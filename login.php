@@ -1,26 +1,31 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login</title>
     <link rel="stylesheet" href="style.css">
 </head>
+
 <body>
     <section>
+        <!--CREATES FORM AREA -->
         <form>
             <h1>Login</h1>
+            <!--CREATES USERNAME AND PASSWORD INPUTS -->
             <div class="loginInput">
-                <input type="text" required>
                 <label>Username</label>
+                <input type="text" id="usernameInput" placeholder="Enter username..." required>
             </div>
             <div class="loginInput">
-                <input type="password" required>
                 <label>Password</label>
+                <input type="password" id="passwordInput" placeholder="Enter password..." required>
             </div>
             <button>Login</button>
+            <!--CREATES LINK TO REGISTER PAGE -->
             <div class="registerStudent">
-                <p>Don't have an account? 
+                <p>Don't have an account?
                     <a href="#">Register</a>
                 </p>
             </div>
