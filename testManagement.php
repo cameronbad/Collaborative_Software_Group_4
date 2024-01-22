@@ -9,6 +9,9 @@
 <body class="d-flex flex-column h-100">
     <main class="flex-shrink-0">
         <div class="container mt-5">
+            <!-- Load Navbar -->
+            <?php include_once("includes/navbar.php"); ?>
+
             <!-- Table to display list of tests to manage -->
             <table id="modalTable" class="table table-bordered table-striped table-dark">
                 <thead>
