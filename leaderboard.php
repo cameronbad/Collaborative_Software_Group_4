@@ -8,50 +8,70 @@
     <link href="https://cdn.datatables.net/v/bs5/dt-1.13.8/r-2.5.0/sr-1.3.0/datatables.min.css" rel="stylesheet">
     <link rel="shortcut icon" href="#" type="image/x-icon">
 </head>
-<body class="m-0 p-0" style="width:100%; height:100vh">
+<body class="m-0 p-0" style="width:100%; height:100vh; background-color: ##d8dede;">
     
     <?php include 'includes/navbar.php';?> <!-- Grabs the navbar code and displays it on the leaderboard page -->
 
     <div class="container-fluid">
-        <table id="leaderboard" class="table table-primary table-hover" style="width: 80%; margin: auto; padding-top:5%; border-collapse: seperate; border-spacing:0 20px;">
+        <table id="leaderboard" class="table table-primary table-hover" style="width: 80%; margin: auto; padding-top:5%; border-collapse: seperate; border-spacing:0 20px;"><!-- Table styling will be moved after merger to the sylesheet-->
             <thead>
-                <tr>
+                <tr><!-- Table headers -->
                     <th scope="col">Placement</th>
                     <th scope="col">Name</th>
                     <th scope="col">Class</th>
                     <th scope="col">Score</th>
                 </tr>
             </thead>
-            <tbody>
+            <tbody><!-- Table Contents -->
                 <tr>
                     <th scope="row">1</th>
                     <td>Luke</td>
                     <td>2b</td>
-                    <td>50</td>
+                    <td>
+                        <div class="progress"><!-- Animated progress bar displaying student's score -->
+                            <div class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100" style="width: 75%"></div>
+                        </div>
+                    </td>
                 </tr>
                 <tr>
                     <th scope="row">2</th>
                     <td>Luke</td>
                     <td>2b</td>
-                    <td>50</td>
+                    <td>
+                        <div class="progress"><!-- Animated progress bar displaying student's score -->
+                            <div class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100" style="width: 75%"></div>
+                        </div>
+                    </td>
                 </tr>
                 <tr>
                     <th scope="row">3</th>
                     <td>Luke</td>
                     <td>2b</td>
-                    <td>50</td>
+                    <td>
+                        <div class="progress"><!-- Animated progress bar displaying student's score -->
+                            <div class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100" style="width: 75%"></div>
+                        </div>
+                    </td>
                 </tr>
                 <tr>
                     <th scope="row">4</th>
                     <td>Luke</td>
                     <td>2b</td>
-                    <td>50</td>
+                    <td>
+                        <div class="progress"><!-- Animated progress bar displaying student's score -->
+                            <div class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100" style="width: 75%"></div>
+                        </div>
+                    </td>
                 </tr>
                 <tr>
                     <th scope="row">5</th>
                     <td>Luke</td>
                     <td>2b</td>
-                    <td>50</td>
+                    <td>
+                        <div class="progress"><!-- Animated progress bar displaying student's score -->
+                            <div class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100" style="width: 75%"></div>
+                        </div>
+                    </td>
                 </tr>
             </tbody>
         </table>
