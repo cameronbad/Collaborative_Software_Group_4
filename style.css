@@ -4,6 +4,8 @@
     font-family: 'Nunito', sans-serif;
 }
 
+/*LOGIN FORM START*/
+
 body{
     display: flex;
     align-items: center;
@@ -32,6 +34,7 @@ h1{
     font-size: 30px;
     color: #fff;
     text-align: center;
+    padding-bottom: 10px;
 }
 
 .loginInput{
@@ -43,7 +46,7 @@ h1{
 
 .loginInput label{
     position: absolute;
-    top: -30%;
+    top: -50%;
     left: 35%;
     transform: translateY(-50%);
     color: #fff;
@@ -86,10 +89,10 @@ button:hover{
 }
 
 .registerStudent{
-    font-size: 0.9rem;
+    font-size: 1rem;
     color: #fff;
     text-align: center;
-    margin: 25px 0 10px;
+    margin: 25px 0 5px;
 }
 
 .registerStudent p a{
@@ -101,3 +104,5 @@ button:hover{
 .registerStudent p a:hover{
     text-decoration: underline;
 }
+
+/*LOGIN FORM END*/
