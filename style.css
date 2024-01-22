@@ -23,7 +23,7 @@ section{
     position: relative;
     max-width: 400px;
     background-color: transparent;
-    border: 2px solid rgba(255, 255, 255, 0.5);
+    border: 4px solid #acd6de;
     border-radius: 20px;
     backdrop-filter: blur(55px);
     display: flex;
@@ -34,16 +34,16 @@ section{
 
 h1{
     font-size: 30px;
-    color: #fff;
+    color: #acdbde;
     text-align: center;
-    padding-bottom: 10px;
+    padding-top: 10px;
 }
 
 .loginInput{
     position: relative;
     margin: 40px 0;
     max-width: 310px;
-    border-bottom: 2px solid #fff;
+    border-bottom: 2px solid #acd6de;
 }
 
 .loginInput label{
@@ -51,7 +51,7 @@ h1{
     top: -40%;
     left: 35%;
     transform: translateY(-50%);
-    color: #fff;
+    color: #acd6de;
     font-size: 1rem;
     pointer-events: none;
     transition: all 0.5s ease-in-out;
@@ -70,14 +70,14 @@ h1{
     outline: none;
     font-size: 1rem;
     padding: 0 35px 0 5px;
-    color: #fff;
+    color: #acd6de;
 }
 
 button{
     width: 100%;
     height: 40px;
     border-radius: 40px;
-    background-color: rgb(255, 255, 255, 1);
+    background-color: #acd6de;
     border: none;
     outline: none;
     cursor: pointer;
@@ -92,7 +92,7 @@ button:hover{
 
 .registerStudent{
     font-size: 1rem;
-    color: #fff;
+    color: #acd6de;
     text-align: center;
     margin: 25px 0 5px;
 }
