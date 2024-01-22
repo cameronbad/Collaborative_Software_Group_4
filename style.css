@@ -8,7 +8,7 @@
 
 /*LOGIN FORM START*/
 
-body{
+.loginBody{
     display: flex;
     align-items: center;
     justify-content: center;
@@ -19,7 +19,7 @@ body{
     background-position: center;
 }
 
-section{
+.loginSection{
     position: relative;
     max-width: 400px;
     background-color: transparent;

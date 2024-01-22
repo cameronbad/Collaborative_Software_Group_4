@@ -8,8 +8,8 @@
     <link rel="stylesheet" href="style.css">
 </head>
 
-<body>
-    <section>
+<body class="loginBody">
+    <section class="loginSection">
         <!--CREATES FORM AREA -->
         <form>
             <img src="./Images/EduTestLogo.png" alt="logo" style="max-width:150px;height:150px;margin-left:18%;">
