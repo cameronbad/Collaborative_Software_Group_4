@@ -43,16 +43,32 @@
             </table>
 
             <!-- Button to create new tests -->
-            <div class="row">
-                <div class="col d-grid">
-                    <a type="button" class="btn btn-success" data-bs-toggle='modal' data-bs-target='#testModal' href="#">
-                        Create new test
-                    </a>
+            <div class="card card-body mb-4">
+                <div class="row">
+                    <div class="col-3">
+                        <select id="courseSelect" name="courseSelect" class="form-select">
+                            <option selected>Select a course</option>
+                            <?php
+                            include_once("includes/_connect.php");
+                            $query = "SELECT `course`.* FROM `course`";
+                            $run = mysqli_query($db_connect, $query);
+                            while ($result = mysqli_fetch_assoc($run)) {
+                                echo "<option value='" . $result["courseID"] . "'>" . $result["courseName"] . "</option>";
+                            }
+                            ?>
+                        </select>
+                    </div>
+
+                    <div class="col d-grid">
+                        <a type="button" class="btn btn-success" data-bs-toggle='modal' data-bs-target='#testModal'>
+                            Create new test
+                        </a>
+                    </div>
                 </div>
             </div>
         </div>
 
-        <!-- MODAL -->
+        <!-- CREATE MODAL -->
         <div class="modal fade" id="testModal" tabindex="-1" aria-labelledby="testLabel" aria-hidden="true">
             <div class="modal-dialog">
                 <div class="modal-content">
@@ -60,28 +76,49 @@
                         <h1 class="modal-title fs-5" id="testLabel">Label</h1>
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
-                    <div class="modal-body">
-                        <div class="mb-3">
-                            <label class="col-form-label">Body text</label>
-                        </div>
-                    </div>
                     <form action="#" method="POST" id="testForm">
-                        <input type="hidden" id="modal-testID" name="testID" class="form-control" value="" readonly>
+                        <div class="modal-body">
+                            <div class="form-floating mb-3">
+                                <input type="text" id="tName" name="tName" class="form-control" placeholder="Test Name" required>
+                                <label for="tName" class="from-label">Test Name</label>
+                            </div>
+                            <div class="form-floating mb-3">
+                                <select id="tSubjectSelect" name="tSubjectSelect" class="form-select">
+                                    <option selected></option>
+                                    <?php
+                                    include_once("includes/_connect.php");
+                                    $query = "SELECT `subject`.* FROM `subject` WHERE `subject`.`courseID` = '1'"; //Should grab subjects based off courseID in courseSelect, placeholder, probably going to need AJAX
+                                    $run = mysqli_query($db_connect, $query);
+                                    while ($result = mysqli_fetch_assoc($run)) {
+                                        echo "<option value='" . $result["subjectID"] . "'>" . $result["subjectName"] . "</option>";
+                                    }
+                                    ?>
+                                </select>
+                                <label for="tSubjectSelect" class="from-label">Subject</label>
+                            </div>
+                            <div class="form-floating">
+                                <input type="number" id="tAmount" name="tAmount" class="form-control" placeholder="Question Amount" required>
+                                <label for="tAmount" class="from-label">Question Amount</label>
+                            </div>
+                        </div>                   
+                        <input type="hidden" id="tTestID" name="tTestID" class="form-control" value="" readonly>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
-                            <button type="submit" class="btn btn-danger">Placeholder</button>
+                            <button type="submit" class="btn btn-success">Placeholder</button>
                         </div>
                     </form>
                 </div>
             </div>
         </div>   
-        <!-- END MODAL -->
+        <!-- END CREATE MODAL -->
     </main>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
     <script>
         const testModal = document.getElementByID('testModal');
         testModal.addEventListener('show.bs.modal', event => {
 
+        var courseSelect = document.getElementByID('courseSelect');
+        var courseValue = courseSelect.value;
         });
     </script>
 </body>
