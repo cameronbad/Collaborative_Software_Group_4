@@ -11,7 +11,7 @@
 </head>
 <body id="leaderboardBody" class="m-0 p-0">
     
-    <?php include 'includes/navbar.php';?> <!-- Grabs the navbar code and displays it on the leaderboard page -->
+    <?php include('includes/navbar.php');?> <!-- Grabs the navbar code and displays it on the leaderboard page -->
 
     <div class="container-fluid"><!-- Leaderboard container -->
         <table id="leaderboard" class="table table-primary table-hover">
