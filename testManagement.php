@@ -26,7 +26,9 @@
                 <tbody>
                     <?php
                     include_once("includes/_connect.php");
-                    $query = "SELECT `test`.*, `subject`.`subjectName` FROM `test` LEFT JOIN `subject` ON `test`.`subjectID` = `subject`.`subjectID`" ;
+                    $query = "SELECT `test`.*, `subject`.`subjectName`, `subject`.`courseID` FROM `test` LEFT JOIN `subject` ON `test`.`subjectID` = `subject`.`subjectID` WHERE `subject`.`courseID` = 1" ; //Replace 1 with session value for courses once login has been implemented
+                    //For Admin, could also add course name to their version? |Could feature|
+                    //$query = "SELECT `test`.*, `subject`.`subjectName` FROM `test` LEFT JOIN `subject` ON `test`.`subjectID` = `subject`.`subjectID`" ;
                     $run = mysqli_query($db_connect, $query);
                     while ($result = mysqli_fetch_assoc($run)) {
                         echo "<tr>";
@@ -34,7 +36,7 @@
                         echo "<td>" . $result["testName"] . "</td>";
                         echo "<td>" . $result["subjectName"] . "</td>";
                         echo "<td>" . $result["questionAmount"] . "</td>"; 
-                        echo "<td> <button type='button' class='btn btn-primary'>Edit</button></td>";
+                        echo "<td> <button type='button' class='btn btn-primary' data-bs-tid='" . $result["testID"] . "'data-bs-toggle='modal' data-bs-target='#editModal'>Edit</button></td>";
                         echo "<td> <button type='button' class='btn btn-danger'>Remove</button> </td>";
                         echo "</tr>";
                     }
@@ -44,20 +46,20 @@
 
             <!-- Button to create new tests -->
             <div class="card card-body mb-4">
-                <div class="row">
-                    <div class="col-3">
+                <div class="row"> <!-- courseSelect selector, potentially for admins. -->
+                    <!--<div class="col-3">
                         <select id="courseSelect" name="courseSelect" class="form-select">
                             <option selected>Select a course</option>
                             <?php
-                            include_once("includes/_connect.php");
-                            $query = "SELECT `course`.* FROM `course`";
-                            $run = mysqli_query($db_connect, $query);
-                            while ($result = mysqli_fetch_assoc($run)) {
-                                echo "<option value='" . $result["courseID"] . "'>" . $result["courseName"] . "</option>";
-                            }
+                            //include_once("includes/_connect.php");
+                            //$query = "SELECT `course`.* FROM `course`";
+                            //$run = mysqli_query($db_connect, $query);
+                            //while ($result = mysqli_fetch_assoc($run)) {
+                            //    echo "<option value='" . $result["courseID"] . "'>" . $result["courseName"] . "</option>";
+                            //}
                             ?>
                         </select>
-                    </div>
+                    </div>-->
 
                     <div class="col d-grid">
                         <a type="button" class="btn btn-success" data-bs-toggle='modal' data-bs-target='#testModal'>
@@ -87,7 +89,8 @@
                                     <option selected></option>
                                     <?php
                                     include_once("includes/_connect.php");
-                                    $query = "SELECT `subject`.* FROM `subject` WHERE `subject`.`courseID` = '1'"; //Should grab subjects based off courseID in courseSelect, placeholder, probably going to need AJAX
+                                    $query = "SELECT `subject`.* FROM `subject` WHERE `subject`.`courseID` = '1'"; //Replace 1 with session value for courses once login has been implemented
+                                    //For Admin, Could grab subjects based off courseID in courseSelect, probably going to need AJAX
                                     $run = mysqli_query($db_connect, $query);
                                     while ($result = mysqli_fetch_assoc($run)) {
                                         echo "<option value='" . $result["subjectID"] . "'>" . $result["subjectName"] . "</option>";
@@ -101,24 +104,79 @@
                                 <label for="tAmount" class="from-label">Question Amount</label>
                             </div>
                         </div>                   
-                        <input type="hidden" id="tTestID" name="tTestID" class="form-control" value="" readonly>
+                        <input type="hidden" id="tTestID" name="tTestID" class="form-control" readonly>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
-                            <button type="submit" class="btn btn-success">Placeholder</button>
+                            <button type="submit" class="btn btn-success">Create</button>
                         </div>
                     </form>
                 </div>
             </div>
         </div>   
         <!-- END CREATE MODAL -->
+
+        <!-- EDIT MODAL -->
+        <div class="modal fade" id="editModal" tabindex="-1" aria-labelledby="editLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h1 class="modal-title fs-5" id="editLabel">Edit</h1>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <form action="#" method="POST" id="editForm">
+                        <div class="modal-body">
+                            <div class="form-floating mb-3">
+                                <input type="text" id="eName" name="eName" class="form-control" placeholder="Test Name" required>
+                                <label for="eName" class="from-label">Test Name</label>
+                            </div>
+                            <div class="form-floating mb-3">
+                                <select id="eSubjectSelect" name="eSubjectSelect" class="form-select">
+                                    <option selected></option>
+                                    <?php
+                                    include_once("includes/_connect.php");
+                                    $query = "SELECT `subject`.* FROM `subject` WHERE `subject`.`courseID` = '1'"; //Replace 1 with session value for courses once login has been implemented
+                                    $run = mysqli_query($db_connect, $query);
+                                    while ($result = mysqli_fetch_assoc($run)) {
+                                        echo "<option value='" . $result["subjectID"] . "'>" . $result["subjectName"] . "</option>";
+                                    }
+                                    ?>
+                                </select>
+                                <label for="eSubjectSelect" class="from-label">Subject</label>
+                            </div>
+                            <div class="form-floating">
+                                <input type="number" id="eAmount" name="eAmount" class="form-control" placeholder="Question Amount" required>
+                                <label for="eAmount" class="from-label">Question Amount</label>
+                            </div>
+                        </div>                   
+                        <input type="hidden" id="eTestID" name="eTestID" class="form-control" readonly>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                            <button type="submit" class="btn btn-success">Create</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>   
+        <!-- END EDIT MODAL -->
     </main>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
     <script>
         const testModal = document.getElementByID('testModal');
         testModal.addEventListener('show.bs.modal', event => {
 
-        var courseSelect = document.getElementByID('courseSelect');
-        var courseValue = courseSelect.value;
+        //var courseSelect = document.getElementByID('courseSelect');
+        //var courseValue = courseSelect.value;
+
+        //Button that triggered the modal
+        const button = event.relatedTarget;
+
+        //Extract data from data-bs-*
+        const testID = button.getAttribute('data-bs-tid');
+
+        //Update content
+        const eTestID = document.getElementByID("eTestID");
+        eTestID.value = testID;
+
         });
     </script>
 </body>
