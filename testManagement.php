@@ -1,3 +1,8 @@
+<?php
+//User auth here
+session_start();
+
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -17,6 +22,7 @@
                     <tr>
                         <th>ID</th>
                         <th>Test Name</th>
+                        <?php if ($_SESSION['accessLevel'] == '3') {echo '<th>Course</th>';}?> 
                         <th>Subject</th>
                         <th>Amount of Questions</th>
                         <th>Edit</th>
@@ -26,14 +32,20 @@
                 <tbody>
                     <?php
                     include_once("includes/_connect.php");
-                    $query = "SELECT `test`.*, `subject`.`subjectName`, `subject`.`courseID` FROM `test` LEFT JOIN `subject` ON `test`.`subjectID` = `subject`.`subjectID` WHERE `subject`.`courseID` = 1" ; //Replace 1 with session value for courses once login has been implemented
-                    //For Admin, could also add course name to their version? |Could feature|
-                    //$query = "SELECT `test`.*, `subject`.`subjectName` FROM `test` LEFT JOIN `subject` ON `test`.`subjectID` = `subject`.`subjectID`" ;
+
+                    //Get query for table
+                    if ($_SESSION['accessLevel'] == '3') { //If admin account
+                        $query = "SELECT `test`.*, `subject`.`subjectName`, `subject`.`courseID`, `course`.`courseName` FROM `test` LEFT JOIN `subject` ON `test`.`subjectID` = `subject`.`subjectID` LEFT JOIN `course` ON `subject`.`courseID` = `course`.`courseID`" ; //Replace 1 with session value for courses once login has been implemented
+                    } else { //If teacher account
+                        $query = "SELECT `test`.*, `subject`.`subjectName`, `subject`.`courseID` FROM `test` LEFT JOIN `subject` ON `test`.`subjectID` = `subject`.`subjectID` WHERE `subject`.`courseID` = 1" ; //Replace 1 with session value for courses once login has been implemented
+                    }
+
                     $run = mysqli_query($db_connect, $query);
                     while ($result = mysqli_fetch_assoc($run)) {
                         echo "<tr>";
                         echo "<td>" . $result["testID"] . "</td>";
                         echo "<td>" . $result["testName"] . "</td>";
+                        if ($_SESSION['accessLevel'] == '3') {echo "<td>" . $result["courseName"] . "</td>";}
                         echo "<td>" . $result["subjectName"] . "</td>";
                         echo "<td>" . $result["questionAmount"] . "</td>"; 
                         echo "<td> <button type='button' class='btn btn-primary' data-bs-tid='" . $result["testID"] . "'data-bs-toggle='modal' data-bs-target='#editModal'>Edit</button></td>";
@@ -46,21 +58,7 @@
 
             <!-- Button to create new tests -->
             <div class="card card-body mb-4">
-                <div class="row"> <!-- courseSelect selector, potentially for admins. -->
-                    <!--<div class="col-3">
-                        <select id="courseSelect" name="courseSelect" class="form-select">
-                            <option selected>Select a course</option>
-                            <?php
-                            //include_once("includes/_connect.php");
-                            //$query = "SELECT `course`.* FROM `course`";
-                            //$run = mysqli_query($db_connect, $query);
-                            //while ($result = mysqli_fetch_assoc($run)) {
-                            //    echo "<option value='" . $result["courseID"] . "'>" . $result["courseName"] . "</option>";
-                            //}
-                            ?>
-                        </select>
-                    </div>-->
-
+                <div class="row">
                     <div class="col d-grid">
                         <a type="button" class="btn btn-success" data-bs-toggle='modal' data-bs-target='#testModal'>
                             Create new test
@@ -88,13 +86,35 @@
                                 <select id="tSubjectSelect" name="tSubjectSelect" class="form-select">
                                     <option selected></option>
                                     <?php
-                                    include_once("includes/_connect.php");
-                                    $query = "SELECT `subject`.* FROM `subject` WHERE `subject`.`courseID` = '1'"; //Replace 1 with session value for courses once login has been implemented
-                                    //For Admin, Could grab subjects based off courseID in courseSelect, probably going to need AJAX
-                                    $run = mysqli_query($db_connect, $query);
-                                    while ($result = mysqli_fetch_assoc($run)) {
-                                        echo "<option value='" . $result["subjectID"] . "'>" . $result["subjectName"] . "</option>";
+                                    include_once("includes/_connect.php");                          
+                                    
+                                    if ($_SESSION['accessLevel'] == '3') { //If admin account
+                                        $query = "SELECT `subject`.*, `course`.`courseName` FROM `subject` LEFT JOIN `course` ON `subject`.`courseID` = `course`.`courseID` ORDER BY `courseName`, `subjectName`";
+                                        $run = mysqli_query($db_connect, $query);
+                                        $preValue = '0';
+                                        while ($result = mysqli_fetch_assoc($run)) {
+                                            if($preValue == 0) { //If the first subject
+                                                echo "<optgroup label=" . $result["courseName"] . ">"; 
+                                                echo "<option value='" . $result["subjectID"] . "'>" . $result["subjectName"] . "</option>"; 
+                                                $preValue = $result["courseID"]; 
+                                            } else if ($preValue != $result["courseID"]) { //If the subject is a different course than the previous subject
+                                                echo "</optgroup>"; 
+                                                echo "<optgroup label=" . $result["courseName"] . ">"; 
+                                                echo "<option value='" . $result["subjectID"] . "'>" . $result["subjectName"] . "</option>"; 
+                                                $preValue = $result["courseID"]; 
+                                            } else { //If the subject is the same course as the previous subject
+                                                echo "<option value='" . $result["subjectID"] . "'>" . $result["subjectName"] . "</option>"; 
+                                            }
+                                        }
+                                        echo "</optgroup>";
+                                    } else { //If teacher account
+                                        $query = "SELECT `subject`.* FROM `subject` WHERE `subject`.`courseID` = '1'"; //Replace 1 with session value for courses once login has been implemented
+                                        $run = mysqli_query($db_connect, $query);
+                                        while ($result = mysqli_fetch_assoc($run)) {
+                                            echo "<option value='" . $result["subjectID"] . "'>" . $result["subjectName"] . "</option>";
+                                        }
                                     }
+
                                     ?>
                                 </select>
                                 <label for="tSubjectSelect" class="from-label">Subject</label>
@@ -133,11 +153,31 @@
                                 <select id="eSubjectSelect" name="eSubjectSelect" class="form-select">
                                     <option selected></option>
                                     <?php
-                                    include_once("includes/_connect.php");
-                                    $query = "SELECT `subject`.* FROM `subject` WHERE `subject`.`courseID` = '1'"; //Replace 1 with session value for courses once login has been implemented
-                                    $run = mysqli_query($db_connect, $query);
-                                    while ($result = mysqli_fetch_assoc($run)) {
-                                        echo "<option value='" . $result["subjectID"] . "'>" . $result["subjectName"] . "</option>";
+                                    if ($_SESSION['accessLevel'] == '3') {
+                                        $query = "SELECT `subject`.*, `course`.`courseName` FROM `subject` LEFT JOIN `course` ON `subject`.`courseID` = `course`.`courseID` ORDER BY `courseName`, `subjectName`";
+                                        $run = mysqli_query($db_connect, $query);
+                                        $preValue = '0';
+                                        while ($result = mysqli_fetch_assoc($run)) {
+                                            if($preValue == 0) {
+                                                echo "<optgroup label=" . $result["courseName"] . ">";
+                                                echo "<option value='" . $result["subjectID"] . "'>" . $result["subjectName"] . "</option>";
+                                                $preValue = $result["courseID"];
+                                            } else if ($preValue != $result["courseID"]) {
+                                                echo "</optgroup>";
+                                                echo "<optgroup label=" . $result["courseName"] . ">";
+                                                echo "<option value='" . $result["subjectID"] . "'>" . $result["subjectName"] . "</option>";
+                                                $preValue = $result["courseID"];
+                                            } else {
+                                                echo "<option value='" . $result["subjectID"] . "'>" . $result["subjectName"] . "</option>";
+                                            }
+                                        }
+                                        echo "</optgroup>";
+                                    } else {
+                                        $query = "SELECT `subject`.* FROM `subject` WHERE `subject`.`courseID` = '1'"; //Replace 1 with session value for courses once login has been implemented
+                                        $run = mysqli_query($db_connect, $query);
+                                        while ($result = mysqli_fetch_assoc($run)) {
+                                            echo "<option value='" . $result["subjectID"] . "'>" . $result["subjectName"] . "</option>";
+                                        }
                                     }
                                     ?>
                                 </select>
