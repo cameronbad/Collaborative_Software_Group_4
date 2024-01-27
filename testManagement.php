@@ -75,7 +75,7 @@
             <div class="modal-dialog">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h1 class="modal-title fs-5" id="testLabel">Label</h1>
+                        <h1 class="modal-title fs-5" id="testLabel">Create</h1>
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <form action="#" method="POST" id="testForm">
@@ -151,7 +151,7 @@
                         <input type="hidden" id="eTestID" name="eTestID" class="form-control" readonly>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
-                            <button type="submit" class="btn btn-success">Create</button>
+                            <button type="submit" class="btn btn-primary">Edit</button>
                         </div>
                     </form>
                 </div>
@@ -170,15 +170,27 @@
                 method: "POST",
                 data: $('#testForm').serialize(),
                 success: function(data) {
-                    alert(data);
-                    //location.reload();
+                    location.reload();
+                }
+            })
+        });
+
+        //AJAX call to edit a test
+        $('#editForm').submit(function (e) {
+            e.preventDefault();
+            $.ajax({
+                url: "./editTest.php",
+                method: "POST",
+                data: $('#editForm').serialize(),
+                success: function(data) {
+                    location.reload();
                 }
             })
         });
 
         //Modal JS
-        const testModal = document.getElementById('testModal');
-        testModal.addEventListener('show.bs.modal', event => {
+        const editModal = document.getElementById('editModal');
+        editModal.addEventListener('show.bs.modal', event => {
 
         //var courseSelect = document.getElementByID('courseSelect');
         //var courseValue = courseSelect.value;

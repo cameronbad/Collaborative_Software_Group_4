@@ -15,8 +15,6 @@ $subject = mysqli_real_escape_string($db_connect, $_POST['tSubjectSelect']);
 $name = mysqli_real_escape_string($db_connect, $_POST['tName']);
 $amount = mysqli_real_escape_string($db_connect, $_POST['tAmount']);
 
-echo "Test";
-
 //Prepare SQL query
 $query = "INSERT INTO `test` (`testID`, `subjectID`, `testName`, `questionAmount`) VALUES (NULL, ?, ?, ?)";
 $stmt = mysqli_prepare($db_connect, $query);
