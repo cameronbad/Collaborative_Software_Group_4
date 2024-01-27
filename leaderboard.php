@@ -19,61 +19,11 @@
                 <tr>
                     <th scope="col">Placement</th>
                     <th scope="col">Name</th>
-                    <th scope="col">Class</th>
                     <th scope="col">Score</th>
                 </tr>
             </thead>
             <tbody><!-- Table Contents -->
-                <tr>
-                    <th scope="row">1</th>
-                    <td>Luke</td>
-                    <td>2b</td>
-                    <td>
-                        <div class="progress"><!-- Animated progress bar displaying student's score -->
-                            <div class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100" style="width: 75%"></div>
-                        </div>
-                    </td>
-                </tr>
-                <tr>
-                    <th scope="row">2</th>
-                    <td>Luke</td>
-                    <td>2b</td>
-                    <td>
-                        <div class="progress"><!-- Animated progress bar displaying student's score -->
-                            <div class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100" style="width: 75%"></div>
-                        </div>
-                    </td>
-                </tr>
-                <tr>
-                    <th scope="row">3</th>
-                    <td>Luke</td>
-                    <td>2b</td>
-                    <td>
-                        <div class="progress"><!-- Animated progress bar displaying student's score -->
-                            <div class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100" style="width: 75%"></div>
-                        </div>
-                    </td>
-                </tr>
-                <tr>
-                    <th scope="row">4</th>
-                    <td>Luke</td>
-                    <td>2b</td>
-                    <td>
-                        <div class="progress"><!-- Animated progress bar displaying student's score -->
-                            <div class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100" style="width: 75%"></div>
-                        </div>
-                    </td>
-                </tr>
-                <tr>
-                    <th scope="row">5</th>
-                    <td>Luke</td>
-                    <td>2b</td>
-                    <td>
-                        <div class="progress"><!-- Animated progress bar displaying student's score -->
-                            <div class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100" style="width: 75%"></div>
-                        </div>
-                    </td>
-                </tr>
+                <?php include('includes/topScorers.php') ?>
             </tbody>
         </table>
 </div>
