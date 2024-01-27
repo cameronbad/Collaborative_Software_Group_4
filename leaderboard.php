@@ -13,6 +13,10 @@
     
     <?php include('includes/navbar.php');?> <!-- Grabs the navbar code and displays it on the leaderboard page -->
 
+    <div class="lBoardBanner container-fluid">
+        <h1> Lets look at our top scorers! </h1>
+    </div>
+
     <div class="container-fluid"><!-- Leaderboard container -->
         <table id="leaderboard" class="table table-primary table-hover">
             <thead><!-- Table headers -->

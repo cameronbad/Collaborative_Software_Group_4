@@ -11,7 +11,7 @@
 <body class="loginBody">
     <section class="loginSection">
         <!--CREATES FORM AREA -->
-        <form>
+        <form class="loginForm">
             <img src="./Images/EduTestLogo.png" alt="logo" style="max-width:150px;height:150px;margin-left:18%;">
             <h1>Login</h1>
             <!--CREATES USERNAME AND PASSWORD INPUTS -->

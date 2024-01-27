@@ -36,7 +36,7 @@
     padding: 2rem 3rem;
 }
 
-h1{
+.loginForm-h1{
     font-size: 30px;
     color: #acdbde;
     text-align: center;
@@ -118,6 +118,10 @@ button:hover{
 /* LOGIN FORM END */
 
 /* LEADERBOARD STYLING START */
+
+.lBoardBanner-h1{
+    color: #8a2e2e;
+}
 
 #leaderboardBody{
     width:100%;
