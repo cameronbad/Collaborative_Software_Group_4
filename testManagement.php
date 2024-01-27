@@ -37,7 +37,7 @@
                         echo "<td>" . $result["subjectName"] . "</td>";
                         echo "<td>" . $result["questionAmount"] . "</td>"; 
                         echo "<td> <button type='button' class='btn btn-primary' data-bs-tid='" . $result["testID"] . "'data-bs-toggle='modal' data-bs-target='#editModal'>Edit</button></td>";
-                        echo "<td> <button type='button' class='btn btn-danger'>Remove</button> </td>";
+                        echo "<td> <button type='button' class='btn btn-danger'  data-bs-tid='" . $result["testID"] . "'data-bs-toggle='modal' data-bs-target='#deleteModal'>Remove</button> </td>";
                         echo "</tr>";
                     }
                     ?>
@@ -158,6 +158,29 @@
             </div>
         </div>   
         <!-- END EDIT MODAL -->
+
+        <!-- DELETE MODAL -->
+        <div class="modal fade" id="deleteModal" tabindex="-1" aria-labelledby="deleteLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h1 class="modal-title fs-5" id="editLabel">Delete</h1>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <form action="#" method="POST" id="deleteForm">
+                        <div class="modal-body">
+                            Are you sure you wish to delete this course?
+                        </div>                   
+                        <input type="hidden" id="dTestID" name="dTestID" class="form-control" readonly>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                            <button type="submit" class="btn btn-danger">Delete</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>  
+        <!-- END DELETE MODAL -->
     </main>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
     <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
@@ -188,23 +211,50 @@
             })
         });
 
-        //Modal JS
+        //AJAX call to delete a test
+        $('#deleteForm').submit(function (e) {
+            e.preventDefault();
+            $.ajax({
+                url: "./deleteTest.php",
+                method: "POST",
+                data: $('#deleteForm').serialize(),
+                success: function(data) {
+                    location.reload();
+                }
+            })
+        });
+
+        //Edit Modal JS
         const editModal = document.getElementById('editModal');
         editModal.addEventListener('show.bs.modal', event => {
 
-        //var courseSelect = document.getElementByID('courseSelect');
-        //var courseValue = courseSelect.value;
+            //var courseSelect = document.getElementByID('courseSelect');
+            //var courseValue = courseSelect.value;
 
-        //Button that triggered the modal
-        const button = event.relatedTarget;
+            //Button that triggered the modal
+            const button = event.relatedTarget;
 
-        //Extract data from data-bs-*
-        const testID = button.getAttribute('data-bs-tid');
+            //Extract data from data-bs-*
+            const testID = button.getAttribute('data-bs-tid');
 
-        //Update content
-        const eTestID = document.getElementById("eTestID");
-        eTestID.value = testID;
+            //Update content
+            const eTestID = document.getElementById("eTestID");
+            eTestID.value = testID;
+        });
 
+        //Delete Modal JS
+        const deleteModal = document.getElementById('deleteModal');
+        deleteModal.addEventListener('show.bs.modal', event => {
+
+            //Button that triggered the modal
+            const button = event.relatedTarget;
+
+            //Extract data from data-bs-*
+            const testID = button.getAttribute('data-bs-tid');
+
+            //Update content
+            const dTestID = document.getElementById("dTestID");
+            dTestID.value = testID;
         });
     </script>
 </body>

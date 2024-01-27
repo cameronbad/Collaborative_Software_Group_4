@@ -1,5 +1,5 @@
 <?php
-
+//User auth here
 
 if (!isset($_POST['eSubjectSelect']) ||
     !isset($_POST['eName']) ||
