@@ -11,7 +11,7 @@
 <body class="loginBody">
     <section class="loginSection">
         <!--CREATES FORM AREA -->
-        <form action="intoDashboard.php" method="post">
+        <form class="loginForm" action="intoDashboard.php" method="post">
             <img src="./Images/EduTestLogo.png" alt="logo" style="max-width:150px;height:150px;margin-left:18%;">
             <h1 class="loginTitle">Login</h1>
             <!--CREATES ERROR MESSAGE -->
