@@ -2,6 +2,20 @@
 session_start(); 
 include "./includes/_connect.php";
 
+// Initialize login attempts counter and block time
+if (!isset($_SESSION['loginAttempts'])) {
+    $_SESSION['loginAttempts'] = 0;
+}
+
+if (!isset($_SESSION['blockedTime']) || $_SESSION['blockedTime'] <= time()) {
+    $_SESSION['loginAttempts'] = 0; // Reset login attempts counter
+    unset($_SESSION['blockedTime']); // Remove block time
+}
+
+// Define maximum login attempts and block duration
+$maxLoginAttempts = 3;
+$blockedTime = 30; // in seconds
+
 if (isset($_POST['userInput']) && isset($_POST['passInput'])) {
 
 	function validate($data){
@@ -34,12 +48,28 @@ if (isset($_POST['userInput']) && isset($_POST['passInput'])) {
             	header("Location: index.php");
 		        exit();
             }else{
-				header("Location: login.php?error=Incorect User name or password");
-		        exit();
+				$_SESSION['loginAttempts']++; // Increment login attempts counter
+                if ($_SESSION['loginAttempts'] >= $maxLoginAttempts) {
+                    $_SESSION['blockedTime'] = time() + $blockedTime; // Set block time
+                    header("Location: login.php?error=Incorrect User name or password.<br> You have been blocked.");
+                    exit();
+                } else {
+                    $attemptsLeft = $maxLoginAttempts - $_SESSION['loginAttempts'];
+                    header("Location: login.php?error=Incorrect User name or password.<br> $attemptsLeft attempts left.");
+                    exit();
+                }
 			}
 		}else{
-			header("Location: login.php?error=Incorect User name or password");
-	        exit();
+			$_SESSION['loginAttempts']++; // Increment login attempts counter
+                if ($_SESSION['loginAttempts'] >= $maxLoginAttempts) {
+                    $_SESSION['blockedTime'] = time() + $blockedTime; // Set block time
+                    header("Location: login.php?error=Incorrect User name or password.<br> You have been blocked.");
+                    exit();
+                } else {
+                    $attemptsLeft = $maxLoginAttempts - $_SESSION['loginAttempts'];
+                    header("Location: login.php?error=Incorrect User name or password.<br> $attemptsLeft attempts left.");
+                    exit();
+                }
 		}
 	}
 	
