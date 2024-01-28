@@ -4,100 +4,35 @@
     font-family: 'Nunito', sans-serif;
 }
 
-body{
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    min-height: 100vh;
-    background-image: url(./Images/loginBackground.jpg);
-    background-repeat: no-repeat;
-    background-size: cover;
-    background-position: center;
-}
 
-section{
-    position: relative;
-    max-width: 400px;
-    background-color: transparent;
-    border: 2px solid rgba(255, 255, 255, 0.5);
-    border-radius: 20px;
-    backdrop-filter: blur(55px);
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    padding: 2rem 3rem;
-}
+/* Table-card */
 
-h1{
-    font-size: 30px;
-    color: #fff;
-    text-align: center;
-}
 
-.loginInput{
-    position: relative;
-    margin: 40px 0;
-    max-width: 310px;
-    border-bottom: 2px solid #fff;
-}
-
-.loginInput label{
-    position: absolute;
-    top: -30%;
-    left: 35%;
-    transform: translateY(-50%);
-    color: #fff;
-    font-size: 1rem;
-    pointer-events: none;
-    transition: all 0.5s ease-in-out;
-}
-
-.loginInput input:focus ~ label,
-.loginInput input:valid ~ label{
-    top: -5px;
-}
-
-.loginInput input{
-    width: 100%;
-    height: 30px;
-    background: transparent;
+.table-card {
+    border-collapse:separate;
+    border-spacing:0 15px;
     border: none;
-    outline: none;
-    font-size: 1rem;
-    padding: 0 35px 0 5px;
-    color: #fff;
 }
 
-button{
-    width: 100%;
-    height: 40px;
-    border-radius: 40px;
-    background-color: rgb(255, 255, 255, 1);
-    border: none;
-    outline: none;
-    cursor: pointer;
-    font-size: 1rem;
-    font-weight: 600;
-    transition: all 0.5s ease;
+.table-card th {
+    background-color: #acd6de;
+    border-style: none;
 }
 
-button:hover{
-    background-color: rgb(255, 255, 255, 0.5);
+.table-card td {
+    background-color: #acd6de;
+    border-style: none;
 }
 
-.registerStudent{
-    font-size: 0.9rem;
-    color: #fff;
-    text-align: center;
-    margin: 25px 0 10px;
+/* First cell of table row/head*/
+td:first-child,
+th:first-child {
+    background-color: #A3C1D4;
+    border-radius: 10px 0 0 10px;
 }
 
-.registerStudent p a{
-    color: #fff;
-    text-decoration: none;
-    font-weight: 600;
-}
-
-.registerStudent p a:hover{
-    text-decoration: underline;
+/* Last cell of table row/head*/
+td:last-child,
+th:last-child {
+    border-radius: 0 10px 10px 0;
 }
