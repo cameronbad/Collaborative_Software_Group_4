@@ -21,9 +21,9 @@
         <table id="leaderboard" class="table table-primary table-hover">
             <thead><!-- Table headers -->
                 <tr>
-                    <th scope="col">Placement</th>
-                    <th scope="col">Name</th>
-                    <th scope="col">Score</th>
+                    <th class="placementCol" scope="col">Placement</th>
+                    <th class="nameCol" scope="col">Name</th>
+                    <th class="scoreCol" scope="col">Score</th>
                 </tr>
             </thead>
             <tbody><!-- Table Contents -->

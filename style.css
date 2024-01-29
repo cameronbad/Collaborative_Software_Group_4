@@ -164,6 +164,27 @@ img {
     border-spacing: 0 20px;
 }
 
+.placementCol{
+  width: 10%;
+  font-weight: bolder;
+}
+
+.nameCol{
+  width: 30%;
+  font-weight: bolder;
+}
+
+.scoreCol{
+  width: 60%;
+  font-weight: bolder;
+}
+
+.progress, div{
+  font-size: 16px;
+  font-weight: bold;
+  height: 20%;
+}
+
 /* LEADERBOARD STYLING END */
 
 /* Table-card */
