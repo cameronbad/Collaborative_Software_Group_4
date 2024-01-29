@@ -35,9 +35,13 @@ if (isset($_POST['userInput']) && isset($_POST['passInput'])) {
         header("Location: login.php?error=Password is required");
 	    exit();
 	}else{
-		$sql = "SELECT * FROM `user` WHERE `user`.`username`='$uname' AND `user`.`password`='$pass'";
+		$sql = "SELECT * FROM `user` WHERE `user`.`username`=? AND `user`.`password`=?";
+        $stmt = mysqli_prepare($db_connect, $sql);
 
-		$result = mysqli_query($db_connect, $sql);
+        // Bind parameters and execute the statement
+        mysqli_stmt_bind_param($stmt, "ss", $uname, $pass);
+        mysqli_stmt_execute($stmt);
+        $result = mysqli_stmt_get_result($stmt);
 
 		if (mysqli_num_rows($result) === 1) {
 			$row = mysqli_fetch_assoc($result);
