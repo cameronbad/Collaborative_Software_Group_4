@@ -165,3 +165,36 @@ img {
 }
 
 /* LEADERBOARD STYLING END */
+
+/* Table-card */
+
+.table-card {
+    border-collapse:separate;
+    border-spacing:0 15px;
+    border: none;
+}
+
+.table-card th {
+    background-color: #acd6de;
+    border-style: none;
+}
+
+.table-card td {
+    background-color: #acd6de;
+    border-style: none;
+}
+
+/* First cell of table row/head*/
+td:first-child,
+th:first-child {
+    background-color: #A3C1D4;
+    border-radius: 10px 0 0 10px;
+}
+
+/* Last cell of table row/head*/
+td:last-child,
+th:last-child {
+    border-radius: 0 10px 10px 0;
+}
+
+/* Table-card  END*/
