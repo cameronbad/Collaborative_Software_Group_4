@@ -45,6 +45,8 @@ if (isset($_POST['userInput']) && isset($_POST['passInput'])) {
             	$_SESSION['username'] = $row['username'];
             	$_SESSION['firstName'] = $row['firstName'];
             	$_SESSION['userID'] = $row['userID'];
+				$_SESSION['courseID'] = $row['courseID'];
+				$_SESSION['accessLevel'] = $row['accessLevel'];
             	header("Location: index.php");
 		        exit();
             }else{
