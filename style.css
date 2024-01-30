@@ -32,7 +32,7 @@
   padding: 2rem 3rem;
 }
 
-img {
+.loginLogo {
   position: absolute;
   top: -220px;
   left: 33%;
@@ -47,7 +47,6 @@ img {
   font-size: 30px;
   color: #acdbde;
   text-align: center;
-  transform: translateY(-10%);
 }
 
 .loginInput {
@@ -55,6 +54,14 @@ img {
   margin: 40px 0;
   max-width: 310px;
   border-bottom: 2px solid #acd6de;
+}
+
+#passInput{
+  margin-top: 10px;
+}
+
+#userInput{
+  margin-top: 10px;
 }
 
 .loginInput label {
@@ -66,6 +73,7 @@ img {
   font-size: 1rem;
   pointer-events: none;
   transition: all 0.5s ease-in-out;
+  margin-top: 10px;
 }
 
 .loginInput input::placeholder {
