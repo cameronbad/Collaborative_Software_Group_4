@@ -67,13 +67,14 @@
 .loginInput label {
   position: absolute;
   top: -40%;
-  left: 35%;
+  left: 33%;
   transform: translateY(-50%);
   color: #acd6de;
   font-size: 1rem;
   pointer-events: none;
   transition: all 0.5s ease-in-out;
   margin-top: 10px;
+  font-size: 18px;
 }
 
 .loginInput input::placeholder {
@@ -86,7 +87,7 @@
   background: transparent;
   border: none;
   outline: none;
-  font-size: 1rem;
+  font-size: 16px;
   padding: 0 35px 0 5px;
   color: white;
 }
