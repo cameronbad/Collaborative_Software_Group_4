@@ -10,11 +10,30 @@
     <link rel="shortcut icon" href="Images/EduTestLogo.png" type="image/x-icon">
 </head>
 <body id="leaderboardBody" class="m-0 p-0">
-    
-    <?php include('includes/navbar.php');?> <!-- Grabs the navbar code and displays it on the leaderboard page -->
-
+<?php include('includes/navbar.php');?> <!-- Grabs the navbar code and displays it on the leaderboard page -->
+<div class="container">
     <div class="lBoardBanner">
         <h1> Lets look at our top scorers! </h1>
+    </div>
+
+    <div class="containter">
+        <form class="filters row">
+            <div class="col-5">
+                <select class="form-select" id="subjectFilter" aria-label="Default select example">
+                    <option selected>Open this select menu</option>
+                    <option value="3">Three</option>
+                </select>
+            </div>
+            <div class="col-5">
+                <select class="form-select col" id="classFilters" aria-label="Default select example">
+                    <option selected>Open this select menu</option>
+                    <option value="3">Three</option>
+                </select>
+            </div>
+            <div class="col-2">
+                <button type="button" class="btn btn-info" id="filterbtn">Info</button>
+            </div>
+        </form>
     </div>
 
     <div class="container-fluid"><!-- Leaderboard container -->
@@ -30,6 +49,7 @@
                 <?php include('includes/topScorers.php') ?>
             </tbody>
         </table>
+    </div>
 </div>
 </body>
 </html>
