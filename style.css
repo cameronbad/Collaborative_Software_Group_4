@@ -47,6 +47,7 @@ img {
   font-size: 30px;
   color: #acdbde;
   text-align: center;
+  transform: translateY(-10%);
 }
 
 .loginInput {
