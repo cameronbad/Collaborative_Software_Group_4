@@ -198,3 +198,20 @@ th:last-child {
 }
 
 /* Table-card  END*/
+
+/* stats-left*/
+
+.stats-left {
+  background-color: #acd6de;
+}
+
+.stats-left span {
+  background-color: #ABBADE;
+
+}
+
+.stats-left h2:last-child {
+  margin-bottom: 0;
+}
+/* stats-left  END*/
+
