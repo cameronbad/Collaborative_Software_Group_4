@@ -5,6 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login</title>
+    <link rel="shortcut icon" href="Images/EduTestLogo.png" type="image/x-icon">
     <link rel="stylesheet" type="text/css" href="style.css">
 </head>
 
@@ -12,7 +13,7 @@
     <section class="loginSection">
         <!--CREATES FORM AREA -->
         <form class="loginForm" action="intoDashboard.php" method="post">
-            <img src="./Images/EduTestLogo.png" alt="logo" style="max-width:150px;height:150px;margin-left:18%;">
+            <img class="loginLogo" src="./Images/EduTestLogo.png" alt="logo" style="max-width:150px;height:150px;margin-left:18%;">
             <h1 class="loginTitle">Login</h1>
             <!--CREATES ERROR MESSAGE -->
             <?php if (isset($_GET['error'])) { ?>

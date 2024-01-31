@@ -29,15 +29,19 @@ if (isset($_POST['userInput']) && isset($_POST['passInput'])) {
 	$pass = validate($_POST['passInput']);
 
 	if (empty($uname)) {
-		header("Location: login.php?error=User Name is required");
+		header("Location: login.php?error=Username is required");
 	    exit();
 	}else if(empty($pass)){
         header("Location: login.php?error=Password is required");
 	    exit();
 	}else{
-		$sql = "SELECT * FROM `user` WHERE `user`.`username`='$uname' AND `user`.`password`='$pass'";
+		$sql = "SELECT * FROM `user` WHERE `user`.`username`=? AND `user`.`password`=?";
+        $stmt = mysqli_prepare($db_connect, $sql);
 
-		$result = mysqli_query($db_connect, $sql);
+        // Bind parameters and execute the statement
+        mysqli_stmt_bind_param($stmt, "ss", $uname, $pass);
+        mysqli_stmt_execute($stmt);
+        $result = mysqli_stmt_get_result($stmt);
 
 		if (mysqli_num_rows($result) === 1) {
 			$row = mysqli_fetch_assoc($result);
@@ -45,6 +49,8 @@ if (isset($_POST['userInput']) && isset($_POST['passInput'])) {
             	$_SESSION['username'] = $row['username'];
             	$_SESSION['firstName'] = $row['firstName'];
             	$_SESSION['userID'] = $row['userID'];
+				$_SESSION['courseID'] = $row['courseID'];
+				$_SESSION['accessLevel'] = $row['accessLevel'];
             	header("Location: index.php");
 		        exit();
             }else{
