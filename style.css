@@ -142,6 +142,32 @@
 
 /* LOGIN FORM END */
 
+/* REGISTER FORM START */
+
+.registerBody {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  background-image: url(./Images/loginBackgroundV2.jpg);
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+}
+
+.registerSection {
+  position: relative;
+  max-width: 400px;
+  background-color: transparent;
+  border: 4px solid #acd6de;
+  border-radius: 20px;
+  backdrop-filter: blur(55px);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 2rem 3rem;
+}
+
 /* LEADERBOARD STYLING START */
 
 .lBoardBanner, h1{
