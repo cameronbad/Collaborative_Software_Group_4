@@ -192,6 +192,70 @@
   border-bottom: 2px solid #acd6de;
 }
 
+.registerInput label {
+  position: absolute;
+  top: -40%;
+  left: 33%;
+  transform: translateY(-50%);
+  color: #acd6de;
+  font-size: 1rem;
+  pointer-events: none;
+  transition: all 0.5s ease-in-out;
+  margin-top: 10px;
+  font-size: 18px;
+}
+
+.registerInput input::placeholder {
+  color: #acd6de;
+}
+
+.registerInput input {
+  width: 100%;
+  height: 30px;
+  background: transparent;
+  border: none;
+  outline: none;
+  font-size: 16px;
+  padding: 0 35px 0 5px;
+  color: white;
+}
+
+.registerButton {
+  width: 100%;
+  height: 40px;
+  border-radius: 40px;
+  background-color: #acd6de;
+  border: none;
+  outline: none;
+  cursor: pointer;
+  font-size: 1rem;
+  font-weight: 600;
+  transition: all 0.5s ease;
+  transform: translateY(-10%);
+}
+
+.registerButton:hover {
+  background-color: rgb(255, 255, 255, 0.5);
+}
+
+.loginStudent {
+  font-size: 1rem;
+  color: #acd6de;
+  text-align: center;
+  margin: 25px 0 5px;
+}
+
+.loginStudent p a {
+  color: #fff;
+  text-decoration: none;
+  font-weight: 600;
+}
+
+.loginStudent p a:hover {
+  text-decoration: underline;
+}
+
+/* REGISTER FORM END */
 
 /* LEADERBOARD STYLING START */
 
