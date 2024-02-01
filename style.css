@@ -172,7 +172,7 @@
   font-size: 30px;
   color: #acdbde;
   text-align: center;
-  /*transform: translateX(8%);*/
+  transform: translateX(2%);
 }
 
 .registerLogo {
