@@ -12,6 +12,7 @@
 </head>
   <body>
     <h1>subject management page</h1>
+<<<<<<< Updated upstream
 
     <div class="modal" tabindex="-1">
         <div class="modal-dialog">
@@ -58,5 +59,18 @@
             </div>
         </div>
     </div>
+=======
+        <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Subject Name</th>
+                        <!--<?php if ($_SESSION['accessLevel'] == '3') {echo '<th>Course</th>';}?>-->
+                        <th>Assigned Tests</th>
+                        <th>Edit</th>
+                        <th>Delete</th>
+                    </tr>
+                </thead>
+    
+>>>>>>> Stashed changes
   </body>
 </html>
