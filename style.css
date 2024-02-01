@@ -191,6 +191,27 @@
   margin: 40px 0;
   max-width: 310px;
   border-bottom: 2px solid #acd6de;
+  text-align: center;
+}
+
+#emailInput{
+  margin-top: 10px;
+}
+
+#confirmPassInput{
+  margin-top: 10px;
+}
+
+#confirmEmailInput{
+  margin-top: 10px;
+}
+
+#lastName{
+  margin-top: 10px;
+}
+
+#firstName{
+  margin-top: 10px;
 }
 
 .registerInput label {
