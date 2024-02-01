@@ -168,10 +168,11 @@
   padding: 2rem 3rem;
 }
 
-.registerForm, h1{
+.registerForm > h1{
   font-size: 30px;
   color: #acdbde;
   text-align: center;
+  /*transform: translateX(8%);*/
 }
 
 .registerLogo {
