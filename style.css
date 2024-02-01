@@ -34,7 +34,8 @@
   padding: 2rem 3rem;
 }
 
-.loginForm, h1{
+.loginForm,
+h1 {
   font-size: 30px;
   color: #acdbde;
   text-align: center;
@@ -58,11 +59,11 @@
   border-bottom: 2px solid #acd6de;
 }
 
-#passInput{
+#passInput {
   margin-top: 10px;
 }
 
-#userInput{
+#userInput {
   margin-top: 10px;
 }
 
@@ -113,8 +114,8 @@
 }
 
 .error {
-  background: #F2DEDE;
-  color: #A94442;
+  background: #f2dede;
+  color: #a94442;
   padding: 10px;
   width: 95%;
   border-radius: 5px;
@@ -168,7 +169,7 @@
   padding: 2rem 3rem;
 }
 
-.registerForm > h1{
+.registerForm > h1 {
   font-size: 30px;
   color: #acdbde;
   text-align: center;
@@ -194,23 +195,23 @@
   text-align: center;
 }
 
-#emailInput{
+#emailInput {
   margin-top: 10px;
 }
 
-#confirmPassInput{
+#confirmPassInput {
   margin-top: 10px;
 }
 
-#confirmEmailInput{
+#confirmEmailInput {
   margin-top: 10px;
 }
 
-#lastName{
+#lastName {
   margin-top: 10px;
 }
 
-#firstName{
+#firstName {
   margin-top: 10px;
 }
 
@@ -281,23 +282,24 @@
 
 /* LEADERBOARD STYLING START */
 
-.lBoardBanner, h1{
-    color: #000;
-    padding-top: 5%;
+.lBoardBanner,
+h1 {
+  color: #000;
+  padding-top: 5%;
 }
 
-#leaderboardBody{
-    width:100%;
-    height:100vh;
-    background-color: #d8dede;
+#leaderboardBody {
+  width: 100%;
+  height: 100vh;
+  background-color: #d8dede;
 }
 
-#leaderboard{
-    width: 80%;
-    margin: auto;
-    padding-top: 5%;
-    border-collapse: separate;
-    border-spacing: 0 20px;
+#leaderboard {
+  width: 80%;
+  margin: auto;
+  padding-top: 5%;
+  border-collapse: separate;
+  border-spacing: 0 20px;
 }
 
 /* LEADERBOARD STYLING END */
@@ -305,32 +307,32 @@
 /* Table-card */
 
 .table-card {
-    border-collapse:separate;
-    border-spacing:0 15px;
-    border: none;
+  border-collapse: separate;
+  border-spacing: 0 15px;
+  border: none;
 }
 
 .table-card th {
-    background-color: #acd6de;
-    border-style: none;
+  background-color: #acd6de;
+  border-style: none;
 }
 
 .table-card td {
-    background-color: #acd6de;
-    border-style: none;
+  background-color: #acd6de;
+  border-style: none;
 }
 
 /* First cell of table row/head*/
 td:first-child,
 th:first-child {
-    background-color: #A3C1D4;
-    border-radius: 10px 0 0 10px;
+  background-color: #a3c1d4;
+  border-radius: 10px 0 0 10px;
 }
 
 /* Last cell of table row/head*/
 td:last-child,
 th:last-child {
-    border-radius: 0 10px 10px 0;
+  border-radius: 0 10px 10px 0;
 }
 
 /* Table-card  END*/

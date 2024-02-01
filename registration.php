@@ -13,7 +13,8 @@
     <section class="registerSection">
         <!--CREATES FORM AREA -->
         <form class="registerForm">
-            <img class="registerLogo" src="./Images/EduTestLogo.png" alt="logo" style="max-width:150px;height:150px;margin-left:18%;">
+            <img class="registerLogo" src="./Images/EduTestLogo.png" alt="logo"
+                style="max-width:150px;height:150px;margin-left:18%;">
             <h1 class="registerTitle">Register</h1>
             <!--CREATES INPUTS FOR USER DATA -->
             <div class="registerInput">
