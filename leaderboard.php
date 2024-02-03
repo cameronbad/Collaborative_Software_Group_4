@@ -40,9 +40,9 @@
         <table id="leaderboard" class="table table-primary table-hover">
             <thead><!-- Table headers -->
                 <tr>
-                    <th class="col-3" id="placementCol" scope="col">Placement</th>
+                    <th class="col-1" id="placementCol" scope="col">Placement</th>
                     <th class="col-3" id="nameCol" scope="col">Name</th>
-                    <th class="col-3" id="scoreCol" scope="col">Score</th>
+                    <th class="col-12" id="scoreCol" scope="col">Score</th>
                 </tr>
             </thead>
             <tbody><!-- Table Contents -->
