@@ -17,7 +17,7 @@
     </div>
 
     <div class="containter">
-        <form class="filters row">
+        <form class="row" id="filterBox">
             <div class="col-10">
                 <select class="form-select col" id="classFilters" aria-label="Default select example">
                     <option selected>Courses</option>
@@ -50,7 +50,7 @@
                 </select>
             </div>
             <div class="col-2">
-                <button type="button" class="btn btn-info" id="filterbtn">Filter</button>
+                <button type="submit" class="btn btn-info"  id="filterbtn">Filter</button>
             </div>
         </form>
     </div>
@@ -59,9 +59,9 @@
         <table id="leaderboard" class="table table-primary table-hover">
             <thead><!-- Table headers -->
                 <tr>
-                    <th class="col-1" id="placementCol" scope="col">Placement</th>
-                    <th class="col-3" id="nameCol" scope="col">Name</th>
-                    <th class="col-12" id="scoreCol" scope="col">Score</th>
+                    <th class="col-1" scope="col">Placement</th>
+                    <th class="col-3" scope="col">Name</th>
+                    <th class="col-12" scope="col">Score</th>
                 </tr>
             </thead>
             <tbody><!-- Table Contents -->
@@ -82,3 +82,16 @@
     searching: false,
     stateSave: true,
 }); </script>
+<script>
+     $('#filterBox').submit(function (e) {
+            e.preventDefault();
+            $.ajax({
+                url: "",
+                method: "POST",
+                data: $('#filterBox').serialize(),
+                success: function(data) {
+                    location.reload();
+                }
+            })
+        });
+</script>
