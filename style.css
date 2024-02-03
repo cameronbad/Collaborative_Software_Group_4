@@ -34,11 +34,11 @@
   padding: 2rem 3rem;
 }
 
-.loginForm, h1{
-  font-size: 30px;
-  color: #acdbde;
-  text-align: center;
-}
+.loginForm > h1{
+    font-size: 30px;
+    color: #acdbde;
+    text-align: center;
+    padding-top: 10px;
 
 .loginLogo {
   position: absolute;
@@ -144,23 +144,52 @@
 
 /* LEADERBOARD STYLING START */
 
-.lBoardBanner, h1{
-    color: #000;
-    padding-top: 5%;
+.lBoardBanner{
+  margin-top: 5%;
+  margin-bottom: 5%;
+  text-align: center;
+}
+
+.lBoardBanner > h1{
+  color: #000;
+  font-size: 42px;
+}
+
+#filterbtn{
+  width: 100%;
 }
 
 #leaderboardBody{
-    width:100%;
     height:100vh;
     background-color: #d8dede;
 }
 
 #leaderboard{
-    width: 80%;
     margin: auto;
     padding-top: 5%;
     border-collapse: separate;
     border-spacing: 0 20px;
+}
+
+.placementCol{
+  width: 10%;
+  font-weight: bolder;
+}
+
+.nameCol{
+  width: 30%;
+  font-weight: bolder;
+}
+
+.scoreCol{
+  width: 60%;
+  font-weight: bolder;
+}
+
+.progress{
+  font-size: 16px;
+  font-weight: bold;
+  height: 20%;
 }
 
 /* LEADERBOARD STYLING END */
