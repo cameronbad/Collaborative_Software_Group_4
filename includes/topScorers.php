@@ -1,9 +1,11 @@
 <?php
 require_once ("_connect.php");
 
-$SQL = "CALL topScoringStudents();"; //Calls the procedure
+$SQL = "CALL topScoringStudents()"; //Calls the procedure
 
 $result = mysqli_query($db_connect, $SQL);
+
+while(mysqli_next_result($db_connect)){;} //Fixes Unsynch Error
 
 $Place = 0; //Stores the placement number
 

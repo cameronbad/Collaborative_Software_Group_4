@@ -18,20 +18,39 @@
 
     <div class="containter">
         <form class="filters row">
-            <div class="col-5">
-                <select class="form-select" id="subjectFilter" aria-label="Default select example">
-                    <option selected>Open this select menu</option>
-                    <option value="3">Three</option>
-                </select>
-            </div>
-            <div class="col-5">
+            <div class="col-10">
                 <select class="form-select col" id="classFilters" aria-label="Default select example">
-                    <option selected>Open this select menu</option>
-                    <option value="3">Three</option>
+                    <option selected>Courses</option>
+                    <?php
+                        require_once ('includes/_connect.php');
+
+                        $SQL = "CALL allCourseNames()";// Calls the procedure
+
+                        $result = mysqli_query($db_connect, $SQL);
+
+                        $preValue = '0';
+
+                        while(mysqli_next_result($db_connect)){;} //Fixes Unsynch Error
+
+                        while($row = mysqli_fetch_assoc($result)){ //Loops through results and matches the subjects with the courses
+                            if($preValue == 0) {
+                                echo "<optgroup label=" . $row["courseName"] . ">";
+                                echo "<option value='" . $row["subjectID"] . "'>" . $row["subjectName"] . "</option>";
+                                $preValue = $row["courseID"];
+                            } else if ($preValue != $row["courseID"]) {
+                                echo "</optgroup>";
+                                echo "<optgroup label=" . $row["courseName"] . ">";
+                                echo "<option value='" . $row["subjectID"] . "'>" . $row["subjectName"] . "</option>";
+                                $preValue = $row["courseID"];
+                            } else {
+                                echo "<option value='" . $row["subjectID"] . "'>" . $row["subjectName"] . "</option>";
+                            }
+                        }
+                    ?>
                 </select>
             </div>
             <div class="col-2">
-                <button type="button" class="btn btn-info" id="filterbtn">Info</button>
+                <button type="button" class="btn btn-info" id="filterbtn">Filter</button>
             </div>
         </form>
     </div>
