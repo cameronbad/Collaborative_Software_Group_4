@@ -15,7 +15,7 @@
   align-items: center;
   justify-content: center;
   min-height: 100vh;
-  background-image: url(./Images/loginBackgroundV2.jpg);
+  background-image: url(./Images/loginBackgroundV3.jpg);
   background-repeat: no-repeat;
   background-size: cover;
   background-position: center;
@@ -34,11 +34,10 @@
   padding: 2rem 3rem;
 }
 
-.loginForm,
-h1 {
-  font-size: 30px;
-  color: #acdbde;
-  text-align: center;
+.loginForm > h1{
+    font-size: 30px;
+    color: #acdbde;
+    text-align: center;
 }
 
 .loginLogo {
@@ -300,6 +299,53 @@ h1 {
   padding-top: 5%;
   border-collapse: separate;
   border-spacing: 0 20px;
+=======
+.lBoardBanner{
+  margin-top: 5%;
+  margin-bottom: 5%;
+  text-align: center;
+}
+
+.lBoardBanner > h1{
+  color: #000;
+  font-size: 42px;
+}
+
+#filterbtn{
+  width: 100%;
+}
+
+#leaderboardBody{
+    height:100vh;
+    background-color: #d8dede;
+}
+
+#leaderboard{
+    margin: auto;
+    padding-top: 5%;
+    border-collapse: separate;
+    border-spacing: 0 20px;
+}
+
+.placementCol{
+  width: 10%;
+  font-weight: bolder;
+}
+
+.nameCol{
+  width: 30%;
+  font-weight: bolder;
+}
+
+.scoreCol{
+  width: 60%;
+  font-weight: bolder;
+}
+
+.progress{
+  font-size: 16px;
+  font-weight: bold;
+  height: 20%;
 }
 
 /* LEADERBOARD STYLING END */
