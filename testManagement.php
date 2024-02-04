@@ -37,9 +37,9 @@ session_start();
 
                     //Get query for table
                     if ($_SESSION['accessLevel'] == '3') { //If admin account
-                        $query = "SELECT `test`.*, `subject`.`subjectName`, `subject`.`courseID`, `course`.`courseName` FROM `test` LEFT JOIN `subject` ON `test`.`subjectID` = `subject`.`subjectID` LEFT JOIN `course` ON `subject`.`courseID` = `course`.`courseID`" ; //Replace 1 with session value for courses once login has been implemented
+                        $query = "SELECT `test`.*, `subject`.`subjectName`, `subject`.`courseID`, `course`.`courseName` FROM `test` LEFT JOIN `subject` ON `test`.`subjectID` = `subject`.`subjectID` LEFT JOIN `course` ON `subject`.`courseID` = `course`.`courseID`" ; 
                     } else { //If teacher account
-                        $query = "SELECT `test`.*, `subject`.`subjectName`, `subject`.`courseID` FROM `test` LEFT JOIN `subject` ON `test`.`subjectID` = `subject`.`subjectID` WHERE `subject`.`courseID` = 1" ; //Replace 1 with session value for courses once login has been implemented
+                        $query = "SELECT `test`.*, `subject`.`subjectName`, `subject`.`courseID` FROM `test` LEFT JOIN `subject` ON `test`.`subjectID` = `subject`.`subjectID` WHERE `subject`.`courseID` = 1" ; //. $_SESSION["courseID"]
                     }
 
                     $run = mysqli_query($db_connect, $query);
@@ -50,7 +50,7 @@ session_start();
                         if ($_SESSION['accessLevel'] == '3') {echo "<td>" . $result["courseName"] . "</td>";}
                         echo "<td>" . $result["subjectName"] . "</td>";
                         echo "<td>" . $result["questionAmount"] . "</td>"; 
-                        echo "<td> <button type='button' class='btn btn-success' data-bs-tid='" . $result["testID"] . "'data-bs-toggle='modal' data-bs-target='#assignModal'>Assign</button></td>";
+                        echo "<td> <button type='button' class='btn btn-success' data-bs-tid='" . $result["testID"] . "' data-bs-cid='" . $result["courseID"] . "'data-bs-toggle='modal' data-bs-target='#assignModal'>Assign</button></td>";
                         echo "<td> <button type='button' class='btn btn-primary' data-bs-tid='" . $result["testID"] . "'data-bs-toggle='modal' data-bs-target='#editModal'>Edit</button></td>";
                         echo "<td> <button type='button' class='btn btn-danger'  data-bs-tid='" . $result["testID"] . "'data-bs-toggle='modal' data-bs-target='#deleteModal'>Remove</button> </td>";
                         echo "</tr>";
@@ -176,7 +176,7 @@ session_start();
                                         }
                                         echo "</optgroup>";
                                     } else {
-                                        $query = "SELECT `subject`.* FROM `subject` WHERE `subject`.`courseID` = '1'"; //Replace 1 with session value for courses once login has been implemented
+                                        $query = "SELECT `subject`.* FROM `subject` WHERE `subject`.`courseID` = '1'"; //. $_SESSION["courseID"]
                                         $run = mysqli_query($db_connect, $query);
                                         while ($result = mysqli_fetch_assoc($run)) {
                                             echo "<option value='" . $result["subjectID"] . "'>" . $result["subjectName"] . "</option>";
@@ -207,7 +207,7 @@ session_start();
             <div class="modal-dialog">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h1 class="modal-title fs-5" id="editLabel">Assign a new class</h1>
+                        <h1 class="modal-title fs-5" id="assignLabel">Assign a new class</h1>
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <form action="#" method="POST" id="assignForm">
@@ -215,11 +215,8 @@ session_start();
                             <div class="form-floating mb-3">
                                 This will assign all students in the selected class to complete the test.
                             </div>
-                            <div class="form-floating mb-3">
-                                <select id="classSelect" name="classSelect" class="form-select">
-                                    <option selected></option>
-
-                                </select>
+                            <div class="form-floating mb-3" id="assignSelect">
+                                
                             </div>
                         </div>
 
@@ -286,6 +283,19 @@ session_start();
             })
         });
 
+        //AJAX call to assign a class a test
+        $('#assignForm').submit(function (e) {
+            e.preventDefault();
+            $.ajax({
+                url: "./assignTest.php",
+                method: "POST",
+                data: $('#assignForm').serialize(),
+                success: function(data) {
+                    location.reload();
+                }
+            })
+        });
+
         //AJAX call to delete a test
         $('#deleteForm').submit(function (e) {
             e.preventDefault();
@@ -303,9 +313,6 @@ session_start();
         const editModal = document.getElementById('editModal');
         editModal.addEventListener('show.bs.modal', event => {
 
-            //var courseSelect = document.getElementByID('courseSelect');
-            //var courseValue = courseSelect.value;
-
             //Button that triggered the modal
             const button = event.relatedTarget;
 
@@ -315,6 +322,32 @@ session_start();
             //Update content
             const eTestID = document.getElementById("eTestID");
             eTestID.value = testID;
+        });
+
+        //Assign Modal JS
+        const assignModal = document.getElementById('assignModal');
+        assignModal.addEventListener('show.bs.modal', event => {
+
+            //Button that triggered the modal
+            const button = event.relatedTarget;
+
+            //Extract data from data-bs-*
+            const testID = button.getAttribute('data-bs-tid');
+            const courseID = button.getAttribute('data-bs-cid');
+
+            //Update content
+            const aTestID = document.getElementById("aTestID");
+            aTestID.value = testID;
+
+            $.ajax({
+                url: "./includes/assignModal.php",
+                method: "POST",
+                data: {courseID:courseID},
+                success: function(data)
+                {
+                $('#assignSelect').html(data);
+                }
+            });
         });
 
         //Delete Modal JS
