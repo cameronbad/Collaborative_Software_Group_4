@@ -27,7 +27,23 @@ session_start();
                 </div>
             </div>
             <!-- Tests -->
-            
+            <div class="row">
+                <?php 
+                include_once("includes/_connect.php");
+
+                $query = "SELECT `result`.*, `test`.*, `subject`.`subjectName` FROM `result` LEFT JOIN `test` ON `result`.`testID` = `test`.`testID` LEFT JOIN `subject` ON `test`.`subjectID` = `subject`.`subjectID` WHERE `result`.`userID` = " . $_SESSION["userID"];
+
+                $run = mysqli_query($db_connect, $query);
+                while ($result = mysqli_fetch_assoc($run)) { //Needs = Number of Questions / Percentage of Correct Questions / Total Acquired Points from Test
+                    echo "<div class='col-3'>";
+                    echo "<div class='card mb-4'>";
+                    echo "<h5 class='card-title'>" . $result["testName"] . "</h5>";
+                    echo "<h6 class='card-subtitle'>" . $result["subjectName"] . "</h6>";
+                    echo "</div>";
+                    echo "</div>";
+                }
+                ?>
+            </div>
         </div>
     </main>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>

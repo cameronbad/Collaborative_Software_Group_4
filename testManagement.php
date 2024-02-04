@@ -26,6 +26,7 @@ session_start();
                         <?php if ($_SESSION['accessLevel'] == '3') {echo '<th>Course</th>';}?> 
                         <th>Subject</th>
                         <th>Amount of Questions</th>
+                        <th>Assign</th>
                         <th>Edit</th>
                         <th>Delete</th>
                     </tr>
@@ -49,6 +50,7 @@ session_start();
                         if ($_SESSION['accessLevel'] == '3') {echo "<td>" . $result["courseName"] . "</td>";}
                         echo "<td>" . $result["subjectName"] . "</td>";
                         echo "<td>" . $result["questionAmount"] . "</td>"; 
+                        echo "<td> <button type='button' class='btn btn-success' data-bs-tid='" . $result["testID"] . "'data-bs-toggle='modal' data-bs-target='#assignModal'>Assign</button></td>";
                         echo "<td> <button type='button' class='btn btn-primary' data-bs-tid='" . $result["testID"] . "'data-bs-toggle='modal' data-bs-target='#editModal'>Edit</button></td>";
                         echo "<td> <button type='button' class='btn btn-danger'  data-bs-tid='" . $result["testID"] . "'data-bs-toggle='modal' data-bs-target='#deleteModal'>Remove</button> </td>";
                         echo "</tr>";
@@ -199,6 +201,38 @@ session_start();
             </div>
         </div>   
         <!-- END EDIT MODAL -->
+
+        <!-- ASSIGN MODAL -->
+        <div class="modal fade" id="assignModal" tabindex="-1" aria-labelledby="assignLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h1 class="modal-title fs-5" id="editLabel">Assign a new class</h1>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <form action="#" method="POST" id="assignForm">
+                        <div class="modal-body">
+                            <div class="form-floating mb-3">
+                                This will assign all students in the selected class to complete the test.
+                            </div>
+                            <div class="form-floating mb-3">
+                                <select id="classSelect" name="classSelect" class="form-select">
+                                    <option selected></option>
+
+                                </select>
+                            </div>
+                        </div>
+
+                        <input type="hidden" id="aTestID" name="aTestID" class="form-control" readonly>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                            <button type="submit" class="btn btn-success">Assign</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>  
+        <!-- END ASSIGN MODAL -->
 
         <!-- DELETE MODAL -->
         <div class="modal fade" id="deleteModal" tabindex="-1" aria-labelledby="deleteLabel" aria-hidden="true">
