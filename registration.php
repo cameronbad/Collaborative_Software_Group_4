@@ -17,11 +17,15 @@
             <h1 class="registerTitle">Register</h1>
             <!--CREATES INPUTS FOR USER DATA -->
             <div class="registerInput">
-                <label>First Name</label>
+                <label id="reglabel">Student Number</label>
+                <input type="text" id="studentID" name="studentNum" placeholder="Enter student number...">
+            </div>
+            <div class="registerInput">
+                <label id="registerLabel">First Name</label>
                 <input type="text" id="firstName" name="firstName" placeholder="Enter first name...">
             </div>
             <div class="registerInput">
-                <label>Last Name</label>
+                <label id="registerLabel">Last Name</label>
                 <input type="text" id="lastName" name="lastName" placeholder="Enter last name...">
             </div>
             <div class="registerInput">
@@ -29,20 +33,25 @@
                 <input type="email" id="emailInput" name="emailInput" placeholder="Enter email...">
             </div>
             <div class="registerInput">
-                <label>Confirm Email</label>
-                <input type="email" id="confirmEmailInput" name="confirmEmailInput" placeholder="Confirm email...">
-            </div>
-            <div class="registerInput">
-                <label>Username</label>
+                <label id="registerLabel">Username</label>
                 <input type="text" id="userInput" name="userInput" placeholder="Enter username...">
             </div>
             <div class="registerInput">
-                <label>Password</label>
+                <label id="registerLabel">Password</label>
                 <input type="password" id="passInput" name="passInput" placeholder="Enter password...">
             </div>
             <div class="registerInput">
-                <label>Confirm Password</label>
+                <label id="reglabel">Confirm Password</label>
                 <input type="password" id="confirmPassInput" name="confirmPassInput" placeholder="Confirm password...">
+            </div>
+            <div class="registerInput">
+                <label>Course</label>
+                <select id="courseInput" name="courseInput">
+                    <option value="1">Computer Science</option>
+                    <option value="2">Information Technology</option>
+                    <option value="3">Software Engineering</option>
+                    <option value="4">Computer Engineering</option>
+                </select>
             </div>
             <button class="registerButton" type="submit">Register</button>
             <!--CREATES LINK TO LOGIN PAGE -->

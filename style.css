@@ -173,7 +173,6 @@
   font-size: 30px;
   color: #acdbde;
   text-align: center;
-  transform: translateX(2%);
 }
 
 .registerLogo {
@@ -214,6 +213,24 @@
 
 #firstName {
   margin-top: 10px;
+}
+
+#studentID {
+  margin-top: 10px;
+}
+
+#courseInput {
+  margin-top: 10px;
+}
+
+#reglabel{
+  left: 20%;
+  transform: translateY(-50%);
+}
+
+#registerLabel {
+  left: 28%;
+  transform: translateY(-50%);
 }
 
 .registerInput label {
