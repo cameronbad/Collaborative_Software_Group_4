@@ -9,7 +9,7 @@ $result = mysqli_query($db_connect, $SQL);
 while($row = mysqli_fetch_assoc($result)){ //Loops through the query result
 
     echo "<tr>";
-    echo "<td>" . $row['studentNumber'] . "</td>";
+    echo "<th>" . $row['studentNumber'] . "</th>";
     echo "<td>" . $row['firstName'] . "</td>";
     echo "<td>" . $row['lastName'] . "</td>";
     echo "<td>" . $row['username'] . "</td>";

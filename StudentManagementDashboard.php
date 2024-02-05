@@ -16,25 +16,16 @@
         <table class="table table-hover table-striped table-bordered">
             <thead class="table-dark">
                 <tr>
-                    <th scope="col">#</th>
-                    <th scope="col">First</th>
-                   <th scope="col">Last</th>
-                    <th scope="col">Handle</th>
+                    <th class="col-1" scope="col">Number</th>
+                    <th class="col-2" scope="col">Name</th>
+                    <th class="col-2" scope="col">Surname</th>
+                    <th class="col-2" scope="col">Username</th>
+                    <th class="col-3" scope="col">Email</th>
+                    <th class="col-3" scope="col">Last Login</th>
                </tr>
             </thead>
             <tbody>
-                <tr>
-                    <th scope="row">1</th>
-                    <td>Mark</td>
-                    <td>Otto</td>
-                    <td>@mdo</td>
-                </tr>
-                <tr>
-                    <th scope="row">2</th>
-                    <td>Jacob</td>
-                    <td>Thornton</td>
-                    <td>@fat</td>
-                </tr>
+                <?php include_once("includes/studentManageOutput.php") ?>
             </tbody>
         </table>
     </div>
