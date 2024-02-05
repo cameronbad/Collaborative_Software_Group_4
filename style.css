@@ -233,6 +233,11 @@
   transform: translateY(-50%);
 }
 
+#registrationLabel {
+  left: 18%;
+  transform: translateY(-50%);
+}
+
 .registerInput label {
   position: absolute;
   top: -40%;

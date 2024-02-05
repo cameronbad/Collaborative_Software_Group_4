@@ -41,7 +41,7 @@
                 <input type="password" id="passInput" name="passInput" placeholder="Enter password...">
             </div>
             <div class="registerInput">
-                <label id="reglabel">Confirm Password</label>
+                <label id="registrationLabel">Confirm Password</label>
                 <input type="password" id="confirmPassInput" name="confirmPassInput" placeholder="Confirm password...">
             </div>
             <div class="registerInput">
