@@ -39,6 +39,7 @@
     color: #acdbde;
     text-align: center;
     padding-top: 10px;
+}
 
 .loginLogo {
   position: absolute;
@@ -193,6 +194,19 @@
 }
 
 /* LEADERBOARD STYLING END */
+
+/* STUDENT MANAGMENT STYLING START */
+
+#studentBody{
+  height:100vh;
+  background-color: #d8dede;
+}
+
+#studentTableMain{
+  
+}
+
+/* STUDENT MANAGMENT STYLING END */
 
 /* Table-card */
 
