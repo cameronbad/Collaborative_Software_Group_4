@@ -17,9 +17,9 @@
     </div>
 
     <div class="containter">
-        <form class="row" id="filterBox">
+        <form class="row" method="POST" id="filterBox">
             <div class="col-10">
-                <select class="form-select col" id="classFilters" aria-label="Default select example">
+                <select class="form-select col" id="classFilters" name="classFilters">
                     <option selected>Courses</option>
                     <?php
                         require_once ('includes/_connect.php');
@@ -64,8 +64,45 @@
                     <th class="col-12" scope="col">Score</th>
                 </tr>
             </thead>
-            <tbody><!-- Table Contents -->
-                <?php include('includes/topScorers.php') ?>
+            <tbody id="leaderboardDisplay"><!-- Table Contents -->
+                <?php
+
+require_once ("includes/_connect.php");
+
+$SQL = "CALL topScoringStudents(1)"; //Calls the procedure
+
+$result = mysqli_query($db_connect, $SQL);
+
+while(mysqli_next_result($db_connect)){;} //Fixes Unsynch Error
+
+$Place = 0; //Stores the placement number
+
+$BarNum = 100; //Used to calcualte the progress bar width
+$BarNumDiff = 0;
+
+while($row = mysqli_fetch_assoc($result)){ //Loops through the query result
+
+    if($Place > 0){ //Calculates BarNum and doesnt run on the first loop
+    $BarNum = $BarNum - ($BarNumDiff - $row['resultTotal']);
+    }
+
+    $Place++;
+
+    echo "<tr>";
+    echo "<td>" . $Place . "</td>";
+    echo "<td>" . $row['username'] . "</td>";?> 
+
+    <td> 
+        <div class="progress"><!-- Animated progress bar displaying student's score -->
+            <div class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100" style="width:<?php echo $BarNum ?>%"><?php echo $row['resultTotal'] ?></div>
+        </div>
+    </td><?php
+
+    echo "</tr>";
+
+    $BarNumDiff =  $row['resultTotal']; //Stores previouse score
+}
+?>
             </tbody>
         </table>
     </div>
@@ -81,16 +118,17 @@
     info: false,
     searching: false,
     stateSave: true,
-}); </script>
+}); 
+</script>
 <script>
      $('#filterBox').submit(function (e) {
             e.preventDefault();
             $.ajax({
-                url: "",
+                url: "includes/topScorers.php",
                 method: "POST",
                 data: $('#filterBox').serialize(),
                 success: function(data) {
-                    location.reload();
+                    $('#leaderboardDisplay').html(data);
                 }
             })
         });

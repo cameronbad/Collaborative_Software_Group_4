@@ -1,7 +1,10 @@
 <?php
+
 require_once ("_connect.php");
 
-$SQL = "CALL topScoringStudents()"; //Calls the procedure
+$filter = mysqli_real_escape_string($db_connect, $_POST['classFilters']);
+
+$SQL = "CALL topScoringStudents($filter)"; //Calls the procedure
 
 $result = mysqli_query($db_connect, $SQL);
 
