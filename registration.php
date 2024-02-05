@@ -13,12 +13,12 @@
 
 <body class="registerBody">
     <section class="registerSection">
-        <!--CREATES FORM AREA -->
-        <form class="registerForm">
+        <!-- CREATES FORM AREA -->
+        <form class="registerForm"> 
             <img class="registerLogo" src="./Images/EduTestLogo.png" alt="logo">
             <h1 class="registerTitle">Register</h1>
             <!--CREATES INPUTS FOR USER DATA -->
-            <div class="registerInput">
+            <!-- <div class="registerInput">
                 <label id="reglabel">Student Number</label>
                 <input type="text" id="studentID" name="studentNum" placeholder="Enter student number...">
             </div>
@@ -54,25 +54,27 @@
                     <option value="3">Software Engineering</option>
                     <option value="4">Computer Engineering</option>
                 </select>
-            </div>
+            </div> -->
 
-            <!-- <div class="row">
+            <div class="row mb-3">
                 <div class="col">
                     <input type="text" class="form-control" placeholder="Student Number" aria-label="Student Number">
                 </div>
-                <div class="col">
+            </div>
+            <div class="row mb-3">
+            <div class="col">
                     <input type="text" class="form-control" placeholder="First Name" aria-label="First name">
                 </div>
-            </div>
-            <div class="row">
                 <div class="col">
                     <input type="text" class="form-control" placeholder="Last Name" aria-label="Last Name">
                 </div>
+            </div>
+            <div class="row mb-3">
                 <div class="col">
                     <input type="email" class="form-control" placeholder="Email" aria-label="Email">
                 </div>
             </div>
-            <div class="row">
+            <div class="row mb-3">
                 <div class="col">
                     <input type="text" class="form-control" placeholder="Username" aria-label="Username">
                 </div>
@@ -80,7 +82,7 @@
                     <input type="password" class="form-control" placeholder="Password" aria-label="Password">
                 </div>
             </div>
-            <div class="row">
+            <div class="row mb-3">
                 <div class="col">
                     <input type="password" class="form-control" placeholder="Confirm Password" aria-label="Confirm Password">
                 </div>
@@ -93,7 +95,7 @@
                         <option value="4">Computer Engineering</option>
                     </select>
                 </div>
-            </div> -->
+            </div>
             <button class="registerButton" type="submit">Register</button>
             <!--CREATES LINK TO LOGIN PAGE -->
             <div class="loginStudent">

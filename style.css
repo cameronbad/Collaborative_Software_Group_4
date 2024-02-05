@@ -158,7 +158,7 @@
 
 .registerSection {
   position: relative;
-  max-width: 400px;
+  max-width: 800px;
   background-color: transparent;
   border: 4px solid #acd6de;
   border-radius: 20px;
@@ -177,8 +177,8 @@
 
 .registerLogo {
   position: absolute;
-  top: -220px;
-  left: 33%;
+  top: -180px;
+  left: 32%;
   transform: translateX(-50%);
   max-width: 150px;
   height: 150px;
@@ -277,7 +277,7 @@
   font-size: 1rem;
   font-weight: 600;
   transition: all 0.5s ease;
-  transform: translateY(-10%);
+  transform: translateY(20%);
 }
 
 .registerButton:hover {
