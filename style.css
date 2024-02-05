@@ -173,6 +173,10 @@
   font-size: 30px;
   color: #acdbde;
   text-align: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transform: translateY(-35%);
 }
 
 .registerLogo {
