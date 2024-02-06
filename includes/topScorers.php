@@ -8,8 +8,6 @@ $SQL = "CALL topScoringStudents($filter)"; //Calls the procedure
 
 $result = mysqli_query($db_connect, $SQL);
 
-while(mysqli_next_result($db_connect)){;} //Fixes Unsynch Error
-
 $Place = 0; //Stores the placement number
 
 $BarNum = 100; //Used to calcualte the progress bar width

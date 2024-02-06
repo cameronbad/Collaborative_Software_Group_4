@@ -20,7 +20,6 @@
         <form class="row" method="POST" id="filterBox">
             <div class="col-10">
                 <select class="form-select col" id="classFilters" name="classFilters">
-                    <option selected>Courses</option>
                     <?php
                         require_once ('includes/_connect.php');
 
@@ -72,8 +71,6 @@ require_once ("includes/_connect.php");
 $SQL = "CALL topScoringStudents(1)"; //Calls the procedure
 
 $result = mysqli_query($db_connect, $SQL);
-
-while(mysqli_next_result($db_connect)){;} //Fixes Unsynch Error
 
 $Place = 0; //Stores the placement number
 
