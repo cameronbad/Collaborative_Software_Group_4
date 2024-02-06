@@ -42,11 +42,11 @@
 
 .loginLogo {
   position: absolute;
-  top: -220px;
+  top: -180px;
   left: 33%;
   transform: translateX(-50%);
-  max-width: 150px;
-  height: 150px;
+  max-width: 125px;
+  height: 125px;
   border-radius: 50%;
   border: 4px solid #fff;
   margin-left: 18%;
@@ -181,11 +181,11 @@
 
 .registerLogo {
   position: absolute;
-  top: -180px;
+  top: -160px;
   left: 32%;
   transform: translateX(-50%);
-  max-width: 150px;
-  height: 150px;
+  max-width: 125px;
+  height: 125px;
   border-radius: 50%;
   border: 4px solid #fff;
   margin-left: 18%;
