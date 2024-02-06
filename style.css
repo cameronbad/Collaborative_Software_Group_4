@@ -191,7 +191,22 @@
   margin-left: 18%;
 }
 
-.registerInput {
+.col > input, .col > select{
+  font-family: "Nunito", sans-serif;
+  font-size: 16px;
+  background-color: #acd6de;
+}
+
+.col > input::placeholder, .col > select::placeholder{
+  color: white;
+}
+
+.col > input:focus, .col > select:focus{
+  background-color: #acd6de;
+  color: white;
+}
+
+/* .registerInput {
   position: relative;
   margin: 40px 0;
   max-width: 310px;
@@ -268,7 +283,7 @@
   font-size: 16px;
   padding: 0 35px 0 5px;
   color: white;
-}
+} */
 
 .registerButton {
   width: 100%;
@@ -292,7 +307,8 @@
   font-size: 1rem;
   color: #acd6de;
   text-align: center;
-  margin: 25px 0 5px;
+  margin-top: 25px;
+  transform: translateY(50%);
 }
 
 .loginStudent p a {

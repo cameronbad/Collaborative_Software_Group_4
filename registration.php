@@ -14,7 +14,7 @@
 <body class="registerBody">
     <section class="registerSection">
         <!-- CREATES FORM AREA -->
-        <form class="registerForm"> 
+        <form class="registerForm">
             <img class="registerLogo" src="./Images/EduTestLogo.png" alt="logo">
             <h1 class="registerTitle">Register</h1>
             <!--CREATES INPUTS FOR USER DATA -->
@@ -58,34 +58,23 @@
 
             <div class="row mb-3">
                 <div class="col">
-                    <input type="text" class="form-control" placeholder="Student Number" aria-label="Student Number">
-                </div>
-            </div>
-            <div class="row mb-3">
-            <div class="col">
-                    <input type="text" class="form-control" placeholder="First Name" aria-label="First name">
-                </div>
-                <div class="col">
-                    <input type="text" class="form-control" placeholder="Last Name" aria-label="Last Name">
+                    <input type="text" class="form-control" placeholder="Student Number" label="Student Number">
                 </div>
             </div>
             <div class="row mb-3">
                 <div class="col">
-                    <input type="email" class="form-control" placeholder="Email" aria-label="Email">
+                    <input type="text" class="form-control" placeholder="First Name" label="First name">
+                </div>
+                <div class="col">
+                    <input type="text" class="form-control" placeholder="Last Name" label="Last Name">
                 </div>
             </div>
             <div class="row mb-3">
                 <div class="col">
-                    <input type="text" class="form-control" placeholder="Username" aria-label="Username">
-                </div>
-                <div class="col">
-                    <input type="password" class="form-control" placeholder="Password" aria-label="Password">
+                    <input type="email" class="form-control" placeholder="Email" label="Email">
                 </div>
             </div>
             <div class="row mb-3">
-                <div class="col">
-                    <input type="password" class="form-control" placeholder="Confirm Password" aria-label="Confirm Password">
-                </div>
                 <div class="col">
                     <select class="form-select" aria-label="Course">
                         <option selected>Course</option>
@@ -94,6 +83,18 @@
                         <option value="3">Software Engineering</option>
                         <option value="4">Computer Engineering</option>
                     </select>
+                </div>
+                <div class="col">
+                    <input type="text" class="form-control" placeholder="Username" label="Username">
+                </div>
+            </div>
+            <div class="row mb-3">
+                <div class="col">
+                    <input type="password" class="form-control" placeholder="Password" label="Password">
+                </div>
+                <div class="col">
+                    <input type="password" class="form-control" placeholder="Confirm Password"
+                        label="Confirm Password">
                 </div>
             </div>
             <button class="registerButton" type="submit">Register</button>
