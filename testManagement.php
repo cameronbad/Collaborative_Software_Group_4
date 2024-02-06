@@ -291,7 +291,7 @@ session_start();
                 method: "POST",
                 data: $('#assignForm').serialize(),
                 success: function(data) {
-                    location.reload();
+                    alert(data); //Could use .html to make an in website alert with proper styling
                 }
             })
         });
