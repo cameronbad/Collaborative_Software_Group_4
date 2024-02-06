@@ -206,6 +206,10 @@
   color: white;
 }
 
+.col > input:focus, .col > select:focus{
+  box-shadow: 0 0 5px white;
+}
+
 /* .registerInput {
   position: relative;
   margin: 40px 0;
