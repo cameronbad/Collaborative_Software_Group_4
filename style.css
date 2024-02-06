@@ -158,6 +158,13 @@
 
 #filterbtn{
   width: 100%;
+  background-color: #acd6de;
+  border-color: azure;
+  font-weight: bold;
+}
+
+#filterbtn:hover{
+  background-color: #A3C1D4;
 }
 
 #leaderboardBody{
