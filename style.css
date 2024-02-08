@@ -197,13 +197,8 @@
   background-color: #acd6de;
 }
 
-.col > input::placeholder, .col > select::placeholder{
-  color: white;
-}
-
 .col > input:focus, .col > select:focus{
   background-color: #acd6de;
-  color: white;
 }
 
 .col > input:focus, .col > select:focus{
