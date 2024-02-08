@@ -78,11 +78,15 @@
             <div class="row mb-3">
                 <div class="col">
                     <select class="form-select" id="course" aria-label="Course">
-                        <option selected>Course</option>
-                        <option value="1">Computer Science</option>
-                        <option value="2">Information Technology</option>
-                        <option value="3">Software Engineering</option>
-                        <option value="4">Computer Engineering</option>
+                        <option selected>Course:</option>
+                        <?php
+                        include './includes/_connect.php';
+                        $sql = "SELECT * FROM course";
+                        $result = mysqli_query($db_connect, $sql);
+                        while ($row = mysqli_fetch_assoc($result)) {
+                            echo "<option value='" . $row['courseID'] . "'>" . $row['courseName'] . "</option>";
+                        }
+                        ?>
                     </select>
                 </div>
                 <div class="col">
