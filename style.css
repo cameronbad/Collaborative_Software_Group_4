@@ -197,6 +197,10 @@
   background-color: #acd6de;
 }
 
+.col > input::placeholder{
+  color: black;
+}
+
 .col > input:focus, .col > select:focus{
   background-color: #acd6de;
 }
