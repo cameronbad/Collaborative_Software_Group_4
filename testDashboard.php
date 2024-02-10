@@ -16,16 +16,21 @@ session_start();
     <main class="flex-shrink-0">
         <!-- Load Navbar -->
         <?php include_once("includes/navbar.php"); ?>
-        <div class="container mt-5">
-            <div class="card mb-4"> <!-- Topbar -->
-                <div class="col-2 card-body stats-left"> <!-- Replace with appropriate icons later -->
-                    <h2><span class="badge">Points</span></h2>
-                    <h2><span class="badge">Avg</span></h2>
-                </div>
-                <div class="col"> <!-- Graph -->
+        <div class="parallax py-5">
+            <div class="container">
+                <div class="card"> <!-- Topbar -->
+                    <div class="col-2 card-body stats-left"> <!-- Replace with appropriate icons later -->
+                        <h2><span class="badge">Points</span></h2>
+                        <h2><span class="badge">Avg</span></h2>
+                    </div>
+                    <div class="col"> <!-- Graph -->
 
+                    </div>
                 </div>
             </div>
+        </div>
+        <div class="container mt-5">
+
             <!-- Tests -->
             <div class="row">
                 <?php 
@@ -36,14 +41,16 @@ session_start();
                 $run = mysqli_query($db_connect, $query);
                 while ($result = mysqli_fetch_assoc($run)) { //Needs = Number of Questions / Percentage of Correct Questions / Total Acquired Points from Test
                     echo "<div class='col-3'>";
-                    echo "<div class='card mb-4'>";
+                    echo "<div class='card test-card'>";
                     echo "<h5 class='card-title'>" . $result["testName"] . "</h5>";
                     echo "<h6 class='card-subtitle'>" . $result["subjectName"] . "</h6>";
+                    echo "<a href='#'></a>";
                     echo "</div>";
                     echo "</div>";
                 }
                 ?>
             </div>
+            
         </div>
     </main>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
