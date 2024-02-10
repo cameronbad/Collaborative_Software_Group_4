@@ -31,6 +31,6 @@ while($row = mysqli_fetch_assoc($result)){ //Loops through the query result
 
     echo "</tr>";
 
-    $BarNumDiff =  $row['resultTotal']; //Stores previouse score
+    $BarNumDiff =  $row['resultTotal']; //Stores previous score
 }
 ?>
