@@ -39,6 +39,7 @@
     color: #acdbde;
     text-align: center;
     padding-top: 10px;
+}
 
 .loginLogo {
   position: absolute;
@@ -157,6 +158,13 @@
 
 #filterbtn{
   width: 100%;
+  background-color: #acd6de;
+  border-color: azure;
+  font-weight: bold;
+}
+
+#filterbtn:hover{
+  background-color: #A3C1D4;
 }
 
 #leaderboardBody{
@@ -169,21 +177,7 @@
     padding-top: 5%;
     border-collapse: separate;
     border-spacing: 0 20px;
-}
-
-.placementCol{
-  width: 10%;
-  font-weight: bolder;
-}
-
-.nameCol{
-  width: 30%;
-  font-weight: bolder;
-}
-
-.scoreCol{
-  width: 60%;
-  font-weight: bolder;
+    font-weight: bolder;
 }
 
 .progress{
