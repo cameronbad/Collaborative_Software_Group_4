@@ -39,7 +39,7 @@
                 </tr>
             </thead>
             <tbody id="leaderboardDisplay"><!-- Table Contents -->
-                        <?php  include_once("includes/defaultScorers.php"); ?> <!-- Grabs a default table based on the users course -->
+                    <?php  include_once("includes/defaultScorers.php"); ?> <!-- Grabs a default table based on the users course -->
             </tbody>
         </table>
     </div>

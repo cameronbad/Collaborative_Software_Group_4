@@ -188,6 +188,19 @@
 
 /* LEADERBOARD STYLING END */
 
+/* STUDENT MANAGMENT STYLING START */
+
+#studentBody{
+  height:100vh;
+  background-color: #d8dede;
+}
+
+#studentTableMain{
+  
+}
+
+/* STUDENT MANAGMENT STYLING END */
+
 /* Table-card */
 
 .table-card {
