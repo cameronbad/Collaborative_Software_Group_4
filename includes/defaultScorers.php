@@ -1,10 +1,8 @@
 <?php
 
-require_once ("_connect.php");
+require_once ("includes/_connect.php");
 
-$filter = mysqli_real_escape_string($db_connect, $_POST['classFilters']);
-
-$SQL = "CALL topScoringStudents($filter)"; //Calls the procedure
+$SQL = "CALL topScoringStudents(1)"; //Calls the procedure the 1 will be changed once session varaibles are added
 
 $result = mysqli_query($db_connect, $SQL);
 
@@ -33,6 +31,6 @@ while($row = mysqli_fetch_assoc($result)){ //Loops through the query result
 
     echo "</tr>";
 
-    $BarNumDiff =  $row['resultTotal']; //Stores previouse score
+    $BarNumDiff =  $row['resultTotal']; //Stores previous score
 }
 ?>

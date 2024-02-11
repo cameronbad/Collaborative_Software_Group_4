@@ -20,37 +20,11 @@
         <form class="row" method="POST" id="filterBox">
             <div class="col-10">
                 <select class="form-select col" id="classFilters" name="classFilters">
-                    <option selected>Courses</option>
-                    <?php
-                        require_once ('includes/_connect.php');
-
-                        $SQL = "CALL allCourseNames()";// Calls the procedure
-
-                        $result = mysqli_query($db_connect, $SQL);
-
-                        $preValue = '0';
-
-                        while(mysqli_next_result($db_connect)){;} //Fixes Unsynch Error
-
-                        while($row = mysqli_fetch_assoc($result)){ //Loops through results and matches the subjects with the courses
-                            if($preValue == 0) {
-                                echo "<optgroup label=" . $row["courseName"] . ">";
-                                echo "<option value='" . $row["subjectID"] . "'>" . $row["subjectName"] . "</option>";
-                                $preValue = $row["courseID"];
-                            } else if ($preValue != $row["courseID"]) {
-                                echo "</optgroup>";
-                                echo "<optgroup label=" . $row["courseName"] . ">";
-                                echo "<option value='" . $row["subjectID"] . "'>" . $row["subjectName"] . "</option>";
-                                $preValue = $row["courseID"];
-                            } else {
-                                echo "<option value='" . $row["subjectID"] . "'>" . $row["subjectName"] . "</option>";
-                            }
-                        }
-                    ?>
+                    <?php include_once("includes/filtersDisplay.php") ?> <!-- Displays subjects for filters -->
                 </select>
             </div>
             <div class="col-2">
-                <button type="submit" class="btn btn-info"  id="filterbtn">Filter</button>
+                <button type="submit" class="btn"  id="filterbtn">Filter</button>
             </div>
         </form>
     </div>
@@ -65,44 +39,7 @@
                 </tr>
             </thead>
             <tbody id="leaderboardDisplay"><!-- Table Contents -->
-                <?php
-
-require_once ("includes/_connect.php");
-
-$SQL = "CALL topScoringStudents(1)"; //Calls the procedure
-
-$result = mysqli_query($db_connect, $SQL);
-
-while(mysqli_next_result($db_connect)){;} //Fixes Unsynch Error
-
-$Place = 0; //Stores the placement number
-
-$BarNum = 100; //Used to calcualte the progress bar width
-$BarNumDiff = 0;
-
-while($row = mysqli_fetch_assoc($result)){ //Loops through the query result
-
-    if($Place > 0){ //Calculates BarNum and doesnt run on the first loop
-    $BarNum = $BarNum - ($BarNumDiff - $row['resultTotal']);
-    }
-
-    $Place++;
-
-    echo "<tr>";
-    echo "<td>" . $Place . "</td>";
-    echo "<td>" . $row['username'] . "</td>";?> 
-
-    <td> 
-        <div class="progress"><!-- Animated progress bar displaying student's score -->
-            <div class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100" style="width:<?php echo $BarNum ?>%"><?php echo $row['resultTotal'] ?></div>
-        </div>
-    </td><?php
-
-    echo "</tr>";
-
-    $BarNumDiff =  $row['resultTotal']; //Stores previouse score
-}
-?>
+                    <?php  include_once("includes/defaultScorers.php"); ?> <!-- Grabs a default table based on the users course -->
             </tbody>
         </table>
     </div>
