@@ -13,7 +13,7 @@
     <section class="loginSection">
         <!--CREATES FORM AREA -->
         <form class="loginForm" action="intoDashboard.php" method="post">
-            <img class="loginLogo" src="./Images/EduTestLogo.png" alt="logo" style="max-width:150px;height:150px;margin-left:18%;">
+            <img class="loginLogo" src="./Images/EduTestLogo.png" alt="logo">
             <h1 class="loginTitle">Login</h1>
             <!--CREATES ERROR MESSAGE -->
             <?php if (isset($_GET['error'])) { ?>
@@ -34,7 +34,7 @@
             <!--CREATES LINK TO REGISTER PAGE -->
             <div class="registerStudent">
                 <p>Don't have an account?
-                    <a href="#">Register</a>
+                    <a href="registration.php">Register</a>
                 </p>
             </div>
         </form>
