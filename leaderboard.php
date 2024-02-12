@@ -17,21 +17,14 @@
     </div>
 
     <div class="containter">
-        <form class="filters row">
-            <div class="col-5">
-                <select class="form-select" id="subjectFilter" aria-label="Default select example">
-                    <option selected>Open this select menu</option>
-                    <option value="3">Three</option>
-                </select>
-            </div>
-            <div class="col-5">
-                <select class="form-select col" id="classFilters" aria-label="Default select example">
-                    <option selected>Open this select menu</option>
-                    <option value="3">Three</option>
+        <form class="row" method="POST" id="filterBox">
+            <div class="col-10">
+                <select class="form-select col" id="classFilters" name="classFilters">
+                    <?php include_once("includes/filtersDisplay.php") ?> <!-- Displays subjects for filters -->
                 </select>
             </div>
             <div class="col-2">
-                <button type="button" class="btn btn-info" id="filterbtn">Info</button>
+                <button type="submit" class="btn"  id="filterbtn">Filter</button>
             </div>
         </form>
     </div>
@@ -40,13 +33,13 @@
         <table id="leaderboard" class="table table-primary table-hover">
             <thead><!-- Table headers -->
                 <tr>
-                    <th class="col-3" id="placementCol" scope="col">Placement</th>
-                    <th class="col-3" id="nameCol" scope="col">Name</th>
-                    <th class="col-3" id="scoreCol" scope="col">Score</th>
+                    <th class="col-1" scope="col">Placement</th>
+                    <th class="col-3" scope="col">Name</th>
+                    <th class="col-12" scope="col">Score</th>
                 </tr>
             </thead>
-            <tbody><!-- Table Contents -->
-                <?php include('includes/topScorers.php') ?>
+            <tbody id="leaderboardDisplay"><!-- Table Contents -->
+                    <?php  include_once("includes/defaultScorers.php"); ?> <!-- Grabs a default table based on the users course -->
             </tbody>
         </table>
     </div>
@@ -62,4 +55,18 @@
     info: false,
     searching: false,
     stateSave: true,
-}); </script>
+}); 
+</script>
+<script>
+     $('#filterBox').submit(function (e) {
+            e.preventDefault();
+            $.ajax({
+                url: "includes/topScorers.php",
+                method: "POST",
+                data: $('#filterBox').serialize(),
+                success: function(data) {
+                    $('#leaderboardDisplay').html(data);
+                }
+            })
+        });
+</script>

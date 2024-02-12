@@ -361,6 +361,13 @@ h1 {
 
 #filterbtn{
   width: 100%;
+  background-color: #acd6de;
+  border-color: azure;
+  font-weight: bold;
+}
+
+#filterbtn:hover{
+  background-color: #A3C1D4;
 }
 
 #leaderboardBody{
@@ -373,21 +380,7 @@ h1 {
     padding-top: 5%;
     border-collapse: separate;
     border-spacing: 0 20px;
-}
-
-.placementCol{
-  width: 10%;
-  font-weight: bolder;
-}
-
-.nameCol{
-  width: 30%;
-  font-weight: bolder;
-}
-
-.scoreCol{
-  width: 60%;
-  font-weight: bolder;
+    font-weight: bolder;
 }
 
 .progress{
@@ -397,6 +390,19 @@ h1 {
 }
 
 /* LEADERBOARD STYLING END */
+
+/* STUDENT MANAGMENT STYLING START */
+
+#studentBody{
+  height:100vh;
+  background-color: #d8dede;
+}
+
+#studentTableMain{
+  
+}
+
+/* STUDENT MANAGMENT STYLING END */
 
 /* Table-card */
 
