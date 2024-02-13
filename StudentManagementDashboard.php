@@ -28,7 +28,7 @@
     </div>
 
     <div class="container-fluid mt-5">
-        <table class="table table-hover table-bordered" id="studentTableMain">
+        <table class="table table-hover" id="studentTableMain">
             <thead>
                 <tr>
                     <th class="col-1" scope="col">Number</th>
@@ -49,3 +49,8 @@
 </html>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
 <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
+<script src="https://cdn.datatables.net/v/bs5/dt-1.13.8/r-2.5.0/sr-1.3.0/datatables.min.js"></script>
+<script> new DataTable('#studentTableMain',{ //Datatable styling
+    info: false,
+    pageLength: 50,
+}); </script>
