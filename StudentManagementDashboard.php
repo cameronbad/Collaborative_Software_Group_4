@@ -17,8 +17,8 @@
     <div class="containter">
         <form class="row" method="POST" id="studentFilterBox">
             <div class="col-10">
-                <select class="form-select col" id="classFilters" name="classFilters">
-                    <?php include_once("includes/filtersDisplay.php") ?> <!-- Displays subjects for filters -->
+                <select class="form-select col" id="studentFilters" name="studentFilters">
+                    <?php include_once("includes/studentFilterDisplay.php") ?> <!-- Displays subjects for filters -->
                 </select>
             </div>
             <div class="col-2">
@@ -39,8 +39,8 @@
                     <th class="col-3" scope="col">Last Login</th>
                </tr>
             </thead>
-            <tbody>
-                <?php include_once("includes/studentManageOutput.php") ?>
+            <tbody id="studentDisplay">
+                <?php include_once("includes/studentManageOutput.php") ?> <!-- Runs a query which outputs the field data -->
             </tbody>
         </table>
     </div>
@@ -54,3 +54,16 @@
     info: false,
     pageLength: 50,
 }); </script>
+<script>
+     $('#studentFilterBox').submit(function (e) {
+            e.preventDefault();
+            $.ajax({
+                url: "includes/studentOutputFiltered.php",
+                method: "POST",
+                data: $('#studentFilterBox').serialize(),
+                success: function(data) {
+                    $('#studentDisplay').html(data);
+                }
+            })
+        });
+</script>

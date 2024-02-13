@@ -10,7 +10,7 @@
     while(mysqli_next_result($db_connect)){;} //Fixes Unsynch Error
 
     while($row = mysqli_fetch_assoc($result)){ //Loops through results and matches the subjects with the courses
-        if (/*$_SESSION['courseID'] Add this once session values*/1 == $row['courseID'] || $_SESSION['accessLevel'] == '3') {
+        //if ($_SESSION['accessLevel'] >= '2') { Will add condition after we have session varaibles implemeted
             if($preValue == 0) {
                 echo "<optgroup label=" . $row["courseName"] . ">";
                 echo "<option value='" . $row["subjectID"] . "'>" . $row["subjectName"] . "</option>";
@@ -25,6 +25,6 @@
             else {
                 echo "<option value='" . $row["subjectID"] . "'>" . $row["subjectName"] . "</option>";
             }
-        }
+        //}
     }
 ?>
