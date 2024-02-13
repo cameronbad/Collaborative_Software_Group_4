@@ -2,6 +2,11 @@
 //User auth here
 session_start();
 
+require_once("includes/_connect.php");
+
+$query = "SELECT SUM(`questionTotal`) AS totalQuestions, SUM(`questionCorrect`) AS totalCorrect, SUM(`points`) AS totalPoints FROM `result` WHERE `completionDate` IS NOT NULL AND `result`.`userID` = " . $_SESSION["userID"];
+
+$userResult = mysqli_fetch_assoc(mysqli_execute_query($db_connect, $query));
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -19,12 +24,14 @@ session_start();
         <div class="parallax py-5">
             <div class="container">
                 <div class="card"> <!-- Topbar -->
-                    <div class="col-2 card-body stats-left"> <!-- Replace with appropriate icons later -->
-                        <h2><span class="badge">Points</span></h2>
-                        <h2><span class="badge">Avg</span></h2>
-                    </div>
-                    <div class="col"> <!-- Graph -->
-
+                    <div class="row">
+                        <div class="col-2 card-body stats-left"> <!-- Replace with appropriate icons later -->
+                            <h2><span class="badge">Points: <?= $userResult['totalPoints'] ?> </span></h2>
+                            <h2><span class="badge">Avg: <?php if($userResult['totalQuestions'] != 0) {echo $userResult['totalCorrect'] / $userResult['totalQuestions'];} ?></span></h2>
+                        </div>
+                        <div class="col-10"> <!-- Graph -->
+                            <canvas id="statChart" style="width:100%; max-height:150px"><!--Undecided height--></canvas>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -55,5 +62,21 @@ session_start();
     </main>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
     <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.js" integrity="sha512-ZwR1/gSZM3ai6vCdI+LVF1zSq/5HznD3ZSTk7kajkaj4D292NLuduDCO1c/NT8Id+jE58KYLKT7hXnbtryGmMg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script> //User json encoding of php arrays below
+        const xValues = []; //Name of test
+        const yValues = []; //Average score
+
+        new Chart("statChart", {
+            type: "bar",
+            data: {
+                labels: xValues,
+                datasets: [{
+                    label: 'Percentage Mark',
+                    data: yValues
+                }]
+            },
+        });
+    </script>
 </body>
 </html>
