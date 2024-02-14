@@ -30,7 +30,7 @@ $userResult = mysqli_fetch_assoc(mysqli_execute_query($db_connect, $query));
                             <h2><span class="badge">Avg: <?php if($userResult['totalQuestions'] != 0) {echo $userResult['totalCorrect'] / $userResult['totalQuestions'];}?></span></h2>
                         </div>
                         <div class="col-10"> <!-- Graph -->
-                            <canvas id="statChart" style="width:100%; max-height:150px"><!--Undecided height--></canvas>
+                            <canvas id="statChart" style="width:100%; max-height:150px"></canvas>
                         </div>
                     </div>
                 </div>
@@ -46,11 +46,25 @@ $userResult = mysqli_fetch_assoc(mysqli_execute_query($db_connect, $query));
                 $query = "SELECT `result`.*, `test`.*, `subject`.`subjectName` FROM `result` LEFT JOIN `test` ON `result`.`testID` = `test`.`testID` LEFT JOIN `subject` ON `test`.`subjectID` = `subject`.`subjectID` WHERE `result`.`userID` = " . $_SESSION["userID"];
 
                 $run = mysqli_query($db_connect, $query);
-                while ($result = mysqli_fetch_assoc($run)) { //Needs = Number of Questions / Percentage of Correct Questions / Total Acquired Points from Test
-                    echo "<div class='col-3'>";
+                while ($result = mysqli_fetch_assoc($run)) {
+                    echo "<div class='col'>";
                     echo "<div class='card test-card'>";
+                    echo "<div class='card-header text-center'>" . $result["subjectName"] . "</div>";
+                    echo "<div class='card-body'>";
                     echo "<h5 class='card-title'>" . $result["testName"] . "</h5>";
-                    echo "<h6 class='card-subtitle'>" . $result["subjectName"] . "</h6>";
+                    echo "<div class='row text-center'>";
+                    echo "<div class='col-4'>Questions: " . $result['questionTotal'] . "</div>"; //Number of question
+                    echo "<div class='col-4'>Correct: "; 
+                    if (is_null($result['completionDate'])) {echo "N/A";} else {echo $result['questionCorrect'] / $result['questionTotal'] . "%";}
+                    echo "</div>"; //Percentage correct
+                    echo "<div class='col-4'>Points: ";
+                    if (is_null($result['completionDate'])) {echo "N/A";} else {echo $result['points'];}
+                    echo "</div>"; //Total points
+                    echo "</div>";
+                    echo "</div>";
+                    echo "<div class='card-footer text-center'>"; //Completion date / Not started / In progress (colour coding?)
+                    if (!is_null($result['completionDate'])) {echo $result['completionDate'];} elseif (is_null($result['questionCurrent'])) {echo "Incomplete";} else {echo "In progress";}
+                    echo "</div>";
                     echo "<a href='#'></a>"; //Add routing to correct testing page when said page is created.
                     echo "</div>";
                     echo "</div>";
