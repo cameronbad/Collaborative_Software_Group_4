@@ -27,7 +27,7 @@ $userResult = mysqli_fetch_assoc(mysqli_execute_query($db_connect, $query));
                     <div class="row">
                         <div class="col-2 card-body stats-left"> <!-- Replace with appropriate icons later -->
                             <h2><span class="badge">Points: <?= $userResult['totalPoints'] ?> </span></h2>
-                            <h2><span class="badge">Avg: <?php if($userResult['totalQuestions'] != 0) {echo $userResult['totalCorrect'] / $userResult['totalQuestions'];} ?></span></h2>
+                            <h2><span class="badge">Avg: <?php if($userResult['totalQuestions'] != 0) {echo $userResult['totalCorrect'] / $userResult['totalQuestions'];}?></span></h2>
                         </div>
                         <div class="col-10"> <!-- Graph -->
                             <canvas id="statChart" style="width:100%; max-height:150px"><!--Undecided height--></canvas>
@@ -51,7 +51,7 @@ $userResult = mysqli_fetch_assoc(mysqli_execute_query($db_connect, $query));
                     echo "<div class='card test-card'>";
                     echo "<h5 class='card-title'>" . $result["testName"] . "</h5>";
                     echo "<h6 class='card-subtitle'>" . $result["subjectName"] . "</h6>";
-                    echo "<a href='#'></a>";
+                    echo "<a href='#'></a>"; //Add routing to correct testing page when said page is created.
                     echo "</div>";
                     echo "</div>";
                 }
@@ -64,8 +64,22 @@ $userResult = mysqli_fetch_assoc(mysqli_execute_query($db_connect, $query));
     <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.js" integrity="sha512-ZwR1/gSZM3ai6vCdI+LVF1zSq/5HznD3ZSTk7kajkaj4D292NLuduDCO1c/NT8Id+jE58KYLKT7hXnbtryGmMg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <script> //User json encoding of php arrays below
-        const xValues = []; //Name of test
-        const yValues = []; //Average score
+        <?php 
+        include_once("includes/_connect.php");
+        $query = "SELECT `test`.`testName`, `result`.`questionTotal`, `result`.`questionCorrect` FROM `result` LEFT JOIN `test` ON `result`.`testID` = `test`.`testID` WHERE `completionDate` IS NOT NULL AND `result`.`userID` = " . $_SESSION["userID"];
+        
+        $name = [];
+        $avg = [];
+
+        $run = mysqli_query($db_connect, $query);
+        while ($result = mysqli_fetch_assoc($run)) {
+            $name[] = $result['testName'];
+            $avg[] = $result['questionCorrect'] / $result['questionTotal'];
+        }
+        ?>
+
+        const xValues = <?= json_encode($name); ?>; //Name of test
+        const yValues = <?= json_encode($avg); ?>; //Average score
 
         new Chart("statChart", {
             type: "bar",
