@@ -26,6 +26,12 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $username = validate($_POST["username"]);
     $password = validate($_POST["password"]);
 
+    //Checks that the password inputs match
+    if ($_POST["password"] != $_POST["confirmPassInput"]) {
+        header("Location: registerStudent.php?error=Passwords do not match");
+        exit();
+    }
+
     // Hash the password using bcrypt
     $hashed_password = password_hash($password, PASSWORD_BCRYPT);
 
