@@ -19,9 +19,11 @@ $blockedTime = 30; // in seconds
 if (isset($_POST['userInput']) && isset($_POST['passInput'])) {
 
 	function validate($data){
+	   include "./includes/_connect.php";
        $data = trim($data);
 	   $data = stripslashes($data);
 	   $data = htmlspecialchars($data);
+	   $data = mysqli_real_escape_string($db_connect, $data);
 	   return $data;
 	}
 

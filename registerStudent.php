@@ -8,9 +8,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     // Function for validating and sanitizing the input data
     function validate($data) {
+        include_once("./includes/_connect.php");
         $data = trim($data);
         $data = stripslashes($data);
         $data = htmlspecialchars($data);
+        $data = mysqli_real_escape_string($db_connect, $data);
         return $data;
     }
 
