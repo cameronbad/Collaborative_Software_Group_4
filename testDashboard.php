@@ -16,6 +16,7 @@ $userResult = mysqli_fetch_assoc(mysqli_execute_query($db_connect, $query));
     <title>EduTest | Test Dashboard</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
     <link href="style.css" rel="stylesheet">
+    <link rel="shortcut icon" href="Images/EduTestLogo.png" type="image/x-icon">
 </head>
 <body class="d-flex flex-column h-100">
     <main class="flex-shrink-0">
