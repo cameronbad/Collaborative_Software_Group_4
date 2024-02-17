@@ -436,3 +436,68 @@ th:last-child {
 }
 
 /* Table-card  END*/
+
+/* parallax */
+
+.parallax {
+  background-color: #d8dede;
+  
+
+  /*background-attachment: fixed;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;*/ /* Only works with images */
+}
+
+/* parallax END */
+
+/* stats-left*/
+
+.stats-left {
+  background-color: #acd6de;
+}
+
+.stats-left span {
+  background-color: #ABBADE;
+
+}
+
+.stats-left h2:last-child {
+  margin-bottom: 0;
+}
+/* stats-left  END*/
+
+/* Test-card */
+
+@keyframes fadeIn {
+  from {
+      opacity: 0;
+      top: 50px;
+  }
+  to {
+      opacity: 1;
+      top: 0px;
+  }
+}
+
+.test-card {
+    transition: all 0.4s;
+    animation-name: fadeIn;
+    animation-duration: 2s;
+}
+
+.test-card:hover {
+    margin-top: -4px;
+    margin-left: -4px;
+    box-shadow: 8px 8px #acd6de;
+}
+
+.test-card > a {
+    display: block;
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    text-decoration: none;
+}
+
+/* Test-card  END*/
