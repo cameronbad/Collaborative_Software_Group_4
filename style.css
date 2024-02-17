@@ -15,7 +15,7 @@
   align-items: center;
   justify-content: center;
   min-height: 100vh;
-  background-image: url(./Images/loginBackgroundV2.jpg);
+  background-image: url(./Images/loginBackgroundV3.jpg);
   background-repeat: no-repeat;
   background-size: cover;
   background-position: center;
@@ -34,28 +34,22 @@
   padding: 2rem 3rem;
 }
 
-.loginForm, h1{
+.loginForm > h1{
     font-size: 30px;
     color: #acdbde;
     text-align: center;
-    padding-top: 10px;
 }
 
-img {
+.loginLogo {
   position: absolute;
-  top: -220px;
+  top: -180px;
   left: 33%;
   transform: translateX(-50%);
-  width: 150px;
-  height: 100px;
+  max-width: 125px;
+  height: 125px;
   border-radius: 50%;
-  border: 4px solid #acd6de;
-}
-
-.loginTitle {
-  font-size: 30px;
-  color: #acdbde;
-  text-align: center;
+  border: 4px solid #fff;
+  margin-left: 18%;
 }
 
 .loginInput {
@@ -65,24 +59,29 @@ img {
   border-bottom: 2px solid #acd6de;
 }
 
+#passInput {
+  margin-top: 10px;
+}
+
+#userInput {
+  margin-top: 10px;
+}
+
 .loginInput label {
   position: absolute;
   top: -40%;
-  left: 35%;
+  left: 33%;
   transform: translateY(-50%);
   color: #acd6de;
   font-size: 1rem;
   pointer-events: none;
   transition: all 0.5s ease-in-out;
+  margin-top: 10px;
+  font-size: 18px;
 }
 
 .loginInput input::placeholder {
-  color: #acd6de;
-}
-
-.loginInput input:focus ~ label,
-.loginInput input:valid ~ label {
-  top: -5px;
+  color: white;
 }
 
 .loginInput input {
@@ -91,7 +90,7 @@ img {
   background: transparent;
   border: none;
   outline: none;
-  font-size: 1rem;
+  font-size: 16px;
   padding: 0 35px 0 5px;
   color: white;
 }
@@ -107,6 +106,7 @@ img {
   font-size: 1rem;
   font-weight: 600;
   transition: all 0.5s ease;
+  transform: translateY(-10%);
 }
 
 .loginButton:hover {
@@ -114,8 +114,8 @@ img {
 }
 
 .error {
-  background: #F2DEDE;
-  color: #A94442;
+  background: #f2dede;
+  color: #a94442;
   padding: 10px;
   width: 95%;
   border-radius: 5px;
@@ -143,58 +143,296 @@ img {
 
 /* LOGIN FORM END */
 
+/* REGISTER FORM START */
+
+.registerBody {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  background-image: url(./Images/loginBackgroundV2.jpg);
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+}
+
+.registerSection {
+  position: relative;
+  max-width: 800px;
+  background-color: transparent;
+  border: 4px solid #acd6de;
+  border-radius: 20px;
+  backdrop-filter: blur(55px);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 2rem 3rem;
+}
+
+.registerForm > h1 {
+  font-size: 30px;
+  color: #acdbde;
+  text-align: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transform: translateY(-35%);
+}
+
+.registerLogo {
+  position: absolute;
+  top: -160px;
+  left: 32%;
+  transform: translateX(-50%);
+  max-width: 125px;
+  height: 125px;
+  border-radius: 50%;
+  border: 4px solid #fff;
+  margin-left: 18%;
+}
+
+.col > input, .col > select{
+  font-family: "Nunito", sans-serif;
+  font-size: 16px;
+  background-color: #acd6de;
+}
+
+.col > input::placeholder{
+  color: black;
+}
+
+.col > input:focus, .col > select:focus{
+  background-color: #acd6de;
+}
+
+.col > input:focus, .col > select:focus{
+  box-shadow: 0 0 5px white;
+}
+
+/* .registerInput {
+  position: relative;
+  margin: 40px 0;
+  max-width: 310px;
+  border-bottom: 2px solid #acd6de;
+  text-align: center;
+}
+
+#emailInput {
+  margin-top: 10px;
+}
+
+#confirmPassInput {
+  margin-top: 10px;
+}
+
+#confirmEmailInput {
+  margin-top: 10px;
+}
+
+#lastName {
+  margin-top: 10px;
+}
+
+#firstName {
+  margin-top: 10px;
+}
+
+#studentID {
+  margin-top: 10px;
+}
+
+#courseInput {
+  margin-top: 10px;
+}
+
+#reglabel{
+  left: 20%;
+  transform: translateY(-50%);
+}
+
+#registerLabel {
+  left: 28%;
+  transform: translateY(-50%);
+}
+
+#registrationLabel {
+  left: 18%;
+  transform: translateY(-50%);
+}
+
+.registerInput label {
+  position: absolute;
+  top: -40%;
+  left: 33%;
+  transform: translateY(-50%);
+  color: #acd6de;
+  font-size: 1rem;
+  pointer-events: none;
+  transition: all 0.5s ease-in-out;
+  margin-top: 10px;
+  font-size: 18px;
+}
+
+.registerInput input::placeholder {
+  color: #acd6de;
+}
+
+.registerInput input {
+  width: 100%;
+  height: 30px;
+  background: transparent;
+  border: none;
+  outline: none;
+  font-size: 16px;
+  padding: 0 35px 0 5px;
+  color: white;
+} */
+
+.registerButton {
+  width: 100%;
+  height: 40px;
+  border-radius: 40px;
+  background-color: #acd6de;
+  border: none;
+  outline: none;
+  cursor: pointer;
+  font-size: 1rem;
+  font-weight: 600;
+  transition: all 0.5s ease;
+  transform: translateY(20%);
+}
+
+.registerButton:hover {
+  background-color: rgb(255, 255, 255, 0.5);
+}
+
+.loginStudent {
+  font-size: 1rem;
+  color: #acd6de;
+  text-align: center;
+  margin-top: 25px;
+  transform: translateY(50%);
+}
+
+.loginStudent p a {
+  color: #fff;
+  text-decoration: none;
+  font-weight: 600;
+}
+
+.loginStudent p a:hover {
+  text-decoration: underline;
+}
+
+/* REGISTER FORM END */
+
 /* LEADERBOARD STYLING START */
 
-.lBoardBanner, h1{
-    color: #000;
-    padding-top: 5%;
+.lBoardBanner,
+h1 {
+  color: #000;
+  padding-top: 5%;
+}
+
+#leaderboardBody {
+  width: 100%;
+  height: 100vh;
+  background-color: #d8dede;
+}
+
+#leaderboard {
+  width: 80%;
+  margin: auto;
+  padding-top: 5%;
+  border-collapse: separate;
+  border-spacing: 0 20px;
+}
+
+.lBoardBanner{
+  margin-top: 5%;
+  margin-bottom: 5%;
+  text-align: center;
+}
+
+.lBoardBanner > h1{
+  color: #000;
+  font-size: 42px;
+}
+
+#filterbtn{
+  width: 100%;
+  background-color: #acd6de;
+  border-color: azure;
+  font-weight: bold;
+}
+
+#filterbtn:hover{
+  background-color: #A3C1D4;
 }
 
 #leaderboardBody{
-    width:100%;
     height:100vh;
     background-color: #d8dede;
 }
 
 #leaderboard{
-    width: 80%;
     margin: auto;
     padding-top: 5%;
     border-collapse: separate;
     border-spacing: 0 20px;
+    font-weight: bolder;
+}
+
+.progress{
+  font-size: 16px;
+  font-weight: bold;
+  height: 20%;
 }
 
 /* LEADERBOARD STYLING END */
 
+/* STUDENT MANAGMENT STYLING START */
+
+#studentBody{
+  height:100vh;
+  background-color: #d8dede;
+}
+
+#studentTableMain{
+  
+}
+
+/* STUDENT MANAGMENT STYLING END */
+
 /* Table-card */
 
 .table-card {
-    border-collapse:separate;
-    border-spacing:0 15px;
-    border: none;
+  border-collapse: separate;
+  border-spacing: 0 15px;
+  border: none;
 }
 
 .table-card th {
-    background-color: #acd6de;
-    border-style: none;
+  background-color: #acd6de;
+  border-style: none;
 }
 
 .table-card td {
-    background-color: #acd6de;
-    border-style: none;
+  background-color: #acd6de;
+  border-style: none;
 }
 
 /* First cell of table row/head*/
 td:first-child,
 th:first-child {
-    background-color: #A3C1D4;
-    border-radius: 10px 0 0 10px;
+  background-color: #a3c1d4;
+  border-radius: 10px 0 0 10px;
 }
 
 /* Last cell of table row/head*/
 td:last-child,
 th:last-child {
-    border-radius: 0 10px 10px 0;
+  border-radius: 0 10px 10px 0;
 }
 
 /* Table-card  END*/
