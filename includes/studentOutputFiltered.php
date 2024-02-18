@@ -1,8 +1,10 @@
 <?php
 
-require_once("_connect.php");
+require_once ("_connect.php");
 
-$SQL = "CALL allStudents(1)"; //Calls the procedure the 1 will be changed once session varaibles are added
+$filter = mysqli_real_escape_string($db_connect, $_POST['studentFilters']);
+
+$SQL = "CALL allStudents($filter)";
 
 $result = mysqli_query($db_connect, $SQL);
 

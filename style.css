@@ -377,7 +377,7 @@ h1 {
 
 #leaderboard{
     margin: auto;
-    padding-top: 5%;
+    margin-top: 5%;
     border-collapse: separate;
     border-spacing: 0 20px;
     font-weight: bolder;
@@ -398,8 +398,13 @@ h1 {
   background-color: #d8dede;
 }
 
+#studentFilterBox{
+  margin-top: 5%;
+}
+
 #studentTableMain{
-  
+    margin-top: 5%;
+    font-weight: 500;
 }
 
 /* STUDENT MANAGMENT STYLING END */
