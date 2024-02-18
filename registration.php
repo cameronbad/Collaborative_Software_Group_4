@@ -14,7 +14,7 @@
 <body class="registerBody">
     <section class="registerSection">
         <!-- CREATES FORM AREA -->
-        <form class="registerForm">
+        <form class="registerForm" action="registerStudent.php" method="post">
             <img class="registerLogo" src="./Images/EduTestLogo.png" alt="logo">
             <h1 class="registerTitle">Register</h1>
             <!--CREATES INPUTS FOR USER DATA -->
