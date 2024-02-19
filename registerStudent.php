@@ -46,8 +46,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     // die($courseID);
 
     // Sends the data in a message to the lecturers for approval where they press the approval button
-    // $message = "Student Number: " . $studentNum . "\nFirst Name: " . $firstName . "\nLast Name: " . $lastName . "\nEmail: " . $email . "\nCourse ID: " . $courseID . "\nUsername: " . $username;
-    // mail("ws314697@weston.ac.uk", "Student Registration Approval", $message);
+    $message = "Student Number: " . $studentNum . "\nFirst Name: " . $firstName . "\nLast Name: " . $lastName . "\nEmail: " . $email . "\nCourse ID: " . $courseID . "\nUsername: " . $username;
+    mail("ws314697@weston.ac.uk", "Student Registration Approval", $message);
 
     // Should the user be approved, the data will be inserted into the database
     // Prepare and execute the SQL statement to insert user data into the database
@@ -61,8 +61,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         mysqli_close($db_connect);
         header("Location: login.php"); // Redirect to login page after successful registration
         //Send email to the user stating that their account has been successfully created
-        // $message = "Hello " . $firstName . " " . $lastName . ",\n\nYour account has been successfully created. You can now login to the system using the following credentials:\n\nUsername: " . $username . "\nPassword: " . $password . "\n\nKind regards,\n\nEduTestPro Team";
-        // mail($email, "Account Created", $message);
+        $message = "Hello " . $firstName . " " . $lastName . ",\n\nYour account has been successfully created. You can now login to the system using the following credentials:\n\nUsername: " . $username . "\nPassword: " . $password . "\n\nKind regards,\n\nEduTestPro Team";
+        mail($email, "Account Created", $message);
         exit();
     } else {
         echo "Error: " . mysqli_error($db_connect);
