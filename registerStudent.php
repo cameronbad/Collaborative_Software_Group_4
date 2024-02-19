@@ -29,7 +29,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $firstName = isset($_POST["firstName"]) ? validate($_POST["firstName"], $db_connect) : "";
     $lastName = isset($_POST["lastName"]) ? validate($_POST["lastName"], $db_connect) : "";
     $email = isset($_POST["email"]) ? validate($_POST["email"], $db_connect) : "";
-    $courseID = isset($_POST["courseID"]) ? validate($_POST["courseID"], $db_connect) : "";
+    $courseID = isset($_POST["course"]) ? validate($_POST["course"], $db_connect) : "";
     $username = isset($_POST["username"]) ? validate($_POST["username"], $db_connect) : "";
     $password = isset($_POST["password"]) ? validate($_POST["password"], $db_connect) : "";
     $confirmPassInput = isset($_POST["confPass"]) ? validate($_POST["confPass"], $db_connect) : "";
@@ -42,6 +42,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     // Hash the password using bcrypt
     $hashed_password = password_hash($password, PASSWORD_BCRYPT);
+
+    // die($courseID);
 
     // Sends the data in a message to the lecturers for approval where they press the approval button
     // $message = "Student Number: " . $studentNum . "\nFirst Name: " . $firstName . "\nLast Name: " . $lastName . "\nEmail: " . $email . "\nCourse ID: " . $courseID . "\nUsername: " . $username;
