@@ -1,24 +1,11 @@
-<?php 
-session_start();
+<?php
 
-if (isset($_SESSION['userID']) && isset($_SESSION['username'])) {
+require_once('jRoute/_load.php');
 
- ?>
-<!DOCTYPE html>
-<html>
-<head>
-	<title>HOME</title>
-	<link rel="stylesheet" type="text/css" href="style.css">
-</head>
-<body>
-     <h1>Hello, <?php echo $_SESSION['firstName']; ?></h1>
-     <a href="logout.php">Logout</a>
-</body>
-</html>
+$route = new jRoute("/Collaborative_Software_Group_4");
 
-<?php 
-}else{
-     header("Location: login.php");
-     exit();
-}
- ?>
+$route->Route(['get'], '/leaderboard', "leaderboard.php");
+
+echo $route->Dispatch($_SERVER['REQUEST_METHOD'], $_SERVER['REQUEST_URI']);
+
+?>
