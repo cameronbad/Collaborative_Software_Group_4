@@ -1,6 +1,6 @@
 <?php
 //User auth here
-session_start();
+@session_start();
 
 ?>
 <!DOCTYPE html>
