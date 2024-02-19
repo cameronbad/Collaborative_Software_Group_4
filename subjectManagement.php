@@ -108,7 +108,7 @@ https://cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css
               <td><?php echo $result["subjectName"] ?></td>
               <td><?php echo $result["courseName"] ?></td>
               <td><a href="" data-bs-toggle="modal" data-bs-target="#editModal" data-bs-whatever="<?php echo $result["subjectName"] ?>"><i class="fa fa-pencil" aria-hidden="true"></i></a></td>
-              <td><a href="" data-bs-toggle="modal" data-bs-target="#deleteModal<?php echo $result["subjectID"] ?>"><i class="fa fa-trash" aria-hidden="true"></i>
+              <!--<td><a href="" data-bs-toggle="modal" data-bs-target="#deleteModal<?php echo $result["subjectID"] ?>"><i class="fa fa-trash" aria-hidden="true"></i>-->
                 </a></td>
             </tr>
             <!-- Delete Modal -->
