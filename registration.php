@@ -59,25 +59,25 @@
             <div class="row mb-3">
                 <div class="col">
                     <input type="text" class="form-control" placeholder="Student Number" id="studentNum"
-                        label="Student Number">
+                        name="studentNum" label="Student Number">
                 </div>
             </div>
             <div class="row mb-3">
                 <div class="col">
-                    <input type="text" class="form-control" placeholder="First Name" id="firstName" label="First name">
+                    <input type="text" class="form-control" placeholder="First Name" id="firstName" name="firstName" label="First name">
                 </div>
                 <div class="col">
-                    <input type="text" class="form-control" placeholder="Last Name" id="lastName" label="Last Name">
-                </div>
-            </div>
-            <div class="row mb-3">
-                <div class="col">
-                    <input type="email" class="form-control" placeholder="Email" id="email" label="Email">
+                    <input type="text" class="form-control" placeholder="Last Name" id="lastName" name="lastName" label="Last Name">
                 </div>
             </div>
             <div class="row mb-3">
                 <div class="col">
-                    <select class="form-select" id="course" aria-label="Course">
+                    <input type="email" class="form-control" placeholder="Email" id="email" name="email" label="Email">
+                </div>
+            </div>
+            <div class="row mb-3">
+                <div class="col">
+                    <select class="form-select" id="course" name="course" aria-label="Course">
                         <option selected>Course:</option>
                         <?php
                         include './includes/_connect.php';
@@ -90,15 +90,15 @@
                     </select>
                 </div>
                 <div class="col">
-                    <input type="text" class="form-control" placeholder="Username" id="username" label="Username">
+                    <input type="text" class="form-control" placeholder="Username" id="username" name="username" label="Username">
                 </div>
             </div>
             <div class="row mb-3">
                 <div class="col">
-                    <input type="password" class="form-control" placeholder="Password" id="password" label="Password">
+                    <input type="password" class="form-control" placeholder="Password" id="password" name="password" label="Password">
                 </div>
                 <div class="col">
-                    <input type="password" class="form-control" placeholder="Confirm Password" id="confPass"
+                    <input type="password" class="form-control" placeholder="Confirm Password" id="confPass" name="confPass"
                         label="Confirm Password">
                 </div>
             </div>
