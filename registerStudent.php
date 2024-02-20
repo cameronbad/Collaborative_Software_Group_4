@@ -40,10 +40,12 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         exit();
     }
 
-    // Hash the password using bcrypt
-    $hashed_password = password_hash($password, PASSWORD_BCRYPT);
+    $options = [
+        'cost' => 12,
+    ];
 
-    // die($courseID);
+    // Hash the password using bcrypt
+    $hashed_password = password_hash($password, PASSWORD_BCRYPT, $options);
 
     // Sends the data in a message to the lecturers for approval where they press the approval button
     $message = "Student Number: " . $studentNum . "\nFirst Name: " . $firstName . "\nLast Name: " . $lastName . "\nEmail: " . $email . "\nCourse ID: " . $courseID . "\nUsername: " . $username;
