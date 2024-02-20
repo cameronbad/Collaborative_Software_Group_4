@@ -1,8 +1,8 @@
 <?php
 //User auth here
-session_start();
+@session_start();
 
-require_once("includes/_connect.php");
+require_once("./includes/_connect.php");
 
 $query = "SELECT SUM(`questionTotal`) AS totalQuestions, SUM(`questionCorrect`) AS totalCorrect, SUM(`points`) AS totalPoints FROM `result` WHERE `completionDate` IS NOT NULL AND `result`.`userID` = " . $_SESSION["userID"];
 
