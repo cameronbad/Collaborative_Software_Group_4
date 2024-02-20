@@ -57,7 +57,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $stmt = mysqli_prepare($db_connect, $sql);
 
     if ($stmt) {
-        mysqli_stmt_bind_param($stmt, "ssssissi", $username, $firstName, $lastName, $email, $hashed_password, $studentNum, $courseID, $accessLevel);
+        mysqli_stmt_bind_param($stmt, "ssssssii", $username, $firstName, $lastName, $email, $hashed_password, $studentNum, $courseID, $accessLevel);
         mysqli_stmt_execute($stmt);
         mysqli_stmt_close($stmt);
         mysqli_close($db_connect);
