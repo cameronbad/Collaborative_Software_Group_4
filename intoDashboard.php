@@ -46,7 +46,7 @@ if (isset($_POST['userInput']) && isset($_POST['passInput'])) {
 
 		if (mysqli_num_rows($result) === 1) {
 			$row = mysqli_fetch_assoc($result);
-            if ($row['username'] === $uname && $row[password_verify($pass, $hashed_password)]) {
+            if ($row['username'] === $uname && password_verify($pass, $row['password'])) {
             	$_SESSION['username'] = $row['username'];
             	$_SESSION['firstName'] = $row['firstName'];
             	$_SESSION['userID'] = $row['userID'];
