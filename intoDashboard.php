@@ -18,8 +18,7 @@ $blockedTime = 30; // in seconds
 
 if (isset($_POST['userInput']) && isset($_POST['passInput'])) {
 
-	function validate($data){
-	   include "./includes/_connect.php";
+	function validate($data, $db_connect){
        $data = trim($data);
 	   $data = stripslashes($data);
 	   $data = htmlspecialchars($data);
@@ -27,8 +26,8 @@ if (isset($_POST['userInput']) && isset($_POST['passInput'])) {
 	   return $data;
 	}
 
-	$uname = validate($_POST['userInput']);
-	$pass = validate($_POST['passInput']);
+	$uname = isset($_POST["username"]) ? validate($_POST["username"], $db_connect) : "";
+    $pass = isset($_POST["password"]) ? validate($_POST["password"], $db_connect) : "";
 
 	if (empty($uname)) {
 		header("Location: login.php?error=Username is required");
@@ -47,7 +46,7 @@ if (isset($_POST['userInput']) && isset($_POST['passInput'])) {
 
 		if (mysqli_num_rows($result) === 1) {
 			$row = mysqli_fetch_assoc($result);
-            if ($row['username'] === $uname && $row['password'] === $pass) {
+            if ($row['username'] === $uname && $row[password_verify($pass, $hashed_password)]) {
             	$_SESSION['username'] = $row['username'];
             	$_SESSION['firstName'] = $row['firstName'];
             	$_SESSION['userID'] = $row['userID'];

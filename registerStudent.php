@@ -49,7 +49,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     // Sends the data in a message to the lecturers for approval where they press the approval button
     $message = "Student Number: " . $studentNum . "\nFirst Name: " . $firstName . "\nLast Name: " . $lastName . "\nEmail: " . $email . "\nCourse ID: " . $courseID . "\nUsername: " . $username;
-    mail("ws314697@weston.ac.uk", "Student Registration Approval", $message);
+    $message = wordwrap($message, 70);
+    mail("max04082003@gmail.com", "Student Registration Approval", $message);
 
     // Should the user be approved, the data will be inserted into the database
     // Prepare and execute the SQL statement to insert user data into the database
