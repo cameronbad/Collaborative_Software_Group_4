@@ -64,8 +64,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         mysqli_close($db_connect);
         header("Location: login.php"); // Redirect to login page after successful registration
         //Send email to the user stating that their account has been successfully created
-        $message = "Hello " . $firstName . " " . $lastName . ",\n\nYour account has been successfully created. You can now login to the system using the following credentials:\n\nUsername: " . $username . "\nPassword: " . $password . "\n\nKind regards,\n\nEduTestPro Team";
-        mail($email, "Account Created", $message);
+        $messageStudent = "Hello " . $firstName . " " . $lastName . ",\n\nYour account has been successfully created. You can now login to the system using the following credentials:\n\nUsername: " . $username . "\nPassword: " . $password . "\n\nKind regards,\n\nEduTestPro Team";
+        mail($email, "Account Created", $messageStudent);
         exit();
     } else {
         echo "Error: " . mysqli_error($db_connect);
