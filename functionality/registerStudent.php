@@ -70,5 +70,4 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     } else {
         echo "Error: " . mysqli_error($db_connect);
     }
-
 }

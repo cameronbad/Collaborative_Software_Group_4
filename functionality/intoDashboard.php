@@ -19,7 +19,7 @@ $blockedTime = 30; // in seconds
 if (isset($_POST['userInput']) && isset($_POST['passInput'])) {
 
 	function validate($data, $db_connect){
-       $data = trim($data);
+     $data = trim($data);
 	   $data = stripslashes($data);
 	   $data = htmlspecialchars($data);
 	   $data = mysqli_real_escape_string($db_connect, $data);
@@ -27,16 +27,16 @@ if (isset($_POST['userInput']) && isset($_POST['passInput'])) {
 	}
 
 	$uname = isset($_POST["username"]) ? validate($_POST["username"], $db_connect) : "";
-    $pass = isset($_POST["password"]) ? validate($_POST["password"], $db_connect) : "";
+  $pass = isset($_POST["password"]) ? validate($_POST["password"], $db_connect) : "";
 
 	if (empty($uname)) {
-		header("Location: ./pages/login.php?error=Username is required");
+		  header("Location: ./pages/login.php?error=Username is required");
 	    exit();
 	}else if(empty($pass)){
-        header("Location: ./pages/login.php?error=Password is required");
+      header("Location: ./pages/login.php?error=Password is required");
 	    exit();
 	}else{
-		$sql = "SELECT * FROM `user` WHERE `user`.`username`=? AND `user`.`password`=?";
+		    $sql = "SELECT * FROM `user` WHERE `user`.`username`=? AND `user`.`password`=?";
         $stmt = mysqli_prepare($db_connect, $sql);
 
         // Bind parameters and execute the statement
@@ -45,14 +45,14 @@ if (isset($_POST['userInput']) && isset($_POST['passInput'])) {
         $result = mysqli_stmt_get_result($stmt);
 
 		if (mysqli_num_rows($result) === 1) {
-			$row = mysqli_fetch_assoc($result);
-            if ($row['username'] === $uname && password_verify($pass, $row['password'])) {
-            	$_SESSION['username'] = $row['username'];
-            	$_SESSION['firstName'] = $row['firstName'];
-            	$_SESSION['userID'] = $row['userID'];
+		$row = mysqli_fetch_assoc($result);
+    if ($row['username'] === $uname && password_verify($pass, $row['password'])) {
+        $_SESSION['username'] = $row['username'];
+        $_SESSION['firstName'] = $row['firstName'];
+        $_SESSION['userID'] = $row['userID'];
 				$_SESSION['courseID'] = $row['courseID'];
 				$_SESSION['accessLevel'] = $row['accessLevel'];
-            	header("Location: ./index.php");
+        header("Location: ./index.php");
 		        exit();
             }else{
 				$_SESSION['loginAttempts']++; // Increment login attempts counter
