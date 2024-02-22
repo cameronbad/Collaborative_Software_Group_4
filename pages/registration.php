@@ -14,70 +14,32 @@
 <body class="registerBody">
     <section class="registerSection">
         <!-- CREATES FORM AREA -->
-        <form class="registerForm" action="registerStudent.php" method="post">
+        <form class="registerForm" action="./functionality/registerStudent.php" method="post">
             <img class="registerLogo" src="./Images/EduTestLogo.png" alt="logo">
             <h1 class="registerTitle">Register</h1>
             <!--CREATES INPUTS FOR USER DATA -->
-            <!-- <div class="registerInput">
-                <label id="reglabel">Student Number</label>
-                <input type="text" id="studentID" name="studentNum" placeholder="Enter student number...">
-            </div>
-            <div class="registerInput">
-                <label id="registerLabel">First Name</label>
-                <input type="text" id="firstName" name="firstName" placeholder="Enter first name...">
-            </div>
-            <div class="registerInput">
-                <label id="registerLabel">Last Name</label>
-                <input type="text" id="lastName" name="lastName" placeholder="Enter last name...">
-            </div>
-            <div class="registerInput">
-                <label>Email</label>
-                <input type="email" id="emailInput" name="emailInput" placeholder="Enter email...">
-            </div>
-            <div class="registerInput">
-                <label id="registerLabel">Username</label>
-                <input type="text" id="userInput" name="userInput" placeholder="Enter username...">
-            </div>
-            <div class="registerInput">
-                <label id="registerLabel">Password</label>
-                <input type="password" id="passInput" name="passInput" placeholder="Enter password...">
-            </div>
-            <div class="registerInput">
-                <label id="registrationLabel">Confirm Password</label>
-                <input type="password" id="confirmPassInput" name="confirmPassInput" placeholder="Confirm password...">
-            </div>
-            <div class="registerInput">
-                <label>Course</label>
-                <select id="courseInput" name="courseInput">
-                    <option value="1">Computer Science</option>
-                    <option value="2">Information Technology</option>
-                    <option value="3">Software Engineering</option>
-                    <option value="4">Computer Engineering</option>
-                </select>
-            </div> -->
-
             <div class="row mb-3">
                 <div class="col">
                     <input type="text" class="form-control" placeholder="Student Number" id="studentNum"
-                        label="Student Number">
+                        name="studentNum" label="Student Number">
                 </div>
             </div>
             <div class="row mb-3">
                 <div class="col">
-                    <input type="text" class="form-control" placeholder="First Name" id="firstName" label="First name">
+                    <input type="text" class="form-control" placeholder="First Name" id="firstName" name="firstName" label="First name">
                 </div>
                 <div class="col">
-                    <input type="text" class="form-control" placeholder="Last Name" id="lastName" label="Last Name">
-                </div>
-            </div>
-            <div class="row mb-3">
-                <div class="col">
-                    <input type="email" class="form-control" placeholder="Email" id="email" label="Email">
+                    <input type="text" class="form-control" placeholder="Last Name" id="lastName" name="lastName" label="Last Name">
                 </div>
             </div>
             <div class="row mb-3">
                 <div class="col">
-                    <select class="form-select" id="course" aria-label="Course">
+                    <input type="email" class="form-control" placeholder="Email" id="email" name="email" label="Email">
+                </div>
+            </div>
+            <div class="row mb-3">
+                <div class="col">
+                    <select class="form-select" id="course" name="course" aria-label="Course">
                         <option selected>Course:</option>
                         <?php
                         include './includes/_connect.php';
@@ -90,15 +52,15 @@
                     </select>
                 </div>
                 <div class="col">
-                    <input type="text" class="form-control" placeholder="Username" id="username" label="Username">
+                    <input type="text" class="form-control" placeholder="Username" id="username" name="username" label="Username">
                 </div>
             </div>
             <div class="row mb-3">
                 <div class="col">
-                    <input type="password" class="form-control" placeholder="Password" id="password" label="Password">
+                    <input type="password" class="form-control" placeholder="Password" id="password" name="password" label="Password">
                 </div>
                 <div class="col">
-                    <input type="password" class="form-control" placeholder="Confirm Password" id="confPass"
+                    <input type="password" class="form-control" placeholder="Confirm Password" id="confPass" name="confPass"
                         label="Confirm Password">
                 </div>
             </div>
@@ -106,7 +68,7 @@
             <!--CREATES LINK TO LOGIN PAGE -->
             <div class="loginStudent">
                 <p>Already have an account?
-                    <a href="login.php">Login</a>
+                    <a href="./pages/login.php">Login</a>
                 </p>
             </div>
         </form>
