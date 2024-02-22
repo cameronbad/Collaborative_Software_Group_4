@@ -14,7 +14,7 @@
 <body class="registerBody">
     <section class="registerSection">
         <!-- CREATES FORM AREA -->
-        <form class="registerForm" action="registerStudent.php" method="post">
+        <form class="registerForm" action="./functionality/registerStudent.php" method="post">
             <img class="registerLogo" src="./Images/EduTestLogo.png" alt="logo">
             <h1 class="registerTitle">Register</h1>
             <!--CREATES INPUTS FOR USER DATA -->
@@ -68,7 +68,7 @@
             <!--CREATES LINK TO LOGIN PAGE -->
             <div class="loginStudent">
                 <p>Already have an account?
-                    <a href="login.php">Login</a>
+                    <a href="./pages/login.php">Login</a>
                 </p>
             </div>
         </form>
