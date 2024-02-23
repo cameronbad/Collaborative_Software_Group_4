@@ -498,4 +498,22 @@ th:last-child {
   width: 100vw;
 }
 
+.test-bottom {
+  background-color: #acd6de;
+  padding: 0;
+}
+
+.test-bottom div:first-child div:first-child {
+  background-color: #ABBADE;
+}
+.test-bottom div:last-child div:last-child {
+  background-color: #ABBADE;
+}
+
+.test-bottom-svg {
+  width: 30px;
+  height: 56px;
+  fill: #ABBADE;
+}
+
 /* Test page END */
