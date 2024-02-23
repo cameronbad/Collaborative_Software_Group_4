@@ -43,8 +43,8 @@
                         $query = "SELECT `test`.*, `subject`.`subjectName`, `subject`.`courseID` FROM `test` LEFT JOIN `subject` ON `test`.`subjectID` = `subject`.`subjectID` WHERE `subject`.`courseID` = 1" ; //. $_SESSION["courseID"]
                     }
 
-                    $run = mysqli_query($db_connect, $query);
-                    while ($result = mysqli_fetch_assoc($run)) {
+                    $run = $db_connect->query($query);
+                    while ($result = $run->fetch_assoc()) {
                         echo "<tr>";
                         echo "<td>" . $result["testID"] . "</td>";
                         echo "<td>" . $result["testName"] . "</td>";
@@ -94,9 +94,9 @@
                                     
                                     if ($_SESSION['accessLevel'] == '3') { //If admin account
                                         $query = "SELECT `subject`.*, `course`.`courseName` FROM `subject` LEFT JOIN `course` ON `subject`.`courseID` = `course`.`courseID` ORDER BY `courseName`, `subjectName`";
-                                        $run = mysqli_query($db_connect, $query);
+                                        $run = $db_connect->query($query);
                                         $preValue = '0';
-                                        while ($result = mysqli_fetch_assoc($run)) {
+                                        while ($result = $run->fetch_assoc()) {
                                             if($preValue == 0) { //If the first subject
                                                 echo "<optgroup label=" . $result["courseName"] . ">"; 
                                                 echo "<option value='" . $result["subjectID"] . "'>" . $result["subjectName"] . "</option>"; 
@@ -113,8 +113,8 @@
                                         echo "</optgroup>";
                                     } else { //If teacher account
                                         $query = "SELECT `subject`.* FROM `subject` WHERE `subject`.`courseID` = '1'"; //Replace 1 with session value for courses once login has been implemented
-                                        $run = mysqli_query($db_connect, $query);
-                                        while ($result = mysqli_fetch_assoc($run)) {
+                                        $run = $db_connect->query($query);
+                                        while ($result = $run->fetch_assoc()) {
                                             echo "<option value='" . $result["subjectID"] . "'>" . $result["subjectName"] . "</option>";
                                         }
                                     }
@@ -159,9 +159,9 @@
                                     <?php
                                     if ($_SESSION['accessLevel'] == '3') {
                                         $query = "SELECT `subject`.*, `course`.`courseName` FROM `subject` LEFT JOIN `course` ON `subject`.`courseID` = `course`.`courseID` ORDER BY `courseName`, `subjectName`";
-                                        $run = mysqli_query($db_connect, $query);
+                                        $run = $db_connect->query($query);
                                         $preValue = '0';
-                                        while ($result = mysqli_fetch_assoc($run)) {
+                                        while ($result = $run->fetch_assoc()) {
                                             if($preValue == 0) {
                                                 echo "<optgroup label=" . $result["courseName"] . ">";
                                                 echo "<option value='" . $result["subjectID"] . "'>" . $result["subjectName"] . "</option>";
@@ -178,8 +178,8 @@
                                         echo "</optgroup>";
                                     } else {
                                         $query = "SELECT `subject`.* FROM `subject` WHERE `subject`.`courseID` = '1'"; //. $_SESSION["courseID"]
-                                        $run = mysqli_query($db_connect, $query);
-                                        while ($result = mysqli_fetch_assoc($run)) {
+                                        $run = $db_connect->query($query);
+                                        while ($result = $run->fetch_assoc()) {
                                             echo "<option value='" . $result["subjectID"] . "'>" . $result["subjectName"] . "</option>";
                                         }
                                     }
@@ -275,7 +275,7 @@
         $('#editForm').submit(function (e) {
             e.preventDefault();
             $.ajax({
-                url: "./editTest.php",
+                url: "./functionality/editTest.php",
                 method: "POST",
                 data: $('#editForm').serialize(),
                 success: function(data) {
@@ -288,7 +288,7 @@
         $('#assignForm').submit(function (e) {
             e.preventDefault();
             $.ajax({
-                url: "./assignTest.php",
+                url: "./functionality/assignTest.php",
                 method: "POST",
                 data: $('#assignForm').serialize(),
                 success: function(data) {
@@ -301,7 +301,7 @@
         $('#deleteForm').submit(function (e) {
             e.preventDefault();
             $.ajax({
-                url: "./deleteTest.php",
+                url: "./functionality/deleteTest.php",
                 method: "POST",
                 data: $('#deleteForm').serialize(),
                 success: function(data) {

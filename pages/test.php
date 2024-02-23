@@ -7,7 +7,7 @@
 require_once("./includes/_connect.php");
 
 $query = "SELECT `test`.`testName`, `subject`.`subjectName`, `result`.`questionTotal`, `result`.`questionCurrent` FROM `result` LEFT JOIN `test` ON `result`.`testID` = `test`.`testID` LEFT JOIN `subject` ON `test`.`subjectID` = `subject`.`subjectID` WHERE `result`.`resultID` = '13'"; //Replace 13 with a GET['resultID'] 
-$test = mysqli_fetch_assoc(mysqli_execute_query($db_connect, $query));
+$test = $db_connect->execute_query($query)->fetch_assoc();
 $current = $test['questionCurrent'];
 ?>
 <!DOCTYPE html>
@@ -27,7 +27,14 @@ $current = $test['questionCurrent'];
         <div class="test-container"> <!-- Question content / fullpage scrolling -->
             <!-- Question / Answers / Submit || Add each question to this container / Existing answers get added on load (initial one created  on first load?)
             Later answers get added by ajax query using page template? -->
+
+            <?php
+            include_once("includes/question.php"); //temp
+
+            ?>
         </div>  
+
+        <!-- Bottom Bar -->
         <div class="navbar fixed-bottom test-bottom">
             <div class="navbar-nav flex-row">
                 <div class="navbar-text p-3"><?= $test['subjectName'] ?></div>
