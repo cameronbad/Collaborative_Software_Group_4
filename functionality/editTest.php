@@ -11,24 +11,24 @@ if (!isset($_POST['eSubjectSelect']) ||
 require_once("includes/_connect.php");
 
 //Declare php variable's from post, creates a legal SQL string to avoid issues.
-$subject = mysqli_real_escape_string($db_connect, $_POST['eSubjectSelect']);
-$name = mysqli_real_escape_string($db_connect, $_POST['eName']);
-$amount = mysqli_real_escape_string($db_connect, $_POST['eAmount']);
-$id = mysqli_real_escape_string($db_connect, $_POST['eTestID']);
+$subject = $db_connect->real_escape_string($_POST['eSubjectSelect']);
+$name = $db_connect->real_escape_string($_POST['eName']);
+$amount = $db_connect->real_escape_string($_POST['eAmount']);
+$id = $db_connect->real_escape_string($_POST['eTestID']);
 
 //Prepare SQL query
 $query = "UPDATE `test` SET 
     `subjectID` = ?,
     `testName` = ?,
     `questionAmount` = ?
-    WHERE `test`.`testID` = $id";
-$stmt = mysqli_prepare($db_connect, $query);
+    WHERE `test`.`testID` = ?";
+$stmt = $db_connect->prepare($query);
 
 //Bind parameters
-mysqli_stmt_bind_param($stmt, "isi", $subject, $name, $amount);
+$stmt->bind_param("isii", $subject, $name, $amount, $id);
 
-if (mysqli_stmt_execute($stmt))
+if ($stmt->execute())
     echo "Test updated succesfully";
 else
-    echo "Error: " . mysqli_error($db_connect);
+    echo "Error: " . $db_connect->error();
 ?>

@@ -8,13 +8,17 @@ if (!isset($_POST['dTestID'])) {
 require_once("includes/_connect.php");
 
 //Declare php variable's from post, creates a legal SQL string to avoid issues.
-$id = mysqli_real_escape_string($db_connect, $_POST['dTestID']);
+$id = $db_connect->real_escape_string($_POST['dTestID']);
 
 //Prepare SQL Query
-$query = "DELETE FROM `test` WHERE `test`.`testID` = $id";
+$query = "DELETE FROM `test` WHERE `test`.`testID` = ?";
+$stmt = $db_connect->prepare($query);
 
-if (mysqli_query($db_connect, $query))
+//Bind parameters
+$stmt->bind_param("i", $id);
+
+if ($stmt->execute())
     echo "Delete succesful";
 else
-    echo "Error: " . mysqli_error($db_connect);
+    echo "Error: " . $db_connect->error();
 ?>
