@@ -6,7 +6,7 @@
 
 require_once("./includes/_connect.php");
 
-$query = "SELECT `test`.`testName`, `subject`.`subjectName`, `result`.`questionTotal`, `result`.`questionCurrent` FROM `result` LEFT JOIN `test` ON `result`.`testID` = `test`.`testID` LEFT JOIN `subject` ON `test`.`subjectID` = `subject`.`subjectID` WHERE `result`.`resultID` = '13'"; //Replace 13 with a GET['resultID'] 
+$query = "SELECT `test`.`testName`, `test`.`subjectID`, `subject`.`subjectName`, `result`.`questionTotal`, `result`.`questionCurrent` FROM `result` LEFT JOIN `test` ON `result`.`testID` = `test`.`testID` LEFT JOIN `subject` ON `test`.`subjectID` = `subject`.`subjectID` WHERE `result`.`resultID` = '13'"; //Replace 13 with a GET['resultID'] 
 $test = $db_connect->execute_query($query)->fetch_assoc();
 $current = $test['questionCurrent'];
 ?>
@@ -27,11 +27,6 @@ $current = $test['questionCurrent'];
         <div class="test-container"> <!-- Question content / fullpage scrolling -->
             <!-- Question / Answers / Submit || Add each question to this container / Existing answers get added on load (initial one created  on first load?)
             Later answers get added by ajax query using page template? -->
-
-            <?php
-            include_once("includes/question.php"); //temp
-
-            ?>
         </div>  
 
         <!-- Bottom Bar -->
@@ -51,7 +46,48 @@ $current = $test['questionCurrent'];
             </div>    
         </div>
     </main>
+    <?php 
+    $query = "SELECT `question`.`questionID` FROM `question` WHERE `question`.`subjectID` = " . $test['subjectID'];
+
+    //Array of all questionID's
+    $questions = [];
+
+    $run = $db_connect->query($query);
+    while ($result = $run->fetch_assoc()) {
+        $questions[] = $result['questionID'];
+    }
+
+    $query = "SELECT `answer`.`chosenAnswer`, `answer`.`questionPosition`, `answer`.`questionID` FROM `answer` WHERE resultID = '13' ORDER BY `answer`.`questionPosition` ASC"; //Replace 13 with a GET['resultID'] 
+
+    //Array of all existing answers
+    $prevQuestions = [];
+
+    $run = $db_connect->query($query);
+    while ($result = $run->fetch_assoc()) {
+        $prevQuestions[] = $result['questionID'];
+        $key = array_search($result['questionID'], $questions);
+        unset($questions[$key]); //Removes index of already made answers from the question id list, this does not rearrange the indexes, so the index will be missing
+    }
+
+    ?>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
     <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
+    <script>
+        //First check for existing answers and append
+        $.each(<?= json_encode($prevQuestions); ?>, function(index, value) {
+            $.ajax({
+                url: "./includes/question.php",
+                method: "POST",
+                data: {questionID:value},
+                success: function(data) {
+                    $('.test-container').append(data);
+                }
+            })
+        });
+
+        //Second/First check for current answer and append
+        //Finally append new answers from list of available questions
+
+    </script>
 </body>
 </html>

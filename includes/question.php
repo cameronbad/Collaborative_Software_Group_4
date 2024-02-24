@@ -1,5 +1,5 @@
 <?php
-include_once("includes/_connect.php");  
+include_once("_connect.php");  
 
 $_GET['questionID'] = '1'; //temp
 
@@ -14,16 +14,19 @@ $keys = array_keys($answers);
 shuffle($keys);
 
 ?>
-<div class="container position-absolute top-50 start-50 translate-middle card"> <!-- card is temp for styling-->
-    <div class="row">
-        <h3 class="text-center"><?= $question['questionText'] ?></h3>      
+<div class="container test-box"> 
+    <div class="top-50 start-50 translate-middle card"> <!-- card is temp for styling-->
+        <div class="row">
+            <h3 class="text-center"><?= $question['questionText'] ?></h3>      
+        </div>
+        <div class="row">
+            <div class="col"><button class="btn btn-primary" value="<?= $keys[0] ?>"><?= $answers[$keys[0]] ?></button></div>
+            <div class="col"><button class="btn btn-primary" value="<?= $keys[1] ?>"><?= $answers[$keys[1]] ?></button></div>
+        </div>
+        <div class="row">
+            <div class="col"><button class="btn btn-primary" value="<?= $keys[2] ?>"><?= $answers[$keys[2]] ?></button></div>
+            <div class="col"><button class="btn btn-primary" value="<?= $keys[3] ?>"><?= $answers[$keys[3]] ?></button></div>
+        </div>
     </div>
-    <div class="row">
-        <div class="col"><?= $answers[$keys[0]] ?></div>
-        <div class="col"><?= $answers[$keys[1]] ?></div>
-    </div>
-    <div class="row">
-        <div class="col"><?= $answers[$keys[2]] ?></div>
-        <div class="col"><?= $answers[$keys[3]] ?></div>
-    </div>
+
 </div>
