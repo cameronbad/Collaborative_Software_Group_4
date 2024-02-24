@@ -28,7 +28,7 @@
     </div>
 
     <div class="container-fluid mt-5">
-        <table class="table table-hover" id="studentTableMain">
+        <table class="table table-hover" id="studentTableMain" name="studentTableMain">
             <thead>
                 <tr>
                     <th class="col-1" scope="col">Number</th>
@@ -37,6 +37,7 @@
                     <th class="col-2" scope="col">Username</th>
                     <th class="col-3" scope="col">Email</th>
                     <th class="col-3" scope="col">Last Login</th>
+                    <th class="col-3" scope="col"></th>
                </tr>
             </thead>
             <tbody id="studentDisplay">
@@ -66,4 +67,14 @@
                 }
             })
         });
+</script>
+<script>
+    $('#studentTableMain').submit(function (e) {
+        e.preventDefault();
+        $.ajax({
+            url: "collaborative/studentProfile",
+            method: "POST",
+            data: $('viewStudentBtn').serialize()
+        })
+    })
 </script>

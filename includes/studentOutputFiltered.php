@@ -17,6 +17,11 @@ while($row = mysqli_fetch_assoc($result)){ //Loops through the query result
     echo "<td>" . $row['username'] . "</td>";
     echo "<td>" . $row['email'] . "</td>";
     echo "<td>" . $row['lastLogin'] . "</td>";
+    ?>
+    <td>
+        <a class="btn btn-secondary" id="viewStudentBtn" name="viewStudentBtn" href="./studentProfile?sid=<?php echo $row['userID']?>">Secondary</a>
+    </td>
+    <?php
     echo "</tr>";
 
 }

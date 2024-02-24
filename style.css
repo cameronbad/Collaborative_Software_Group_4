@@ -372,6 +372,23 @@ h1 {
     font-weight: 500;
 }
 
+#studentProfileBody{
+  background-color: #d8dede;
+}
+
+.studentProfileBack{
+  text-align: end;
+}
+
+#studentProfileMain{
+  width: 100%;
+  height: 100vh;
+  margin-top: 15%;
+  display: grid;
+  grid-template-rows: 1fr 1fr;
+  grid-template-columns: 1fr 1fr;
+}
+
 /* STUDENT MANAGMENT STYLING END */
 
 /* Table-card */
