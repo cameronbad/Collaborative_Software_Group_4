@@ -68,7 +68,7 @@
             <!--CREATES LINK TO LOGIN PAGE -->
             <div class="loginStudent">
                 <p>Already have an account?
-                    <a href="./pages/login.php">Login</a>
+                    <a href="login">Login</a>
                 </p>
             </div>
         </form>

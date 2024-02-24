@@ -30,10 +30,10 @@ if (isset($_POST['userInput']) && isset($_POST['passInput'])) {
   $pass = isset($_POST["password"]) ? validate($_POST["password"], $db_connect) : "";
 
 	if (empty($uname)) {
-		  header("Location: ./pages/login.php?error=Username is required");
+		  header("Location: login?error=Username is required");
 	    exit();
 	}else if(empty($pass)){
-      header("Location: ./pages/login.php?error=Password is required");
+      header("Location: login?error=Password is required");
 	    exit();
 	}else{
 		    $sql = "SELECT * FROM `user` WHERE `user`.`username`=? AND `user`.`password`=?";
@@ -58,11 +58,11 @@ if (isset($_POST['userInput']) && isset($_POST['passInput'])) {
 				$_SESSION['loginAttempts']++; // Increment login attempts counter
                 if ($_SESSION['loginAttempts'] >= $maxLoginAttempts) {
                     $_SESSION['blockedTime'] = time() + $blockedTime; // Set block time
-                    header("Location: ./pages/login.php?error=Incorrect Username or Password.<br> You have been blocked.");
+                    header("Location: login?error=Incorrect Username or Password.<br> You have been blocked.");
                     exit();
                 } else {
                     $attemptsLeft = $maxLoginAttempts - $_SESSION['loginAttempts'];
-                    header("Location: ./pages/login.php?error=Incorrect Username or Password.<br> $attemptsLeft attempts left.");
+                    header("Location: login?error=Incorrect Username or Password.<br> $attemptsLeft attempts left.");
                     exit();
                 }
 			}
@@ -70,17 +70,17 @@ if (isset($_POST['userInput']) && isset($_POST['passInput'])) {
 			$_SESSION['loginAttempts']++; // Increment login attempts counter
                 if ($_SESSION['loginAttempts'] >= $maxLoginAttempts) {
                     $_SESSION['blockedTime'] = time() + $blockedTime; // Set block time
-                    header("Location: ./pages/login.php?error=Incorrect Username or Password.<br> You have been blocked.");
+                    header("Location: login?error=Incorrect Username or Password.<br> You have been blocked.");
                     exit();
                 } else {
                     $attemptsLeft = $maxLoginAttempts - $_SESSION['loginAttempts'];
-                    header("Location: ./pages/login.php?error=Incorrect Username or Password.<br> $attemptsLeft attempts left.");
+                    header("Location: login?error=Incorrect Username or Password.<br> $attemptsLeft attempts left.");
                     exit();
                 }
 		}
 	}
 	
 }else{
-	header("Location: ./pages/login.php");
+	header("Location: login");
 	exit();
 }
