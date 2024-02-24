@@ -15,12 +15,12 @@
 
 <div class="container p-5">
     <div class="studentProfileBack">
-        <button type="submit" class="btn btn-danger">Back</button>
+        <button type="submit" class="btn btn-danger">Back</button> <!-- Returns the user to the student managment table-->
     </div>
     <div class="container" id="studentProfileMain">
         <div class="studentProfileLeft">
             <div>
-                <img alt="Profile Picture">
+                <img alt="Profile Picture"> <!-- May remove but will display a profile picture if implemented-->
             </div>
             <div>
                 <p>stuff</p>
@@ -28,44 +28,48 @@
         </div>
             <div class="studentProfileRight">
 
-            <?php
-                $SQL="CALL studentPRofileUser(1)";
-            ?>
+            <?php include('includes/studentInfo.php');?> <!-- Grabs a students data -->
 
-            <form>
+            <form>  <!-- Form displays students data -->
                 <div class="mb-3">
                     <label for="studentProfileID" class="form-label">ID</label>
-                    <input type="text" class="form-control" id="studentProfileID">
+                    <input type="text" class="form-control" id="studentProfileID" value="<?php echo $user['userID'] ?>">
                 </div>
                 <div class="mb-3">
                     <label for="studentProfileUsername" class="form-label">Username</label>
-                    <input type="text" class="form-control" id="studentProfileUsername">
+                    <input type="text" class="form-control" id="studentProfileUsername" value="<?php echo $user['username'] ?>">
                 </div>
                 <div class="mb-3">
                     <label for="studentProfileName" class="form-label">Name</label>
-                    <input type="text" class="form-control" id="studentProfileName">
+                    <input type="text" class="form-control" id="studentProfileName" value="<?php echo $user['firstName'] ?>">
+                </div>
+                <div class="mb-3">
+                    <label for="studentProfileName" class="form-label">Surname</label>
+                    <input type="text" class="form-control" id="studentProfileName" value="<?php echo $user['lastName'] ?>">
                 </div>
                 <div class="mb-3">
                     <label for="studentProfileEmail" class="form-label">Email</label>
-                    <input type="text" class="form-control" id="studentProfileEmail">
+                    <input type="text" class="form-control" id="studentProfileEmail" value="<?php echo $user['email'] ?>">
                 </div>
                 <div class="mb-3">
                     <label for="studentProfileNumber" class="form-label">Student Number</label>
-                    <input type="text" class="form-control" id="studentProfileNumber">
+                    <input type="text" class="form-control" id="studentProfileNumber" value="<?php echo $user['studentNumber'] ?>">
                 </div>
                 <div class="mb-3">
                     <label for="studentProfileCourse" class="form-label">Course</label>
-                    <input type="text" class="form-control" id="studentProfileCourse">
+                    <input type="text" class="form-control" id="studentProfileCourse" value="<?php echo $user['courseID'] ?>">
                 </div>
                 <div class="mb-3">
                     <label for="studentProfileState" class="form-label">Account State</label>
-                    <input type="text" class="form-control" id="studentProfileState">
+                    <input type="text" class="form-control" id="studentProfileState" value="<?php echo $user['accountState'] ?>">
                 </div>
                 <div class="mb-3">
                     <label for="studentProfileLogin" class="form-label">Last Login</label>
-                    <input type="text" class="form-control" id="studentProfileLogin">
+                    <input type="text" class="form-control" id="studentProfileLogin" value="<?php echo $user['lastLogin'] ?>" disabled>
                 </div>
-                <button type="submit" class="btn btn-primary">Save</button>
+                <button type="submit" class="btn btn-primary">Save</button> <!-- For editing students -->
+                <button type="submit" class="btn btn-primary">Approve</button> <!-- Will approve their account -->
+                <button type="submit" class="btn btn-primary">Disable</button> <!-- Will disable their account -->
             </form>
             </div>
         <div>
