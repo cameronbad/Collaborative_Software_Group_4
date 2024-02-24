@@ -43,7 +43,7 @@ $current = $test['questionCurrent'];
                 <svg class="test-bottom-svg d-inline-block align-text-top">
                     <polygon points='30,56 0,56 30,0'>
                 </svg>  
-                <div class="navbar-text p-3"><?= $current ?> of <?= $test['questionTotal'] ?></div>
+                <div class="navbar-text p-3"><?= $current //This needs to update with javascript ?> of <?= $test['questionTotal'] ?></div>
             </div>    
         </div>
     </main>
@@ -105,12 +105,38 @@ $current = $test['questionCurrent'];
                         }
 
                         $('.question-done').removeClass('question-active'); //Remove active from done questions to prevent loops
+                    } //Add function for moving user to active question after its been loaded, make sure it wont trigger if there is no active question.
+                }
+            });
+        });
+
+        //AJAX call to submit an answer
+        $(document).on("click", '.question-active .answer-btn', function() {
+            $.ajax({
+                url: "./functionality/submitAnswer.php",
+                method: "POST",
+                data: {answerID:'2'}, //Placeholder, replace with proper way to get it
+                success: function(data) { //Should return "chosenAnswer|correctAnswer" i.e. "4|4" or "1|3"
+                    alert(data);
+                    const result = data.split("|");
+
+                    $('.question-active').addClass('question-done'); //Set question as done
+                    $('.question-active button').addClass('disabled'); //Disable buttons
+
+                    if (result[0] == result[1]) {
+                        $('[value=' + result[0] + ']').addClass('answer-correct');
+                    } else {
+                        $('[value=' + result[0] + ']').addClass('answer-wrong');
+                        $('[value=' + result[1] + ']').addClass('answer-correct');
                     }
+                    
                 }
             })
         });
-        
+
         //Finally append new answers from list of available questions
+
+
 
     </script>
 </body>
