@@ -3,10 +3,11 @@
 @session_start();
 
 //need to $_GET the result ID
+$_GET['resultID'] = '13'; //temp
 
 require_once("./includes/_connect.php");
 
-$query = "SELECT `test`.`testName`, `test`.`subjectID`, `subject`.`subjectName`, `result`.`questionTotal`, `result`.`questionCurrent` FROM `result` LEFT JOIN `test` ON `result`.`testID` = `test`.`testID` LEFT JOIN `subject` ON `test`.`subjectID` = `subject`.`subjectID` WHERE `result`.`resultID` = '13'"; //Replace 13 with a GET['resultID'] 
+$query = "SELECT `test`.`testName`, `test`.`subjectID`, `subject`.`subjectName`, `result`.`questionTotal`, `result`.`questionCurrent` FROM `result` LEFT JOIN `test` ON `result`.`testID` = `test`.`testID` LEFT JOIN `subject` ON `test`.`subjectID` = `subject`.`subjectID` WHERE `result`.`resultID` = " . $_GET['resultID'];
 $test = $db_connect->execute_query($query)->fetch_assoc();
 $current = $test['questionCurrent'];
 ?>
@@ -57,14 +58,18 @@ $current = $test['questionCurrent'];
         $questions[] = $result['questionID'];
     }
 
-    $query = "SELECT `answer`.`chosenAnswer`, `answer`.`questionPosition`, `answer`.`questionID` FROM `answer` WHERE resultID = '13' ORDER BY `answer`.`questionPosition` ASC"; //Replace 13 with a GET['resultID'] 
+    $query = "SELECT `answer`.`chosenAnswer`, `answer`.`questionPosition`, `answer`.`questionID`, `question`.`correctAnswer` FROM `answer` LEFT JOIN `question` ON `answer`.`questionID` = `question`.`questionID` WHERE `resultID` = " . $_GET['resultID'] . " ORDER BY `answer`.`questionPosition` ASC"; 
 
     //Array of all existing answers
     $prevQuestions = [];
+    $prevChoice = [];
+    $prevCorrect = [];
 
     $run = $db_connect->query($query);
     while ($result = $run->fetch_assoc()) {
         $prevQuestions[] = $result['questionID'];
+        $prevChoice[] = $result['chosenAnswer'];
+        $prevCorrect[] = $result['correctAnswer'];
         $key = array_search($result['questionID'], $questions);
         unset($questions[$key]); //Removes index of already made answers from the question id list, this does not rearrange the indexes, so the index will be missing
     }
@@ -74,18 +79,37 @@ $current = $test['questionCurrent'];
     <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
     <script>
         //First check for existing answers and append
-        $.each(<?= json_encode($prevQuestions); ?>, function(index, value) {
+        var prevQuestions = <?= json_encode($prevQuestions); ?>;
+        var prevChoice = <?= json_encode($prevChoice); ?>;
+        var prevCorrect = <?= json_encode($prevCorrect); ?>;
+        var count = 0;
+
+        $.each(prevQuestions, function(index, value) {
             $.ajax({
                 url: "./includes/question.php",
-                method: "POST",
-                data: {questionID:value},
+                method: "GET",
+                data: {questionID: value},
                 success: function(data) {
+                    count++;
                     $('.test-container').append(data);
+
+                    if (count != prevQuestions.length) {
+                        $('.question-active').addClass('question-done'); //Set question as done
+                        $('.question-active button').addClass('disabled'); //Disable buttons
+
+                        if(prevChoice[index] == prevCorrect[index]) {
+                            $('[value=' + prevChoice[index] + ']').addClass('answer-correct');
+                        } else {
+                            $('[value=' + prevChoice[index] + ']').addClass('answer-wrong');
+                            $('[value=' + prevCorrect[index] + ']').addClass('answer-correct');
+                        }
+
+                        $('.question-done').removeClass('question-active'); //Remove active from done questions to prevent loops
+                    }
                 }
             })
         });
-
-        //Second/First check for current answer and append
+        
         //Finally append new answers from list of available questions
 
     </script>

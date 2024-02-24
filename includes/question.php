@@ -1,8 +1,6 @@
 <?php
 include_once("_connect.php");  
 
-$_GET['questionID'] = '1'; //temp
-
 $query = "SELECT `question`.`questionText`, `question`.`answerA`, `question`.`answerB`, `question`.`answerC`, `question`.`answerD` FROM `question` WHERE `question`.`questionID` = " . $_GET['questionID'];
 $question = $db_connect->execute_query($query)->fetch_assoc();
 
@@ -15,7 +13,7 @@ shuffle($keys);
 
 ?>
 <div class="container test-box"> 
-    <div class="top-50 start-50 translate-middle card"> <!-- card is temp for styling-->
+    <div class="top-50 start-50 translate-middle card question-active"> <!-- card is temp for styling-->
         <div class="row">
             <h3 class="text-center"><?= $question['questionText'] ?></h3>      
         </div>
@@ -28,5 +26,4 @@ shuffle($keys);
             <div class="col"><button class="btn btn-primary" value="<?= $keys[3] ?>"><?= $answers[$keys[3]] ?></button></div>
         </div>
     </div>
-
 </div>
