@@ -1,7 +1,9 @@
 <?php
     require_once ("./includes/_connect.php");
 
-    $SQL = "CALL studentProfileUser(1)"; //Calls the routine in the database which grabs all the data of a user
+    $sID = mysqli_real_escape_string($db_connect, $_GET['studentID']);
+
+    $SQL = "CALL studentProfileUser($sID)"; //Calls the routine in the database which grabs all the data of a user
 
     $result = mysqli_query($db_connect, $SQL);
 

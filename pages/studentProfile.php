@@ -7,7 +7,7 @@
     <link href="https://cdn.datatables.net/v/bs5/dt-1.13.8/r-2.5.0/sr-1.3.0/datatables.min.css" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
     <link rel="shortcut icon" href="Images/EduTestLogo.png" type="image/x-icon">
-    <link href="style.css" rel="stylesheet">
+    <link href="../style.css" rel="stylesheet">
 </head>
 <body class="m-0 p-0" id="studentProfileBody">
 
@@ -15,7 +15,7 @@
 
 <div class="container p-5">
     <div class="studentProfileBack">
-        <button type="submit" class="btn btn-danger">Back</button> <!-- Returns the user to the student managment table-->
+        <a type="submit" class="btn btn-danger" href="/Collaborative_Software_Group_4/studentDisplay">Back</a> <!-- Returns the user to the student managment table-->
     </div>
     <div class="container" id="studentProfileMain">
         <div class="studentProfileLeft">

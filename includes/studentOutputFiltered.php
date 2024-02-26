@@ -19,7 +19,7 @@ while($row = mysqli_fetch_assoc($result)){ //Loops through the query result
     echo "<td>" . $row['lastLogin'] . "</td>";
     ?>
     <td>
-        <a class="btn btn-secondary" id="viewStudentBtn" name="viewStudentBtn" href="./studentProfile?sid=<?php echo $row['userID']?>">Secondary</a>
+        <a class="btn btn-secondary" id="viewStudentBtn" name="viewStudentBtn" href="./studentProfile/?studentID=<?php echo $row['userID']?>">Edit</a>
     </td>
     <?php
     echo "</tr>";
