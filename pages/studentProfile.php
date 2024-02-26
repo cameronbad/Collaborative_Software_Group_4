@@ -31,41 +31,49 @@
             <?php include('includes/studentInfo.php');?> <!-- Grabs a students data -->
 
             <form>  <!-- Form displays students data -->
-                <div class="mb-3">
-                    <label for="studentProfileID" class="form-label">ID</label>
-                    <input type="text" class="form-control" id="studentProfileID" value="<?php echo $user['userID'] ?>">
+                <div class="row">
+                    <div class="mb-3 col">
+                        <label for="studentProfileID" class="form-label">ID</label>
+                        <input type="text" class="form-control" id="studentProfileID" value="<?php echo $user['userID'] ?>" disabled>
+                    </div>
+                    <div class="mb-3 col">
+                        <label for="studentProfileUsername" class="form-label">Username</label>
+                        <input type="text" class="form-control" id="studentProfileUsername" value="<?php echo $user['username'] ?>">
+                    </div>
                 </div>
-                <div class="mb-3">
-                    <label for="studentProfileUsername" class="form-label">Username</label>
-                    <input type="text" class="form-control" id="studentProfileUsername" value="<?php echo $user['username'] ?>">
-                </div>
-                <div class="mb-3">
-                    <label for="studentProfileName" class="form-label">Name</label>
-                    <input type="text" class="form-control" id="studentProfileName" value="<?php echo $user['firstName'] ?>">
-                </div>
-                <div class="mb-3">
-                    <label for="studentProfileName" class="form-label">Surname</label>
-                    <input type="text" class="form-control" id="studentProfileName" value="<?php echo $user['lastName'] ?>">
+                <div class="row">
+                    <div class="mb-3 col">
+                        <label for="studentProfileName" class="form-label">Name</label>
+                        <input type="text" class="form-control" id="studentProfileName" value="<?php echo $user['firstName'] ?>">
+                    </div>
+                    <div class="mb-3 col">
+                        <label for="studentProfileName" class="form-label">Surname</label>
+                        <input type="text" class="form-control" id="studentProfileName" value="<?php echo $user['lastName'] ?>">
+                    </div>
                 </div>
                 <div class="mb-3">
                     <label for="studentProfileEmail" class="form-label">Email</label>
                     <input type="text" class="form-control" id="studentProfileEmail" value="<?php echo $user['email'] ?>">
                 </div>
-                <div class="mb-3">
-                    <label for="studentProfileNumber" class="form-label">Student Number</label>
-                    <input type="text" class="form-control" id="studentProfileNumber" value="<?php echo $user['studentNumber'] ?>">
+                <div class="row">
+                    <div class="mb-3 col">
+                        <label for="studentProfileNumber" class="form-label">Student Number</label>
+                        <input type="text" class="form-control" id="studentProfileNumber" value="<?php echo $user['studentNumber'] ?>" disabled>
+                    </div>
+                    <div class="mb-3 col">
+                        <label for="studentProfileCourse" class="form-label">Course</label>
+                        <input type="text" class="form-control" id="studentProfileCourse" value="<?php include_once("./includes/accountCourseDisplay.php") ?>" disabled>
+                    </div>
                 </div>
-                <div class="mb-3">
-                    <label for="studentProfileCourse" class="form-label">Course</label>
-                    <input type="text" class="form-control" id="studentProfileCourse" value="<?php echo $user['courseID'] ?>">
-                </div>
-                <div class="mb-3">
-                    <label for="studentProfileState" class="form-label">Account State</label>
-                    <input type="text" class="form-control" id="studentProfileState" value="<?php echo $user['accountState'] ?>">
-                </div>
-                <div class="mb-3">
-                    <label for="studentProfileLogin" class="form-label">Last Login</label>
-                    <input type="text" class="form-control" id="studentProfileLogin" value="<?php echo $user['lastLogin'] ?>" disabled>
+                <div class="row">
+                    <div class="mb-3 col">
+                        <label for="studentProfileState" class="form-label">Account State</label>
+                        <input type="text" class="form-control" id="studentProfileState" value="<?php include_once("./includes/accountStateDisplay.php") ?>" disabled><!-- Dispalys if user is actived or disabled -->
+                    </div>
+                    <div class="mb-3 col">
+                        <label for="studentProfileLogin" class="form-label">Last Login</label>
+                        <input type="text" class="form-control" id="studentProfileLogin" value="<?php echo $user['lastLogin'] ?>" disabled>
+                    </div>
                 </div>
                 <button type="submit" class="btn btn-primary">Save</button> <!-- For editing students -->
                 <button type="submit" class="btn btn-primary">Approve</button> <!-- Will approve their account -->
