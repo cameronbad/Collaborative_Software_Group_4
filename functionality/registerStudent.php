@@ -36,7 +36,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     //Checks that the password inputs match
     if ($_POST["password"] != $_POST["confPass"]) {
-        header("Location: ./functionality/registerStudent.php?error=Passwords do not match");
+        header("Location: ./registrationPasswords_do_not_match");
         exit();
     }
 

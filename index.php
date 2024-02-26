@@ -10,6 +10,8 @@ $route->Route(['get'], '/leaderboard', "pages/leaderboard.php");
 
 $route->Route(['get'], '/login', "pages/login.php");
 
+$route->Route(['get'], '/login{error}', "pages/login.php");
+
 $route->Route(['get'], '/register', "pages/registration.php");
 
 $route->Route(['get'], '/studentDashboard', "pages/studentManagementDashboard.php");
