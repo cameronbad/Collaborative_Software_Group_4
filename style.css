@@ -52,6 +52,157 @@
 
 /* Routing End */
 
+/*LANDING PAGE START*/
+:root {
+    --primary-color: #acd6de;
+    --black-color: #050505;
+    --gray-color: #d8dede;
+    --white-color: #FFF;
+
+    --animate-duration: 800ms;
+    --animate-delay: 0.9s;
+}
+
+
+/* Animate */
+.animate__animated.animate__bounceInUp {
+    --animation-duration: 2s;
+}
+
+
+/* The image half */
+.content,
+.image {
+    min-height: 100vh;
+}
+
+.bg-image {
+    background-image: url('./Images/loginBackgroundV2.jpg');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+
+/* The content half */
+.landingLogo {
+  max-width: 125px;
+  height: 125px;
+  border-radius: 50%;
+  border: 4px solid #fff;
+}
+
+.label p {
+    font-size: 20px;
+    color: var(--gray-color);
+    font-family: 'Red Hat Display';
+}
+
+.label .bx {
+    vertical-align: middle;
+    color: var(--gray-color);
+    font-size: 24px;
+}
+
+.flex {
+    display: -webkit-flex;
+    display: flex;
+    -webkit-flex-direction: row;
+    flex-direction: row;
+    -webkit-justify-content: flex-start;
+    justify-content: flex-start;
+}
+
+.text {
+    font-family: 'Nunito';
+}
+
+.text h5 {
+    font-size: 40px;
+    font-weight: 400;
+    color: var(--black-color);
+    padding: 0 0 46px 0;
+}
+
+.text p {
+    font-size: 40px;
+    color: var(--black-color);
+    font-weight: 700;
+}
+
+.btn-primary {
+    background-color: var(--primary-color);
+    box-shadow: 0px 17px 30px #d8dede;
+}
+
+a.btn {
+    margin-top: 51px;
+    padding: 30px;
+    font-size: 20px;
+    font-weight: 500;
+    line-height: 24px;
+    border-radius: 16px;
+}
+
+a.btn i {
+    font-size: 34px;
+    vertical-align: middle;
+    padding-left: 106px;
+}
+
+/* Responsive for mobile */
+@media(max-width: 576px) {
+    a.btn {
+        display: block;
+    }
+
+    a.btn i {
+        padding-left: 0;
+    }
+
+    .label p {
+        font-size: 16px;
+    }
+
+    .text h5 {
+        font-size: 32px;
+        font-weight: 300;
+        line-height: 142.02%;
+    }
+
+    .text p {
+        font-size: 40px;
+    }
+}
+
+
+/* Responsive for tablet */
+
+@media(max-width: 768px) {
+    a.btn {
+        display: block;
+    }
+
+    a.btn i {
+        padding-left: 0;
+    }
+
+    .label p {
+        font-size: 16px;
+    }
+
+    .text h5 {
+        font-size: 32px;
+        font-weight: 300;
+        line-height: 142.02%;
+    }
+
+    .text p {
+        font-size: 40px;
+    }
+}
+/*LANDING PAGE END*/
+
 /* LOGIN FORM START */
 
 .loginBody {
