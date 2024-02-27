@@ -123,14 +123,14 @@
 }
 
 .text h5 {
-    font-size: 40px;
+    font-size: 36px;
     font-weight: 400;
     color: var(--black-color);
     padding: 0 0 46px 0;
 }
 
 .text p {
-    font-size: 40px;
+    font-size: 24px;
     color: var(--black-color);
     font-weight: 700;
 }
