@@ -59,14 +59,14 @@
     --gray-color: #d8dede;
     --white-color: #FFF;
 
-    --animate-duration: 5s;
-    --animate-delay: 0.9s;
+    --animate-duration: 20s;
+    --animate-delay: 5s;
 }
 
 
 /* Animate */
 .animate__animated.animate__bounceInUp {
-    --animation-duration: 2s;
+    --animation-duration: 20s;
 }
 
 
@@ -387,21 +387,21 @@ a.btn i {
   margin-left: 18%;
 }
 
-.col > input, .col > select{
+.regsiterCol > input, .regsiterCol > select{
   font-family: "Nunito", sans-serif;
   font-size: 16px;
   background-color: #acd6de;
 }
 
-.col > input::placeholder{
+.regsiterCol > input::placeholder{
   color: black;
 }
 
-.col > input:focus, .col > select:focus{
+.regsiterCol > input:focus, .regsiterCol > select:focus{
   background-color: #acd6de;
 }
 
-.col > input:focus, .col > select:focus{
+.regsiterCol > input:focus, .regsiterCol > select:focus{
   box-shadow: 0 0 5px white;
 }
 

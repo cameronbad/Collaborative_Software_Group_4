@@ -34,7 +34,7 @@
                             <div class="col-lg-10 col-xl-11 mx-auto">
                                 <div class="text__area">
                                     <div class="landingLogo">
-                                        <img class="landingLogo" src="./Images/EduTestLogo.png" alt="logo">
+                                        <img class="landingLogo animate__animated animate__bounceInUp" src="./Images/EduTestLogo.png" alt="logo">
                                     </div>
                                     <div class="flex align label animate__animated animate__bounceInUp pt-2">
                                         <i class='bx bxs-arrow-to-right py-1'></i>
@@ -43,10 +43,10 @@
                                     <div class="text">
                                         <h5 class="display-5 animate__animated animate__bounceInUp">Use a new way of test taking to improve your test results.
                                         </h5>
-                                        <p class="animate__animated animate__bounceInUp">Hello</p>
+                                        <p class="animate__animated animate__bounceInUp">The best way to learn new information for all your learning</p>
                                     </div>
-                                    <a href="/login" class="btn btn-primary animate__animated animate__bounceInUp">Login <i class='bx bx-right-arrow-alt'></i></a>
-                                    <a href="/registration" class="btn btn-primary animate__animated animate__bounceInUp">Register <i class='bx bx-right-arrow-alt'></i></a>
+                                    <a href="./login" class="btn btn-primary animate__animated animate__bounceInUp">Login <i class='bx bx-right-arrow-alt'></i></a>
+                                    <a href="./register" class="btn btn-primary animate__animated animate__bounceInUp">Register <i class='bx bx-right-arrow-alt'></i></a>
                                 </div>
                             </div>
                         </div>
