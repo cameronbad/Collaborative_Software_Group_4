@@ -25,7 +25,7 @@
             <!-- The image half -->
             <div class="col-md-6 d-none d-md-flex bg-image animate__animated animate__fadeInUp"></div>
             <!-- The content half -->
-            <div class="col-lg-6 col-md-12 col-sm-12">
+            <div class="landingContainer col-lg-6 col-md-12 col-sm-12">
                 <div class="content d-flex align-items-center">
 
                     <!-- The content -->
