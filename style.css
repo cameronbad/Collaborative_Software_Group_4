@@ -94,7 +94,7 @@
   height: 300px;
   border-radius: 100%;
   border: 2px solid #fff;
-  transform: translateY(-10%);
+  transform: translateY(-30%);
 }
 
 .label p {
