@@ -1,5 +1,5 @@
 <?php
-    require_once ("./includes/_connect.php");
+    require_once ("_connect.php");
 
     $sID = mysqli_real_escape_string($db_connect, $_GET['studentID']);
 
