@@ -48,7 +48,7 @@
                     </div>
                     <div class="mb-3 col">
                         <label for="studentProfileName" class="form-label">Surname</label>
-                        <input type="text" class="form-control" id="studentProfileName" value="<?php echo $user['lastName'] ?>">
+                        <input type="text" class="form-control" id="studentProfileSurname" value="<?php echo $user['lastName'] ?>">
                     </div>
                 </div>
                 <div class="mb-3">
@@ -95,11 +95,11 @@
 $('#disableBtnModal').click(function (e) {
             e.preventDefault();
             $.ajax({
-                url: "functionality/disableAccount.php",
-                method: "POST",
-                data: {sID: sID},
+                url: "../disableAccount/",
+                method: "GET",
+                data: ({sID: <?php echo $user['userID']?>}),
                 success: function(data) {
-                    echo "success";
+                    alert(data);
                 }
             })
         });

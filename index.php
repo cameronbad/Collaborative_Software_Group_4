@@ -18,6 +18,10 @@ $route->Route(['get'], '/testDashboard', "pages/testDashboard.php");
 
 $route->Route(['get'], '/testManagement', "pages/testManagement.php");
 
+$route->Route(['get'], '/disableAccount/{id}', "functionality/disableAccount.php");
+
+$route->Route(['get'], '/approveAccount/{id}', "functionality/approveAccount.php");
+
 echo $route->Dispatch($_SERVER['REQUEST_METHOD'], $_SERVER['REQUEST_URI']);
 
 ?>
