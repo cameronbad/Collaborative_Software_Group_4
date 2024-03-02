@@ -76,8 +76,14 @@
                     </div>
                 </div>
                 <button type="submit" class="btn btn-primary">Save</button> <!-- For editing students -->
-                <button type="submit" class="btn btn-primary">Approve</button> <!-- Will approve their account -->
-                <button type="button" class="btn btn-primary" id="disableBtn" name="disableBtn" data-bs-toggle="modal" data-bs-target="#disableModal">Disable</button> <!-- Will disable their account -->
+                <?php 
+                if($user['accountState'] == 0){
+                    echo "<button type='button' class='btn btn-primary' id='approveBtn' name='approveBtn' data-bs-toggle='modal' data-bs-target='#approveModal'>Approve</button>"; //Will approve their account
+                }
+                else{
+                    echo "<button type='button' class='btn btn-primary' id='disableBtn' name='disableBtn' data-bs-toggle='modal' data-bs-target='#disableModal'>Disable</button>"; //Will disable their account
+                }
+                ?>
             </form>
             </div>
         <div>
@@ -85,6 +91,7 @@
     </div>
     
     <?php include_once("includes/disableAccountModal.php"); ?> <!-- Displays modal for disabling accounts -->
+    <?php include_once("includes/approveAccountModal.php"); ?> <!-- Displays modal for approving accounts -->
  
 </div>
 </body>
@@ -99,7 +106,19 @@ $('#disableBtnModal').click(function (e) {
                 method: "GET",
                 data: ({sID: <?php echo $user['userID']?>}),
                 success: function(data) {
-                    alert(data);
+                    location.reload();
+                }
+            })
+        });
+
+$('#approveBtnModal').click(function (e) {
+            e.preventDefault();
+            $.ajax({
+                url: "../approveAccount/",
+                method: "GET",
+                data: ({sID: <?php echo $user['userID']?>}),
+                success: function(data) {
+                    location.reload();
                 }
             })
         });
