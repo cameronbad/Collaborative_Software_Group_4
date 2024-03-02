@@ -30,49 +30,49 @@
 
             <?php include('./includes/studentInfo.php');?> <!-- Grabs a students data -->
 
-            <form>  <!-- Form displays students data -->
+            <form id="studentProfileForm" name="studentProfileForm">  <!-- Form displays students data -->
                 <div class="row">
                     <div class="mb-3 col">
                         <label for="studentProfileID" class="form-label">ID</label>
-                        <input type="text" class="form-control" id="studentProfileID" value="<?php echo $user['userID'] ?>" disabled>
+                        <input type="text" class="form-control" id="studentProfileID" name="studentProfileID" value="<?php echo $user['userID'] ?>" readonly>
                     </div>
                     <div class="mb-3 col">
                         <label for="studentProfileUsername" class="form-label">Username</label>
-                        <input type="text" class="form-control" id="studentProfileUsername" value="<?php echo $user['username'] ?>">
+                        <input type="text" class="form-control" id="studentProfileUsername" name="studentProfileUsername" value="<?php echo $user['username'] ?>">
                     </div>
                 </div>
                 <div class="row">
                     <div class="mb-3 col">
                         <label for="studentProfileName" class="form-label">Name</label>
-                        <input type="text" class="form-control" id="studentProfileName" value="<?php echo $user['firstName'] ?>">
+                        <input type="text" class="form-control" id="studentProfileName" name="studentProfileName" value="<?php echo $user['firstName'] ?>">
                     </div>
                     <div class="mb-3 col">
                         <label for="studentProfileName" class="form-label">Surname</label>
-                        <input type="text" class="form-control" id="studentProfileSurname" value="<?php echo $user['lastName'] ?>">
+                        <input type="text" class="form-control" id="studentProfileSurname" name="studentProfileSurname" value="<?php echo $user['lastName'] ?>">
                     </div>
                 </div>
                 <div class="mb-3">
                     <label for="studentProfileEmail" class="form-label">Email</label>
-                    <input type="text" class="form-control" id="studentProfileEmail" value="<?php echo $user['email'] ?>">
+                    <input type="text" class="form-control" id="studentProfileEmail" name="studentProfileEmail" value="<?php echo $user['email'] ?>">
                 </div>
                 <div class="row">
                     <div class="mb-3 col">
                         <label for="studentProfileNumber" class="form-label">Student Number</label>
-                        <input type="text" class="form-control" id="studentProfileNumber" value="<?php echo $user['studentNumber'] ?>" disabled>
+                        <input type="text" class="form-control" id="studentProfileNumber" value="<?php echo $user['studentNumber'] ?>" readonly>
                     </div>
                     <div class="mb-3 col">
                         <label for="studentProfileCourse" class="form-label">Course</label>
-                        <input type="text" class="form-control" id="studentProfileCourse" value="<?php include_once("./includes/accountCourseDisplay.php") ?>" disabled>
+                        <input type="text" class="form-control" id="studentProfileCourse" value="<?php include_once("./includes/accountCourseDisplay.php") ?>" readonly>
                     </div>
                 </div>
                 <div class="row">
                     <div class="mb-3 col">
                         <label for="studentProfileState" class="form-label">Account State</label>
-                        <input type="text" class="form-control" id="studentProfileState" value="<?php include_once("./includes/accountStateDisplay.php") ?>" disabled><!-- Dispalys if user is actived or disabled -->
+                        <input type="text" class="form-control" id="studentProfileState" value="<?php include_once("./includes/accountStateDisplay.php") ?>" readonly><!-- Dispalys if user is actived or disabled -->
                     </div>
                     <div class="mb-3 col">
                         <label for="studentProfileLogin" class="form-label">Last Login</label>
-                        <input type="text" class="form-control" id="studentProfileLogin" value="<?php echo $user['lastLogin'] ?>" disabled>
+                        <input type="text" class="form-control" id="studentProfileLogin" value="<?php echo $user['lastLogin'] ?>" readonly>
                     </div>
                 </div>
                 <button type="submit" class="btn btn-primary">Save</button> <!-- For editing students -->
@@ -99,6 +99,18 @@
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
 <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
 <script>
+$('#studentProfileForm').submit(function (e) {
+            e.preventDefault();
+            $.ajax({
+                url: "../functionality/editProfile.php",
+                method: "POST",
+                data: $('#studentProfileForm').serialize(),
+                success: function(data) {
+                    location.reload();
+                }
+            })
+        });
+
 $('#disableBtnModal').click(function (e) {
             e.preventDefault();
             $.ajax({
