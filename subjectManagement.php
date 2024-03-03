@@ -227,28 +227,9 @@ https://cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css
             <label for="recipient-name" class="col-form-label">Course Name:</label>
             <input type="text" class="form-control" id="recipient-name">
           </div>
+          
           <div class="mb-3">
-            <label for="message-text" class="col-form-label">Subject:</label>
-
-            <?php
-
-
-if(isset($_POST['submit'])) {
-    $course = $_POST['courseName'];
-    $subjectName = $_POST['subjectName'];
-    
-    // Perform database update
-    $query = "UPDATE subject SET subjectName = '$subjectName' WHERE courseName = '$course'";
-    $result = mysqli_query($db_connect, $query);
-    
-    if($result) {
-        echo "Subject updated successfully.";
-    } else {
-        echo "Error updating subject: " . mysqli_error($db_connect);
-    }
-}
-?>
-            
+            <label for="message-text" class="col-form-label">Subject:</label>          
             <select name="updateCourse" class="form-select" id="select" required aria-label="Default select example">
                     <option selected>Please select a course</option>
                     <?php
@@ -259,12 +240,6 @@ if(isset($_POST['submit'])) {
                     }
                     ?>
                   </select>
-
-                  <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary">Save changes</button>
-      </div>
-
           </div>
         </form>
       </div>
