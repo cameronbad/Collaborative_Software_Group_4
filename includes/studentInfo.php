@@ -1,11 +1,18 @@
 <?php
     require_once ("_connect.php");
 
-    $sID = mysqli_real_escape_string($db_connect, $_GET['studentID']);
+    $sID = $db_connect->real_escape_string($_GET['studentID']);
 
-    $SQL = "CALL studentProfileUser($sID)"; //Calls the routine in the database which grabs all the data of a user
+    $stmt = $db_connect->prepare("CALL studentProfileUser(?)"); //Prepares the statement
+    $stmt->bind_param("i", $sID); //Binds the parameter
+    $stmt->execute(); //Runs the query
 
-    $result = mysqli_query($db_connect, $SQL);
+    $stmt->store_result();
+    $stmt->bind_result($userID, $username, $firstName, $lastName, $email, $studentNumber, $courseID, $accountState, $lastLogin); //Stores the result into a variable
 
-    $user = mysqli_fetch_assoc($result);
+
+    $stmt->fetch();
+
+    $stmt->close();
+    $db_connect->close();
 ?>

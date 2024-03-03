@@ -34,31 +34,31 @@
                 <div class="row">
                     <div class="mb-3 col">
                         <label for="studentProfileID" class="form-label">ID</label>
-                        <input type="text" class="form-control" id="studentProfileID" name="studentProfileID" value="<?php echo $user['userID'] ?>" readonly>
+                        <input type="text" class="form-control" id="studentProfileID" name="studentProfileID" value="<?php echo $userID ?>" readonly>
                     </div>
                     <div class="mb-3 col">
                         <label for="studentProfileUsername" class="form-label">Username</label>
-                        <input type="text" class="form-control" id="studentProfileUsername" name="studentProfileUsername" value="<?php echo $user['username'] ?>">
+                        <input type="text" class="form-control" id="studentProfileUsername" name="studentProfileUsername" value="<?php echo $username ?>">
                     </div>
                 </div>
                 <div class="row">
                     <div class="mb-3 col">
                         <label for="studentProfileName" class="form-label">Name</label>
-                        <input type="text" class="form-control" id="studentProfileName" name="studentProfileName" value="<?php echo $user['firstName'] ?>">
+                        <input type="text" class="form-control" id="studentProfileName" name="studentProfileName" value="<?php echo $firstName ?>">
                     </div>
                     <div class="mb-3 col">
                         <label for="studentProfileName" class="form-label">Surname</label>
-                        <input type="text" class="form-control" id="studentProfileSurname" name="studentProfileSurname" value="<?php echo $user['lastName'] ?>">
+                        <input type="text" class="form-control" id="studentProfileSurname" name="studentProfileSurname" value="<?php echo $lastName ?>">
                     </div>
                 </div>
                 <div class="mb-3">
                     <label for="studentProfileEmail" class="form-label">Email</label>
-                    <input type="text" class="form-control" id="studentProfileEmail" name="studentProfileEmail" value="<?php echo $user['email'] ?>">
+                    <input type="text" class="form-control" id="studentProfileEmail" name="studentProfileEmail" value="<?php echo $email ?>">
                 </div>
                 <div class="row">
                     <div class="mb-3 col">
                         <label for="studentProfileNumber" class="form-label">Student Number</label>
-                        <input type="text" class="form-control" id="studentProfileNumber" value="<?php echo $user['studentNumber'] ?>" readonly>
+                        <input type="text" class="form-control" id="studentProfileNumber" value="<?php echo $studentNumber ?>" readonly>
                     </div>
                     <div class="mb-3 col">
                         <label for="studentProfileCourse" class="form-label">Course</label>
@@ -72,12 +72,12 @@
                     </div>
                     <div class="mb-3 col">
                         <label for="studentProfileLogin" class="form-label">Last Login</label>
-                        <input type="text" class="form-control" id="studentProfileLogin" value="<?php echo $user['lastLogin'] ?>" readonly>
+                        <input type="text" class="form-control" id="studentProfileLogin" value="<?php echo $lastLogin ?>" readonly>
                     </div>
                 </div>
                 <button type="submit" class="btn btn-primary">Save</button> <!-- For editing students -->
                 <?php 
-                if($user['accountState'] == 0){
+                if($accountState == 0 ||  $accountState == NULL){
                     echo "<button type='button' class='btn btn-primary' id='approveBtn' name='approveBtn' data-bs-toggle='modal' data-bs-target='#approveModal'>Approve</button>"; //Will approve their account
                 }
                 else{
@@ -116,7 +116,7 @@ $('#disableBtnModal').click(function (e) {
             $.ajax({
                 url: "../disableAccount/",
                 method: "GET",
-                data: ({sID: <?php echo $user['userID']?>}),
+                data: ({sID: <?php echo $userID?>}),
                 success: function(data) {
                     location.reload();
                 }
@@ -128,7 +128,7 @@ $('#approveBtnModal').click(function (e) {
             $.ajax({
                 url: "../approveAccount/",
                 method: "GET",
-                data: ({sID: <?php echo $user['userID']?>}),
+                data: ({sID: <?php echo $userID?>}),
                 success: function(data) {
                     location.reload();
                 }

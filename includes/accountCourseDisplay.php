@@ -1,13 +1,21 @@
 <?php
     require ("_connect.php");
 
-    $cID = mysqli_real_escape_string($db_connect, $user['courseID']);
+    $cID = $db_connect->real_escape_string($courseID); //Grabs the variable
 
-    $SQL = "CALL studentProfileCourse($cID)";
+    $stmt = $db_connect->prepare("CALL studentProfileCourse(?)"); //Prepares the statement
+    $stmt->bind_param("i", $cID); //Binds the parameter
 
-    $result = $db_connect->query($SQL);
+    $stmt->execute(); //Runs the query
 
-    $row = mysqli_fetch_assoc($result);
+    $stmt->store_result();
+    $stmt->bind_result($courseName); //Stores the result into a variable
 
-    echo $row['courseName'];
+    while($stmt->fetch()){ //Displays the data
+    echo $courseName;
+    }
+
+    $stmt->close(); //Closes the stmt
+    $db_connect->close();
+
  ?>

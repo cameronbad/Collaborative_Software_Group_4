@@ -2,26 +2,32 @@
 
 require_once("_connect.php");
 
-$SQL = "CALL allStudents(1)"; //Calls the procedure the 1 will be changed once session varaibles are added
+$filter = $db_connect->real_escape_string(1);//Calls the procedure the 1 will be changed once session varaibles are added
 
-$result = mysqli_query($db_connect, $SQL);
+$stmt = $db_connect->prepare("CALL allStudents(?)"); //Prepares the statement
+$stmt->bind_param("i", $filter); //Binds the parameter
+$stmt->execute(); //Runs the query
 
-while($row = mysqli_fetch_assoc($result)){ //Loops through the query result
+$stmt->store_result();
+$stmt->bind_result($studentNumber, $firstName, $lastName, $username, $email, $lastLogin, $userID); //Stores the result into a variable
+
+while($stmt->fetch()){ //Loops through the query result
 
     echo "<tr>";
-    echo "<th>" . $row['studentNumber'] . "</th>";
-    echo "<td>" . $row['firstName'] . "</td>";
-    echo "<td>" . $row['lastName'] . "</td>";
-    echo "<td>" . $row['username'] . "</td>";
-    echo "<td>" . $row['email'] . "</td>";
-    echo "<td>" . $row['lastLogin'] . "</td>";
+    echo "<th>" . $studentNumber . "</th>";
+    echo "<td>" . $firstName . "</td>";
+    echo "<td>" . $lastName . "</td>";
+    echo "<td>" . $username . "</td>";
+    echo "<td>" . $email . "</td>";
+    echo "<td>" . $lastLogin . "</td>";
     ?>
     <td>
-        <a class="btn btn-secondary" id="viewStudentBtn" name="viewStudentBtn" href="./studentProfile/?studentID=<?php echo $row['userID']?>">Edit</a>
+        <a class="btn btn-secondary" id="viewStudentBtn" name="viewStudentBtn" href="./studentProfile/?studentID=<?php echo $userID ?>">Edit</a>
     </td>
     <?php
     echo "</tr>";
 
 }
+
 
 ?>

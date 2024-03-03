@@ -1,7 +1,7 @@
 <?php
 require("./includes/_connect.php");
 
-$dID = mysqli_real_escape_string($db_connect, $_GET['sID']); // Grabs the Id from the url
+$dID = $db_connect->real_escape_string($_GET['sID']); // Grabs the Id from the url
 
 $stmt = $db_connect->prepare("CALL approveUser(?)");
 $stmt->bind_param("i", $dID);

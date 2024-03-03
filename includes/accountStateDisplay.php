@@ -1,11 +1,11 @@
 <?php
-    if($user['accountState'] == 1){
+    if($accountState == 1){
         echo "Active";
     }
-    else if($user['accountState'] == 0){
+    else if($accountState == 0){
         echo "Disabled";
     }
-    else{
+    else{ //Field is left null meaning they havent been verified
         echo "Awaiting Verification";
     }
  ?>

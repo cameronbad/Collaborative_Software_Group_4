@@ -2,7 +2,7 @@
   <div class="modal-dialog modal-dialog-centered">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="disableModalLabel"><?php echo $user['username'] ?> account disable</h5> <!-- Uses the username from the get query on studentProfile -->
+        <h5 class="modal-title" id="disableModalLabel"><?php echo $username ?> account disable</h5> <!-- Uses the username from the get query on studentProfile -->
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
