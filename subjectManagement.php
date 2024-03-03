@@ -212,9 +212,9 @@ https://cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css
 
 
       <!-- EDIT MODAL  -->
-     
+     <!--there's a scuffed ass fix here somewhere just make the form get the data submission right and update subjectName-->
 
-<div class="modal fade" id="editModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div class="modal fade" id="editModal<?php echo $result["subjectID"] ?>" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
@@ -227,7 +227,7 @@ https://cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css
             <label for="recipient-name" class="col-form-label">Course Name:</label>
             <input type="text" class="form-control" id="recipient-name">
           </div>
-          
+
           <div class="mb-3">
             <label for="message-text" class="col-form-label">Subject:</label>          
             <select name="updateCourse" class="form-select" id="select" required aria-label="Default select example">
