@@ -5,7 +5,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Subject Management</title>
+  <title>Lecturer Management</title>
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
   <link href="https://cdn.datatables.net/v/bs/jq-3.7.0/jszip-3.10.1/dt-1.13.8/b-2.4.2/b-html5-2.4.2/b-print-2.4.2/cr-1.7.0/r-2.5.0/datatables.min.css" rel="stylesheet">
@@ -29,14 +29,14 @@ https://cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css
   <main>
     <section class="container">
 
-      <h1>Subject management page</h1>
-      <p>Use the page below to manage subjects</p>
+      <h1>Lecturer management page</h1>
+      <p>Use the page below to manage</p>
       <!-- ADD NEW Subject  ######################################################################################## -->
 
       <!-- Button to trigger modal -->
-      <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#createModal">
+      <!--<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#createModal">
         + Create Subject
-      </button>
+      </button> -->
 
 
 
@@ -111,10 +111,8 @@ https://cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css
        ////////////////////////////////END OF EDIT////////////////////////////
 
 
-      //SELECT SUBECT
-      $query = "SELECT `subject`.*, `course`.`courseName`
-      FROM `subject` 
-        LEFT JOIN `course` ON `subject`.`courseID` = `course`.`courseID`;";
+      //SELECT
+      $query = "SELECT `userID`, `username`, `firstName`, `lastName`, `accountState`, `lastLogin` FROM `user` WHERE `accessLevel` >= 2";
       $run = mysqli_query($db_connect, $query);
 
 
@@ -125,18 +123,21 @@ https://cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css
         <thead>
           <tr>
             <th>ID</th>
-            <th>Subject Name</th>
-            <th>Course Name</th>
+            <th>Username</th>
+            <th>First Name</th>
+            <th>Surname</th>
             <th>Edit</th>
-            <th>Delete</th>
           </tr>
         </thead>
         <tbody>
           <?php while ($result = mysqli_fetch_assoc($run)) { ?>
             <tr>
-              <td><?php echo $result["subjectID"] ?></td>
-              <td><?php echo $result["subjectName"] ?></td>
-              <td><?php echo $result["courseName"] ?></td>
+              <td><?php echo $result["userID"] ?></td>
+              <td><?php echo $result["username"] ?></td>
+              <td><?php echo $result["firstName"] ?></td>
+              <td><?php echo $result["lastName"] ?></td>
+              <td><?php echo $result["accountState"] ?></td>
+            
               <td><a href="" data-bs-toggle="modal" data-bs-target="#editModal" data-bs-whatever="<?php echo $result["subjectName"] ?>"><i class="fa fa-pencil" aria-hidden="true"></i></a></td>
               <!--<td><a href="" data-bs-toggle="modal" data-bs-target="#deleteModal<?php echo $result["subjectID"] ?>"><i class="fa fa-trash" aria-hidden="true"></i>-->
                 </a></td>
