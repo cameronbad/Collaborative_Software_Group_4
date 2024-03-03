@@ -82,6 +82,35 @@ https://cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css
   
         }
 
+               /////////////////////////////////EDIT/////////////////////////////////
+
+      if (isset($_POST["addSubject"]) && isset($_POST["addCourse"])) {
+        $addCourse = $_POST["addSubject"]; 
+        $addSubject = $_POST["addCourse"];
+    
+        $query = "UPDATE `subject` SET `subjectName` = '$addSubject' WHERE `courseID` = '$addCourse';";
+      // echo $query;
+        $run = mysqli_query($db_connect, $query);
+        
+        if ($run) {
+      ?>
+        <div class="alert alert-success" role="alert">
+            Course <?php echo $addCourse ?> has been updated.
+        </div>
+      <?php
+        } else {
+      ?>
+        <div class="alert alert-danger" role="alert">
+            Failed to update <?php echo $addCourse ?>.
+        </div>
+      <?php
+        }
+    }
+
+
+       ////////////////////////////////END OF EDIT////////////////////////////
+
+
       //SELECT SUBECT
       $query = "SELECT `subject`.*, `course`.`courseName`
       FROM `subject` 
