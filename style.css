@@ -389,6 +389,11 @@ h1 {
   grid-template-columns: 1fr 1fr;
 }
 
+.profilePicture{
+  border: solid 3px #000;
+  border-radius: 5px;
+}
+
 /* STUDENT MANAGMENT STYLING END */
 
 /* Table-card */

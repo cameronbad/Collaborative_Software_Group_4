@@ -12,6 +12,7 @@
 <body class="m-0 p-0" id="studentProfileBody">
 
 <?php include('./includes/navbar.php');?> <!-- Grabs the navbar code and displays it on the student management page -->
+<?php include('./includes/studentInfo.php');?> <!-- Grabs a students data -->
 
 <div class="container p-5">
     <div class="studentProfileBack">
@@ -20,16 +21,16 @@
     <div class="container" id="studentProfileMain">
         <div class="studentProfileLeft">
             <div>
-                <img alt="Profile Picture"> <!-- May remove but will display a profile picture if implemented-->
+            <?php
+                $hash = md5(strtolower(trim($email)));
+                echo "<img src='http://gravatar.com/avatar/$hash?size=400&d=identicon' class='profilePicture'>";
+            ?>
             </div>
             <div>
-                <p>stuff</p>
+                <p>Profile pictures can be set here: <a href="https://gravatar.com">https://gravatar.com</a></p>
             </div>
         </div>
-            <div class="studentProfileRight">
-
-            <?php include('./includes/studentInfo.php');?> <!-- Grabs a students data -->
-
+        <div class="studentProfileRight">
             <form id="studentProfileForm" name="studentProfileForm">  <!-- Form displays students data -->
                 <div class="row">
                     <div class="mb-3 col">
