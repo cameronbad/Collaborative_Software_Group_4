@@ -135,32 +135,6 @@
     font-weight: 700;
 }
 
-.btn-primary {
-    background-color: var(--primary-color);
-    box-shadow: 0px 17px 30px #d8dede;
-}
-
-.btn-primary:hover {
-  background-color: var(--white-color);
-  box-shadow: 0px 17px 30px #d8dede;
-  color: #acd6de;
-}
-
-a.btn {
-    margin-top: 51px;
-    padding: 30px;
-    font-size: 20px;
-    font-weight: 500;
-    line-height: 24px;
-    border-radius: 16px;
-}
-
-a.btn i {
-    font-size: 34px;
-    vertical-align: middle;
-    padding-left: 106px;
-}
-
 /* Responsive for mobile */
 @media(max-width: 576px) {
     .landingLogo {
@@ -562,6 +536,39 @@ h1 {
 .profilePicture{
   border: solid 3px #000;
   border-radius: 5px;
+}
+
+#profileSaveBtn{
+  width: 49%;
+  background-color: #acd6de;
+  border-color: azure;
+  font-weight: bold;
+}
+
+#disableBtn{
+  width: 50%;
+  background-color: #acd6de;
+  border-color: azure;
+  font-weight: bold;
+}
+
+#approveBtn{
+  width: 50%;
+  background-color: #acd6de;
+  border-color: azure;
+  font-weight: bold;
+}
+
+#profileSaveBtn:hover{
+  background-color: #A3C1D4;
+}
+
+#disableBtn:hover{
+  background-color: #A3C1D4;
+}
+
+#approveBtn:hover{
+  background-color: #A3C1D4;
 }
 
 /* STUDENT MANAGMENT STYLING END */

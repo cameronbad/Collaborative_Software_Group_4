@@ -16,7 +16,7 @@
 
 <div class="container p-5">
     <div class="studentProfileBack">
-        <a type="submit" class="btn btn-danger" href="/Collaborative_Software_Group_4/studentDisplay">Back</a> <!-- Returns the user to the student managment table-->
+        <a type="submit" class="btn btn-danger" href="/Collaborative_Software_Group_4/studentDisplay" id="profileBackBtn">Back</a> <!-- Returns the user to the student managment table-->
     </div>
     <div class="container" id="studentProfileMain">
         <div class="studentProfileLeft">
@@ -76,7 +76,7 @@
                         <input type="text" class="form-control" id="studentProfileLogin" value="<?php echo $lastLogin ?>" readonly>
                     </div>
                 </div>
-                <button type="submit" class="btn btn-primary">Save</button> <!-- For editing students -->
+                <button type="submit" class="btn btn-primary" id="profileSaveBtn">Save</button> <!-- For editing students -->
                 <?php 
                 if($accountState == 0 ||  $accountState == NULL){
                     echo "<button type='button' class='btn btn-primary' id='approveBtn' name='approveBtn' data-bs-toggle='modal' data-bs-target='#approveModal'>Approve</button>"; //Will approve their account
