@@ -212,7 +212,7 @@ https://cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css
 
 
       <!-- EDIT MODAL  -->
-     <!--there's a scuffed ass fix here somewhere just make the form get the data submission right and update subjectName-->
+
 
 <div class="modal fade" id="editModal<?php echo $result["subjectID"] ?>" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog">
