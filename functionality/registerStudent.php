@@ -14,14 +14,16 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $data = stripslashes($data);
         $data = htmlspecialchars($data);
         if (is_object($db_connect)) { // Check if $db_connect is a valid MySQLi connection object
-            $data = mysqli_real_escape_string($db_connect, $data);
+            $data = $db_connect->real_escape_string($data);
         }
         return $data;
     }
 
     // Validate and sanitize input data
     if ($db_connect === false) {
-        die("Database connection error: " . mysqli_connect_error());
+        if (!$db_connect) {
+            die("Database connection error: " . mysqli_connect_error());
+        }
     }
 
     // Validate and sanitize input data

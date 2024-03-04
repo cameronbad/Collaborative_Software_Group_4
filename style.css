@@ -405,21 +405,21 @@ a.btn i {
   margin-left: 18%;
 }
 
-.regsiterCol > input, .regsiterCol > select{
+.registerCol > input, .registerCol > select{
   font-family: "Nunito", sans-serif;
   font-size: 16px;
   background-color: #acd6de;
 }
 
-.regsiterCol > input::placeholder{
+.registerCol > input::placeholder{
   color: black;
 }
 
-.regsiterCol > input:focus, .regsiterCol > select:focus{
+.registerCol > input:focus, .registerCol > select:focus{
   background-color: #acd6de;
 }
 
-.regsiterCol > input:focus, .regsiterCol > select:focus{
+.registerCol > input:focus, .registerCol > select:focus{
   box-shadow: 0 0 5px white;
 }
 

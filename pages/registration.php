@@ -19,26 +19,28 @@
             <h1 class="registerTitle">Register</h1>
             <!--CREATES INPUTS FOR USER DATA -->
             <div class="row mb-3">
-                <div class="regsiterCol col">
+                <div class="registerCol col">
                     <input type="text" class="form-control" placeholder="Student Number" id="studentNum"
                         name="studentNum" label="Student Number">
                 </div>
             </div>
             <div class="row mb-3">
-                <div class="regsiterCol col">
-                    <input type="text" class="form-control" placeholder="First Name" id="firstName" name="firstName" label="First name">
+                <div class="registerCol col">
+                    <input type="text" class="form-control" placeholder="First Name" id="firstName" name="firstName"
+                        label="First name">
                 </div>
-                <div class="regsiterCol col">
-                    <input type="text" class="form-control" placeholder="Last Name" id="lastName" name="lastName" label="Last Name">
+                <div class="registerCol col">
+                    <input type="text" class="form-control" placeholder="Last Name" id="lastName" name="lastName"
+                        label="Last Name">
                 </div>
             </div>
             <div class="row mb-3">
-                <div class="regsiterCol col">
+                <div class="registerCol col">
                     <input type="email" class="form-control" placeholder="Email" id="email" name="email" label="Email">
                 </div>
             </div>
             <div class="row mb-3">
-                <div class="regsiterCol col">
+                <div class="registerCol col">
                     <select class="form-select" id="course" name="course" aria-label="Course">
                         <option selected>Course:</option>
                         <?php
@@ -51,17 +53,19 @@
                         ?>
                     </select>
                 </div>
-                <div class="regsiterCol col">
-                    <input type="text" class="form-control" placeholder="Username" id="username" name="username" label="Username">
+                <div class="registerCol col">
+                    <input type="text" class="form-control" placeholder="Username" id="username" name="username"
+                        label="Username">
                 </div>
             </div>
             <div class="row mb-3">
-                <div class="regsiterCol col">
-                    <input type="password" class="form-control" placeholder="Password" id="password" name="password" label="Password">
+                <div class="registerCol col">
+                    <input type="password" class="form-control" placeholder="Password" id="password" name="password"
+                        label="Password">
                 </div>
-                <div class="regsiterCol col">
-                    <input type="password" class="form-control" placeholder="Confirm Password" id="confPass" name="confPass"
-                        label="Confirm Password">
+                <div class="registerCol col">
+                    <input type="password" class="form-control" placeholder="Confirm Password" id="confPass"
+                        name="confPass" label="Confirm Password">
                 </div>
             </div>
             <button class="registerButton" type="submit">Register</button>

@@ -44,7 +44,8 @@
                                         <p class="animate__animated animate__bounceInUp">Discover a world of seamless
                                             collaboration and dynamic solutions with EduTestPro. Our platform
                                             brings together cutting-edge technology and intuitive design to empower your
-                                            studying and fuel your creativity. Join us and revolutionize the way you work!
+                                            studying and fuel your creativity. Join us and revolutionize the way you
+                                            work!
                                         </p>
                                     </div>
                                     <a href="./login"
