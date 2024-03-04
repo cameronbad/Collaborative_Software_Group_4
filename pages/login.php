@@ -34,7 +34,7 @@
             <!--CREATES LINK TO REGISTER PAGE -->
             <div class="registerStudent">
                 <p>Don't have an account?
-                    <a href="./pages/registration.php">Register</a>
+                    <a href="register">Register</a>
                 </p>
             </div>
         </form>
