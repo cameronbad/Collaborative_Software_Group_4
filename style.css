@@ -135,18 +135,18 @@
     font-weight: 700;
 }
 
-.btn-primary {
+.landingButton {
     background-color: var(--primary-color);
     box-shadow: 0px 17px 30px #d8dede;
 }
 
-.btn-primary:hover {
+.landingButton:hover {
   background-color: var(--white-color);
   box-shadow: 0px 17px 30px #d8dede;
   color: #acd6de;
 }
 
-a.btn {
+a.landingButton {
     margin-top: 51px;
     padding: 30px;
     font-size: 20px;
@@ -155,7 +155,7 @@ a.btn {
     border-radius: 16px;
 }
 
-a.btn i {
+a.landingButton i {
     font-size: 34px;
     vertical-align: middle;
     padding-left: 106px;
@@ -171,11 +171,11 @@ a.btn i {
         margin-top: 20px;
     }
 
-    a.btn {
+    a.landingButton {
         display: block;
     }
 
-    a.btn i {
+    a.landingButton i {
         padding-left: 0;
     }
 
@@ -198,11 +198,11 @@ a.btn i {
 /* Responsive for tablet */
 
 @media(max-width: 768px) {
-    a.btn {
+    a.landingButton {
         display: block;
     }
 
-    a.btn i {
+    a.landingButton i {
         padding-left: 0;
     }
 

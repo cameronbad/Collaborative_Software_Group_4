@@ -49,10 +49,10 @@
                                         </p>
                                     </div>
                                     <a href="./login"
-                                        class="btn btn-primary animate__animated animate__bounceInUp me-3">Login <i
+                                        class="btn landingButton btn-primary animate__animated animate__bounceInUp me-3">Login <i
                                             class='bx bx-right-arrow-alt'></i></a>
                                     <a href="./register"
-                                        class="btn btn-primary animate__animated animate__bounceInUp">Register <i
+                                        class="btn landingButton btn-primary animate__animated animate__bounceInUp">Register <i
                                             class='bx bx-right-arrow-alt'></i></a>
                                 </div>
                             </div>
