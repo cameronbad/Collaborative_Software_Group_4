@@ -27,8 +27,8 @@ if (isset($_POST['userInput']) && isset($_POST['passInput'])) {
         return $data;
     }
 
-    $uname = isset($_POST["username"]) ? validate($_POST["username"], $db_connect) : "";
-    $pass = isset($_POST["password"]) ? validate($_POST["password"], $db_connect) : "";
+    $uname = isset($_POST["userInput"]) ? validate($_POST["userInput"], $db_connect) : "";
+    $pass = isset($_POST["passInput"]) ? validate($_POST["passInput"], $db_connect) : "";
 
     if (empty($uname)) {
         header("Location: ../loginUsername_is_required");
