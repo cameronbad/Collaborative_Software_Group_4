@@ -18,8 +18,8 @@
     <div class="studentProfileBack">
         <a type="submit" class="btn btn-danger" href="/Collaborative_Software_Group_4/studentDisplay" id="profileBackBtn">Back</a> <!-- Returns the user to the student managment table-->
     </div>
-    <div class="container" id="studentProfileMain">
-        <div class="studentProfileLeft">
+    <div class="container row" id="studentProfileMain">
+        <div class="col">
             <div>
             <?php
                 $hash = md5(strtolower(trim($email)));
@@ -30,7 +30,7 @@
                 <p>Profile pictures can be set here: <a href="https://gravatar.com">https://gravatar.com</a></p>
             </div>
         </div>
-        <div class="studentProfileRight">
+        <div class="col">
             <form id="studentProfileForm" name="studentProfileForm">  <!-- Form displays students data -->
                 <div class="row">
                     <div class="mb-3 col">
