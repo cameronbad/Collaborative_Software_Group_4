@@ -10,7 +10,7 @@ $stmt->execute();
 if ($stmt->affected_rows > 0) {//Checks if the query worked
     echo "Approved";
 } else {
-    echo "Error: " . mysqli_error($db_connect);
+    echo "Error: " . $db_connect->error;
 }
 
 $stmt->close();

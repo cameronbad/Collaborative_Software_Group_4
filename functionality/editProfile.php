@@ -11,11 +11,11 @@ if (!isset($_POST['studentProfileUsername']) || //Checks the fields were filled 
 
 require_once("../includes/_connect.php");
 
-$profileUsername = mysqli_real_escape_string($db_connect, $_POST['studentProfileUsername']);
-$profileName = mysqli_real_escape_string($db_connect, $_POST['studentProfileName']);
-$profileSurname = mysqli_real_escape_string($db_connect, $_POST['studentProfileSurname']);
-$profileEmail = mysqli_real_escape_string($db_connect, $_POST['studentProfileEmail']);
-$profileID = mysqli_real_escape_string($db_connect, $_POST['studentProfileID']);
+$profileUsername = $db_connect->real_escape_string($_POST['studentProfileUsername']);
+$profileName = $db_connect->real_escape_string($_POST['studentProfileName']);
+$profileSurname = $db_connect->real_escape_string($_POST['studentProfileSurname']);
+$profileEmail = $db_connect->real_escape_string($_POST['studentProfileEmail']);
+$profileID = $db_connect->real_escape_string($_POST['studentProfileID']);
 
 $stmt = $db_connect->prepare("CALL editStudentProfile(?, ?, ?, ?, ?)"); // Prepares the statements
 $stmt->bind_param("issss", $profileID, $profileUsername, $profileName, $profileSurname, $profileEmail);
@@ -25,7 +25,7 @@ if ($stmt->affected_rows > 0){ //Checks if it worked
     echo "Changes have been made to a user.";
 }
 else{
-    echo "Error: " . mysqli_error($db_connect);
+    echo "Error: " . $db_connect->error;
 }
 
 $stmt->close();
