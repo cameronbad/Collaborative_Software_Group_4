@@ -1,8 +1,14 @@
 <?php
 
-require_once ("_connect.php");
+require_once("_connect.php");
 
-$filter = $db_connect->real_escape_string($_POST['studentFilters']);
+if(isset($_POST['studentFilters'])){ //Checks if its a filter or a onload up
+    $filter = $db_connect->real_escape_string($_POST['studentFilters']);
+}
+else{
+    $filter = $db_connect->real_escape_string($_SESSION['courseID']);
+}
+
 
 $stmt = $db_connect->prepare("CALL allStudents(?)"); //Prepares the statement
 $stmt->bind_param("i", $filter); //Binds the parameter

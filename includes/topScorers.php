@@ -2,7 +2,14 @@
 
 require_once ("_connect.php");
 
-$filter = $db_connect->real_escape_string($_POST['classFilters']);
+while(mysqli_next_result($db_connect)){;} //Fixes Unsynch Error
+
+if(isset($_POST['classFilters'])){ //Checks if its a filter or a onload up
+    $filter = $db_connect->real_escape_string($_POST['classFilters']);
+}
+else{
+    $filter = $db_connect->real_escape_string($_SESSION['courseID']);
+}
 
 $stmt = $db_connect->prepare("CALL topScoringStudents(?)"); //Prepares the statement
 $stmt->bind_param("i", $filter); //Binds the parameter

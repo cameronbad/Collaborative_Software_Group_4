@@ -6,10 +6,8 @@
     $result = $db_connect->query($SQL);
 
     $preValue = '0';
-
-    while($db_connect->next_result){;} //Fixes Unsynch Error
-
-    while($row = $result->fetch_assoc){ //Loops through results and matches the subjects with the courses
+    
+    while($row = $result->fetch_assoc()){ //Loops through results and matches the subjects with the courses
         if ($row['courseID'] == 1 || $_SESSION['accessLevel'] == '3') { // add this after session is fixed $_SESSION['courseID'] 
             if($preValue == 0) {
                 echo "<optgroup label=" . $row["courseName"] . ">";

@@ -2,7 +2,7 @@
   <div class="modal-dialog modal-dialog-centered">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="approveModalLabel"><?php echo $username ?> account approve</h5> <!-- Uses the username from the get query on studentProfile -->
+        <h5 class="modal-title" id="approveModalLabel">Approve <?php echo $username ?></h5> <!-- Uses the username from the get query on studentProfile -->
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">

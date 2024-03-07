@@ -35,13 +35,13 @@
                     <th class="col-2" scope="col">Name</th>
                     <th class="col-2" scope="col">Surname</th>
                     <th class="col-2" scope="col">Username</th>
-                    <th class="col-3" scope="col">Email</th>
-                    <th class="col-3" scope="col">Last Login</th>
-                    <th class="col-3" scope="col"></th>
+                    <th class="col-2" scope="col">Email</th>
+                    <th class="col-2" scope="col">Last Login</th>
+                    <th class="col-1" scope="col"></th>
                </tr>
             </thead>
             <tbody id="studentDisplay">
-                <?php include_once("includes/studentManageOutput.php") ?> <!-- Runs a query which outputs the field data -->
+                <?php include_once("includes/studentOutputFiltered.php") ?> <!-- Runs a query which outputs the field data -->
             </tbody>
         </table>
     </div>

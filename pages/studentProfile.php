@@ -76,15 +76,21 @@
                         <input type="text" class="form-control" id="studentProfileLogin" value="<?php echo $lastLogin ?>" readonly>
                     </div>
                 </div>
-                <button type="submit" class="btn btn-primary" id="profileSaveBtn">Save</button> <!-- For editing students -->
-                <?php 
-                if($accountState == 0 ||  $accountState == NULL){
-                    echo "<button type='button' class='btn btn-primary' id='approveBtn' name='approveBtn' data-bs-toggle='modal' data-bs-target='#approveModal'>Approve</button>"; //Will approve their account
-                }
-                else{
-                    echo "<button type='button' class='btn btn-primary' id='disableBtn' name='disableBtn' data-bs-toggle='modal' data-bs-target='#disableModal'>Disable</button>"; //Will disable their account
-                }
-                ?>
+                <div class="row">
+                    <div class="col">
+                        <button type="submit" class="btn btn-primary profileBtn">Save</button> <!-- For editing students -->
+                    </div>
+                    <div class="col">
+                        <?php 
+                            if($accountState == 0 ||  $accountState == NULL){
+                                echo "<button type='button' class='btn btn-primary profileBtn' data-bs-toggle='modal' data-bs-target='#approveModal'>Approve</button>"; //Will approve their account
+                            }
+                            else{
+                                echo "<button type='button' class='btn btn-primary profileBtn' data-bs-toggle='modal' data-bs-target='#disableModal'>Disable</button>"; //Will disable their account
+                            }
+                        ?>
+                    </div>
+                </div>
             </form>
             </div>
         <div>

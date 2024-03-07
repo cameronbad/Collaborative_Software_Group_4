@@ -561,36 +561,14 @@ h1 {
   border-radius: 5px;
 }
 
-#profileSaveBtn{
-  width: 49%;
+.profileBtn{
+  width: 100%;
   background-color: #acd6de;
   border-color: azure;
   font-weight: bold;
 }
 
-#disableBtn{
-  width: 50%;
-  background-color: #acd6de;
-  border-color: azure;
-  font-weight: bold;
-}
-
-#approveBtn{
-  width: 50%;
-  background-color: #acd6de;
-  border-color: azure;
-  font-weight: bold;
-}
-
-#profileSaveBtn:hover{
-  background-color: #A3C1D4;
-}
-
-#disableBtn:hover{
-  background-color: #A3C1D4;
-}
-
-#approveBtn:hover{
+.profileBtn:hover{
   background-color: #A3C1D4;
 }
 
