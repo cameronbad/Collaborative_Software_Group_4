@@ -167,7 +167,7 @@ https://cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css
         </tbody>
       </table>
 
-<!-- #############################################      MODALS ################################### --> 
+<!-- Add Subject Modal  --> 
 
 
     <!--ADD SUBJECT  Modal -->
