@@ -38,14 +38,14 @@ if (isset($_POST['userInput']) && isset($_POST['passInput'])) {
         exit();
     } else {
         $sql = "SELECT * FROM `user` WHERE `user`.`username`=?";
-        $stmt = mysqli_prepare($db_connect, $sql);
+        $stmt = $db_connect->prepare($sql);
 
         // Bind parameters and execute the statement
-        mysqli_stmt_bind_param($stmt, "s", $uname);
-        mysqli_stmt_execute($stmt);
-        $result = mysqli_stmt_get_result($stmt);
+        $stmt->bind_param("s", $uname);
+        $stmt-> execute();
+        $result = $stmt->get_result();
 
-        if (mysqli_num_rows($result) == 1) {
+        if (mysqli_num_rows($result) === 1) {
             $row = mysqli_fetch_assoc($result);
             if ($row['username'] === $uname && password_verify($pass, $row['password'])) {
                 $_SESSION['username'] = $row['username'];
