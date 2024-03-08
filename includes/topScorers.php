@@ -2,7 +2,7 @@
 
 require_once ("_connect.php");
 
-while(mysqli_next_result($db_connect)){;} //Fixes Unsynch Error
+while($db_connect->next_result){;} //Fixes Unsynch Error
 
 if(isset($_POST['classFilters'])){ //Checks if its a filter or a onload up
     $filter = $db_connect->real_escape_string($_POST['classFilters']);

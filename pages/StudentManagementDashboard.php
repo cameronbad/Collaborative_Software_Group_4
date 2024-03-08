@@ -68,13 +68,3 @@
             })
         });
 </script>
-<script>
-    $('#studentTableMain').submit(function (e) {
-        e.preventDefault();
-        $.ajax({
-            url: "collaborative/studentProfile",
-            method: "POST",
-            data: $('viewStudentBtn').serialize()
-        })
-    })
-</script>
