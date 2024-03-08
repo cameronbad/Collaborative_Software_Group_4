@@ -542,6 +542,36 @@ h1 {
     font-weight: 500;
 }
 
+#studentProfileBody{
+  background-color: #d8dede;
+}
+
+.studentProfileBack{
+  text-align: end;
+}
+
+#studentProfileMain{
+  width: 100%;
+  height: 100vh;
+  margin-top: 10%;
+}
+
+.profilePicture{
+  border: solid 3px #000;
+  border-radius: 5px;
+}
+
+.profileBtn{
+  width: 100%;
+  background-color: #acd6de;
+  border-color: azure;
+  font-weight: bold;
+}
+
+.profileBtn:hover{
+  background-color: #A3C1D4;
+}
+
 /* STUDENT MANAGMENT STYLING END */
 
 /* Table-card */

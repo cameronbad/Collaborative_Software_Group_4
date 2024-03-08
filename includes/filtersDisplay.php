@@ -1,16 +1,14 @@
 <?php
-    require_once ('includes/_connect.php');
+    require_once ('_connect.php');
 
     $SQL = "CALL allCourseNames()";// Calls the procedure
 
-    $result = mysqli_query($db_connect, $SQL);
+    $result = $db_connect->query($SQL);
 
     $preValue = '0';
-
-    while(mysqli_next_result($db_connect)){;} //Fixes Unsynch Error
-
-    while($row = mysqli_fetch_assoc($result)){ //Loops through results and matches the subjects with the courses
-        if (/*$_SESSION['courseID'] Add this once session values*/1 == $row['courseID'] || $_SESSION['accessLevel'] == '3') {
+    
+    while($row = $result->fetch_assoc()){ //Loops through results and matches the subjects with the courses
+        if ($row['courseID'] == 1 || $_SESSION['accessLevel'] == '3') { // add this after session is fixed $_SESSION['courseID'] 
             if($preValue == 0) {
                 echo "<optgroup label=" . $row["courseName"] . ">";
                 echo "<option value='" . $row["subjectID"] . "'>" . $row["subjectName"] . "</option>";
