@@ -220,59 +220,20 @@
     </main>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
     <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
+    <script src="includes/_functions.js"></script>
     <script>
         //AJAX call to create a test
-        $('#testForm').submit(function (e) {
-            e.preventDefault();
-            $.ajax({
-                url: "./createTest.php",
-                method: "POST",
-                data: $('#testForm').serialize(),
-                success: function(data) {
-                    //alert(data);
-                }
-            })
-        });
+        ajaxFormSubmit('#testForm', "./functionality/createTest.php");
 
         //AJAX call to edit a test
-        $('#editForm').submit(function (e) {
-            e.preventDefault();
-            $.ajax({
-                url: "./functionality/editTest.php",
-                method: "POST",
-                data: $('#editForm').serialize(),
-                success: function(data) {
-                    //alert(data);
-                }
-            })
-        });
+        ajaxFormSubmit('#editForm', "./functionality/editTest.php");
 
         //AJAX call to assign a class a test
-        $('#assignForm').submit(function (e) {
-            e.preventDefault();
-            $.ajax({
-                url: "./functionality/assignTest.php",
-                method: "POST",
-                data: $('#assignForm').serialize(),
-                success: function(data) {
-                    alert(data); //Could use .html to make an in website alert with proper styling
-                }
-            })
-        });
+        ajaxFormSubmit('#assignForm', "./functionality/assignTest.php");
 
         //AJAX call to delete a test
-        $('#deleteForm').submit(function (e) {
-            e.preventDefault();
-            $.ajax({
-                url: "./functionality/deleteTest.php",
-                method: "POST",
-                data: $('#deleteForm').serialize(),
-                success: function(data) {
-                    //alert(data);
-                }
-            })
-        });
-        
+        ajaxFormSubmit('#deleteForm', "./functionality/deleteTest.php");
+
         //Updates test whenever an AJAX call is complete
         $(document).on("ajaxSuccess", function() {
            $.ajax({

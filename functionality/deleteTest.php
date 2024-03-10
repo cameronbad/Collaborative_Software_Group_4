@@ -5,7 +5,7 @@ if (!isset($_POST['dTestID'])) {
     die("Please fill out all fields");
 }
 
-require_once("includes/_connect.php");
+require_once("../includes/_connect.php");
 
 //Declare php variable's from post, creates a legal SQL string to avoid issues.
 $id = $db_connect->real_escape_string($_POST['dTestID']);

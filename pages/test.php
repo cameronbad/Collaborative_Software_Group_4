@@ -66,39 +66,13 @@ $current = $test['questionCurrent'];
     ?>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
     <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
+    <script src="includes/_functions.js"></script>
     <script>
         //First check for existing answers and append
         var prevQuestions = <?= json_encode($prevQuestions); ?>;
         var prevChoice = <?= json_encode($prevChoice); ?>;
         var prevCorrect = <?= json_encode($prevCorrect); ?>;
         var count = 0;
-
-
-
-        function checkQuestion(choice, correct) { //Marks buttons on an answer
-            $('.question-active').addClass('question-done'); //Set question as done
-            $('.question-active button').addClass('disabled'); //Disable buttons
-
-            if(choice == correct) {
-                $('[value=' + choice + ']').addClass('answer-correct');
-            } else {
-                $('[value=' + choice + ']').addClass('answer-wrong');
-                $('[value=' + correct + ']').addClass('answer-correct');
-            }
-
-            $('.question-done').removeClass('question-active'); //Remove active from done questions to prevent loops
-        }
-
-        function makeQuestion(doneQuestions, subjectID) {
-            $.ajax({
-                url: "./includes/question.php",
-                method: "GET",
-                data: {prevQuestions: doneQuestions, subjectID: subjectID},
-                success: function(data) {
-                    $('.test-container').append(data);
-                }
-            });
-        }
 
         if (prevQuestions.length === 0) {
             //Make new question
