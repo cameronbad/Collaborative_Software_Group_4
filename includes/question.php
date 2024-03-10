@@ -1,7 +1,21 @@
 <?php
 include_once("_connect.php");  
+include_once("_functions.php");
 
-$query = "SELECT `question`.`questionText`, `question`.`answerA`, `question`.`answerB`, `question`.`answerC`, `question`.`answerD` FROM `question` WHERE `question`.`questionID` = " . $_GET['questionID'];
+if(isset($_GET['questionID'])) {
+    $questionID = $_GET['questionID'];
+} 
+elseif (isset($_GET['prevQuestions'])) {
+    $questionID = shuffleQuestion($_GET['prevQuestions'], $_GET['subjectID'], $db_connect);
+
+    //Generate question in database
+
+}
+else {
+    die('Error: No valid data entered.');
+}
+
+$query = "SELECT `question`.`questionText`, `question`.`answerA`, `question`.`answerB`, `question`.`answerC`, `question`.`answerD` FROM `question` WHERE `question`.`questionID` = " . $questionID;
 $question = $db_connect->execute_query($query)->fetch_assoc();
 
 //Make array with answers assigned to value 1-4

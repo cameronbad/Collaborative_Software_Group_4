@@ -6,6 +6,7 @@
 $_GET['resultID'] = '13'; //temp
 
 require_once("./includes/_connect.php");
+require_once("./includes/_functions.php");
 
 $query = "SELECT `test`.`testName`, `test`.`subjectID`, `subject`.`subjectName`, `result`.`questionTotal`, `result`.`questionCurrent` FROM `result` LEFT JOIN `test` ON `result`.`testID` = `test`.`testID` LEFT JOIN `subject` ON `test`.`subjectID` = `subject`.`subjectID` WHERE `result`.`resultID` = " . $_GET['resultID'];
 $test = $db_connect->execute_query($query)->fetch_assoc();
@@ -48,16 +49,6 @@ $current = $test['questionCurrent'];
         </div>
     </main>
     <?php 
-    $query = "SELECT `question`.`questionID` FROM `question` WHERE `question`.`subjectID` = " . $test['subjectID'];
-
-    //Array of all questionID's
-    $questions = [];
-
-    $run = $db_connect->query($query);
-    while ($result = $run->fetch_assoc()) {
-        $questions[] = $result['questionID'];
-    }
-
     $query = "SELECT `answer`.`chosenAnswer`, `answer`.`questionPosition`, `answer`.`questionID`, `question`.`correctAnswer` FROM `answer` LEFT JOIN `question` ON `answer`.`questionID` = `question`.`questionID` WHERE `resultID` = " . $_GET['resultID'] . " ORDER BY `answer`.`questionPosition` ASC"; 
 
     //Array of all existing answers
@@ -70,8 +61,6 @@ $current = $test['questionCurrent'];
         $prevQuestions[] = $result['questionID'];
         $prevChoice[] = $result['chosenAnswer'];
         $prevCorrect[] = $result['correctAnswer'];
-        $key = array_search($result['questionID'], $questions);
-        unset($questions[$key]); //Removes index of already made answers from the question id list, this does not rearrange the indexes, so the index will be missing
     }
 
     ?>
@@ -84,31 +73,55 @@ $current = $test['questionCurrent'];
         var prevCorrect = <?= json_encode($prevCorrect); ?>;
         var count = 0;
 
-        $.each(prevQuestions, function(index, value) {
+
+
+        function checkQuestion(choice, correct) { //Marks buttons on an answer
+            $('.question-active').addClass('question-done'); //Set question as done
+            $('.question-active button').addClass('disabled'); //Disable buttons
+
+            if(choice == correct) {
+                $('[value=' + choice + ']').addClass('answer-correct');
+            } else {
+                $('[value=' + choice + ']').addClass('answer-wrong');
+                $('[value=' + correct + ']').addClass('answer-correct');
+            }
+
+            $('.question-done').removeClass('question-active'); //Remove active from done questions to prevent loops
+        }
+
+        function makeQuestion(doneQuestions, subjectID) {
             $.ajax({
                 url: "./includes/question.php",
                 method: "GET",
-                data: {questionID: value},
+                data: {prevQuestions: doneQuestions, subjectID: subjectID},
                 success: function(data) {
-                    count++;
                     $('.test-container').append(data);
-
-                    if (count != prevQuestions.length) {
-                        $('.question-active').addClass('question-done'); //Set question as done
-                        $('.question-active button').addClass('disabled'); //Disable buttons
-
-                        if(prevChoice[index] == prevCorrect[index]) {
-                            $('[value=' + prevChoice[index] + ']').addClass('answer-correct');
-                        } else {
-                            $('[value=' + prevChoice[index] + ']').addClass('answer-wrong');
-                            $('[value=' + prevCorrect[index] + ']').addClass('answer-correct');
-                        }
-
-                        $('.question-done').removeClass('question-active'); //Remove active from done questions to prevent loops
-                    } //Add function for moving user to active question after its been loaded, make sure it wont trigger if there is no active question.
                 }
             });
-        });
+        }
+
+        if (prevQuestions.length === 0) {
+            //Make new question
+            makeQuestion(prevQuestions, <?= $test['subjectID'] ?>);
+        } else {
+            //Run loop to make all previous questions.
+            $.each(prevQuestions, function(index, value) {
+                $.ajax({
+                    url: "./includes/question.php",
+                    method: "GET",
+                    data: {questionID: value},
+                    success: function(data) {
+                        count++;
+                        $('.test-container').append(data);
+
+                        if (count != prevQuestions.length) {
+                            checkQuestion(prevChoice[index], prevCorrect[index]);
+                        } //Add function for moving user to active question after its been loaded, make sure it wont trigger if there is no active question.
+                    }
+                });
+            });
+        }
+
 
         //AJAX call to submit an answer
         $(document).on("click", '.question-active .answer-btn', function() {
@@ -117,19 +130,11 @@ $current = $test['questionCurrent'];
                 method: "POST",
                 data: {answerID:'2'}, //Placeholder, replace with proper way to get it
                 success: function(data) { //Should return "chosenAnswer|correctAnswer" i.e. "4|4" or "1|3"
-                    alert(data);
                     const result = data.split("|");
 
-                    $('.question-active').addClass('question-done'); //Set question as done
-                    $('.question-active button').addClass('disabled'); //Disable buttons
+                    checkQuestion(result[0], result[1]);
 
-                    if (result[0] == result[1]) {
-                        $('[value=' + result[0] + ']').addClass('answer-correct');
-                    } else {
-                        $('[value=' + result[0] + ']').addClass('answer-wrong');
-                        $('[value=' + result[1] + ']').addClass('answer-correct');
-                    }
-                    
+                    makeQuestion(prevQuestions, <?= $test['subjectID'] ?>);
                 }
             })
         });
