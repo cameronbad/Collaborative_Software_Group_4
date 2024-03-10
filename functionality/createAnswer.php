@@ -1,5 +1,5 @@
 <?php
-//Add authentication
+//Add authentication and validation | check question length
 
 require_once("../includes/_connect.php");
 
@@ -14,10 +14,10 @@ $query = "CALL createAnswer(?, ?, ?)";
 
 //Runs query with parameters
 if($db_connect->execute_query($query, [$questionID, $resultID, $position])) {
-    die("New answer generated");
+    die($questionID);
 }
 else {
-    die("Error: Query failed to execute.");
+    die(false);
 }
 
 ?>

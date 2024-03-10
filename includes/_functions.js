@@ -14,38 +14,57 @@ function checkQuestion(choice, correct) {
 }
 
 //Appends a new question to page
-function makeQuestion(doneQuestions, subjectID, resultID) {
-    //Get question ID
-    $.ajax({
-        url: "./functionality/questionData.php",
-        method: "GET",
-        data: {prevQuestions: doneQuestions, subjectID: subjectID, resultID: resultID},
-        success: function(data) {
-            const result = data.split("|");
-            const questionID = result[0];
-            const position = result[1];
+async function makeQuestion(doneQuestions, subjectID, resultID) {
+    //Declare variables
+    var questionID;
+    var position;
 
-            //Generate question
+    let promise = new Promise(function(resolve) {
+        //Get question ID
+        function getID() {
+            $.ajax({
+                url: "./functionality/questionData.php",
+                method: "GET",
+                data: {prevQuestions: doneQuestions, subjectID: subjectID, resultID: resultID},
+                success: function(data) {
+                    const result = data.split("|");
+                    questionID = result[0];
+                    position = result[1];
+                    appendTest();
+                }
+            });
+        }
+
+        //Append test
+        function appendTest() {
             $.ajax({
                 url: "./includes/question.php",
                 method: "GET",
                 data: {questionID: questionID},
                 success: function(data) {
                     $('.test-container').append(data);
-
-                    //Create new answer in database
-                    $.ajax({
-                        url: "./functionality/createAnswer.php",
-                        method: "GET",
-                        data: {questionID: questionID, resultID: resultID, position: position},
-                        success: function(data) {
-                            alert(data);
-                        }
-                    })
+                    createAnswer();
                 }
             });
         }
+
+        //Create new answer
+        function createAnswer() {
+            $.ajax({
+                url: "./functionality/createAnswer.php",
+                method: "GET",
+                data: {questionID: questionID, resultID: resultID, position: position},
+                success: function(data) {
+                    resolve(questionID);
+                }
+            })
+        }
+ 
+        getID();
     });
+
+    var ID = await promise;
+    return ID;
 }
 
 //Checks for a form being submitted and then posts it's data to a page

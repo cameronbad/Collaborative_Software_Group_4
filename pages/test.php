@@ -75,8 +75,10 @@ $current = $test['questionCurrent'];
         var count = 0;
 
         if (prevQuestions.length === 0) {
-            //Make new question
-            makeQuestion(prevQuestions, <?= $test['subjectID'] ?>);
+            //Generates a new question
+            makeQuestion(prevQuestions, <?= $test['subjectID'] ?>, <?= $_GET['resultID'] ?>).then(
+                function(value) {prevQuestions.push(value);}
+            )
         } else {
             //Run loop to make all previous questions.
             $.each(prevQuestions, function(index, value) {
@@ -96,21 +98,30 @@ $current = $test['questionCurrent'];
             });
         }
 
-
         //AJAX call to submit an answer
         $(document).on("click", '.question-active .answer-btn', function() {
+            //Get the value of the button that triggered this
+            var choice = $(this).attr("value");
+
             $.ajax({
                 url: "./functionality/submitAnswer.php",
                 method: "POST",
-                data: {answerID:'2'}, //Placeholder, replace with proper way to get it
+                data: {questionID: prevQuestions[prevQuestions.length - 1], resultID: <?= $_GET['resultID'] ?>, choice: choice}, 
                 success: function(data) { //Should return "chosenAnswer|correctAnswer" i.e. "4|4" or "1|3"
                     const result = data.split("|");
 
                     //Marks answers
                     checkQuestion(result[0], result[1]);
 
-                    //Generates a new question
-                    makeQuestion(prevQuestions, <?= $test['subjectID'] ?>, <?= $_GET['resultID'] ?>);
+                    //Checks if questions are done
+                    if (prevQuestions.length >= <?= $test['questionTotal'] ?>) {
+                        //End test
+                    } else {
+                        //Generates a new question
+                        makeQuestion(prevQuestions, <?= $test['subjectID'] ?>, <?= $_GET['resultID'] ?>).then(
+                            function(value) {prevQuestions.push(value);}
+                        )
+                    }
                 }
             })
         });
