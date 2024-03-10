@@ -106,17 +106,14 @@ $current = $test['questionCurrent'];
                 success: function(data) { //Should return "chosenAnswer|correctAnswer" i.e. "4|4" or "1|3"
                     const result = data.split("|");
 
+                    //Marks answers
                     checkQuestion(result[0], result[1]);
 
-                    makeQuestion(prevQuestions, <?= $test['subjectID'] ?>);
+                    //Generates a new question
+                    makeQuestion(prevQuestions, <?= $test['subjectID'] ?>, <?= $_GET['resultID'] ?>);
                 }
             })
         });
-
-        //Finally append new answers from list of available questions
-
-
-
     </script>
 </body>
 </html>

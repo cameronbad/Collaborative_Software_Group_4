@@ -5,12 +5,6 @@ include_once("_functions.php");
 if(isset($_GET['questionID'])) {
     $questionID = $_GET['questionID'];
 } 
-elseif (isset($_GET['prevQuestions'])) {
-    $questionID = shuffleQuestion($_GET['prevQuestions'], $_GET['subjectID'], $db_connect);
-
-    //Generate question in database
-
-}
 else {
     die('Error: No valid data entered.');
 }
