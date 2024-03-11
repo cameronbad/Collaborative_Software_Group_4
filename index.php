@@ -1,5 +1,8 @@
 <?php
 
+// Hides strict standard output
+error_reporting(error_reporting() & ~E_STRICT & ~E_DEPRECATED); 
+
 require_once('jRoute/_load.php');
 
 $route = new jRoute("/Collaborative_Software_Group_4");

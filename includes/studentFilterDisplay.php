@@ -7,7 +7,7 @@
 
     $preValue = '0';
 
-    while(mysqli_next_result($db_connect)){;} //Fixes Unsynch Error
+    while($db_connect->next_result()){;} //Fixes Unsynch Error
 
     while($row = mysqli_fetch_assoc($result)){ //Loops through results and matches the subjects with the courses
         //if ($_SESSION['accessLevel'] >= '2') { Will add condition after we have session varaibles implemeted
