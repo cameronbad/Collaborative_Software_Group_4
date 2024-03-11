@@ -12,13 +12,13 @@ require_once("../includes/_connect.php");
 $questionID = $_GET['questionID'];
 $resultID = $_GET['resultID'];
 $position = $_GET['position'];
-$_SESSION['testCurrent'] = $_SESSION['testCurrent']++;
 
 //Need questionID, resultID, questionPosition
 $query = "CALL createAnswer(?, ?, ?)";
 
 //Runs query with parameters
 if($db_connect->execute_query($query, [$questionID, $resultID, $position])) {
+    $_SESSION['testCurrent'] = $_SESSION['testCurrent']++;
     die($questionID);
 }
 else {

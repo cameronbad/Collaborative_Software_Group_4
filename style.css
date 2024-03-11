@@ -516,4 +516,12 @@ th:last-child {
   fill: #ABBADE;
 }
 
+.question-done .answer-correct {
+  background-color: green;
+  border-color: green;
+}
+.question-done .answer-wrong {
+  background-color: red;
+  border-color: red;
+}
 /* Test page END */

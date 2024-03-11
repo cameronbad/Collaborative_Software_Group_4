@@ -81,3 +81,9 @@ function ajaxFormSubmit(formID, pageURL) {
         })
     });
 }
+
+function currentQuestion(textID) {
+    $.get("./functionality/getCurrent.php", function(data) {
+        $(textID).text(data);
+    })
+}

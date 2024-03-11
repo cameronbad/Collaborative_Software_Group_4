@@ -2,14 +2,29 @@
 //User auth here / Only user doing the test should be able to access the page.
 @session_start();
 
-//need to $_GET the result ID
-$_GET['resultID'] = '13'; //temp
-
 require_once("./includes/_connect.php");
 require_once("./includes/_functions.php");
 
 $query = "SELECT `test`.`testName`, `test`.`subjectID`, `subject`.`subjectName`, `result`.`questionTotal`, `result`.`questionCurrent` FROM `result` LEFT JOIN `test` ON `result`.`testID` = `test`.`testID` LEFT JOIN `subject` ON `test`.`subjectID` = `subject`.`subjectID` WHERE `result`.`resultID` = " . $_GET['resultID'];
 $test = $db_connect->execute_query($query)->fetch_assoc();
+
+$query = "SELECT `answer`.`chosenAnswer`, `answer`.`questionPosition`, `answer`.`questionID`, `question`.`correctAnswer` FROM `answer` LEFT JOIN `question` ON `answer`.`questionID` = `question`.`questionID` WHERE `resultID` = " . $_GET['resultID'] . " ORDER BY `answer`.`questionPosition` ASC"; 
+
+//Array of all existing answers
+$prevQuestions = [];
+$prevChoice = [];
+$prevCorrect = [];
+
+$run = $db_connect->query($query);
+while ($result = $run->fetch_assoc()) {
+    $prevQuestions[] = $result['questionID'];
+    $prevChoice[] = $result['chosenAnswer'];
+    $prevCorrect[] = $result['correctAnswer'];
+}
+
+$_SESSION['testCurrent'] = count($prevQuestions);
+$_SESSION['testTotal'] = $test['questionTotal'];
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -43,29 +58,11 @@ $test = $db_connect->execute_query($query)->fetch_assoc();
                 <svg class="test-bottom-svg d-inline-block align-text-top">
                     <polygon points='30,56 0,56 30,0'>
                 </svg>  
-                <div class="navbar-text p-3"><?= $current //This needs to update with javascript ?> of <?= $test['questionTotal'] ?></div>
+                <div class="navbar-text p-3"><span id='currentQuestion'><?= $_SESSION['testCurrent'] ?></span> of <?= $test['questionTotal'] ?></div>
             </div>    
         </div>
     </main>
-    <?php 
-    $query = "SELECT `answer`.`chosenAnswer`, `answer`.`questionPosition`, `answer`.`questionID`, `question`.`correctAnswer` FROM `answer` LEFT JOIN `question` ON `answer`.`questionID` = `question`.`questionID` WHERE `resultID` = " . $_GET['resultID'] . " ORDER BY `answer`.`questionPosition` ASC"; 
 
-    //Array of all existing answers
-    $prevQuestions = [];
-    $prevChoice = [];
-    $prevCorrect = [];
-
-    $run = $db_connect->query($query);
-    while ($result = $run->fetch_assoc()) {
-        $prevQuestions[] = $result['questionID'];
-        $prevChoice[] = $result['chosenAnswer'];
-        $prevCorrect[] = $result['correctAnswer'];
-    }
-
-    $_SESSION['testCurrent'] = count($prevQuestions);
-    $_SESSION['testTotal'] = $test['questionTotal'];
-
-    ?>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
     <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
     <script src="includes/_functions.js"></script>
@@ -79,7 +76,12 @@ $test = $db_connect->execute_query($query)->fetch_assoc();
         if (prevQuestions.length === 0) {
             //Generates a new question
             makeQuestion(prevQuestions, <?= $test['subjectID'] ?>, <?= $_GET['resultID'] ?>).then(
-                function(value) {prevQuestions.push(value);}
+                function(value) {
+                    if(value){
+                        prevQuestions.push(value);
+                        currentQuestion('currentQuestion');
+                    }
+                }                
             )
         } else {
             //Run loop to make all previous questions.
@@ -127,7 +129,12 @@ $test = $db_connect->execute_query($query)->fetch_assoc();
                     } else {
                         //Generates a new question
                         makeQuestion(prevQuestions, <?= $test['subjectID'] ?>, <?= $_GET['resultID'] ?>).then(
-                            function(value) {if(value){prevQuestions.push(value);}}
+                            function(value) {
+                                if(value){
+                                    prevQuestions.push(value);
+                                    currentQuestion('currentQuestion');
+                                }
+                            }                
                         )
                     }
                 }

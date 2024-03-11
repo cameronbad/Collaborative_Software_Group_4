@@ -16,7 +16,7 @@ $route->Route(['get'], '/testDashboard', "pages/testDashboard.php");
 
 $route->Route(['get'], '/testManagement', "pages/testManagement.php");
 
-$route->Route(['get'], '/test', "pages/test.php");
+$route->Route(['get'], '/test_{resultID}', "pages/test.php");
 
 echo $route->Dispatch($_SERVER['REQUEST_METHOD'], $_SERVER['REQUEST_URI']);
 

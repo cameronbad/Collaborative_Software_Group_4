@@ -66,7 +66,7 @@ $userResult = $db_connect->execute_query($query)->fetch_assoc();
                     echo "<div class='card-footer text-center'>"; //Completion date / Not started / In progress (colour coding?)
                     if (!is_null($result['completionDate'])) {echo $result['completionDate'];} elseif (is_null($result['questionCurrent'])) {echo "Incomplete";} else {echo "In progress";}
                     echo "</div>";
-                    echo "<a href='#'></a>"; //Add routing to correct testing page when said page is created.
+                    echo "<a href='test_" . $result['resultID'] . "'></a>"; //Add routing to correct testing page when said page is created.
                     echo "</div>";
                     echo "</div>";
                 }
