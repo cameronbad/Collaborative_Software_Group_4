@@ -5,7 +5,7 @@
 
 <head>
     <title>403 Forbidden</title>
-    <link href="style.css" rel="stylesheet">
+    <link href="../style.css" rel="stylesheet">
 </head>
 
 <body class="routingBody">

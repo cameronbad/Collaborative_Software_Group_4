@@ -23,12 +23,14 @@ if (isset($_POST['userInput']) && isset($_POST['passInput'])) {
         $data = trim($data);
         $data = stripslashes($data);
         $data = htmlspecialchars($data);
-        $data = $db_connect->real_escape_string($db_connect, $data);
+        $data = $db_connect->real_escape_string($data);
         return $data;
     }
 
-    $uname = isset($_POST["userInput"]) ? validate($_POST["userInput"], $db_connect) : "";
-    $pass = isset($_POST["passInput"]) ? validate($_POST["passInput"], $db_connect) : "";
+    $uname = validate($_POST["userInput"], $db_connect);
+    $pass = $_POST["passInput"];
+
+    //replace underscore with space in error message
 
     if (empty($uname)) {
         header("Location: ../loginUsername_is_required");
@@ -37,13 +39,13 @@ if (isset($_POST['userInput']) && isset($_POST['passInput'])) {
         header("Location: ../loginPassword_is_required");
         exit();
     } else {
-        $sql = "SELECT * FROM `user` WHERE `user`.`username`=? AND `user`.`password`=?";
-        $stmt = mysqli_prepare($db_connect, $sql);
+        $sql = "SELECT * FROM `user` WHERE `user`.`username`=?";
+        $stmt = $db_connect->prepare($sql);
 
         // Bind parameters and execute the statement
-        mysqli_stmt_bind_param($stmt, "ss", $uname, $pass);
-        mysqli_stmt_execute($stmt);
-        $result = mysqli_stmt_get_result($stmt);
+        $stmt->bind_param("s", $uname);
+        $stmt-> execute();
+        $result = $stmt->get_result();
 
         if (mysqli_num_rows($result) === 1) {
             $row = mysqli_fetch_assoc($result);
@@ -53,17 +55,17 @@ if (isset($_POST['userInput']) && isset($_POST['passInput'])) {
                 $_SESSION['userID'] = $row['userID'];
                 $_SESSION['courseID'] = $row['courseID'];
                 $_SESSION['accessLevel'] = $row['accessLevel'];
-                header("Location: /testDashboard");
+                header("Location: ../testDashboard");
                 exit();
             } else {
                 $_SESSION['loginAttempts']++; // Increment login attempts counter
                 if ($_SESSION['loginAttempts'] >= $maxLoginAttempts) {
                     $_SESSION['blockedTime'] = time() + $blockedTime; // Set block time
-                    header("Location: ../loginIncorrect_Username_or_Password.<br> You_have_been_blocked.");
+                    header("Location: ../loginIncorrect_Username_or_Password._You_have_been_blocked.");
                     exit();
                 } else {
                     $attemptsLeft = $maxLoginAttempts - $_SESSION['loginAttempts'];
-                    header("Location: ../loginIncorrect_Username_or_Password.<br> $attemptsLeft - attempts_left.");
+                    header("Location: ../loginIncorrect_Username_or_Password._$attemptsLeft-attempts_left.");
                     exit();
                 }
             }
@@ -71,11 +73,11 @@ if (isset($_POST['userInput']) && isset($_POST['passInput'])) {
             $_SESSION['loginAttempts']++; // Increment login attempts counter
             if ($_SESSION['loginAttempts'] >= $maxLoginAttempts) {
                 $_SESSION['blockedTime'] = time() + $blockedTime; // Set block time
-                header("Location: ../loginIncorrect_Username_or_Password.<br> You_have_been_blocked.");
+                header("Location: ../loginIncorrect_Username_or_Password._You_have_been_blocked.");
                 exit();
             } else {
                 $attemptsLeft = $maxLoginAttempts - $_SESSION['loginAttempts'];
-                header("Location: ../loginIncorrect_Username_or_Password.<br> $attemptsLeft - attempts_left.");
+                header("Location: ../loginIncorrect_Username_or_Password._$attemptsLeft-attempts_left.");
                 exit();
             }
         }
