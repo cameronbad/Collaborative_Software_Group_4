@@ -39,9 +39,14 @@
             <a class="nav-link" href="./functionality/logout.php">Logout</a> <!-- Logs out user -->
         </li>     
         </ul>
+        <span class="nav-item"> <!-- Displays the gravatar profile picture of the currently logged in user -->
+            <?php
+                $hash = md5(strtolower(trim($_SESSION['email'])));
+                echo "<img src='http://gravatar.com/avatar/$hash?size=40&d=identicon' class='profilePicture'>";
+            ?>
+        </span>
         <span class="navbar-text nav-item">
-            <a class="nav-link" href="#"><?= $_SESSION['username'] ?></a> <!-- Displays currently logged in user, could also take them to profile when clicked on? 
-            Could replace with student profile picture if added-->
+            <a class="nav-link" href="#"><?= $_SESSION['username'] ?></a> <!-- Displays currently logged in user-->
         </span>
     </div>
     </div>
