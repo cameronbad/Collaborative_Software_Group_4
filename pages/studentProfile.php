@@ -90,6 +90,9 @@
                             }
                         ?>
                     </div>
+                    <div class="col">
+                        <button type="button" class="btn btn-primary profileBtn" data-bs-toggle="modal" data-bs-target="#terminateModal">Terminate</button> <!-- For terminating students students -->
+                    </div>
                 </div>
             </form>
             </div>
@@ -99,6 +102,7 @@
     
     <?php include_once("includes/disableAccountModal.php"); ?> <!-- Displays modal for disabling accounts -->
     <?php include_once("includes/approveAccountModal.php"); ?> <!-- Displays modal for approving accounts -->
+    <?php include_once("includes/terminateAccountModal.php"); ?> <!-- Displays modal for terminating accounts -->
  
 </div>
 </body>
@@ -138,6 +142,18 @@ $('#approveBtnModal').click(function (e) {
                 data: ({sID: <?php echo $userID?>}),
                 success: function(data) {
                     location.reload();
+                }
+            })
+        });
+
+        $('#terminateBtnModal').click(function (e) {
+            e.preventDefault();
+            $.ajax({
+                url: "../terminateAccount/",
+                method: "GET",
+                data: ({sID: <?php echo $userID?>}),
+                success: function(data) {
+                    location.replace("../studentDisplay");
                 }
             })
         });

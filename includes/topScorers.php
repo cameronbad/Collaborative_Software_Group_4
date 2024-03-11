@@ -1,8 +1,8 @@
 <?php
 
-require_once ("_connect.php");
+require_once ("includes/_connect.php");
 
-while($db_connect->next_result){;} //Fixes Unsynch Error
+//while($db_connect->next_result()){;} //Fixes Unsynch Error
 
 if(isset($_POST['classFilters'])){ //Checks if its a filter or a onload up
     $filter = $db_connect->real_escape_string($_POST['classFilters']);
