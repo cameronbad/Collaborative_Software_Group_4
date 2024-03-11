@@ -46,8 +46,8 @@ if (count($questions) === 0)
 shuffle($questions);
 
 //Get position of new question
-$query = "SELECT COUNT(`answer`.`answerID`) as position FROM `answer` WHERE `answer`.`resultID` = " . $resultID;
-$run = $db_connect->execute_query($query)->fetch_assoc();
+$query = "CALL getPosition(?)";
+$run = $db_connect->execute_query($query, [$resultID])->fetch_assoc();
 
 $position = $run['position'] + 1;
 

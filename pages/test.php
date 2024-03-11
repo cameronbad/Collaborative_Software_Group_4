@@ -10,7 +10,6 @@ require_once("./includes/_functions.php");
 
 $query = "SELECT `test`.`testName`, `test`.`subjectID`, `subject`.`subjectName`, `result`.`questionTotal`, `result`.`questionCurrent` FROM `result` LEFT JOIN `test` ON `result`.`testID` = `test`.`testID` LEFT JOIN `subject` ON `test`.`subjectID` = `subject`.`subjectID` WHERE `result`.`resultID` = " . $_GET['resultID'];
 $test = $db_connect->execute_query($query)->fetch_assoc();
-$current = $test['questionCurrent'];
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -63,6 +62,9 @@ $current = $test['questionCurrent'];
         $prevCorrect[] = $result['correctAnswer'];
     }
 
+    $_SESSION['testCurrent'] = count($prevQuestions);
+    $_SESSION['testTotal'] = $test['questionTotal'];
+
     ?>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
     <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
@@ -107,19 +109,25 @@ $current = $test['questionCurrent'];
                 url: "./functionality/submitAnswer.php",
                 method: "POST",
                 data: {questionID: prevQuestions[prevQuestions.length - 1], resultID: <?= $_GET['resultID'] ?>, choice: choice}, 
-                success: function(data) { //Should return "chosenAnswer|correctAnswer" i.e. "4|4" or "1|3"
-                    const result = data.split("|");
-
+                success: function(data) { 
                     //Marks answers
-                    checkQuestion(result[0], result[1]);
+                    checkQuestion(choice, data);
 
                     //Checks if questions are done
                     if (prevQuestions.length >= <?= $test['questionTotal'] ?>) {
                         //End test
+                        $.ajax({
+                            url: "./includes/testEnd.php",
+                            method: "GET",
+                            data: {questionID: questionID},
+                            success: function(data) {
+                                $('.test-container').append(data);
+                            }
+                        });
                     } else {
                         //Generates a new question
                         makeQuestion(prevQuestions, <?= $test['subjectID'] ?>, <?= $_GET['resultID'] ?>).then(
-                            function(value) {prevQuestions.push(value);}
+                            function(value) {if(value){prevQuestions.push(value);}}
                         )
                     }
                 }

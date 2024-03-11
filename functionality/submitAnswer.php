@@ -1,5 +1,9 @@
 <?php
 //Add authentication and validation | check question length
+session_start();
+if (!isset($_SESSION['testCurrent']) || !isset($_SESSION['testTotal']) || $_SESSION['testCurrent'] > $_SESSION['testTotal']) {
+    die(false);
+}
 
 require_once("../includes/_connect.php");
 
@@ -7,6 +11,14 @@ require_once("../includes/_connect.php");
 $questionID = $_POST['questionID'];
 $resultID = $_POST['resultID'];
 $choice = $_POST['choice'];
+
+//Validation check
+$query = "CALL getPosition(?)";
+$run = $db_connect->execute_query($query, [$resultID])->fetch_assoc();
+
+if($run['position'] >= $_SESSION['testTotal']) {
+    die(false);
+}
 
 //Need questionID, resultID, questionPosition
 $query = "CALL submitAnswer(?, ?, ?)";
@@ -24,7 +36,7 @@ $answer = $db_connect->execute_query($query, [$questionID])->fetch_assoc();
 
 
 if(isset($answer)) {
-    die($choice . "|" . $answer['correctAnswer']);
+    die($answer['correctAnswer']);
 }
 else {
     die(false);
