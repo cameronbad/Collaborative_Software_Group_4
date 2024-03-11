@@ -30,6 +30,8 @@ if (isset($_POST['userInput']) && isset($_POST['passInput'])) {
     $uname = validate($_POST["userInput"], $db_connect);
     $pass = $_POST["passInput"];
 
+    //replace underscore with space in error message
+
     if (empty($uname)) {
         header("Location: ../loginUsername_is_required");
         exit();
@@ -63,7 +65,7 @@ if (isset($_POST['userInput']) && isset($_POST['passInput'])) {
                     exit();
                 } else {
                     $attemptsLeft = $maxLoginAttempts - $_SESSION['loginAttempts'];
-                    //header("Location: ../loginIncorrect_Username_or_Password._$attemptsLeft-attempts_left.");
+                    header("Location: ../loginIncorrect_Username_or_Password._$attemptsLeft-attempts_left.");
                     exit();
                 }
             }
@@ -75,7 +77,7 @@ if (isset($_POST['userInput']) && isset($_POST['passInput'])) {
                 exit();
             } else {
                 $attemptsLeft = $maxLoginAttempts - $_SESSION['loginAttempts'];
-                //header("Location: ../loginIncorrect_Username_or_Password._$attemptsLeft-attempts_left.");
+                header("Location: ../loginIncorrect_Username_or_Password._$attemptsLeft-attempts_left.");
                 exit();
             }
         }
