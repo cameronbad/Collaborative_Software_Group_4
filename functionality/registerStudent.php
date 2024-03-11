@@ -57,13 +57,13 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     // Should the user be approved, the data will be inserted into the database
     // Prepare and execute the SQL statement to insert user data into the database
     $sql = "INSERT INTO `user` (`username`, `firstName`, `lastName`, `email`, `password`, `studentNumber`, `courseID`, `accessLevel`) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
-    $stmt = mysqli_prepare($db_connect, $sql);
+    $stmt = $db_connect->prepare($sql);
 
     if ($stmt) {
-        mysqli_stmt_bind_param($stmt, "ssssssii", $username, $firstName, $lastName, $email, $hashed_password, $studentNum, $courseID, $accessLevel);
-        mysqli_stmt_execute($stmt);
-        mysqli_stmt_close($stmt);
-        mysqli_close($db_connect);
+        $stmt->bind_param("ssssssii", $username, $firstName, $lastName, $email, $hashed_password, $studentNum, $courseID, $accessLevel);
+        $stmt->execute();
+        $stmt->close();
+        $db_connect->close();
         header("Location: ../login"); // Redirect to login page after successful registration
         //Send email to the user stating that their account has been successfully created
         $messageStudent = "Hello " . $firstName . " " . $lastName . ",\n\nYour account has been successfully created. You can now login to the system using the following credentials:\n\nUsername: " . $username . "\nPassword: " . $password . "\n\nKind regards,\n\nEduTestPro Team";
