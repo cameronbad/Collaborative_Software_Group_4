@@ -211,12 +211,7 @@ https://cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css
       <!--ADD SUBJECT  Modal -->
 
 
-      <!-- EDIT MODAL  -->
-<<<<<<< HEAD
-     
-=======
-
->>>>>>> 53dceb77981361bc71f24e12f563aae53255ebfa
+   <!--edit-->
 
 <div class="modal fade" id="editModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog">
@@ -233,21 +228,14 @@ https://cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css
           </div>
           <div class="mb-3">
             <label for="message-text" class="col-form-label">Course:</label>
-
             <?php
-
-
-if(isset($_POST['submit'])) {
-    $course = $_POST['courseName'];
-    $subjectName = $_POST['subjectName'];
-    
-    // Perform database update
-    $query = "UPDATE subject SET subjectName = '$subjectName' WHERE courseName = '$course'";
-    $result = mysqli_query($db_connect, $query);
-    
-}
-?>
-            
+              if(isset($_POST['submit'])) {
+              $course = $_POST['courseName'];
+              $subjectName = $_POST['subjectName'];
+              $query = "UPDATE subject SET subjectName = '$subjectName' WHERE courseName = '$course'";
+              $result = mysqli_query($db_connect, $query);   
+            }
+            ?>            
             <select name="updateCourse" class="form-select" id="select" required aria-label="Default select example">
                     <option selected>Please select a course</option>
                     <?php
@@ -258,9 +246,6 @@ if(isset($_POST['submit'])) {
                     }
                     ?>
                   </select>
-
-
-
           </div>
         </form>
       </div>
@@ -296,13 +281,14 @@ editModal.addEventListener('show.bs.modal', event => {
   // Button that triggered the modal
   const button = event.relatedTarget
   // Extract info from data-bs-* attributes
-  const recipient = button.getAttribute('data-bs-whatever')
+  const subject = button.getAttribute('data-bs-subject')
+  const subject_Id = button.getAttribute('data-bs-id')
  
   const modalTitle = editModal.querySelector('.modal-title')
   const modalBodyInput = editModal.querySelector('.modal-body input')
 
-  modalTitle.textContent = `New message to ${recipient}`
-  modalBodyInput.value = recipient
+  modalTitle.textContent = `You are eduting: ${subject}`
+  modalBodyInput.value = subject
 })
 
 
