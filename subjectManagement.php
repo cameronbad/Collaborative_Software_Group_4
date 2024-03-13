@@ -167,7 +167,7 @@ https://cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css
         </tbody>
       </table>
 
-<!-- #############################################      MODALS ################################### --> 
+<!-- Add Subject Modal  --> 
 
 
     <!--ADD SUBJECT  Modal -->
@@ -212,9 +212,13 @@ https://cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css
 
 
       <!-- EDIT MODAL  -->
-     <!--there's a scuffed ass fix here somewhere just make the form get the data submission right and update subjectName-->
+<<<<<<< HEAD
+     
+=======
 
-<div class="modal fade" id="editModal<?php echo $result["subjectID"] ?>" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+>>>>>>> 53dceb77981361bc71f24e12f563aae53255ebfa
+
+<div class="modal fade" id="editModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
@@ -224,12 +228,26 @@ https://cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css
       <div class="modal-body">
         <form>
           <div class="mb-3">
-            <label for="recipient-name" class="col-form-label">Course Name:</label>
+            <label for="recipient-name" class="col-form-label">Subject Name:</label>
             <input type="text" class="form-control" id="recipient-name">
           </div>
-
           <div class="mb-3">
-            <label for="message-text" class="col-form-label">Subject:</label>          
+            <label for="message-text" class="col-form-label">Course:</label>
+
+            <?php
+
+
+if(isset($_POST['submit'])) {
+    $course = $_POST['courseName'];
+    $subjectName = $_POST['subjectName'];
+    
+    // Perform database update
+    $query = "UPDATE subject SET subjectName = '$subjectName' WHERE courseName = '$course'";
+    $result = mysqli_query($db_connect, $query);
+    
+}
+?>
+            
             <select name="updateCourse" class="form-select" id="select" required aria-label="Default select example">
                     <option selected>Please select a course</option>
                     <?php
@@ -240,6 +258,9 @@ https://cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css
                     }
                     ?>
                   </select>
+
+
+
           </div>
         </form>
       </div>

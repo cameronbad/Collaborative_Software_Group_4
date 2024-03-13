@@ -224,11 +224,11 @@ https://cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css
       <div class="modal-body">
         <form>
           <div class="mb-3">
-            <label for="recipient-name" class="col-form-label">Course Name:</label>
+            <label for="recipient-name" class="col-form-label">Subject Name:</label>
             <input type="text" class="form-control" id="recipient-name">
           </div>
           <div class="mb-3">
-            <label for="message-text" class="col-form-label">Subject:</label>
+            <label for="message-text" class="col-form-label">Course:</label>
 
             <?php
 
@@ -241,11 +241,6 @@ if(isset($_POST['submit'])) {
     $query = "UPDATE subject SET subjectName = '$subjectName' WHERE courseName = '$course'";
     $result = mysqli_query($db_connect, $query);
     
-    if($result) {
-        echo "Subject updated successfully.";
-    } else {
-        echo "Error updating subject: " . mysqli_error($db_connect);
-    }
 }
 ?>
             
