@@ -18,7 +18,11 @@
             <!--CREATES ERROR MESSAGE -->
             <?php if (isset($_GET['error'])) { ?>
                 <p class="error">
-                    <?php echo $_GET['error']; ?>
+                    <?php 
+                    $newError = str_replace("_", " ", $_GET['error']);
+                    echo $newError;
+                    
+                    ?>
                 </p>
             <?php } ?>
             <!--CREATES USERNAME AND PASSWORD INPUTS -->
@@ -34,7 +38,7 @@
             <!--CREATES LINK TO REGISTER PAGE -->
             <div class="registerStudent">
                 <p>Don't have an account?
-                    <a href="./pages/registration.php">Register</a>
+                    <a href="register">Register</a>
                 </p>
             </div>
         </form>
