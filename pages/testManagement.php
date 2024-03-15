@@ -19,45 +19,8 @@
         <?php include_once("includes/navbar.php"); ?>
         <div class="container mt-5">
             <!-- Table to display list of tests to manage -->
-            <table id="modalTable" class="table table-bordered table-striped table-card">
-                <thead>
-                    <tr>
-                        <th>ID</th>
-                        <th>Test Name</th>
-                        <?php if ($_SESSION['accessLevel'] == '3') {echo '<th>Course</th>';}?> 
-                        <th>Subject</th>
-                        <th>Amount of Questions</th>
-                        <th>Assign</th>
-                        <th>Edit</th>
-                        <th>Delete</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <?php
-                    include_once("includes/_connect.php");
-
-                    //Get query for table
-                    if ($_SESSION['accessLevel'] == '3') { //If admin account
-                        $query = "SELECT `test`.*, `subject`.`subjectName`, `subject`.`courseID`, `course`.`courseName` FROM `test` LEFT JOIN `subject` ON `test`.`subjectID` = `subject`.`subjectID` LEFT JOIN `course` ON `subject`.`courseID` = `course`.`courseID`" ; 
-                    } else { //If teacher account
-                        $query = "SELECT `test`.*, `subject`.`subjectName`, `subject`.`courseID` FROM `test` LEFT JOIN `subject` ON `test`.`subjectID` = `subject`.`subjectID` WHERE `subject`.`courseID` = 1" ; //. $_SESSION["courseID"]
-                    }
-
-                    $run = mysqli_query($db_connect, $query);
-                    while ($result = mysqli_fetch_assoc($run)) {
-                        echo "<tr>";
-                        echo "<td>" . $result["testID"] . "</td>";
-                        echo "<td>" . $result["testName"] . "</td>";
-                        if ($_SESSION['accessLevel'] == '3') {echo "<td>" . $result["courseName"] . "</td>";}
-                        echo "<td>" . $result["subjectName"] . "</td>";
-                        echo "<td>" . $result["questionAmount"] . "</td>"; 
-                        echo "<td> <button type='button' class='btn btn-success' data-bs-tid='" . $result["testID"] . "' data-bs-cid='" . $result["courseID"] . "'data-bs-toggle='modal' data-bs-target='#assignModal'>Assign</button></td>";
-                        echo "<td> <button type='button' class='btn btn-primary' data-bs-tid='" . $result["testID"] . "'data-bs-toggle='modal' data-bs-target='#editModal'>Edit</button></td>";
-                        echo "<td> <button type='button' class='btn btn-danger'  data-bs-tid='" . $result["testID"] . "'data-bs-toggle='modal' data-bs-target='#deleteModal'>Remove</button> </td>";
-                        echo "</tr>";
-                    }
-                    ?>
-                </tbody>
+            <table id="testManagementTable" class="table table-bordered table-striped table-card">
+                <?php include("includes/testManagementTable.php"); ?>
             </table>
 
             <!-- Button to create new tests -->
@@ -94,9 +57,9 @@
                                     
                                     if ($_SESSION['accessLevel'] == '3') { //If admin account
                                         $query = "SELECT `subject`.*, `course`.`courseName` FROM `subject` LEFT JOIN `course` ON `subject`.`courseID` = `course`.`courseID` ORDER BY `courseName`, `subjectName`";
-                                        $run = mysqli_query($db_connect, $query);
+                                        $run = $db_connect->query($query);
                                         $preValue = '0';
-                                        while ($result = mysqli_fetch_assoc($run)) {
+                                        while ($result = $run->fetch_assoc()) {
                                             if($preValue == 0) { //If the first subject
                                                 echo "<optgroup label=" . $result["courseName"] . ">"; 
                                                 echo "<option value='" . $result["subjectID"] . "'>" . $result["subjectName"] . "</option>"; 
@@ -113,8 +76,8 @@
                                         echo "</optgroup>";
                                     } else { //If teacher account
                                         $query = "SELECT `subject`.* FROM `subject` WHERE `subject`.`courseID` = '1'"; //Replace 1 with session value for courses once login has been implemented
-                                        $run = mysqli_query($db_connect, $query);
-                                        while ($result = mysqli_fetch_assoc($run)) {
+                                        $run = $db_connect->query($query);
+                                        while ($result = $run->fetch_assoc()) {
                                             echo "<option value='" . $result["subjectID"] . "'>" . $result["subjectName"] . "</option>";
                                         }
                                     }
@@ -159,9 +122,9 @@
                                     <?php
                                     if ($_SESSION['accessLevel'] == '3') {
                                         $query = "SELECT `subject`.*, `course`.`courseName` FROM `subject` LEFT JOIN `course` ON `subject`.`courseID` = `course`.`courseID` ORDER BY `courseName`, `subjectName`";
-                                        $run = mysqli_query($db_connect, $query);
+                                        $run = $db_connect->query($query);
                                         $preValue = '0';
-                                        while ($result = mysqli_fetch_assoc($run)) {
+                                        while ($result = $run->fetch_assoc()) {
                                             if($preValue == 0) {
                                                 echo "<optgroup label=" . $result["courseName"] . ">";
                                                 echo "<option value='" . $result["subjectID"] . "'>" . $result["subjectName"] . "</option>";
@@ -178,8 +141,8 @@
                                         echo "</optgroup>";
                                     } else {
                                         $query = "SELECT `subject`.* FROM `subject` WHERE `subject`.`courseID` = '1'"; //. $_SESSION["courseID"]
-                                        $run = mysqli_query($db_connect, $query);
-                                        while ($result = mysqli_fetch_assoc($run)) {
+                                        $run = $db_connect->query($query);
+                                        while ($result = $run->fetch_assoc()) {
                                             echo "<option value='" . $result["subjectID"] . "'>" . $result["subjectName"] . "</option>";
                                         }
                                     }
@@ -257,57 +220,29 @@
     </main>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
     <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
+    <script src="includes/_functions.js"></script>
     <script>
         //AJAX call to create a test
-        $('#testForm').submit(function (e) {
-            e.preventDefault();
-            $.ajax({
-                url: "./createTest.php",
-                method: "POST",
-                data: $('#testForm').serialize(),
-                success: function(data) {
-                    location.reload();
-                }
-            })
-        });
+        ajaxFormSubmit('#testForm', "./functionality/createTest.php");
 
         //AJAX call to edit a test
-        $('#editForm').submit(function (e) {
-            e.preventDefault();
-            $.ajax({
-                url: "./editTest.php",
-                method: "POST",
-                data: $('#editForm').serialize(),
-                success: function(data) {
-                    location.reload();
-                }
-            })
-        });
+        ajaxFormSubmit('#editForm', "./functionality/editTest.php");
 
         //AJAX call to assign a class a test
-        $('#assignForm').submit(function (e) {
-            e.preventDefault();
-            $.ajax({
-                url: "./assignTest.php",
-                method: "POST",
-                data: $('#assignForm').serialize(),
-                success: function(data) {
-                    alert(data); //Could use .html to make an in website alert with proper styling
-                }
-            })
-        });
+        ajaxFormSubmit('#assignForm', "./functionality/assignTest.php");
 
         //AJAX call to delete a test
-        $('#deleteForm').submit(function (e) {
-            e.preventDefault();
-            $.ajax({
-                url: "./deleteTest.php",
-                method: "POST",
-                data: $('#deleteForm').serialize(),
+        ajaxFormSubmit('#deleteForm', "./functionality/deleteTest.php");
+
+        //Updates test whenever an AJAX call is complete
+        $(document).on("ajaxSuccess", function() {
+           $.ajax({
+                url: './includes/testManagementTable.php',
+                global: false,
                 success: function(data) {
-                    location.reload();
+                    $('#testManagementTable').html(data);
                 }
-            })
+           }); 
         });
 
         //Edit Modal JS
@@ -343,6 +278,7 @@
             $.ajax({
                 url: "./includes/assignModal.php",
                 method: "POST",
+                global: false,
                 data: {courseID:courseID},
                 success: function(data)
                 {

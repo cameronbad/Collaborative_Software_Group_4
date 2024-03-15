@@ -6,7 +6,7 @@ require_once("./includes/_connect.php");
 
 $query = "SELECT SUM(`questionTotal`) AS totalQuestions, SUM(`questionCorrect`) AS totalCorrect, SUM(`points`) AS totalPoints FROM `result` WHERE `completionDate` IS NOT NULL AND `result`.`userID` = " . $_SESSION["userID"];
 
-$userResult = mysqli_fetch_assoc(mysqli_execute_query($db_connect, $query));
+$userResult = $db_connect->execute_query($query)->fetch_assoc();
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -46,8 +46,8 @@ $userResult = mysqli_fetch_assoc(mysqli_execute_query($db_connect, $query));
 
                 $query = "SELECT `result`.*, `test`.*, `subject`.`subjectName` FROM `result` LEFT JOIN `test` ON `result`.`testID` = `test`.`testID` LEFT JOIN `subject` ON `test`.`subjectID` = `subject`.`subjectID` WHERE `result`.`userID` = " . $_SESSION["userID"];
 
-                $run = mysqli_query($db_connect, $query);
-                while ($result = mysqli_fetch_assoc($run)) {
+                $run = $db_connect->query($query);
+                while ($result = $run->fetch_assoc()) {
                     echo "<div class='col'>";
                     echo "<div class='card test-card'>";
                     echo "<div class='card-header text-center'>" . $result["subjectName"] . "</div>";
@@ -66,7 +66,7 @@ $userResult = mysqli_fetch_assoc(mysqli_execute_query($db_connect, $query));
                     echo "<div class='card-footer text-center'>"; //Completion date / Not started / In progress (colour coding?)
                     if (!is_null($result['completionDate'])) {echo $result['completionDate'];} elseif (is_null($result['questionCurrent'])) {echo "Incomplete";} else {echo "In progress";}
                     echo "</div>";
-                    echo "<a href='#'></a>"; //Add routing to correct testing page when said page is created.
+                    echo "<a href='test_" . $result['resultID'] . "'></a>"; //Add routing to correct testing page when said page is created.
                     echo "</div>";
                     echo "</div>";
                 }
@@ -86,8 +86,8 @@ $userResult = mysqli_fetch_assoc(mysqli_execute_query($db_connect, $query));
         $name = [];
         $avg = [];
 
-        $run = mysqli_query($db_connect, $query);
-        while ($result = mysqli_fetch_assoc($run)) {
+        $run = $db_connect->query($query);
+        while ($result = $run->fetch_assoc()) {
             $name[] = $result['testName'];
             $avg[] = $result['questionCorrect'] / $result['questionTotal'];
         }
