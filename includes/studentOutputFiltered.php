@@ -6,9 +6,11 @@ if(isset($_POST['studentFilters'])){ //Checks if its a filter or a onload up
     $filter = $db_connect->real_escape_string($_POST['studentFilters']);
 }
 else{
-    $filter = $db_connect->real_escape_string($_SESSION['courseID']);
+    require_once("functionality/getSubjectIDFunction"); //Calls function which grabs the subject ID
+    $filter = getSubjectID();
 }
 
+while($db_connect->next_result()){;} //Fixes Unsynch Error
 
 $stmt = $db_connect->prepare("CALL allStudents(?)"); //Prepares the statement
 $stmt->bind_param("i", $filter); //Binds the parameter

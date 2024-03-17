@@ -44,7 +44,7 @@ if (isset($_POST['userInput']) && isset($_POST['passInput'])) {
 
         // Bind parameters and execute the statement
         $stmt->bind_param("s", $uname);
-        $stmt-> execute();
+        $stmt->execute();
         $result = $stmt->get_result();
 
         if (mysqli_num_rows($result) === 1) {
@@ -54,6 +54,7 @@ if (isset($_POST['userInput']) && isset($_POST['passInput'])) {
                 $_SESSION['firstName'] = $row['firstName'];
                 $_SESSION['userID'] = $row['userID'];
                 $_SESSION['courseID'] = $row['courseID'];
+                $_SESSION['email'] = $row['email'];
                 $_SESSION['accessLevel'] = $row['accessLevel'];
                 header("Location: ../testDashboard");
                 exit();

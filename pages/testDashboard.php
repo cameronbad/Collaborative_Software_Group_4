@@ -7,6 +7,7 @@ require_once("./includes/_connect.php");
 $query = "SELECT SUM(`questionTotal`) AS totalQuestions, SUM(`questionCorrect`) AS totalCorrect, SUM(`points`) AS totalPoints FROM `result` WHERE `completionDate` IS NOT NULL AND `result`.`userID` = " . $_SESSION["userID"];
 
 $userResult = $db_connect->execute_query($query)->fetch_assoc();
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
