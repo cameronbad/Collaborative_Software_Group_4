@@ -1,14 +1,18 @@
 <?php
 
-require_once ("_connect.php");
+// Hides strict standard output
+error_reporting(error_reporting() & ~E_STRICT & ~E_DEPRECATED); 
 
-while($db_connect->next_result){;} //Fixes Unsynch Error
+require_once("_connect.php");
+
+while($db_connect->next_result()){;} //Fixes Unsynch Error
 
 if(isset($_POST['classFilters'])){ //Checks if its a filter or a onload up
     $filter = $db_connect->real_escape_string($_POST['classFilters']);
 }
 else{
-    $filter = $db_connect->real_escape_string($_SESSION['courseID']);
+    require_once("functionality/getSubjectIDFunction"); //Calls function which grabs the subject ID
+    $filter = getSubjectID();
 }
 
 $stmt = $db_connect->prepare("CALL topScoringStudents(?)"); //Prepares the statement
@@ -21,7 +25,7 @@ $stmt->bind_result($username, $resultTotal); //Stores the result into a variable
 
 $Place = 0; //Stores the placement number
 
-$BarNum = 100; //Used to calcualte the progress bar width
+$BarNum = 100; //Used to calculate the progress bar width
 $BarNumDiff = 0;
 
 while($stmt->fetch()){ //Loops through the query result
@@ -44,7 +48,7 @@ while($stmt->fetch()){ //Loops through the query result
 
     echo "</tr>";
 
-    $BarNumDiff =  $resultTotal; //Stores previouse score
+    $BarNumDiff =  $resultTotal; //Stores previous score
 }
 
 $stmt->close(); //Closes the stmt
