@@ -1,13 +1,13 @@
 <?php
 
 require_once("_connect.php");
+require_once("_functions.php"); 
 
 if(isset($_POST['studentFilters'])){ //Checks if its a filter or a onload up
     $filter = $db_connect->real_escape_string($_POST['studentFilters']);
 }
 else{
-    require_once("functionality/getSubjectIDFunction"); //Calls function which grabs the subject ID
-    $filter = getSubjectID();
+    $filter = getSubjectID(); //Calls function which grabs the subject ID
 }
 
 while($db_connect->next_result()){;} //Fixes Unsynch Error
