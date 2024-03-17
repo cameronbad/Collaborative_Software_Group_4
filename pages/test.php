@@ -115,7 +115,6 @@ $_SESSION['testTotal'] = $test['questionTotal'];
                 data: {questionID: prevQuestions[prevQuestions.length - 1], resultID: <?= $resultID ?>, choice: choice}, 
                 success: function(data) { 
                     //Marks answers
-                    alert(data);
                     checkQuestion(choice, data);
 
                     //Checks if questions are done

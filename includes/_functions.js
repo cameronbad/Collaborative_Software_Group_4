@@ -21,11 +21,25 @@ async function makeQuestion(doneQuestions, subjectID, resultID) {
 
     let promise = new Promise(function(resolve) {
         //Get question ID
-        function getID() {
+        function getID(doneQuestions) {
             $.ajax({
                 url: "./functionality/questionData.php",
                 method: "GET",
                 data: {prevQuestions: doneQuestions, subjectID: subjectID, resultID: resultID},
+                success: function(data) {
+                    const result = data.split("|");
+                    questionID = result[0];
+                    position = result[1];
+                    appendTest();
+                }
+            });
+        }
+        //Get question ID
+        function getID() {
+            $.ajax({
+                url: "./functionality/questionData.php",
+                method: "GET",
+                data: {subjectID: subjectID, resultID: resultID},
                 success: function(data) {
                     const result = data.split("|");
                     questionID = result[0];
@@ -60,7 +74,12 @@ async function makeQuestion(doneQuestions, subjectID, resultID) {
             })
         }
  
-        getID();
+        if(doneQuestions.length == 0) {
+            getID();
+        } else {
+            getID(doneQuestions);
+        }
+
     });
 
     var ID = await promise;
