@@ -8,22 +8,22 @@ if (!isset($_POST['tSubjectSelect']) ||
     die("Please fill out all fields");
 }
 
-require_once("includes/_connect.php");
+require_once("../includes/_connect.php");
 
 //Declare php variable's from post, creates a legal SQL string to avoid issues.
-$subject = mysqli_real_escape_string($db_connect, $_POST['tSubjectSelect']);
-$name = mysqli_real_escape_string($db_connect, $_POST['tName']);
-$amount = mysqli_real_escape_string($db_connect, $_POST['tAmount']);
+$subject = $db_connect->real_escape_string($_POST['tSubjectSelect']);
+$name = $db_connect->real_escape_string($_POST['tName']);
+$amount = $db_connect->real_escape_string($_POST['tAmount']);
 
 //Prepare SQL query
 $query = "INSERT INTO `test` (`testID`, `subjectID`, `testName`, `questionAmount`) VALUES (NULL, ?, ?, ?)";
-$stmt = mysqli_prepare($db_connect, $query);
+$stmt = $db_connect->prepare($query);
 
 //Bind parameters
-mysqli_stmt_bind_param($stmt, "isi", $subject, $name, $amount);
+$stmt->bind_param("isi", $subject, $name, $amount);
 
-if (mysqli_stmt_execute($stmt))
+if ($stmt->execute())
     echo "Test created succesfully";
 else
-    echo "Error: " . mysqli_error($db_connect);
+    echo "Error: " . $db_connect->error();
 ?>

@@ -27,8 +27,9 @@ $route->Route(['get'], '/testDashboard', "pages/testDashboard.php");
 
 $route->Route(['get'], '/testManagement', "pages/testManagement.php");
 
-//Includes
+$route->Route(['get'], '/test_{resultID}', "pages/test.php");
 
+//Includes
 $route->Route(['get'], '/disableAccount/{id}', "functionality/disableAccount.php");
 
 $route->Route(['get'], '/approveAccount/{id}', "functionality/approveAccount.php");

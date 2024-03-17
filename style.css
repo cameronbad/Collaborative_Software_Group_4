@@ -658,3 +658,57 @@ th:last-child {
 }
 
 /* Test-card  END*/
+
+/* Test page */
+
+.test-body {
+  overflow: hidden;
+}
+
+.test-container {
+  /* Creates a full screen scrolling effect*/
+  height: 100vh;
+  scroll-snap-type: y mandatory;
+  overflow-y: scroll;
+
+  /* Hides the scrollbar while still allowing functionality */
+  -ms-overflow-style: none;  /* Hide scrollbar for IE and Edge */
+  scrollbar-width: none;  /* Hide scrollbar for Firefox */
+}
+.test-container::-webkit-scrollbar {
+  display: none; /* Hide scrollbar for Chrome, Safari and Opera */
+}
+
+.test-box {
+  scroll-snap-align: start;
+  height: 100vh;
+  width: 100vw;
+}
+
+.test-bottom {
+  background-color: #acd6de;
+  padding: 0;
+}
+
+.test-bottom div:first-child div:first-child {
+  background-color: #ABBADE;
+}
+.test-bottom div:last-child div:last-child {
+  background-color: #ABBADE;
+}
+
+.test-bottom-svg {
+  width: 30px;
+  height: 56px;
+  fill: #ABBADE;
+}
+
+.question-done .answer-correct {
+  background-color: green;
+  border-color: green;
+}
+.question-done .answer-wrong {
+  background-color: red;
+  border-color: red;
+}
+/* Test page END */
