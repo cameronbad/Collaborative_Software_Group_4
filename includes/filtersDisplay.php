@@ -8,7 +8,7 @@
     $preValue = '0';
     
     while($result = $run->fetch_assoc()){ //Loops through results and matches the subjects with the courses
-        if ($result['courseID'] == $_SESSION['courseID'] || $_SESSION['accessLevel'] == '3') { // add this after session is fixed $_SESSION['courseID'] 
+        if ($result['courseID'] == $_SESSION['courseID'] || $_SESSION['accessLevel'] == '3') {
             if($preValue == 0) { //If the first subject
                 echo "<optgroup label=" . $result["courseName"] . ">"; 
                 echo "<option value='" . $result["subjectID"] . "'>" . $result["subjectName"] . "</option>"; 
