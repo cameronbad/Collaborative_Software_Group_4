@@ -12,7 +12,7 @@ if(isset($_POST['classFilters'])){ //Checks if its a filter or a onload up
     $filter = $db_connect->real_escape_string($_POST['classFilters']);
 }
 else{
-    $filter = getSubjectID(); //Calls function which grabs the subject ID
+    $filter = getSubjectID($db_connect); //Calls function which grabs the subject ID
 }
 
 $stmt = $db_connect->prepare("CALL topScoringStudents(?)"); //Prepares the statement
