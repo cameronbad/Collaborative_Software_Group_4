@@ -61,9 +61,9 @@ if (isset($_POST['userInput']) && isset($_POST['passInput'])) {
                 //Gets the current date and time
                 $date = date('Y-m-d H:i:s');
                 //Inserts the date and time into the database
-                $SQL = "UPDATE `user` SET `lastLogin` = $date WHERE `user`.`username` = ?";
+                $SQL = "UPDATE `user` SET `lastLogin` = ? WHERE `username` = ?";
                 $stmt = $db_connect->prepare($SQL);
-                $stmt->bind_param("s", $uname);
+                $stmt->bind_param("ss", $date, $uname);
                 $stmt->execute();
                 header("Location: ../testDashboard");
                 exit();
