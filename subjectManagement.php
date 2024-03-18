@@ -59,7 +59,7 @@ https://cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css
       <?php
 
         $courseID = $_POST['DcourseID'];
-        $query = "DELETE FROM subject WHERE `subject`.`subjectID` = $courseID";
+        $query = "DELETE FROM 'subject' WHERE `subject`.`subjectID` = $courseID";
         echo $run;
         $run = mysqli_query($db_connect, $query);
       }
@@ -84,60 +84,32 @@ https://cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css
 
       /////////////////////////////////EDIT/////////////////////////////////
 
-      if (isset($_POST["addSubject"]) && isset($_POST["addCourse"])) {
-        $addCourse = $_POST["addSubject"];
-        $addSubject = $_POST["addCourse"];
+      if (isset($_POST["subject-id"]) && isset($_POST["subject-name"]) && isset($_POST["courseSubject"])) {
+        $subjectName = $_POST["subject-name"];
+        $subjectID = $_POST["subject-id"];
+        $select = $_POST["courseSubject"];
 
-        $query = "UPDATE `subject` SET `subjectName` = '$addSubject',`courseID` = `$courseName` WHERE `courseID` = '$addCourse';";
+        $query = "UPDATE `subject` SET `subjectName` = '$subjectName',`courseID` = `$select` WHERE `subjectID` = '$subjectID';";
         // echo $query;
         $run = mysqli_query($db_connect, $query);
 
         if ($run) {
         ?>
           <div class="alert alert-success" role="alert">
-            Course <?php echo $addCourse ?> has been updated.
+            Subject <?php echo $subjectName ?> has been updated.
           </div>
         <?php
         } else {
         ?>
           <div class="alert alert-danger" role="alert">
-            Failed to update <?php echo $addCourse ?>.
+            Failed to update <?php echo $subjectName ?>.
           </div>
       <?php
         }
       }
 
 
-      ////////////////////////////////END OF EDIT////////////////////////////
-
-
-               /////////////////////////////////EDIT/////////////////////////////////
-
-      if (isset($_POST["addSubject"]) && isset($_POST["addCourse"])) {
-        $addCourse = $_POST["addSubject"]; 
-        $addSubject = $_POST["addCourse"];
-    
-        $query = "UPDATE `subject` SET `subjectName` = '$addSubject' WHERE `courseID` = '$addCourse';";
-      // echo $query;
-        $run = mysqli_query($db_connect, $query);
-        
-        if ($run) {
-      ?>
-        <div class="alert alert-success" role="alert">
-            Course <?php echo $addCourse ?> has been updated.
-        </div>
-      <?php
-        } else {
-      ?>
-        <div class="alert alert-danger" role="alert">
-            Failed to update <?php echo $addCourse ?>.
-        </div>
-      <?php
-        }
-    }
-
-
-       ////////////////////////////////END OF EDIT////////////////////////////
+      ////////////////////////////////END OF EDIT///////////////////////////
 
 
       //SELECT SUBECT
