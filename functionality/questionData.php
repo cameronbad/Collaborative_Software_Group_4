@@ -3,8 +3,7 @@
 
 require_once("../includes/_connect.php");
 
-//Takes ID of previously answered questions, makes a list of all questions which havent been generated and returns a random one
-$prevQuestions = $_GET['prevQuestions'];
+
 $subjectID = $_GET['subjectID'];
 $resultID = $_GET['resultID'];
 
@@ -24,16 +23,20 @@ while ($result = $run->fetch_assoc()) {
     $questions[] = $result['questionID'];
 }
 
-foreach ($prevQuestions as $prev) {     
-    $key = array_search($prev, $questions);
+//Takes ID of previously answered questions, makes a list of all questions which havent been generated and returns a random one
+if (isset($_GET['prevQuestions'])) {
+    $prevQuestions = $_GET['prevQuestions'];
+    foreach ($prevQuestions as $prev) {     
+        $key = array_search($prev, $questions);
+        
+        //Error check
+        if ($key === false) {         
+            //array_search failed due to invalid ID, skip
+            continue;
+        }
     
-    //Error check
-    if ($key === false) {         
-        //array_search failed due to invalid ID, skip
-        continue;
+        unset($questions[$key]); //Removes index of already made answers from the question id list, this does not rearrange the indexes, so the index will be missing
     }
-
-    unset($questions[$key]); //Removes index of already made answers from the question id list, this does not rearrange the indexes, so the index will be missing
 }
 
 //Error check

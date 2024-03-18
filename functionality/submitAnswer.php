@@ -17,6 +17,7 @@ $query = "CALL getPosition(?)";
 $run = $db_connect->execute_query($query, [$resultID])->fetch_assoc();
 
 if($run['position'] >= $_SESSION['testTotal']) {
+    error_log("Question position is invalid for this test.");
     die(false);
 }
 
@@ -35,10 +36,11 @@ $query = "CALL getCorrectAnswer(?)";
 $answer = $db_connect->execute_query($query, [$questionID])->fetch_assoc();
 
 
-if(isset($answer)) {
-    die($answer['correctAnswer']);
+if($answer) {
+    die(strval($answer['correctAnswer']));
 }
 else {
+    error_log("Answer submitted but failed to get correct answer from database.");
     die(false);
 }
 

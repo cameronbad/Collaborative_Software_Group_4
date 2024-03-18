@@ -5,17 +5,19 @@
 require_once("./includes/_connect.php");
 require_once("./includes/_functions.php");
 
-$query = "SELECT `test`.`testName`, `test`.`subjectID`, `subject`.`subjectName`, `result`.`questionTotal`, `result`.`questionCurrent` FROM `result` LEFT JOIN `test` ON `result`.`testID` = `test`.`testID` LEFT JOIN `subject` ON `test`.`subjectID` = `subject`.`subjectID` WHERE `result`.`resultID` = " . $_GET['resultID'];
-$test = $db_connect->execute_query($query)->fetch_assoc();
+$resultID = $_GET['resultID'];
 
-$query = "SELECT `answer`.`chosenAnswer`, `answer`.`questionPosition`, `answer`.`questionID`, `question`.`correctAnswer` FROM `answer` LEFT JOIN `question` ON `answer`.`questionID` = `question`.`questionID` WHERE `resultID` = " . $_GET['resultID'] . " ORDER BY `answer`.`questionPosition` ASC"; 
+$query = "CALL getResultPage(?)";
+$test = $db_connect->execute_query($query, [$resultID])->fetch_assoc();
+
+$query = "CALL getPreviousQuestions(?)";
 
 //Array of all existing answers
 $prevQuestions = [];
 $prevChoice = [];
 $prevCorrect = [];
 
-$run = $db_connect->query($query);
+$run = $db_connect->execute_query($query, [$resultID]);
 while ($result = $run->fetch_assoc()) {
     $prevQuestions[] = $result['questionID'];
     $prevChoice[] = $result['chosenAnswer'];
@@ -75,7 +77,7 @@ $_SESSION['testTotal'] = $test['questionTotal'];
 
         if (prevQuestions.length === 0) {
             //Generates a new question
-            makeQuestion(prevQuestions, <?= $test['subjectID'] ?>, <?= $_GET['resultID'] ?>).then(
+            makeQuestion(prevQuestions, <?= $test['subjectID'] ?>, <?= $resultID ?>).then(
                 function(value) {
                     if(value){
                         prevQuestions.push(value);
@@ -110,7 +112,7 @@ $_SESSION['testTotal'] = $test['questionTotal'];
             $.ajax({
                 url: "./functionality/submitAnswer.php",
                 method: "POST",
-                data: {questionID: prevQuestions[prevQuestions.length - 1], resultID: <?= $_GET['resultID'] ?>, choice: choice}, 
+                data: {questionID: prevQuestions[prevQuestions.length - 1], resultID: <?= $resultID ?>, choice: choice}, 
                 success: function(data) { 
                     //Marks answers
                     checkQuestion(choice, data);
@@ -128,7 +130,7 @@ $_SESSION['testTotal'] = $test['questionTotal'];
                         });
                     } else {
                         //Generates a new question
-                        makeQuestion(prevQuestions, <?= $test['subjectID'] ?>, <?= $_GET['resultID'] ?>).then(
+                        makeQuestion(prevQuestions, <?= $test['subjectID'] ?>, <?= $resultID ?>).then(
                             function(value) {
                                 if(value){
                                     prevQuestions.push(value);

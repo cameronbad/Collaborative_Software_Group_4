@@ -18,7 +18,7 @@
         <form class="row" method="POST" id="studentFilterBox">
             <div class="col-10">
                 <select class="form-select col" id="studentFilters" name="studentFilters">
-                    <?php include_once("includes/studentFilterDisplay.php") ?> <!-- Displays subjects for filters -->
+                    <?php include_once("includes/filtersDisplay.php") ?> <!-- Displays subjects for filters -->
                 </select>
             </div>
             <div class="col-2">

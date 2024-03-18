@@ -17,17 +17,9 @@ $amount = $db_connect->real_escape_string($_POST['eAmount']);
 $id = $db_connect->real_escape_string($_POST['eTestID']);
 
 //Prepare SQL query
-$query = "UPDATE `test` SET 
-    `subjectID` = ?,
-    `testName` = ?,
-    `questionAmount` = ?
-    WHERE `test`.`testID` = ?";
-$stmt = $db_connect->prepare($query);
+$query = "CALL editTest(?, ?, ?, ?)";
 
-//Bind parameters
-$stmt->bind_param("isii", $subject, $name, $amount, $id);
-
-if ($stmt->execute())
+if ($db_connect->execute_query($query, [$subject, $name, $amount, $id]))
     echo "Test updated succesfully";
 else
     echo "Error: " . $db_connect->error();

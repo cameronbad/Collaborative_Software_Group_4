@@ -52,37 +52,7 @@
                             <div class="form-floating mb-3">
                                 <select id="tSubjectSelect" name="tSubjectSelect" class="form-select">
                                     <option selected></option>
-                                    <?php
-                                    include_once("includes/_connect.php");                          
-                                    
-                                    if ($_SESSION['accessLevel'] == '3') { //If admin account
-                                        $query = "SELECT `subject`.*, `course`.`courseName` FROM `subject` LEFT JOIN `course` ON `subject`.`courseID` = `course`.`courseID` ORDER BY `courseName`, `subjectName`";
-                                        $run = $db_connect->query($query);
-                                        $preValue = '0';
-                                        while ($result = $run->fetch_assoc()) {
-                                            if($preValue == 0) { //If the first subject
-                                                echo "<optgroup label=" . $result["courseName"] . ">"; 
-                                                echo "<option value='" . $result["subjectID"] . "'>" . $result["subjectName"] . "</option>"; 
-                                                $preValue = $result["courseID"]; 
-                                            } else if ($preValue != $result["courseID"]) { //If the subject is a different course than the previous subject
-                                                echo "</optgroup>"; 
-                                                echo "<optgroup label=" . $result["courseName"] . ">"; 
-                                                echo "<option value='" . $result["subjectID"] . "'>" . $result["subjectName"] . "</option>"; 
-                                                $preValue = $result["courseID"]; 
-                                            } else { //If the subject is the same course as the previous subject
-                                                echo "<option value='" . $result["subjectID"] . "'>" . $result["subjectName"] . "</option>"; 
-                                            }
-                                        }
-                                        echo "</optgroup>";
-                                    } else { //If teacher account
-                                        $query = "SELECT `subject`.* FROM `subject` WHERE `subject`.`courseID` = '1'"; //Replace 1 with session value for courses once login has been implemented
-                                        $run = $db_connect->query($query);
-                                        while ($result = $run->fetch_assoc()) {
-                                            echo "<option value='" . $result["subjectID"] . "'>" . $result["subjectName"] . "</option>";
-                                        }
-                                    }
-
-                                    ?>
+                                    <?php include_once("includes/filtersDisplay.php"); ?>
                                 </select>
                                 <label for="tSubjectSelect" class="from-label">Subject</label>
                             </div>
@@ -119,34 +89,7 @@
                             <div class="form-floating mb-3">
                                 <select id="eSubjectSelect" name="eSubjectSelect" class="form-select">
                                     <option selected></option>
-                                    <?php
-                                    if ($_SESSION['accessLevel'] == '3') {
-                                        $query = "SELECT `subject`.*, `course`.`courseName` FROM `subject` LEFT JOIN `course` ON `subject`.`courseID` = `course`.`courseID` ORDER BY `courseName`, `subjectName`";
-                                        $run = $db_connect->query($query);
-                                        $preValue = '0';
-                                        while ($result = $run->fetch_assoc()) {
-                                            if($preValue == 0) {
-                                                echo "<optgroup label=" . $result["courseName"] . ">";
-                                                echo "<option value='" . $result["subjectID"] . "'>" . $result["subjectName"] . "</option>";
-                                                $preValue = $result["courseID"];
-                                            } else if ($preValue != $result["courseID"]) {
-                                                echo "</optgroup>";
-                                                echo "<optgroup label=" . $result["courseName"] . ">";
-                                                echo "<option value='" . $result["subjectID"] . "'>" . $result["subjectName"] . "</option>";
-                                                $preValue = $result["courseID"];
-                                            } else {
-                                                echo "<option value='" . $result["subjectID"] . "'>" . $result["subjectName"] . "</option>";
-                                            }
-                                        }
-                                        echo "</optgroup>";
-                                    } else {
-                                        $query = "SELECT `subject`.* FROM `subject` WHERE `subject`.`courseID` = '1'"; //. $_SESSION["courseID"]
-                                        $run = $db_connect->query($query);
-                                        while ($result = $run->fetch_assoc()) {
-                                            echo "<option value='" . $result["subjectID"] . "'>" . $result["subjectName"] . "</option>";
-                                        }
-                                    }
-                                    ?>
+                                    <?php include_once("includes/filtersDisplay.php"); ?>
                                 </select>
                                 <label for="eSubjectSelect" class="from-label">Subject</label>
                             </div>

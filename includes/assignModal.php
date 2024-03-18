@@ -2,11 +2,11 @@
     <option selected></option>
     <?php
     include_once("./_connect.php");
-    $query = "SELECT `class`.* FROM `class` WHERE `class`.`courseID` = " . $_POST["courseID"];
-    $run = mysqli_query($db_connect, $query);
+    $query = "CALL getClasses(?)";
+    $run = $db_connect->execute_query($query, [$_POST["courseID"]]);
 
-    while ($result = mysqli_fetch_assoc($run)) {
-        echo "<option value='" . $result["classID"] . "'>" . $result["className"] . "</option>";
+    while ($result = $run->fetch_assoc()) {
+        echo "<option value='" . $result["classID"] . "'>" . $result["className"] . " - " . $result["classCount"] . " students " . "</option>";
     }                 
     ?>
 </select>
