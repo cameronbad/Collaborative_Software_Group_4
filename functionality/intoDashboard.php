@@ -65,8 +65,16 @@ if (isset($_POST['userInput']) && isset($_POST['passInput'])) {
                 $stmt = $db_connect->prepare($SQL);
                 $stmt->bind_param("ss", $date, $uname);
                 $stmt->execute();
-                header("Location: ../testDashboard");
-                exit();
+                if ($_SESSION['accessLevel'] == 1) {
+                    header("Location: ../testDashboard");
+                    exit();
+                } else if ($_SESSION['accessLevel'] == 2) {
+                    header("Location: ../studentDisplay");
+                    exit();
+                } else if ($_SESSION['accessLevel'] == 3) {
+                    header("Location: ../adminDashboard");
+                    exit();
+                }
             } else {
                 $_SESSION['loginAttempts']++; // Increment login attempts counter
                 if ($_SESSION['loginAttempts'] >= $maxLoginAttempts) {
