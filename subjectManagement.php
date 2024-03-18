@@ -89,7 +89,7 @@ https://cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css
         $subjectID = $_POST["subject-id"];
         $select = $_POST["courseSubject"];
 
-        $query = "UPDATE `subject` SET `subjectName` = '$subjectName',`courseID` = `$select` WHERE `subjectID` = '$subjectID';";
+        $query = "UPDATE `subject` SET `subjectName` = '$subjectName',`courseID` = '$select' WHERE `subjectID` = '$subjectID';";
         // echo $query;
         $run = mysqli_query($db_connect, $query);
 
