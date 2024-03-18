@@ -49,13 +49,22 @@ if (isset($_POST['userInput']) && isset($_POST['passInput'])) {
 
         if (mysqli_num_rows($result) === 1) {
             $row = mysqli_fetch_assoc($result);
-            if ($row['username'] === $uname && password_verify($pass, $row['password'])) {
+            if ($row['username'] === $uname && password_verify($pass, $row['password']) && $row['accountState'] == 1) {
                 $_SESSION['username'] = $row['username'];
                 $_SESSION['firstName'] = $row['firstName'];
                 $_SESSION['userID'] = $row['userID'];
                 $_SESSION['courseID'] = $row['courseID'];
                 $_SESSION['email'] = $row['email'];
                 $_SESSION['accessLevel'] = $row['accessLevel'];
+                $_SESSION['loginAttempts'] = 0; // Reset login attempts counter
+                unset($_SESSION['blockedTime']); // Remove block time
+                //Gets the current date and time
+                $date = date('Y-m-d H:i:s');
+                //Inserts the date and time into the database
+                $SQL = "UPDATE `user` SET `lastLogin` = $date WHERE `user`.`username` = ?";
+                $stmt = $db_connect->prepare($SQL);
+                $stmt->bind_param("s", $uname);
+                $stmt->execute();
                 header("Location: ../testDashboard");
                 exit();
             } else {
@@ -66,7 +75,7 @@ if (isset($_POST['userInput']) && isset($_POST['passInput'])) {
                     exit();
                 } else {
                     $attemptsLeft = $maxLoginAttempts - $_SESSION['loginAttempts'];
-                    header("Location: ../loginIncorrect_Username_or_Password._$attemptsLeft-attempts_left.");
+                    header("Location: ../loginIncorrect_Username_or_Password_or_your_account_has_been_Disabled._$attemptsLeft-attempts_left.");
                     exit();
                 }
             }
@@ -78,7 +87,7 @@ if (isset($_POST['userInput']) && isset($_POST['passInput'])) {
                 exit();
             } else {
                 $attemptsLeft = $maxLoginAttempts - $_SESSION['loginAttempts'];
-                header("Location: ../loginIncorrect_Username_or_Password._$attemptsLeft-attempts_left.");
+                header("Location: ../loginIncorrect_Username_or_Password_or_your_account_has_been_Disabled._$attemptsLeft-attempts_left.");
                 exit();
             }
         }
