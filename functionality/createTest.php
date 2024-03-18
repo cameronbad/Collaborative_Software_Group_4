@@ -16,13 +16,9 @@ $name = $db_connect->real_escape_string($_POST['tName']);
 $amount = $db_connect->real_escape_string($_POST['tAmount']);
 
 //Prepare SQL query
-$query = "INSERT INTO `test` (`testID`, `subjectID`, `testName`, `questionAmount`) VALUES (NULL, ?, ?, ?)";
-$stmt = $db_connect->prepare($query);
+$query = "CALL createTest(?, ?, ?)";
 
-//Bind parameters
-$stmt->bind_param("isi", $subject, $name, $amount);
-
-if ($stmt->execute())
+if ($db_connect->execute_query($query, [$subject, $name, $amount]))
     echo "Test created succesfully";
 else
     echo "Error: " . $db_connect->error();

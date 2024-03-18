@@ -4,6 +4,7 @@
 error_reporting(error_reporting() & ~E_STRICT & ~E_DEPRECATED); 
 
 require_once("_connect.php");
+require_once("_functions.php");
 
 while($db_connect->next_result()){;} //Fixes Unsynch Error
 
@@ -11,8 +12,7 @@ if(isset($_POST['classFilters'])){ //Checks if its a filter or a onload up
     $filter = $db_connect->real_escape_string($_POST['classFilters']);
 }
 else{
-    require_once("functionality/getSubjectIDFunction"); //Calls function which grabs the subject ID
-    $filter = getSubjectID();
+    $filter = getSubjectID($db_connect); //Calls function which grabs the subject ID
 }
 
 $stmt = $db_connect->prepare("CALL topScoringStudents(?)"); //Prepares the statement
