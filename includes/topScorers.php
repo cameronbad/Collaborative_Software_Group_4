@@ -42,7 +42,7 @@ while($stmt->fetch()){ //Loops through the query result
 
     <td> 
         <div class="progress"><!-- Animated progress bar displaying student's score -->
-            <div class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100" style="width:<?php echo $BarNum ?>%"><?php echo $resultTotal ?></div>
+            <div class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100" style="width:<?php echo $BarNum ?>%"><?php echo round($resultTotal) ?></div>
         </div>
     </td><?php
 
