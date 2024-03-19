@@ -47,8 +47,8 @@ if (isset($_POST['userInput']) && isset($_POST['passInput'])) {
         $stmt->execute();
         $result = $stmt->get_result();
 
-        if (mysqli_num_rows($result) === 1) {
-            $row = mysqli_fetch_assoc($result);
+        if ($result->num_rows === 1) {
+            $row = $result->fetch_assoc();
             if ($row['username'] === $uname && password_verify($pass, $row['password']) && $row['accountState'] == 1) {
                 $_SESSION['username'] = $row['username'];
                 $_SESSION['firstName'] = $row['firstName'];
@@ -83,7 +83,7 @@ if (isset($_POST['userInput']) && isset($_POST['passInput'])) {
                     exit();
                 } else {
                     $attemptsLeft = $maxLoginAttempts - $_SESSION['loginAttempts'];
-                    header("Location: ../loginIncorrect_Username_or_Password_or_your_account_has_been_Disabled._$attemptsLeft-attempts_left.");
+                    header("Location: ../loginIncorrect_Username_or_Password,_or_your_account_has_been_Disabled._$attemptsLeft-attempts_left.");
                     exit();
                 }
             }
@@ -95,7 +95,7 @@ if (isset($_POST['userInput']) && isset($_POST['passInput'])) {
                 exit();
             } else {
                 $attemptsLeft = $maxLoginAttempts - $_SESSION['loginAttempts'];
-                header("Location: ../loginIncorrect_Username_or_Password_or_your_account_has_been_Disabled._$attemptsLeft-attempts_left.");
+                header("Location: ../loginIncorrect_Username_or_Password,_or_your_account_has_been_Disabled._$attemptsLeft-attempts_left.");
                 exit();
             }
         }
