@@ -13,15 +13,15 @@
     <section class="loginSection">
         <!--CREATES FORM AREA -->
         <form class="loginForm" action="./functionality/intoDashboard.php" method="post">
+            <input type="hidden" name="g-recaptcha-response" id="g-recaptcha-response">
             <img class="loginLogo" src="./Images/EduTestLogo.png" alt="logo">
             <h1 class="loginTitle">Login</h1>
             <!--CREATES ERROR MESSAGE -->
-            <?php if (isset($_GET['error'])) { ?>
+            <?php if (isset ($_GET['error'])) { ?>
                 <p class="error">
-                    <?php 
+                    <?php
                     $newError = str_replace("_", " ", $_GET['error']);
                     echo $newError;
-                    
                     ?>
                 </p>
             <?php } ?>
@@ -43,6 +43,7 @@
             </div>
         </form>
     </section>
+    <script src="https://www.google.com/recaptcha/api.js?render=6Lfv350pAAAAAKiom8ecSe4eYyinCRs1mdRWhulw"></script>
 </body>
 
 </html>
