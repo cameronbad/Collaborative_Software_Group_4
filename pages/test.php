@@ -1,3 +1,5 @@
+<?php include_once("functionality/loginCheck.php") ?> <!-- Checks if the user has logged in -->
+
 <?php
 //User auth here / Only user doing the test should be able to access the page.
 @session_start();

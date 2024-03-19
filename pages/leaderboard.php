@@ -1,3 +1,5 @@
+<?php include_once("functionality/loginCheck.php") ?> <!-- Checks if the user has logged in -->
+
 <!DOCTYPE html>
 <html lang="en">
 <head>

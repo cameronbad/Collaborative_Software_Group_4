@@ -1,3 +1,6 @@
+<?php include_once("functionality/loginCheck.php") ?> <!-- Checks if the user has logged in -->
+<?php include_once("functionality/authCheck.php") ?> <!-- Checks if the user is of the correct access level -->
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -82,7 +85,7 @@
                     </div>
                     <div class="col">
                         <?php 
-                            if($accountState == 0 ||  $accountState == NULL){
+                            if($accountState == 0 ||  $accountState == NULL){ // Checks if the current account is approved or disabled
                                 echo "<button type='button' class='btn btn-primary profileBtn' data-bs-toggle='modal' data-bs-target='#approveModal'>Approve</button>"; //Will approve their account
                             }
                             else{
