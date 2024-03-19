@@ -39,13 +39,14 @@ if (isset($_POST['userInput']) && isset($_POST['passInput'])) {
         header("Location: ../loginPassword_is_required");
         exit();
     } else {
-        $sql = "SELECT * FROM `user` WHERE `user`.`username`=?";
+        $sql = "CALL loginUser(?)";
         $stmt = $db_connect->prepare($sql);
 
         // Bind parameters and execute the statement
         $stmt->bind_param("s", $uname);
         $stmt->execute();
         $result = $stmt->get_result();
+        $stmt->close();
 
         if ($result->num_rows === 1) {
             $row = $result->fetch_assoc();
@@ -61,10 +62,11 @@ if (isset($_POST['userInput']) && isset($_POST['passInput'])) {
                 //Gets the current date and time
                 $date = date('Y-m-d H:i:s');
                 //Inserts the date and time into the database
-                $SQL = "UPDATE `user` SET `lastLogin` = ? WHERE `username` = ?";
+                $SQL = "CALL setLastLogin(?, ?)";
                 $stmt = $db_connect->prepare($SQL);
                 $stmt->bind_param("ss", $date, $uname);
                 $stmt->execute();
+                $stmt->close();
                 if ($_SESSION['accessLevel'] == 1) {
                     header("Location: ../testDashboard");
                     exit();
