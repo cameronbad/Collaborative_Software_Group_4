@@ -12,32 +12,48 @@
 <body>
     <div>
         <?php include_once("includes/navbar.php"); ?>
-        <div class="classMain">
-            <div>
-                <button type='button' class='btn btn-info' value='$classID'>Create New</button>
-            </div>
-            <div class="container">
-                <table class="table" id="classTable" name="classTable">
-                    <thead>
-                        <tr>
-                            <th scope="col">Class ID</th>
-                            <th scope="col">Class Name</th>
-                            <th scope="col">Course</th>
-                            <th scope="col"></th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <?php include_once("includes/classesTable.php"); ?>
-                    </tbody>
-                </table>
+        <div class="container">
+            <div class="classMain">
+                <div class="newClassContainer">
+                    <button type='button' class='btn btn-primary newClassBtn' data-bs-toggle="modal" data-bs-target="#newClassModal">Create New</button> <!-- Opens the class creation modal -->
+                </div>
+                <div class="container">
+                    <table class="table" id="classTable" name="classTable"> <!-- Table for class data -->
+                        <thead>
+                            <tr>
+                                <th scope="col">Class ID</th>
+                                <th scope="col">Class Name</th>
+                                <th scope="col">Course</th>
+                                <th scope="col"></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <?php include_once("includes/classesTable.php"); ?> <!-- Table data is generated using SQL -->
+                        </tbody>
+                    </table>
+                </div>
             </div>
         </div>
+        <?php include_once("includes/newClassModal.php") ?> <!-- Modal for creating new classes -->
     </div>
 </body>
 </html>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
 <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
 <script>
+$('#newClassForm').submit(function (e) {
+            e.preventDefault();
+            $.ajax({
+                url: "functionality/createNewClass.php",
+                method: "POST",
+                data: $('#newClassForm').serialize(),
+                success: function(data) {
+                    alert(data);
+                    location.reload();
+                }
+            })
+        });
+
 $('.deleteClassBtn').click(function (e) {
             e.preventDefault();
             $.ajax({
