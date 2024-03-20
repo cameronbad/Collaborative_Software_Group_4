@@ -10,7 +10,7 @@
     <link rel="shortcut icon" href="Images/EduTestLogo.png" type="image/x-icon">
 </head>
 <body>
-    <div>
+    <div class="classBack">
         <?php include_once("includes/navbar.php"); ?>
         <div class="container">
             <div class="classMain">

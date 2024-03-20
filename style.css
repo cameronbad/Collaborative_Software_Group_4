@@ -716,6 +716,14 @@ th:last-child {
 
 /* CLASS MANAGEMENT PAGE START */
 
+.classBack{
+  background-color: #d8dede;
+  width: 100%;
+  height: 100%;
+  padding: 0%;
+  margin: 0%;
+}
+
 .classMain{
   padding: 0%;
   margin: 0%;
