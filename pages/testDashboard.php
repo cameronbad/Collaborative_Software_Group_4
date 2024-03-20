@@ -35,6 +35,9 @@ $userResult = $db_connect->execute_query($query, [$_SESSION['userID']])->fetch_a
                         </div>
                     </div>
                 </div>
+                <div class="row">
+                    <button class="btn btn-success mt-5" data-bs-toggle='modal' data-bs-target='#testModal'>Create a new test</button>
+                </div>
             </div>
         </div>
         <div class="container mt-5">
@@ -74,6 +77,7 @@ $userResult = $db_connect->execute_query($query, [$_SESSION['userID']])->fetch_a
             </div>
             
         </div>
+        <?php include_once("includes/testManagementModal.php"); ?>
     </main>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
     <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
@@ -106,6 +110,9 @@ $userResult = $db_connect->execute_query($query, [$_SESSION['userID']])->fetch_a
                 }]
             },
         });
+
+        //AJAX call to create a test
+        ajaxFormSubmit('#testForm', "./functionality/createTest.php");
     </script>
 </body>
 </html>
