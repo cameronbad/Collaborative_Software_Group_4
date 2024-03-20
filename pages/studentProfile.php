@@ -11,7 +11,6 @@
 </head>
 <body class="m-0 p-0" id="studentProfileBody">
 
-<?php include('./includes/navbar.php');?> <!-- Grabs the navbar code and displays it on the student management page -->
 <?php include('./includes/studentInfo.php');?> <!-- Grabs a students data -->
 
 <div class="container p-5">
@@ -91,7 +90,12 @@
                         ?>
                     </div>
                     <div class="col">
-                        <button type="button" class="btn btn-primary profileBtn" data-bs-toggle="modal" data-bs-target="#terminateModal">Terminate</button> <!-- For terminating students students -->
+                        <button type="button" class="btn btn-primary profileBtn" data-bs-toggle="modal" data-bs-target="#terminateModal">Terminate</button> <!-- For terminating students -->
+                    </div>
+                </div>
+                <div class="row pt-1">
+                    <div class="col">
+                        <button type="button" class="btn btn-primary profileBtn" data-bs-toggle="modal" data-bs-target="#assignClassModal">Assign Class</button> <!-- For asigning classes for students -->
                     </div>
                 </div>
             </form>
@@ -103,6 +107,7 @@
     <?php include_once("includes/disableAccountModal.php"); ?> <!-- Displays modal for disabling accounts -->
     <?php include_once("includes/approveAccountModal.php"); ?> <!-- Displays modal for approving accounts -->
     <?php include_once("includes/terminateAccountModal.php"); ?> <!-- Displays modal for terminating accounts -->
+    <?php include_once("includes/assignClassModal.php"); ?> <!-- Displays modal for assigning classes -->
  
 </div>
 </body>
@@ -154,6 +159,19 @@ $('#approveBtnModal').click(function (e) {
                 data: ({sID: <?php echo $userID?>}),
                 success: function(data) {
                     location.replace("../studentDisplay");
+                }
+            })
+        });
+
+        $('#classAssignForm').submit(function (e) {
+            e.preventDefault();
+            $.ajax({
+                url: "../functionality/assignClass.php",
+                method: "POST",
+                data: $('#classAssignForm').serialize(),
+                success: function(data) {
+                    alert(data);
+                    location.reload();
                 }
             })
         });

@@ -9,7 +9,7 @@
         <form id="newClassForm" name="newClassForm" method="POST">
             <div class="mb-3">
                 <label for="classNameInput" class="form-label">Class Name</label>
-                <input type="text" class="form-control" id="classNameInput" name="classNameInput">
+                <input type="text" class="form-control" id="classNameInput" name="classNameInput" placeholder="Class Name">
             </div>
             <div class="mb-3">
                 <label for="classCourseName" class="form-label">Course</label>

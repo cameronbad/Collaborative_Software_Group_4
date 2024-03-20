@@ -1,7 +1,7 @@
 <?php
     include('_connect.php');
 
-    $SQL = "CALL onlyCourses()";// Calls the procedure
+    $SQL = "CALL allClasses()";// Calls the procedure
 
     while($db_connect->next_result()){;} //Fixes Unsynch Error
     
@@ -9,7 +9,9 @@
 
     echo "<optgroup>";
     while($result = $run->fetch_assoc()){ //Loops through results creating dropdown options
-        echo "<option value='" . $result["courseID"] . "'>" . $result["courseName"] . "</option>"; 
+        if($result["courseID"] == $courseID){
+        echo "<option value='" . $result["classID"] . "'>" . $result["className"] . "</option>"; 
+        }
     }
     echo "</optgroup>";
 ?>
