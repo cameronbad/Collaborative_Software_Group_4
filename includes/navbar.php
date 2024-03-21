@@ -1,3 +1,9 @@
+<?php //Check if this file is being included or called directly
+if ( basename(__FILE__) == basename($_SERVER["SCRIPT_FILENAME"]) ) {
+    http_response_code(404); //Act like this page doesn't exist
+    die();
+}
+?>    
 <nav class="navbar navbar-expand-md sticky-top navbar-dark bg-dark">
     <div class="container">
     <a class="navbar-brand" href="#">EduTestPro</a>

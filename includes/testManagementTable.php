@@ -1,6 +1,10 @@
-<?php @session_start(); ?>
-
-<thead>
+<?php //Check if this file is being included or called directly
+if ( basename(__FILE__) == basename($_SERVER["SCRIPT_FILENAME"]) ) {
+    http_response_code(404); //Act like this page doesn't exist
+    die();
+}
+?>    
+ <thead>
     <tr>
         <th>ID</th>
         <th>Test Name</th>
@@ -15,15 +19,17 @@
 <tbody>
     <?php
     include_once("_connect.php");
+    $run;
 
     //Get query for table
     if ($_SESSION['accessLevel'] == '3') { //If admin account
-        $query = "SELECT `test`.*, `subject`.`subjectName`, `subject`.`courseID`, `course`.`courseName` FROM `test` LEFT JOIN `subject` ON `test`.`subjectID` = `subject`.`subjectID` LEFT JOIN `course` ON `subject`.`courseID` = `course`.`courseID`" ; 
+        $query = "CALL getTestManagementAdmin()"; 
+        $run = $db_connect->query($query);
     } else { //If teacher account
-        $query = "SELECT `test`.*, `subject`.`subjectName`, `subject`.`courseID` FROM `test` LEFT JOIN `subject` ON `test`.`subjectID` = `subject`.`subjectID` WHERE `subject`.`courseID` = 1" ; //. $_SESSION["courseID"]
+        $query = "CALL getTestManagementTeacher(?)" ;
+        $run = $db_connect->execute_query($query, [$_SESSION["courseID"]]);
     }
 
-    $run = $db_connect->query($query);
     while ($result = $run->fetch_assoc()) {
         echo "<tr>";
         echo "<td>" . $result["testID"] . "</td>";

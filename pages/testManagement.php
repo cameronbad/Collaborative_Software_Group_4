@@ -1,5 +1,4 @@
-<?php
-@session_start();
+<?php @session_start(); 
 if ($_SESSION['accessLevel'] == 2 || $_SESSION['accessLevel'] == 3) {
     //Auth passed
 } else if ($_SESSION['accessLevel'] == 1) {
@@ -11,7 +10,6 @@ if ($_SESSION['accessLevel'] == 2 || $_SESSION['accessLevel'] == 3) {
     header("Location: ./");
     die();
 }
-
 ?>
 <!DOCTYPE html>
 <html lang="en">
