@@ -15,7 +15,10 @@
         
         if($_SESSION['accessLevel'] == '2' || $_SESSION['accessLevel'] == '3') {
             echo '<li class="nav-item">
-                <a class="nav-link" href="./studentDashboard">Students</a>
+                <a class="nav-link" href="./studentDisplay">Students</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="./classManagement">Classes</a>
             </li>
             <li class="nav-item">
                 <a class="nav-link" href="./testManagement">Tests</a>
