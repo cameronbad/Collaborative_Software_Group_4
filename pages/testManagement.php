@@ -1,6 +1,16 @@
 <?php
-//User auth here
 @session_start();
+if ($_SESSION['accessLevel'] == 2 || $_SESSION['accessLevel'] == 3) {
+    //Auth passed
+} else if ($_SESSION['accessLevel'] == 1) {
+    //Auth failed, student
+    header("Location: ./testDashboard");
+    die();
+} else {
+    //Not logged in
+    header("Location: ./");
+    die();
+}
 
 ?>
 <!DOCTYPE html>

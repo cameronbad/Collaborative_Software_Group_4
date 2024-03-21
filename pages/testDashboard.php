@@ -1,6 +1,20 @@
 <?php
-//User auth here
 @session_start();
+if ($_SESSION['accessLevel'] == 1) {
+    //Auth passed
+} else if ($_SESSION['accessLevel'] == 2) {
+    //Auth failed, teacher
+    header("Location: ./studentDisplay");
+    die();
+} else if ($_SESSION['accessLevel'] == 3) {
+    //Auth failed, admin
+    header("Location: ./adminDashboard");
+    die();
+} else {
+    //Not logged in
+    header("Location: ./");
+    die();
+}
 
 require_once("./includes/_connect.php");
 

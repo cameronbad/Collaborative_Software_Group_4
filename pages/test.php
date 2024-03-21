@@ -1,8 +1,36 @@
 <?php
-//User auth here / Only user doing the test should be able to access the page.
 @session_start();
+if ($_SESSION['accessLevel'] == 1) {
+    //Auth passed
+} else if ($_SESSION['accessLevel'] == 2) {
+    //Auth failed, teacher
+    header("Location: ./studentDisplay");
+    die();
+} else if ($_SESSION['accessLevel'] == 3) {
+    //Auth failed, admin
+    header("Location: ./adminDashboard");
+    die();
+} else {
+    //Not logged in
+    header("Location: ./");
+    die();
+}
 
 require_once("./includes/_connect.php");
+
+//Check if the sessino user is the same as the user assigned to this result.
+$query = "CALL checkUser(?)";
+$checkUser = $db_connect->execute_query($query, [$resultID])->fetch_assoc();
+
+if ($checkUser == $_SESSION['userID']) {
+    //Auth passed
+} else {
+    //Not the correct user
+    header("Location: ./testDashboard");
+    die();
+}
+
+
 require_once("./includes/_functions.php");
 
 $resultID = $_GET['resultID'];
