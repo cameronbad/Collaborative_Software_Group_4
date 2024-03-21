@@ -12,19 +12,12 @@
 <body class="loginBody">
     <section class="loginSection">
         <!--CREATES FORM AREA -->
-        <form class="loginForm" action="./functionality/intoDashboard.php" method="post">
+        <form class="loginForm" id="loginForm">
+            <input type="hidden" name="g-recaptcha-response" id="g-recaptcha-response">
             <img class="loginLogo" src="./Images/EduTestLogo.png" alt="logo">
             <h1 class="loginTitle">Login</h1>
             <!--CREATES ERROR MESSAGE -->
-            <?php if (isset($_GET['error'])) { ?>
-                <p class="error">
-                    <?php 
-                    $newError = str_replace("_", " ", $_GET['error']);
-                    echo $newError;
-                    
-                    ?>
-                </p>
-            <?php } ?>
+            <p class="error" id="errorMessage" style="display:none;"></p>
             <!--CREATES USERNAME AND PASSWORD INPUTS -->
             <div class="loginInput">
                 <label>Username</label>
@@ -43,6 +36,40 @@
             </div>
         </form>
     </section>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://www.google.com/recaptcha/api.js?render=6Lfv350pAAAAAKiom8ecSe4eYyinCRs1mdRWhulw"></script>
+    <script>
+        $('#loginForm').submit(function (e) {
+            e.preventDefault();
+            grecaptcha.ready(function () {
+                grecaptcha.execute('6Lfv350pAAAAAKiom8ecSe4eYyinCRs1mdRWhulw',
+                    { action: 'create_comment' }).then(function (token) {
+                        var Username = $('#userInput').val();
+                        var Password = $('#passInput').val();
+                        $('#g-recaptcha-response').val(token);
+
+                        $.ajax({
+                            type: 'POST',
+                            url: './functionality/intoDashboard.php',
+                            data: {
+                                token: $('#g-recaptcha-response').val(),
+                                Username: Username,
+                                Password: Password,
+                            },
+                            success: function (data) {
+                                // Handle success response here
+                                if (data.trim() === 'success') {
+                                    window.location.href = './testDashboard';
+                                } else {
+                                    $('#errorMessage').html(data);
+                                    $('#errorMessage').show();
+                                }
+                            }
+                        }); // <-- Closing bracket for $.ajax() function
+                    });
+            });
+        });
+    </script>
 </body>
 
 </html>

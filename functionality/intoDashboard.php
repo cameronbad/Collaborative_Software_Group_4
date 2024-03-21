@@ -1,90 +1,124 @@
 <?php
 session_start();
-include "../includes/_connect.php";
 
-// Initialize login attempts counter and block time
-if (!isset($_SESSION['loginAttempts'])) {
-    $_SESSION['loginAttempts'] = 0;
-}
+// Include database connection
+include ('../includes/_connect.php');
 
-if (!isset($_SESSION['blockedTime']) || $_SESSION['blockedTime'] <= time()) {
-    $_SESSION['loginAttempts'] = 0; // Reset login attempts counter
-    unset($_SESSION['blockedTime']); // Remove block time
-}
+// Define maximum login attempts and lockout time (in minutes)
+$maxAttempts = 3;
+$lockoutTime = 10;
 
-// Define maximum login attempts and block duration
-$maxLoginAttempts = 3;
-$blockedTime = 30; // in seconds
+// Check if the form is submitted
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
-if (isset($_POST['userInput']) && isset($_POST['passInput'])) {
-
-    function validate($data, $db_connect)
-    {
-        $data = trim($data);
-        $data = stripslashes($data);
-        $data = htmlspecialchars($data);
-        $data = $db_connect->real_escape_string($data);
-        return $data;
+    // Check if user is currently locked out
+    if (isset ($_SESSION['lockout']) && $_SESSION['lockout'] > time()) {
+        echo "You have been temporarily locked out due to multiple failed login attempts. Please try again later.";
+        exit();
     }
 
-    $uname = validate($_POST["userInput"], $db_connect);
-    $pass = $_POST["passInput"];
+    // Google reCAPTCHA secret key
+    $secretKey = '6Lfv350pAAAAABSLfJUefNHfjqanZI1aPcuFab86';
 
-    //replace underscore with space in error message
+    // Verify reCAPTCHA response
+    $responseToken = $_POST['token'];
+    $url = 'https://www.google.com/recaptcha/api/siteverify';
+    $data = [
+        'secret' => $secretKey,
+        'response' => $responseToken
+    ];
 
-    if (empty($uname)) {
-        header("Location: ../loginUsername_is_required");
-        exit();
-    } else if (empty($pass)) {
-        header("Location: ../loginPassword_is_required");
-        exit();
-    } else {
-        $sql = "SELECT * FROM `user` WHERE `user`.`username`=?";
+    $options = [
+        'http' => [
+            'header' => "Content-Type: application/x-www-form-urlencoded\r\n",
+            'method' => 'POST',
+            'content' => http_build_query($data)
+        ]
+    ];
+
+    $context = stream_context_create($options);
+    $verify = file_get_contents($url, false, $context);
+    $captchaSuccess = json_decode($verify)->success;
+
+    if ($captchaSuccess) {
+        // Sanitize user input to prevent SQL injection
+        $username = $db_connect->real_escape_string($_POST['Username']);
+        $password = $_POST['Password'];
+
+        // Query to fetch user data
+        $sql = "CALL loginUser(?);";
         $stmt = $db_connect->prepare($sql);
-
-        // Bind parameters and execute the statement
-        $stmt->bind_param("s", $uname);
+        $stmt->bind_param("s", $username);
         $stmt->execute();
         $result = $stmt->get_result();
+        $stmt->close();
 
-        if (mysqli_num_rows($result) === 1) {
-            $row = mysqli_fetch_assoc($result);
-            if ($row['username'] === $uname && password_verify($pass, $row['password'])) {
+        if ($result->num_rows == 1) {
+            $row = $result->fetch_assoc();
+            // Verify password using bcrypt
+            if (password_verify($password, $row['password'])) {
+                // Authentication successful
                 $_SESSION['username'] = $row['username'];
-                $_SESSION['firstName'] = $row['firstName'];
                 $_SESSION['userID'] = $row['userID'];
+                $_SESSION['accessLevel'] = $row['accessLevel'];
                 $_SESSION['courseID'] = $row['courseID'];
                 $_SESSION['email'] = $row['email'];
-                $_SESSION['accessLevel'] = $row['accessLevel'];
-                header("Location: ../testDashboard");
-                exit();
-            } else {
-                $_SESSION['loginAttempts']++; // Increment login attempts counter
-                if ($_SESSION['loginAttempts'] >= $maxLoginAttempts) {
-                    $_SESSION['blockedTime'] = time() + $blockedTime; // Set block time
-                    header("Location: ../loginIncorrect_Username_or_Password._You_have_been_blocked.");
+                // Reset login attempts
+                unset($_SESSION['login_attempts']);
+                // Update lastLogin time
+                $currentTime = date('Y-m-d H:i:s');
+                $updateSql = "CALL setLastLogin(?, ?);";
+                $stmt = $db_connect->prepare($updateSql);
+                $stmt->bind_param("ss", $currentTime, $username);
+                $stmt->execute();
+                $stmt->close();
+
+                // Redirect user based on access level
+                if ($_SESSION['accessLevel'] == 1) {
+                    header("Location: ../testDashboard");
+                    exit();
+                } elseif ($_SESSION['accessLevel'] == 2) {
+                    header("Location: ../studentDisplay");
+                    exit();
+                } elseif ($_SESSION['accessLevel'] == 3) {
+                    header("Location: ../adminDashboard");
                     exit();
                 } else {
-                    $attemptsLeft = $maxLoginAttempts - $_SESSION['loginAttempts'];
-                    header("Location: ../loginIncorrect_Username_or_Password._$attemptsLeft-attempts_left.");
+                    header("Location: /login");
                     exit();
                 }
+            } else {
+                // Invalid password
+                handleInvalidLogin();
             }
         } else {
-            $_SESSION['loginAttempts']++; // Increment login attempts counter
-            if ($_SESSION['loginAttempts'] >= $maxLoginAttempts) {
-                $_SESSION['blockedTime'] = time() + $blockedTime; // Set block time
-                header("Location: ../loginIncorrect_Username_or_Password._You_have_been_blocked.");
-                exit();
-            } else {
-                $attemptsLeft = $maxLoginAttempts - $_SESSION['loginAttempts'];
-                header("Location: ../loginIncorrect_Username_or_Password._$attemptsLeft-attempts_left.");
-                exit();
-            }
+            // User not found
+            handleInvalidLogin();
         }
+    } else {
+        // reCAPTCHA verification failed
+        echo "reCAPTCHA verification failed. Please try again.";
+        exit();
     }
-
-} else {
-    header("Location: /login");
-    exit();
 }
+
+function handleInvalidLogin()
+{
+    // Increment login attempts
+    $_SESSION['login_attempts'] = isset ($_SESSION['login_attempts']) ? $_SESSION['login_attempts'] + 1 : 1;
+
+    // Check if maximum login attempts reached
+    global $maxAttempts;
+    if ($_SESSION['login_attempts'] >= $maxAttempts) {
+        // Set lockout time
+        global $lockoutTime;
+        $_SESSION['lockout'] = time() + ($lockoutTime * 60); // Convert lockout time to seconds
+
+        echo "You have exceeded the maximum number of login attempts. Please try again later.";
+        exit();
+    } else {
+        echo "Invalid username or password. Please try again.";
+        exit();
+    }
+}
+?>
