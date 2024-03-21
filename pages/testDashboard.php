@@ -35,6 +35,9 @@ $userResult = $db_connect->execute_query($query, [$_SESSION['userID']])->fetch_a
                         </div>
                     </div>
                 </div>
+                <div class="row">
+                    <button class="btn btn-success mt-5" data-bs-toggle='modal' data-bs-target='#testModal'>Create a new test</button>
+                </div>
             </div>
         </div>
         <div class="container mt-5">
@@ -74,13 +77,16 @@ $userResult = $db_connect->execute_query($query, [$_SESSION['userID']])->fetch_a
             </div>
             
         </div>
+        <?php include_once("includes/testManagementModal.php"); ?>
     </main>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
     <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.js" integrity="sha512-ZwR1/gSZM3ai6vCdI+LVF1zSq/5HznD3ZSTk7kajkaj4D292NLuduDCO1c/NT8Id+jE58KYLKT7hXnbtryGmMg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="includes/_functions.js"></script>
     <script> //User json encoding of php arrays below
         <?php 
-        include_once("includes/_connect.php");
+        $db_connect->next_result();
+        include_once("./includes/_connect.php");
         $query = "CALL getBarChart(?)";
         
         $name = [];
@@ -88,8 +94,10 @@ $userResult = $db_connect->execute_query($query, [$_SESSION['userID']])->fetch_a
 
         $run = $db_connect->execute_query($query, [$_SESSION["userID"]]);
         while ($result = $run->fetch_assoc()) {
-            $name[] = $result['testName'];
-            $avg[] = $result['questionCorrect'] / $result['questionTotal'] * 100;
+            if($result['questionCorrect'] != 0) {
+                $name[] = $result['testName'];
+                $avg[] = $result['questionCorrect'] / $result['questionTotal'] * 100;
+            }
         }
         ?>
 
@@ -106,6 +114,9 @@ $userResult = $db_connect->execute_query($query, [$_SESSION['userID']])->fetch_a
                 }]
             },
         });
+
+        //AJAX call to create a test
+        ajaxFormSubmit('#testForm', "./functionality/createTest.php", true);
     </script>
 </body>
 </html>
