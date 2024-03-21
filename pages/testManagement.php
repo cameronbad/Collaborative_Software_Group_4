@@ -135,16 +135,16 @@
     <script src="includes/_functions.js"></script>
     <script>
         //AJAX call to create a test
-        ajaxFormSubmit('#testForm', "./functionality/createTest.php");
+        ajaxFormSubmit('#testForm', "./functionality/createTest.php", false);
 
         //AJAX call to edit a test
-        ajaxFormSubmit('#editForm', "./functionality/editTest.php");
+        ajaxFormSubmit('#editForm', "./functionality/editTest.php", false);
 
         //AJAX call to assign a class a test
-        ajaxFormSubmit('#assignForm', "./functionality/assignTest.php");
+        ajaxFormSubmit('#assignForm', "./functionality/assignTest.php", false);
 
         //AJAX call to delete a test
-        ajaxFormSubmit('#deleteForm', "./functionality/deleteTest.php");
+        ajaxFormSubmit('#deleteForm', "./functionality/deleteTest.php", false);
 
         //Updates test whenever an AJAX call is complete
         $(document).on("ajaxSuccess", function() {
