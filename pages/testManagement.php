@@ -58,9 +58,13 @@
                                 </select>
                                 <label for="eSubjectSelect" class="from-label">Subject</label>
                             </div>
-                            <div class="form-floating">
+                            <div class="form-floating mb-3">
                                 <input type="number" id="eAmount" name="eAmount" class="form-control" placeholder="Question Amount" required>
                                 <label for="eAmount" class="from-label">Question Amount</label>
+                            </div>
+                            <div class="form-floating">
+                                <input type="datetime-local" id="eSchedule" name="eSchedule" class="form-control" placeholder="Scheduled Time" required>
+                                <label for="eSchedule" class="from-label">Scheduled Time</label>
                             </div>
                         </div>                   
                         <input type="hidden" id="eTestID" name="eTestID" class="form-control" readonly>

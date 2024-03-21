@@ -19,9 +19,13 @@
                                 </select>
                                 <label for="tSubjectSelect" class="from-label">Subject</label>
                             </div>
-                            <div class="form-floating">
+                            <div class="form-floating mb-3">
                                 <input type="number" id="tAmount" name="tAmount" class="form-control" placeholder="Question Amount" required>
                                 <label for="tAmount" class="from-label">Question Amount</label>
+                            </div>
+                            <div class="form-floating">
+                                <input type="datetime-local" id="tSchedule" name="tSchedule" class="form-control" placeholder="Scheduled Time" required>
+                                <label for="tSchedule" class="from-label">Scheduled Time</label>
                             </div>
                         </div>                   
                         <input type="hidden" id="tTestID" name="tTestID" class="form-control" readonly>
