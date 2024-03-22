@@ -47,6 +47,9 @@ $run = $db_connect->execute_query($query, [$resultID])->fetch_assoc();
 if($run['position'] >= $_SESSION['testTotal']) {
     error_log("Question position is invalid for this test.");
     die(false);
+} else if ($run['position'] + 1 = $_SESSION['testTotal']) {
+    $query = "CALL endTest(?)";
+    $db_connect->execute_query($query, [$resultID]);
 }
 
 //Need questionID, resultID, questionPosition
