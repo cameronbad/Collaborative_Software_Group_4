@@ -75,14 +75,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
                 // Redirect user based on access level
                 if ($_SESSION['accessLevel'] == 1) {
-                    header("Location: ../testDashboard");
-                    exit();
+                    die("success1");
                 } elseif ($_SESSION['accessLevel'] == 2) {
-                    header("Location: ../studentDisplay");
-                    exit();
+                    die("success2");
                 } elseif ($_SESSION['accessLevel'] == 3) {
-                    header("Location: ../adminDashboard");
-                    exit();
+                    die("success3");
                 } else {
                     header("Location: /login");
                     exit();

@@ -58,8 +58,12 @@
                             },
                             success: function (data) {
                                 // Handle success response here
-                                if (data.trim() === 'success') {
+                                if (data.trim() === 'success1') {
                                     window.location.href = './testDashboard';
+                                } else if (data.trim() === 'success2') {
+                                    window.location.href = './studentDisplay';
+                                } else if (data.trim() === 'success3') {
+                                    window.location.href = './adminDashboard';
                                 } else {
                                     $('#errorMessage').html(data);
                                     $('#errorMessage').show();
