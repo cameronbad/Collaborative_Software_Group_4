@@ -13,7 +13,7 @@ $id = $db_connect->real_escape_string($_POST['dTestID']);
 
 //Check authentication
 @session_start(); 
-testCheck($id, $_SESSION['courseID']);
+testCheck($id, $_SESSION['courseID'], 'Test');
 
 //Check fields have been entered
 if (!isset($_POST['dTestID'])) {

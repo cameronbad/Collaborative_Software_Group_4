@@ -17,16 +17,25 @@ function getSubjectID($db_connect){
     return $IDPure; //Returns the final value
 }
 
-function testCheck($testID, $courseID) {
+function testCheck($ID, $courseID, $type) {
     if ($_SESSION['accessLevel'] == 3) {
         //Auth passed, admin
     } else if ($_SESSION['accessLevel'] == 2 ) {
-        //Check if the course of the test matches the the courseID given
-        $query = "CALL checkTest(?)";
-        $checkTest = $db_connect->execute_query($query, [$testID])->fetch_assoc();
+        if ($type == 'Test' || $type == 'Class' || $type == 'Subject') {
+            //Type is used correctly
 
-        if ($checkTest['courseID'] != $courseID) {
-            //Auth failed, teacher is attempting to edit a test from a different course
+            //Check if the course matches the the courseID given
+            $query = "CALL check" . $type . "(?)";
+            $check = $db_connect->execute_query($query, [$ID])->fetch_assoc();
+
+            if ($check['courseID'] != $courseID) {
+                //Auth failed, teacher is attempting to edit a test from a different course
+                header("Location: ./studentDisplay");
+                die();
+            }
+        } else {
+            //Type is being inputted incorrectly, this is an error.
+            error_log('Type is being inputted incorrectly in testCheck()');
             header("Location: ./studentDisplay");
             die();
         }
@@ -38,30 +47,6 @@ function testCheck($testID, $courseID) {
     } else {
         //Not logged in
         header("Location: ./");
-        die();
-    }
-}
-
-function classCheck($classID, $courseID) {
-    //Check if the course of the class matches the courseID given
-    $query = "CALL checkClass(?)";
-    $checkClass = $db_connect->execute_query($query, [$classID])->fetch_assoc();
-
-    if ($checkClass['courseID'] != $courseID) {
-        //Auth failed, teacher is attempting to edit a class from a different course
-        header("Location: ./studentDisplay");
-        die();
-    }
-}
-
-function subjectCheck($subjectID, $courseID) {
-    //Check if the course of the subject matches the courseID given
-    $query = "CALL checkSubject(?)";
-    $checkClass = $db_connect->execute_query($query, [$subjectID])->fetch_assoc();
-
-    if ($checkClass['courseID'] != $courseID) {
-        //Auth failed, teacher is attempting to edit a subject from a different course
-        header("Location: ./studentDisplay");
         die();
     }
 }

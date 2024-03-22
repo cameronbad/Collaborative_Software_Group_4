@@ -14,8 +14,8 @@ $test = $db_connect->real_escape_string($_POST['aTestID']);
 
 //Check authentication
 @session_start(); 
-testCheck($test, $_SESSION['courseID']);
-classCheck($class, $_SESSION['courseID']);
+testCheck($test, $_SESSION['courseID'], 'Test');
+testCheck($class, $_SESSION['courseID'], 'Class');
 
 //Check fields have been entered
 if (!isset($_POST['classSelect']) ||

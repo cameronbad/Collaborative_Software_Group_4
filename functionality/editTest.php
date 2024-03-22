@@ -17,8 +17,8 @@ $id = $db_connect->real_escape_string($_POST['eTestID']);
 
 //Check authentication
 @session_start(); 
-testCheck($id, $_SESSION['courseID']);
-subjectCheck($subject, $_SESSION['courseID']);
+testCheck($id, $_SESSION['courseID'], 'Test');
+subjectCheck($subject, $_SESSION['courseID'], 'Subject');
 
 //Check fields have been entered
 if (!isset($_POST['eSubjectSelect']) ||
