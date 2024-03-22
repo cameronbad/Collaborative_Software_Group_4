@@ -1,18 +1,45 @@
 <?php
 //Add Authentication
+@session_start();
+if ($_SESSION['accessLevel'] == 1) {
+    //Auth passed
+} else if ($_SESSION['accessLevel'] == 2) {
+    //Auth failed, teacher
+    header("Location: ../studentDisplay");
+    die();
+} else if ($_SESSION['accessLevel'] == 3) {
+    //Auth failed, admin
+    header("Location: ../adminDashboard");
+    die();
+} else {
+    //Not logged in
+    header("Location: ../");
+    die();
+}
 
 require_once("../includes/_connect.php");
-
 
 $subjectID = $_GET['subjectID'];
 $resultID = $_GET['resultID'];
 
-$query = "SELECT `question`.`questionID` FROM `question` WHERE `question`.`subjectID` = " . $subjectID;
+//Check if the session user is the same as the user assigned to this result.
+$query = "CALL checkUser(?)";
+$checkUser = $db_connect->execute_query($query, [$resultID])->fetch_assoc();
+
+if ($checkUser['userID'] == $_SESSION['userID'] && $checkUser['subjectID'] == $subjectID) {
+    //Auth passed
+} else {
+    //Not the correct user/attempted data manipulation
+    header("Location: ./testDashboard");
+    die();
+}
+
+$query = "getQuestionList(?)";
 
 //Array of all questionID's
 $questions = [];
 
-$run = $db_connect->execute_query($query);
+$run = $db_connect->execute_query($query, [$subjectID]);
 
 //Error check
 if ($run === false) {

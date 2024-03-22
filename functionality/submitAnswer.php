@@ -5,12 +5,40 @@ if (!isset($_SESSION['testCurrent']) || !isset($_SESSION['testTotal']) || $_SESS
     die(false);
 }
 
+if ($_SESSION['accessLevel'] == 1) {
+    //Auth passed
+} else if ($_SESSION['accessLevel'] == 2) {
+    //Auth failed, teacher
+    header("Location: ../studentDisplay");
+    die();
+} else if ($_SESSION['accessLevel'] == 3) {
+    //Auth failed, admin
+    header("Location: ../adminDashboard");
+    die();
+} else {
+    //Not logged in
+    header("Location: ../");
+    die();
+}
+
 require_once("../includes/_connect.php");
 
 //Set variables
 $questionID = $_POST['questionID'];
 $resultID = $_POST['resultID'];
 $choice = $_POST['choice'];
+
+//Check if the session user is the same as the user assigned to this result.
+$query = "CALL checkUser(?)";
+$checkUser = $db_connect->execute_query($query, [$resultID])->fetch_assoc();
+
+if ($checkUser['userID'] == $_SESSION['userID']) {
+    //Auth passed
+} else {
+    //Not the correct user/attempted data manipulation
+    header("Location: ./testDashboard");
+    die();
+}
 
 //Validation check
 $query = "CALL getPosition(?)";

@@ -18,11 +18,13 @@ if ($_SESSION['accessLevel'] == 1) {
 
 require_once("./includes/_connect.php");
 
-//Check if the sessino user is the same as the user assigned to this result.
+$resultID = $_GET['resultID'];
+
+//Check if the session user is the same as the user assigned to this result.
 $query = "CALL checkUser(?)";
 $checkUser = $db_connect->execute_query($query, [$resultID])->fetch_assoc();
 
-if ($checkUser == $_SESSION['userID']) {
+if ($checkUser['userID'] == $_SESSION['userID']) {
     //Auth passed
 } else {
     //Not the correct user
@@ -30,10 +32,7 @@ if ($checkUser == $_SESSION['userID']) {
     die();
 }
 
-
 require_once("./includes/_functions.php");
-
-$resultID = $_GET['resultID'];
 
 $query = "CALL getResultPage(?)";
 $test = $db_connect->execute_query($query, [$resultID])->fetch_assoc();

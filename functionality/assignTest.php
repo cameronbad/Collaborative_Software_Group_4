@@ -1,5 +1,16 @@
 <?php
-//User auth here
+@session_start(); 
+if ($_SESSION['accessLevel'] == 2 || $_SESSION['accessLevel'] == 3) {
+    //Auth passed
+} else if ($_SESSION['accessLevel'] == 1) {
+    //Auth failed, student
+    header("Location: ./testDashboard");
+    die();
+} else {
+    //Not logged in
+    header("Location: ./");
+    die();
+}
 
 if (!isset($_POST['classSelect']) ||
     !isset($_POST['aTestID'])
@@ -27,7 +38,7 @@ $users = $db_connect->execute_query($getQuery, [$class]);
 $trimQuery = "CALL trimClassMember(?, ?)";
 
 $trim = [];
-while ($user = $users->fetch_assoc()) { //Trimming doesn't work correctly and can cause duplicate entries in some cases, please fix
+while ($user = $users->fetch_assoc()) { 
     $trimResult = $db_connect->execute_query($trimQuery, [$test, $user['userID']]);
     if ($trimResult->num_rows === 0) {
         $trim[] = $user['userID'];

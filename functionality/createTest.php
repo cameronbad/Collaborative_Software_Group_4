@@ -21,7 +21,7 @@ $schedule = $db_connect->real_escape_string($_POST['tSchedule']);
 $userID = $_SESSION['userID'];
 
 //Prepare SQL query
-if ($_POST['practice']) {
+if ($_POST['practice'] == true && ($_SESSION['accessLevel'] == 2 || $_SESSION['accessLevel'] == 3)) {
     $query = "CALL createPracticeTest(?, ?, ?, ?)";
 
     if ($db_connect->execute_query($query, [$subject, $name, $amount, $userID]))
