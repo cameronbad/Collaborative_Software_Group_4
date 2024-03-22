@@ -34,10 +34,10 @@ https://cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css
       <!-- ADD NEW Subject  ######################################################################################## -->
 
       <!-- Button to trigger modal -->
-      <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#createModal">
+      <button type="button" class="btn btn-primary " data-bs-toggle="modal" data-bs-target="#createModal">
         + Create Subject
       </button>
-
+      <br>
 
 
       <!-- /ADD NEW Subject  ######################################################################################## -->
@@ -59,56 +59,57 @@ https://cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css
       <?php
 
         $courseID = $_POST['DcourseID'];
-        $query = "DELETE FROM subject WHERE `subject`.`subjectID` = $courseID";
+        $query = "DELETE FROM 'subject' WHERE `subject`.`subjectID` = $courseID";
         echo $run;
         $run = mysqli_query($db_connect, $query);
       }
 
       //ADD SUBJECT
 
-      if (isset($_POST["addSubject"])&&isset($_POST["addCourse"])) {
-        $addCourse = $_POST["addSubject"]; 
+      if (isset($_POST["addSubject"]) && isset($_POST["addCourse"])) {
+        $addCourse = $_POST["addSubject"];
         $addSubject = $_POST["addCourse"];
 
         $query = "INSERT INTO `subject` (`subjectID`, `courseID`, `subjectName`) VALUES (NULL, '$addSubject','$addCourse');";
-       // echo $query;
-          $run = mysqli_query($db_connect, $query);
-         
-        ?>
-          <div class="alert alert-success" role="alert">
-         New course <?php echo $addCourse ?> has been added.
-          </div>
-        <?php
-  
-        }
-
-               /////////////////////////////////EDIT/////////////////////////////////
-
-      if (isset($_POST["addSubject"]) && isset($_POST["addCourse"])) {
-        $addCourse = $_POST["addSubject"]; 
-        $addSubject = $_POST["addCourse"];
-    
-        $query = "UPDATE `subject` SET `subjectName` = '$addSubject' WHERE `courseID` = '$addCourse';";
-      // echo $query;
+        // echo $query;
         $run = mysqli_query($db_connect, $query);
-        
-        if ($run) {
+
       ?>
         <div class="alert alert-success" role="alert">
-            Course <?php echo $addCourse ?> has been updated.
+          New course <?php echo $addCourse ?> has been added.
         </div>
-      <?php
+        <?php
+
+      }
+
+      /////////////////////////////////EDIT/////////////////////////////////
+
+      if (isset($_POST["subject-id"]) && isset($_POST["subject-name"]) && isset($_POST["courseSubject"])) {
+        $subjectName = $_POST["subject-name"];
+        $subjectID = $_POST["subject-id"];
+        $select = $_POST["courseSubject"];
+
+        $query = "UPDATE `subject` SET `subjectName` = '$subjectName',`courseID` = '$select' WHERE `subjectID` = '$subjectID';";
+        // echo $query;
+        $run = mysqli_query($db_connect, $query);
+
+        if ($run) {
+        ?>
+          <div class="alert alert-success" role="alert">
+            Subject <?php echo $subjectName ?> has been updated.
+          </div>
+        <?php
         } else {
-      ?>
-        <div class="alert alert-danger" role="alert">
-            Failed to update <?php echo $addCourse ?>.
-        </div>
+        ?>
+          <div class="alert alert-danger" role="alert">
+            Failed to update <?php echo $subjectName ?>.
+          </div>
       <?php
         }
-    }
+      }
 
 
-       ////////////////////////////////END OF EDIT////////////////////////////
+      ////////////////////////////////END OF EDIT///////////////////////////
 
 
       //SELECT SUBECT
@@ -121,14 +122,14 @@ https://cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css
       ?>
 
 
-      <table id="dataTable" class=" table table-bordered table-striped">
+      <table id="dataTable" class=" table table-bordered table-striped pt-3">
         <thead>
           <tr>
             <th>ID</th>
             <th>Subject Name</th>
             <th>Course Name</th>
             <th>Edit</th>
-            <th>Delete</th>
+            <!--  <th>Delete</th>  -->
           </tr>
         </thead>
         <tbody>
@@ -137,41 +138,19 @@ https://cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css
               <td><?php echo $result["subjectID"] ?></td>
               <td><?php echo $result["subjectName"] ?></td>
               <td><?php echo $result["courseName"] ?></td>
-              <td><a href="" data-bs-toggle="modal" data-bs-target="#editModal" data-bs-whatever="<?php echo $result["subjectName"] ?>"><i class="fa fa-pencil" aria-hidden="true"></i></a></td>
-              <!--<td><a href="" data-bs-toggle="modal" data-bs-target="#deleteModal<?php echo $result["subjectID"] ?>"><i class="fa fa-trash" aria-hidden="true"></i>-->
-                </a></td>
+              <td><a href="" data-bs-toggle="modal" data-bs-target="#editModal" data-bs-subject="<?php echo $result["subjectName"] ?>" data-bs-sid="<?php echo $result["subjectID"] ?>" data-bs-subject="<?php echo $result["courseName"] ?>"><i class="fa fa-pencil" aria-hidden="true"></i></a></td>
             </tr>
-            <!-- Delete Modal -->
-            <div class="modal fade" id="deleteModal<?php echo $result["subjectID"] ?>" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-              <div class="modal-dialog">
-                <div class="modal-content">
-                  <div class="modal-header">
-                    <h1 class="modal-title fs-5" id="exampleModalLabel">Delete Modal</h1>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                  </div>
-                  <div class="modal-body">
-                    Are you sure you want to delete <strong><?php echo $result["subjectName"] ?></strong>?
-                  </div>
-                  <div class="modal-footer">
-                    <button type="button" class="btn btn-success" data-bs-dismiss="modal">Close</button>
-                    <form method="POST" action="#">
-                      <input type="hidden" name="DcourseID" value="<?php echo $result["subjectID"] ?>">
-                      <button type="submit" class="btn btn-danger">Delete</button>
-                    </form>
-                  </div>
-                </div>
-              </div>
-            </div>
+
           <?php } ?>
 
         </tbody>
       </table>
 
-<!-- Add Subject Modal  --> 
+      <!-- ///////////////////MODALS//////////////////////// -->
 
 
-    <!--ADD SUBJECT  Modal -->
-    <div class="modal fade" id="createModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <!--ADD SUBJECT  Modal -->
+      <div class="modal fade" id="createModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog">
           <div class="modal-content">
             <div class="modal-header">
@@ -211,33 +190,30 @@ https://cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css
       <!--ADD SUBJECT  Modal -->
 
 
-   <!--edit-->
+      <!-- EDIT MODAL  -->
 
-<div class="modal fade" id="editModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h1 class="modal-title fs-5" id="exampleModalLabel">Edit Modal</h1>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-      </div>
-      <div class="modal-body">
-        <form>
-          <div class="mb-3">
-            <label for="recipient-name" class="col-form-label">Subject Name:</label>
-            <input type="text" class="form-control" id="recipient-name">
-          </div>
-          <div class="mb-3">
-            <label for="message-text" class="col-form-label">Course:</label>
-            <?php
-              if(isset($_POST['submit'])) {
-              $course = $_POST['courseName'];
-              $subjectName = $_POST['subjectName'];
-              $query = "UPDATE subject SET subjectName = '$subjectName' WHERE courseName = '$course'";
-              $result = mysqli_query($db_connect, $query);   
-            }
-            ?>            
-            <select name="updateCourse" class="form-select" id="select" required aria-label="Default select example">
-                    <option selected>Please select a course</option>
+
+      <div class="modal fade" id="editModal<?php echo $result["subjectID"] ?>" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h1 class="modal-title fs-5" id="exampleModalLabel">Edit Modal</h1>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <form method="POST" action="#">
+            <div class="modal-body">
+            
+                <div class="mb-3">
+                  <label for="subject-name" class="col-form-label">Subject Name:</label>
+                  <input type="text" name="subject-name" class="form-control subject-name" id="subject-name">
+                  <input type="hidden" name="subject-id" class="form-control subject-id" id="subject-id">
+
+                </div>
+
+                <div class="mb-3">
+                  <label for="message-text" class="col-form-label">Course Name:</label>
+                  <select name="courseSubject" class="form-select" id="select"  aria-label="Default select example" required>
+                    <option value="" selected>Please select a course...</option>
                     <?php
                     $query = "SELECT* from `course`";
                     $run = mysqli_query($db_connect, $query);
@@ -246,53 +222,45 @@ https://cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css
                     }
                     ?>
                   </select>
+                </div>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+              <button type="submit" class="btn btn-primary">Save changes</button>
+            </div>
+            </form>
+
           </div>
-        </form>
+        </div>
       </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary">Save changes</button>
-      </div>
-    </div>
-  </div>
-</div>
-
-
-
-
-
-
       <!-- /Edit Modal-->
-
-
-
-
-
-
     </section>
   </main>
 
 </body>
 <script>
   let table = new DataTable('#dataTable');
-//edit modal
-const editModal = document.getElementById('editModal')
-editModal.addEventListener('show.bs.modal', event => {
-  // Button that triggered the modal
-  const button = event.relatedTarget
-  // Extract info from data-bs-* attributes
-  const subject = button.getAttribute('data-bs-subject')
-  const subject_Id = button.getAttribute('data-bs-id')
- 
-  const modalTitle = editModal.querySelector('.modal-title')
-  const modalBodyInput = editModal.querySelector('.modal-body input')
+  //edit modal
+  const editModal = document.getElementById('editModal')
+  editModal.addEventListener('show.bs.modal', event => {
+    // Button that triggered the modal
+    const button = event.relatedTarget
+    // Extract info from data-bs-* attributes
+    const subject = button.getAttribute('data-bs-subject')
+    const course = button.getAttribute('data-bs-course')
+    const sid = button.getAttribute('data-bs-sid')
 
-  modalTitle.textContent = `You are eduting: ${subject}`
-  modalBodyInput.value = subject
-})
+    const modalTitle = editModal.querySelector('.modal-title')
+    const modalSubjectInput = editModal.querySelector('.modal-body .subject-name')
+    const modalSIDInput = editModal.querySelector('.modal-body .subject-id')
+    //const modalSubjectInput = editModal.querySelector('.modal-body input')
+    //const modalCourseInput = editModal.querySelector('.modal-body2 input')
 
-
-
+    modalTitle.textContent = `Editng Subject: ${subject}`
+    modalSubjectInput.value = subject
+    modalSIDInput.value = sid
+    //modalCourseInput.value = course
+  })
 </script>
 
 </html>
