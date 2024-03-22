@@ -1,25 +1,24 @@
-<?php
-@session_start(); 
-if ($_SESSION['accessLevel'] == 2 || $_SESSION['accessLevel'] == 3) {
-    //Auth passed
-} else if ($_SESSION['accessLevel'] == 1) {
-    //Auth failed, student
-    header("Location: ../testDashboard");
-    die();
-} else {
-    //Not logged in
-    header("Location: ../");
+<?php //Check if this file is being included or called directly
+if ( basename(__FILE__) == basename($_SERVER["SCRIPT_FILENAME"]) ) {
+    http_response_code(404); //Act like this page doesn't exist
     die();
 }
 
-if (!isset($_POST['dTestID'])) {
-    die("Please fill out all fields");
-}
-
+//Require php includes
+require_once("../includes/_functions.php");
 require_once("../includes/_connect.php");
 
 //Declare php variable's from post, creates a legal SQL string to avoid issues.
 $id = $db_connect->real_escape_string($_POST['dTestID']);
+
+//Check authentication
+@session_start(); 
+testCheck($id, $_SESSION['courseID']);
+
+//Check fields have been entered
+if (!isset($_POST['dTestID'])) {
+    die("Please fill out all fields");
+}
 
 //Prepare SQL Query
 $query = "CALL deleteTest(?)";
