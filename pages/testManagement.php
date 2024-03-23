@@ -62,7 +62,7 @@ if ($_SESSION['accessLevel'] == 2 || $_SESSION['accessLevel'] == 3) {
                             <div class="form-floating mb-3">
                                 <select id="eSubjectSelect" name="eSubjectSelect" class="form-select">
                                     <option selected></option>
-                                    <?php include_once("includes/filtersDisplay.php"); ?>
+                                    <?php include("includes/filtersDisplay.php"); ?>
                                 </select>
                                 <label for="eSubjectSelect" class="from-label">Subject</label>
                             </div>

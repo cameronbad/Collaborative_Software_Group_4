@@ -21,7 +21,7 @@ if ( basename(__FILE__) == basename($_SERVER["SCRIPT_FILENAME"]) ) {
                             <div class="form-floating mb-3">
                                 <select id="tSubjectSelect" name="tSubjectSelect" class="form-select">
                                     <option selected></option>
-                                    <?php include_once("includes/filtersDisplay.php"); ?>
+                                    <?php include("includes/filtersDisplay.php"); ?>
                                 </select>
                                 <label for="tSubjectSelect" class="from-label">Subject</label>
                             </div>
