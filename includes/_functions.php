@@ -1,6 +1,4 @@
-<?php
-require("_connect.php");
-
+<?php @session_start();
 function getSubjectID($db_connect){
     $stmt = $db_connect->prepare("CALL subjectFromCourse(?)"); //Finds the subject id from the course id
     $stmt->bind_param("i", $_SESSION['courseID']);
@@ -17,7 +15,7 @@ function getSubjectID($db_connect){
     return $IDPure; //Returns the final value
 }
 
-function testCheck($ID, $courseID, $type) {
+function testCheck($db_connect, $ID, $courseID, $type) {
     if ($_SESSION['accessLevel'] == 3) {
         //Auth passed, admin
     } else if ($_SESSION['accessLevel'] == 2 ) {

@@ -23,8 +23,8 @@ $id = $db_connect->real_escape_string($_POST['eTestID']);
 
 //Check authentication
 @session_start(); 
-testCheck($id, $_SESSION['courseID'], 'Test');
-subjectCheck($subject, $_SESSION['courseID'], 'Subject');
+testCheck($db_connect, $id, $_SESSION['courseID'], 'Test');
+testCheck($db_connect, $subject, $_SESSION['courseID'], 'Subject');
 
 //Prepare SQL query
 $query = "CALL editTest(?, ?, ?, ?, ?)";

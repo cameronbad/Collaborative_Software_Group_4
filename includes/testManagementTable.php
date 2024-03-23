@@ -1,10 +1,5 @@
-<?php //Check if this file is being included or called directly
-if ( basename(__FILE__) == basename($_SERVER["SCRIPT_FILENAME"]) ) {
-    http_response_code(404); //Act like this page doesn't exist
-    die();
-}
-?>    
- <thead>
+<?php @session_start(); ?>
+<thead>
     <tr>
         <th>ID</th>
         <th>Test Name</th>
@@ -18,7 +13,7 @@ if ( basename(__FILE__) == basename($_SERVER["SCRIPT_FILENAME"]) ) {
 </thead>
 <tbody>
     <?php
-    include_once("_connect.php");
+    include("_connect.php");
     $run;
 
     //Get query for table

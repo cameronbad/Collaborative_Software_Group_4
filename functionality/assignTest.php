@@ -17,8 +17,8 @@ $test = $db_connect->real_escape_string($_POST['aTestID']);
 
 //Check authentication
 @session_start(); 
-testCheck($test, $_SESSION['courseID'], 'Test');
-testCheck($class, $_SESSION['courseID'], 'Class');
+testCheck($db_connect, $test, $_SESSION['courseID'], 'Test');
+testCheck($db_connect, $class, $_SESSION['courseID'], 'Class');
 
 //Get questionTotal
 $totalQuery = "CALL getQuestionAmount(?)"; 
