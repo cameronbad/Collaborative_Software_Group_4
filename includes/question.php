@@ -1,6 +1,6 @@
 <?php
-include_once("_connect.php");  
-include_once("_functions.php");
+//Require php includes
+require_once("_connect.php");  
 
 if(isset($_GET['questionID'])) {
     $questionID = $_GET['questionID'];
@@ -9,8 +9,8 @@ else {
     die('Error: No valid data entered.');
 }
 
-$query = "SELECT `question`.`questionText`, `question`.`answerA`, `question`.`answerB`, `question`.`answerC`, `question`.`answerD` FROM `question` WHERE `question`.`questionID` = " . $questionID;
-$question = $db_connect->execute_query($query)->fetch_assoc();
+$query = "CALL getQuestion(?)";
+$question = $db_connect->execute_query($query, [$questionID])->fetch_assoc();
 
 //Make array with answers assigned to value 1-4
 $answers = array('1'=>$question['answerA'],'2'=>$question['answerB'],'3'=>$question['answerC'],'4'=>$question['answerD']);

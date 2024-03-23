@@ -1,16 +1,22 @@
 <?php
-//Add authentication and validation | check question length
-session_start();
+//Require php includes
+require_once("../includes/_functions.php");
+require_once("../includes/_connect.php");
+@session_start();
+
+//Check fields exist / check current question does not exist test total
 if (!isset($_SESSION['testCurrent']) || !isset($_SESSION['testTotal']) || $_SESSION['testCurrent'] >= $_SESSION['testTotal']) {
     die(false);
 }
 
+//Set variable
+$resultID = $db_connect->real_escape_string($_GET['resultID']);
 
-require_once("../includes/_connect.php");
+//Check authentication
+resultCheck($db_connect, $resultID, $_SEESION['userID']);
 
 //Set variables
 $questionID = $_GET['questionID'];
-$resultID = $_GET['resultID'];
 $position = $_GET['position'];
 
 //Need questionID, resultID, questionPosition

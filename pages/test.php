@@ -1,21 +1,52 @@
 <?php
-//User auth here / Only user doing the test should be able to access the page.
 @session_start();
+if ($_SESSION['accessLevel'] == 1) {
+    //Auth passed
+} else if ($_SESSION['accessLevel'] == 2) {
+    //Auth failed, teacher
+    header("Location: ./studentDisplay");
+    die();
+} else if ($_SESSION['accessLevel'] == 3) {
+    //Auth failed, admin
+    header("Location: ./adminDashboard");
+    die();
+} else {
+    //Not logged in
+    header("Location: ./");
+    die();
+}
 
+//Require php includes
 require_once("./includes/_connect.php");
 require_once("./includes/_functions.php");
 
-$resultID = $_GET['resultID'];
+//Declare variable
+$resultID = $db_connect->real_escape_string($_GET['resultID']);
 
+//Check if the session user is the same as the user assigned to this result.
+$query = "CALL checkUser(?)";
+$checkUser = $db_connect->execute_query($query, [$resultID])->fetch_assoc();
+
+if ($checkUser['userID'] == $_SESSION['userID']) {
+    //Auth passed
+} else {
+    //Not the correct user
+    header("Location: ./testDashboard");
+    die();
+}
+
+
+//Get test information for this result.
 $query = "CALL getResultPage(?)";
 $test = $db_connect->execute_query($query, [$resultID])->fetch_assoc();
-
-$query = "CALL getPreviousQuestions(?)";
 
 //Array of all existing answers
 $prevQuestions = [];
 $prevChoice = [];
 $prevCorrect = [];
+
+//Get previous question's questionID
+$query = "CALL getPreviousQuestions(?)";
 
 $run = $db_connect->execute_query($query, [$resultID]);
 while ($result = $run->fetch_assoc()) {

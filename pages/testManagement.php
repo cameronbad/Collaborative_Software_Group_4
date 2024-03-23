@@ -1,7 +1,15 @@
-<?php
-//User auth here
-@session_start();
-
+<?php @session_start(); 
+if ($_SESSION['accessLevel'] == 2 || $_SESSION['accessLevel'] == 3) {
+    //Auth passed
+} else if ($_SESSION['accessLevel'] == 1) {
+    //Auth failed, student
+    header("Location: ./testDashboard");
+    die();
+} else {
+    //Not logged in
+    header("Location: ./");
+    die();
+}
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -54,7 +62,7 @@
                             <div class="form-floating mb-3">
                                 <select id="eSubjectSelect" name="eSubjectSelect" class="form-select">
                                     <option selected></option>
-                                    <?php include_once("includes/filtersDisplay.php"); ?>
+                                    <?php include("includes/filtersDisplay.php"); ?>
                                 </select>
                                 <label for="eSubjectSelect" class="from-label">Subject</label>
                             </div>
