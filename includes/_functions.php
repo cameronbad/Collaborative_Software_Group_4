@@ -55,7 +55,7 @@ function resultCheck($db_connect, $ID, $userID) {
         $query = "CALL checkUser(?)";
         $checkUser = $db_connect->execute_query($query, [$resultID])->fetch_assoc();
 
-        if ($checkUser['userID'] == $_SESSION['userID']) {
+        if ($checkUser['userID'] == $userID) {
             //Auth passed
         } else {
             //Not the correct user/attempted data manipulation

@@ -16,9 +16,12 @@ if ($_SESSION['accessLevel'] == 1) {
     die();
 }
 
+//Require php includes
 require_once("./includes/_connect.php");
+require_once("./includes/_functions.php");
 
-$resultID = $_GET['resultID'];
+//Declare variable
+$resultID = $db_connect->real_escape_string($_GET['resultID']);
 
 //Check if the session user is the same as the user assigned to this result.
 $query = "CALL checkUser(?)";
@@ -32,17 +35,18 @@ if ($checkUser['userID'] == $_SESSION['userID']) {
     die();
 }
 
-require_once("./includes/_functions.php");
 
+//Get test information for this result.
 $query = "CALL getResultPage(?)";
 $test = $db_connect->execute_query($query, [$resultID])->fetch_assoc();
-
-$query = "CALL getPreviousQuestions(?)";
 
 //Array of all existing answers
 $prevQuestions = [];
 $prevChoice = [];
 $prevCorrect = [];
+
+//Get previous question's questionID
+$query = "CALL getPreviousQuestions(?)";
 
 $run = $db_connect->execute_query($query, [$resultID]);
 while ($result = $run->fetch_assoc()) {

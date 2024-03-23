@@ -1,8 +1,26 @@
 <?php
-//Add Authentication
+//Require php includes
+require_once("../includes/_functions.php");
+require_once("../includes/_connect.php");
 @session_start();
+
+//Set variables
+$subjectID = $db_connect->real_escape_string($_GET['subjectID']);
+$resultID = $db_connect->real_escape_string($_GET['resultID']);
+
+//Check authentication
 if ($_SESSION['accessLevel'] == 1) {
-    //Auth passed
+    //Check if the user is the same as the user assigned to this result.
+    $query = "CALL checkUser(?)";
+    $checkUser = $db_connect->execute_query($query, [$resultID])->fetch_assoc();
+    
+    if ($checkUser['userID'] == $_SESSION['userID'] && $checkUser['subjectID'] == $subjectID) {
+        //Auth passed
+    } else {
+        //Not the correct user/attempted data manipulation
+        header("Location: ./testDashboard");
+        die();
+    }
 } else if ($_SESSION['accessLevel'] == 2) {
     //Auth failed, teacher
     header("Location: ../studentDisplay");
@@ -17,28 +35,10 @@ if ($_SESSION['accessLevel'] == 1) {
     die();
 }
 
-require_once("../includes/_connect.php");
-
-$subjectID = $_GET['subjectID'];
-$resultID = $_GET['resultID'];
-
-//Check if the session user is the same as the user assigned to this result.
-$query = "CALL checkUser(?)";
-$checkUser = $db_connect->execute_query($query, [$resultID])->fetch_assoc();
-
-if ($checkUser['userID'] == $_SESSION['userID'] && $checkUser['subjectID'] == $subjectID) {
-    //Auth passed
-} else {
-    //Not the correct user/attempted data manipulation
-    header("Location: ./testDashboard");
-    die();
-}
-
-$query = "getQuestionList(?)";
-
 //Array of all questionID's
 $questions = [];
 
+$query = "getQuestionList(?)";
 $run = $db_connect->execute_query($query, [$subjectID]);
 
 //Error check
