@@ -1,44 +1,21 @@
 <?php
-//Add authentication and validation | check question length
-session_start();
+//Require php includes
+require_once("../includes/_functions.php");
+require_once("../includes/_connect.php");
+@session_start();
+
+//Check fields exist / check current question does not exist test total
 if (!isset($_SESSION['testCurrent']) || !isset($_SESSION['testTotal']) || $_SESSION['testCurrent'] > $_SESSION['testTotal']) {
     die(false);
 }
 
-if ($_SESSION['accessLevel'] == 1) {
-    //Auth passed
-} else if ($_SESSION['accessLevel'] == 2) {
-    //Auth failed, teacher
-    header("Location: ../studentDisplay");
-    die();
-} else if ($_SESSION['accessLevel'] == 3) {
-    //Auth failed, admin
-    header("Location: ../adminDashboard");
-    die();
-} else {
-    //Not logged in
-    header("Location: ../");
-    die();
-}
-
-require_once("../includes/_connect.php");
-
 //Set variables
-$questionID = $_POST['questionID'];
-$resultID = $_POST['resultID'];
-$choice = $_POST['choice'];
+$questionID = $db_connect->real_escape_string($_POST['questionID']);
+$resultID = $db_connect->real_escape_string($_POST['resultID']);
+$choice = $db_connect->real_escape_string($_POST['choice']);
 
-//Check if the session user is the same as the user assigned to this result.
-$query = "CALL checkUser(?)";
-$checkUser = $db_connect->execute_query($query, [$resultID])->fetch_assoc();
-
-if ($checkUser['userID'] == $_SESSION['userID']) {
-    //Auth passed
-} else {
-    //Not the correct user/attempted data manipulation
-    header("Location: ./testDashboard");
-    die();
-}
+//Check authentication
+resultCheck($db_connect, $resultID, $_SEESION['userID']);
 
 //Validation check
 $query = "CALL getPosition(?)";

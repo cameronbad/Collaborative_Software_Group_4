@@ -48,4 +48,32 @@ function testCheck($db_connect, $ID, $courseID, $type) {
         die();
     }
 }
+
+function resultCheck($db_connect, $ID, $userID) {
+    if ($_SESSION['accessLevel'] == 1) {
+        //Check if the user is the same as the user assigned to this result.
+        $query = "CALL checkUser(?)";
+        $checkUser = $db_connect->execute_query($query, [$resultID])->fetch_assoc();
+
+        if ($checkUser['userID'] == $_SESSION['userID']) {
+            //Auth passed
+        } else {
+            //Not the correct user/attempted data manipulation
+            header("Location: ./testDashboard");
+            die();
+        }
+    } else if ($_SESSION['accessLevel'] == 2) {
+        //Auth failed, teacher
+        header("Location: ../studentDisplay");
+        die();
+    } else if ($_SESSION['accessLevel'] == 3) {
+        //Auth failed, admin
+        header("Location: ../adminDashboard");
+        die();
+    } else {
+        //Not logged in
+        header("Location: ../");
+        die();
+    }
+}
 ?>

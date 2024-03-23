@@ -1,41 +1,19 @@
 <?php
-//Add authentication and validation | check question length
+//Require php includes
+require_once("../includes/_functions.php");
+require_once("../includes/_connect.php");
 @session_start();
-if ($_SESSION['accessLevel'] == 1) {
-    //Auth passed
-} else if ($_SESSION['accessLevel'] == 2) {
-    //Auth failed, teacher
-    header("Location: ../studentDisplay");
-    die();
-} else if ($_SESSION['accessLevel'] == 3) {
-    //Auth failed, admin
-    header("Location: ../adminDashboard");
-    die();
-} else {
-    //Not logged in
-    header("Location: ../");
-    die();
-}
 
+//Check fields exist / check current question does not exist test total
 if (!isset($_SESSION['testCurrent']) || !isset($_SESSION['testTotal']) || $_SESSION['testCurrent'] >= $_SESSION['testTotal']) {
     die(false);
 }
 
-$resultID = $_GET['resultID'];
+//Set variable
+$resultID = $db_connect->real_escape_string($_GET['resultID']);
 
-//Check if the session user is the same as the user assigned to this result.
-$query = "CALL checkUser(?)";
-$checkUser = $db_connect->execute_query($query, [$resultID])->fetch_assoc();
-
-if ($checkUser['userID'] == $_SESSION['userID']) {
-    //Auth passed
-} else {
-    //Not the correct user/attempted data manipulation
-    header("Location: ./testDashboard");
-    die();
-}
-
-require_once("../includes/_connect.php");
+//Check authentication
+resultCheck($db_connect, $resultID, $_SEESION['userID']);
 
 //Set variables
 $questionID = $_GET['questionID'];
