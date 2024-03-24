@@ -28,14 +28,14 @@ https://cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css
   <main>
     <section class="container">
 
-      <h1>Subject management page</h1>
-      <p>Use the page below to manage subjects</p>
+      <h1>Lecturer management dashboard</h1>
+      <p>Use the page below to manage users</p>
       <!-- ADD NEW Subject  ######################################################################################## -->
 
       <!-- Button to trigger modal -->
-      <button type="button" class="btn btn-primary " data-bs-toggle="modal" data-bs-target="#createModal">
+      <!--<button type="button" class="btn btn-primary " data-bs-toggle="modal" data-bs-target="#createModal">
         + Add User
-      </button>
+      </button>-->
       <br>
 
 
@@ -115,7 +115,7 @@ https://cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css
 
 
        //SELECT
-       $query = "SELECT `userID`, `username`, `firstName`, `lastName`, `accountState`, `lastLogin` FROM `user` WHERE `accessLevel` = 2"; 
+       $query = "SELECT `userID`, `username`, `firstName`, `lastName`, `accountState`, `email` FROM `user` WHERE `accessLevel` = 2"; 
       $run = mysqli_query($db_connect, $query);
 
 
@@ -128,7 +128,7 @@ https://cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css
             <th>Username</th>
             <th>First Name</th>
             <th>Surname</th>
-            <th>Last Login</th>
+            <th>Email</th>
             <th>Edit</th>
             <!--  <th>Delete</th>  -->
           </tr>
@@ -139,18 +139,8 @@ https://cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css
               <td><?php echo $result["username"] ?></td>
               <td><?php echo $result["firstName"] ?></td>
               <td><?php echo $result["lastName"] ?></td>
-              <td><?php echo $result["lastLogin"] ?></td>
-              <td>
-                <a href="#" class="edit-user" 
-                data-bs-toggle="modal" 
-                data-bs-target="#editModal<?php echo $result["userID"] ?>" 
-                data-bs-username="<?php echo $result["username"] ?>" 
-                data-bs-userid="<?php echo $result["userID"] ?>" 
-                data-bs-firstname="<?php echo $result["firstName"] ?>" 
-                data-bs-lastname="<?php echo $result["lastName"] ?>">
-                <i class="fa fa-pencil edit-icon" aria-hidden="true"></i>
-                </a>
-            </td>
+              <td><?php echo $result["email"] ?></td>
+              <td><a href="" data-bs-toggle="modal" data-bs-target="#editModal" data-bs-subject="<?php echo $result["userName"] ?>" data-bs-sid="<?php echo $result["userID"] ?>" data-bs-subject="<?php echo $result["firstName"] ?>" data-bs-subject="<?php echo $result["lastName"] ?>"> <i class="fa fa-pencil" aria-hidden="true"></i></a></td>
             </tr>
 
           <?php } ?>
@@ -247,22 +237,7 @@ https://cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css
 <script>
   // Assuming DataTable is still used for displaying user data
   let table = new DataTable('#dataTable');
-    
-  document.addEventListener('DOMContentLoaded', function() {
-    const editIcons = document.querySelectorAll('.edit-icon');
 
-    editIcons.forEach(editIcon => {
-        editIcon.addEventListener('click', function(event) {
-            event.preventDefault();
-            const editModalId = this.closest('.edit-user').getAttribute('data-bs-target');
-            const editModal = document.querySelector(editModalId);
-            const modal = new bootstrap.Modal(editModal);
-            modal.show();
-        });
-    });
-});
-
-                
   // Edit modal
   const editModal = document.getElementById('editModal')
   editModal.addEventListener('show.bs.modal', event => {
@@ -289,7 +264,7 @@ https://cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css
       modalLastNameInput.value = lastName;
       modalUserIDInput.value = userID;
     });
-  ;
+  });
 </script>
 
 </html>
