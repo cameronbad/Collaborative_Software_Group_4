@@ -85,10 +85,13 @@ https://cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css
         $firstName = $_POST["first-name"];
         $lastName = $_POST["last-name"];
 
-        $query = "UPDATE `user` SET `userName` = '$userName',`firstName` = '$firstName',`lastName` = '$lastName' WHERE `userID` = '$userID';";
+        $query = "UPDATE `user` SET `username` = '$userName',`firstName` = '$firstName',`lastName` = '$lastName' WHERE `userID` = '$userID';";
         // echo $query;
         $run = mysqli_query($db_connect, $query);
 
+        ////////////////////////////////////////////////////////////////////////////
+        ////////////////IT POSTS BUT USER-ID IS FUCKED FIX TONIGHT//////////////////
+        ////////////////////////////////////////////////////////////////////////////
         if ($run) {
         ?>
           <div class="alert alert-success" role="alert">
@@ -199,20 +202,17 @@ https://cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css
 
                 <div class="mb-3">   
                   <label for="user-name" class="col-form-label">Lecturer Username:</label>
-                  <input type="text" name="user-name" class="form-control user-name" id="-name">
+                  <input type="text" name="user-name" class="form-control user-name" id="user-name">
                   <input type="hidden" name="user-id" class="form-control user-id" id="user-id">
                   </div>
 
                 <div class="mb-3">   
                   <label for="first-name" class="col-form-label">Lecturer First Name:</label>
-                  <input type="text" name="first-name" class="form-control first-name" id="-name">
-                  <input type="hidden" name="user-id" class="form-control user-id" id="user-id">
                   </div>
 
                   <div class="mb-3">   
                   <label for="last-name" class="col-form-label">Lecturer Surname:</label>
                   <input type="text" name="last-name" class="form-control last-name" id="-name">
-                  <input type="hidden" name="user-id" class="form-control user-id" id="user-id">
                   </div>
 
                 </div>

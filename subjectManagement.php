@@ -31,7 +31,7 @@ https://cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css
 
       <h1>Subject management page</h1>
       <p>Use the page below to manage subjects</p>
-      <!-- ADD NEW Subject  ######################################################################################## -->
+      <!-- ADD NEW Subject   -->
 
       <!-- Button to trigger modal -->
       <button type="button" class="btn btn-primary " data-bs-toggle="modal" data-bs-target="#createModal">
@@ -40,14 +40,14 @@ https://cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css
       <br>
 
 
-      <!-- /ADD NEW Subject  ######################################################################################## -->
+      <!-- /ADD NEW Subject   -->
 
 
 
 
       <?php
       include_once("includes/_connect.php");
-      //DELETE SUBJECT
+      //DELETE SUBJECT ---- OBSELETE BUT DELETING THIS BREAKS IT SO IT'S STAYING IN FOR NOW
       if (isset($_POST["DcourseID"])) {
       ?>
         <div class="alert alert-warning" role="alert">
@@ -63,7 +63,7 @@ https://cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css
 
         $run = $db_connect->execute_query($query, [$courseID]);
       }
-
+      //END OF OBSELETE CODE
       //ADD SUBJECT
 
       if (isset($_POST["addSubject"]) && isset($_POST["addCourse"])) {
