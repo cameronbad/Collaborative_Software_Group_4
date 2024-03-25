@@ -1,6 +1,6 @@
 <?php
 session_start();
-include_once("../includes/_connect.php");
+include_once ("../includes/_connect.php");
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     // Define variables and initialize with empty values
@@ -22,25 +22,35 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     // Validate and sanitize input data
     if ($db_connect === false) {
         if (!$db_connect) {
-            die("Database connection error: " . mysqli_connect_error());
+            die ("Database connection error: " . mysqli_connect_error());
         }
     }
 
-    // Validate and sanitize input data
-    $studentNum = isset($_POST["studentNum"]) ? validate($_POST["studentNum"], $db_connect) : "";
-    $firstName = isset($_POST["firstName"]) ? validate($_POST["firstName"], $db_connect) : "";
-    $lastName = isset($_POST["lastName"]) ? validate($_POST["lastName"], $db_connect) : "";
-    $email = isset($_POST["email"]) ? validate($_POST["email"], $db_connect) : "";
-    $courseID = isset($_POST["course"]) ? validate($_POST["course"], $db_connect) : "";
-    $username = isset($_POST["username"]) ? validate($_POST["username"], $db_connect) : "";
-    $password = isset($_POST["password"]) ? validate($_POST["password"], $db_connect) : "";
-    $confirmPassInput = isset($_POST["confPass"]) ? validate($_POST["confPass"], $db_connect) : "";
-
-    //Checks that the password inputs match
-    if ($_POST["password"] != $_POST["confPass"]) {
-        header("Location: ./registrationPasswords_do_not_match");
+    //empty fields
+    if (empty($_POST["studentNum"]) || empty($_POST["firstName"]) || empty($_POST["lastName"]) || empty($_POST["email"]) || empty($_POST["course"]) || empty($_POST["username"]) || empty($_POST["password"]) || empty($_POST["confPass"])) {
+        echo "Please fill in all fields.";
+        header("refresh:2; url=../register");
         exit();
     }
+
+    // Validate and sanitize input data
+    $studentNum = isset ($_POST["studentNum"]) ? validate($_POST["studentNum"], $db_connect) : "";
+    $firstName = isset ($_POST["firstName"]) ? validate($_POST["firstName"], $db_connect) : "";
+    $lastName = isset ($_POST["lastName"]) ? validate($_POST["lastName"], $db_connect) : "";
+    $email = isset ($_POST["email"]) ? validate($_POST["email"], $db_connect) : "";
+    $courseID = isset ($_POST["course"]) ? validate($_POST["course"], $db_connect) : "";
+    $username = isset ($_POST["username"]) ? validate($_POST["username"], $db_connect) : "";
+    $password = isset ($_POST["password"]) ? validate($_POST["password"], $db_connect) : "";
+    $confirmPassInput = isset ($_POST["confPass"]) ? validate($_POST["confPass"], $db_connect) : "";
+
+    // Check if the password and confirm password match
+    if ($password != $confirmPassInput) {
+        //redirect to the registration page after 2 seconds once echoing the error message
+        echo "Passwords do not match. Please try again.";
+        header("refresh:2; url=../register");
+        exit();
+    }
+
 
     $options = [
         'cost' => 12,
@@ -56,7 +66,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     // Should the user be approved, the data will be inserted into the database
     // Prepare and execute the SQL statement to insert user data into the database
-    $sql = "INSERT INTO `user` (`username`, `firstName`, `lastName`, `email`, `password`, `studentNumber`, `courseID`, `accessLevel`) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
+    $sql = "CALL registerStudent(?, ?, ?, ?, ?, ?, ?, ?);";
     $stmt = $db_connect->prepare($sql);
 
     if ($stmt) {
