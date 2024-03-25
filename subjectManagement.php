@@ -59,9 +59,9 @@ https://cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css
       <?php
 
         $courseID = $_POST['DcourseID'];
-        $query = "DELETE FROM 'subject' WHERE `subject`.`subjectID` = $courseID";
-        echo $run;
-        $run = mysqli_query($db_connect, $query);
+        $query = "DELETE FROM 'subject' WHERE `subject`.`subjectID` = ?";
+
+        $run = $db_connect->execute_query($query, [$courseID]);
       }
 
       //ADD SUBJECT
