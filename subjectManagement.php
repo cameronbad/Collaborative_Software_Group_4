@@ -215,8 +215,8 @@ https://cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css
                     <option value="" selected>Please select a course...</option>
                     <?php
                     $query = "SELECT* from `course`";
-                    $run = mysqli_query($db_connect, $query);
-                    while ($course = mysqli_fetch_assoc($run)) {
+                    $run = $db_connect->query($query);
+                    while ($course = $run->fetch_assoc()) {
                       echo "<option value='" . $course["courseID"] . "'>" . $course["courseName"] . "</option>";
                     }
                     ?>
