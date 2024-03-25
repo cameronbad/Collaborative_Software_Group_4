@@ -165,7 +165,7 @@ https://cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css
                 </div>
 
                 <div class="mb-3">
-                  <label for="select" class="form-label">Subject Name</label>
+                  <label for="select" class="form-label">Course</label>
                   <select name="addCourse" class="form-select" id="select" required aria-label="Default select example">
                     <option selected>Please select a course</option>
                     <?php
