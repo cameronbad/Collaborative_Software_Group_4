@@ -59,20 +59,19 @@ https://cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css
       <?php
 
         $courseID = $_POST['DcourseID'];
-        $query = "DELETE FROM 'subject' WHERE `subject`.`subjectID` = $courseID";
-        echo $run;
-        $run = mysqli_query($db_connect, $query);
+        $query = "DELETE FROM 'subject' WHERE `subject`.`subjectID` = ?";
+
+        $run = $db_connect->execute_query($query, [$courseID]);
       }
 
       //ADD SUBJECT
 
       if (isset($_POST["addSubject"]) && isset($_POST["addCourse"])) {
-        $addCourse = $_POST["addSubject"];
-        $addSubject = $_POST["addCourse"];
+        $addCourse = $_POST["addCourse"];
+        $addSubject = $_POST["addSubject"];
 
-        $query = "INSERT INTO `subject` (`subjectID`, `courseID`, `subjectName`) VALUES (NULL, '$addSubject','$addCourse');";
-        // echo $query;
-        $run = mysqli_query($db_connect, $query);
+        $query = "INSERT INTO `subject` (`subjectID`, `courseID`, `subjectName`) VALUES (NULL, ?, ?);";
+        $run = $db_connect->execute_query($query, [$addSubject, $addCourse]);
 
       ?>
         <div class="alert alert-success" role="alert">
@@ -89,9 +88,8 @@ https://cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css
         $subjectID = $_POST["subject-id"];
         $select = $_POST["courseSubject"];
 
-        $query = "UPDATE `subject` SET `subjectName` = '$subjectName',`courseID` = '$select' WHERE `subjectID` = '$subjectID';";
-        // echo $query;
-        $run = mysqli_query($db_connect, $query);
+        $query = "UPDATE `subject` SET `subjectName` = ?, `courseID` = ? WHERE `subjectID` = ?;";
+        $run = $db_connect->execute_query($query, [$subjectName, $select, $subjectID]);
 
         if ($run) {
         ?>
@@ -216,8 +214,8 @@ https://cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css
                     <option value="" selected>Please select a course...</option>
                     <?php
                     $query = "SELECT* from `course`";
-                    $run = mysqli_query($db_connect, $query);
-                    while ($course = mysqli_fetch_assoc($run)) {
+                    $run = $db_connect->query($query);
+                    while ($course = $run->fetch_assoc()) {
                       echo "<option value='" . $course["courseID"] . "'>" . $course["courseName"] . "</option>";
                     }
                     ?>
