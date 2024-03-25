@@ -53,6 +53,12 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $result = $stmt->get_result();
         $stmt->close();
 
+        //Check that account state is active
+        if ($row['accountState'] == 0) {
+            echo "Your account is currently disabled. Please contact your lecturer for further assistance.";
+            exit();
+        }
+
         if ($result->num_rows == 1) {
             $row = $result->fetch_assoc();
             // Verify password using bcrypt
