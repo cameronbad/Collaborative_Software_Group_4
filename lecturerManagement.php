@@ -30,16 +30,13 @@ https://cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css
 
       <h1>Lecturer management dashboard</h1>
       <p>Use the page below to manage users</p>
-      <!-- ADD NEW Subject  ######################################################################################## -->
+      <!-- ALL OF THIS IS OBSELETE BUT DELETING IT BREAKS IT FOR SOME REASON SO I'M LEAVING IT IN -->
 
       <!-- Button to trigger modal -->
       <!--<button type="button" class="btn btn-primary " data-bs-toggle="modal" data-bs-target="#createModal">
         + Add User
       </button>-->
       <br>
-
-
-      <!-- /ADD NEW Subject  ######################################################################################## -->
 
 
 
@@ -63,8 +60,6 @@ https://cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css
         $run = mysqli_query($db_connect, $query);
       }
 
-      //ADD SUBJECT
-
       if (isset($_POST["addSubject"]) && isset($_POST["addCourse"])) {
         $addCourse = $_POST["addSubject"];
         $addSubject = $_POST["addCourse"];
@@ -79,12 +74,12 @@ https://cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css
         </div>
         <?php
 
-               /////////////////////////////////EDIT/////////////////////////////////
+            
       }
 
-      /////////////////////////////////EDIT/////////////////////////////////
+      /////////////////////////////////RELEVANT CODE/////////////////////////////////
 
-      if (isset($_POST["subject-id"]) && isset($_POST["user-name"]) && isset($_POST["first-name"])) {
+      if (isset($_POST["user-id"]) && isset($_POST["user-name"]) && isset($_POST["first-name"])) {
         $userName = $_POST["user-name"];
         $userID = $_POST["user-id"];
         $firstName = $_POST["first-name"];
@@ -97,7 +92,7 @@ https://cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css
         if ($run) {
         ?>
           <div class="alert alert-success" role="alert">
-            Subject <?php echo $userName ?> has been updated.
+            User <?php echo $userName ?> has been updated.
           </div>
         <?php
         } else {
@@ -110,7 +105,6 @@ https://cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css
       }
 
 
-      ////////////////////////////////END OF EDIT///////////////////////////
 
 
 
@@ -140,7 +134,7 @@ https://cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css
               <td><?php echo $result["firstName"] ?></td>
               <td><?php echo $result["lastName"] ?></td>
               <td><?php echo $result["email"] ?></td>
-              <td><a href="" data-bs-toggle="modal" data-bs-target="#editModal" data-bs-subject="<?php echo $result["userName"] ?>" data-bs-sid="<?php echo $result["userID"] ?>" data-bs-subject="<?php echo $result["firstName"] ?>" data-bs-subject="<?php echo $result["lastName"] ?>"> <i class="fa fa-pencil" aria-hidden="true"></i></a></td>
+              <td><a href="" data-bs-toggle="modal" data-bs-target="#editModal" data-bs-username="<?php echo $result["userName"] ?>" data-bs-id="<?php echo $result["userID"] ?>" data-bs-firstname="<?php echo $result["firstName"] ?>" data-bs-lastname="<?php echo $result["lastName"] ?>"> <i class="fa fa-pencil" aria-hidden="true"></i></a></td>
             </tr>
 
           <?php } ?>
@@ -149,9 +143,7 @@ https://cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css
       </table>
 
       <!-- ///////////////////MODALS//////////////////////// -->
-
-
-      <!--ADD SUBJECT  Modal -->
+      <!--
       <div class="modal fade" id="createModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog">
           <div class="modal-content">
@@ -188,7 +180,7 @@ https://cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css
             </form>
           </div>
         </div>
-      </div>
+      </div>-->
       <!--ADD SUBJECT  Modal -->
 
 
@@ -205,21 +197,24 @@ https://cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css
             <form method="POST" action="#">
                 <div class="modal-body">
 
-                    <div class="mb-3">
-                        <label for="user-name" class="col-form-label">Username:</label>
-                        <input type="text" name="user-name" class="form-control user-name" id="user-name">
-                        <input type="hidden" name="user-id" class="form-control user-id" id="user-id" value="<?php echo $result["userID"] ?>">
-                    </div>
+                <div class="mb-3">   
+                  <label for="user-name" class="col-form-label">Lecturer Username:</label>
+                  <input type="text" name="user-name" class="form-control user-name" id="-name">
+                  <input type="hidden" name="user-id" class="form-control user-id" id="user-id">
+                  </div>
 
-                    <div class="mb-3">
-                        <label for="first-name" class="col-form-label">First Name:</label>
-                        <input type="text" name="first-name" class="form-control first-name" id="first-name">
-                    </div>
+                <div class="mb-3">   
+                  <label for="first-name" class="col-form-label">Lecturer First Name:</label>
+                  <input type="text" name="first-name" class="form-control first-name" id="-name">
+                  <input type="hidden" name="user-id" class="form-control user-id" id="user-id">
+                  </div>
 
-                    <div class="mb-3">
-                        <label for="last-name" class="col-form-label">Last Name:</label>
-                        <input type="text" name="last-name" class="form-control last-name" id="last-name">
-                    </div>
+                  <div class="mb-3">   
+                  <label for="last-name" class="col-form-label">Lecturer Surname:</label>
+                  <input type="text" name="last-name" class="form-control last-name" id="-name">
+                  <input type="hidden" name="user-id" class="form-control user-id" id="user-id">
+                  </div>
+
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
@@ -235,36 +230,31 @@ https://cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css
 
 </body>
 <script>
-  // Assuming DataTable is still used for displaying user data
-  let table = new DataTable('#dataTable');
 
-  // Edit modal
+  let table = new DataTable('#dataTable');
+  //edit modal
   const editModal = document.getElementById('editModal')
   editModal.addEventListener('show.bs.modal', event => {
-      // Button that triggered the modal
-      const button = event.relatedTarget;
+    // Button that triggered the modal
+    const button = event.relatedTarget
+    // Extract info from data-bs-* attributes
+    const username = button.getAttribute('data-bs-username')
+    const firstname = button.getAttribute('data-bs-firstname')
+    const lastname = button.getAttribute('data-bs-lastname')
+    const id = button.getAttribute('data-bs-id')
 
-      // Extract user data from data-bs-* attributes
-      const userName = button.getAttribute('data-bs-username');
-      const firstName = button.getAttribute('data-bs-firstname');
-      const lastName = button.getAttribute('data-bs-lastname');
-      const userID = button.getAttribute('data-bs-userid');
+    const modalTitle = editModal.querySelector('.modal-title')
+    const modalUserInput = editModal.querySelector('.modal-body .user-name')
+    const modalUIDInput = editModal.querySelector('.modal-body .user-id')
+    //const modalSubjectInput = editModal.querySelector('.modal-body input')
+    //const modalCourseInput = editModal.querySelector('.modal-body2 input')
 
-      // Select modal elements for manipulation
-      const modalTitle = editModal.querySelector('.modal-title');
-      const modalUserNameInput = editModal.querySelector('.modal-body .user-name');
-      const modalFirstNameInput = editModal.querySelector('.modal-body .first-name');
-      const modalLastNameInput = editModal.querySelector('.modal-body .last-name');
-      const modalUserIDInput = editModal.querySelector('.modal-body .user-id');
-
-      // Populate modal with user data
-      modalTitle.textContent = `Editing User: ${userName}`;
-      modalUserNameInput.value = userName;
-      modalFirstNameInput.value = firstName;
-      modalLastNameInput.value = lastName;
-      modalUserIDInput.value = userID;
-    });
-  });
+    modalTitle.textContent = `Editng User: ${username}`
+    modalUserInput.value = userName
+    modalUIDInput.value = id
+    //modalCourseInput.value = course
+  })
 </script>
+
 
 </html>
