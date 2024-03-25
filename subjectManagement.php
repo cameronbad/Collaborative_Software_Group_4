@@ -70,7 +70,8 @@ https://cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css
         $addCourse = $_POST["addCourse"];
         $addSubject = $_POST["addSubject"];
 
-        $query = "INSERT INTO `subject` (`subjectID`, `courseID`, `subjectName`) VALUES (NULL, ?, ?);";
+        //$query = "INSERT INTO `subject` (`subjectID`, `courseID`, `subjectName`) VALUES (NULL, ?, ?);";
+        $query = "CALL createSubject";
         $run = $db_connect->execute_query($query, [$addSubject, $addCourse]);
 
       ?>
@@ -239,7 +240,7 @@ https://cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css
 <script>
   
   let table = new DataTable('#dataTable');
-  
+
   const editModal = document.getElementById('editModal');
   editModal.addEventListener('show.bs.modal', event => {
     // Button that triggered the modal
