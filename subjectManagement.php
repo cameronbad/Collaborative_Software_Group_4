@@ -132,7 +132,7 @@ https://cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css
           </tr>
         </thead>
         <tbody>
-          <?php while ($result = mysqli_fetch_assoc($run)) { ?>
+          <?php while ($result = $run->fetch_assoc()) { ?>
             <tr>
               <td><?php echo $result["subjectID"] ?></td>
               <td><?php echo $result["subjectName"] ?></td>
