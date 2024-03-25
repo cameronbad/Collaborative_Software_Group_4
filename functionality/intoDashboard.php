@@ -53,13 +53,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $result = $stmt->get_result();
         $stmt->close();
 
-        //Check that account state is active
-        if ($row['accountState'] == 0) {
-            echo "Your account is currently disabled. Please contact your lecturer for further assistance.";
-            header("refresh:2; url=../login");
-            exit();
-        }
-
         //check that there are no empty fields
         if (empty($username) || empty($password)) {
             echo "Please fill in all fields.";
@@ -79,6 +72,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 $_SESSION['email'] = $row['email'];
                 // Reset login attempts
                 unset($_SESSION['login_attempts']);
+                //Check account status
+                if ($row['accountState'] == 0) {
+                    echo "Your account has been disabled. Please contact the administrator.";
+                    exit();
+                }
                 // Update lastLogin time
                 $currentTime = date('Y-m-d H:i:s');
                 $updateSql = "CALL setLastLogin(?, ?);";
