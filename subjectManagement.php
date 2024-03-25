@@ -239,27 +239,26 @@ https://cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css
 
 </body>
 <script>
+  
   let table = new DataTable('#dataTable');
-  //edit modal
-  const editModal = document.getElementById('editModal')
+  
+  const editModal = document.getElementById('editModal');
   editModal.addEventListener('show.bs.modal', event => {
     // Button that triggered the modal
-    const button = event.relatedTarget
+    const button = event.relatedTarget;
     // Extract info from data-bs-* attributes
-    const subject = button.getAttribute('data-bs-subject')
-    const course = button.getAttribute('data-bs-course')
-    const sid = button.getAttribute('data-bs-sid')
-
-    const modalTitle = editModal.querySelector('.modal-title')
-    const modalSubjectInput = editModal.querySelector('.modal-body .subject-name')
-    const modalSIDInput = editModal.querySelector('.modal-body .subject-id')
-    //const modalSubjectInput = editModal.querySelector('.modal-body input')
-    //const modalCourseInput = editModal.querySelector('.modal-body2 input')
-
-    modalTitle.textContent = `Editng Subject: ${subject}`
-    modalSubjectInput.value = subject
-    modalSIDInput.value = sid
-    //modalCourseInput.value = course
+    const subject = button.getAttribute('data-bs-subject');
+    const course = button.getAttribute('data-bs-course');
+    const sid = button.getAttribute('data-bs-sid');
+    const modalTitle = editModal.querySelector('.modal-title');
+    const modalSubjectInput = editModal.querySelector('.modal-body .subject-name');
+    const modalSIDInput = editModal.querySelector('.modal-body .subject-id');
+    //const modalSubjectInput = editModal.querySelector('.modal-body input');
+    //const modalCourseInput = editModal.querySelector('.modal-body2 input');
+    modalTitle.textContent = `Editng Subject: ${subject}`;
+    modalSubjectInput.value = subject;
+    modalSIDInput.value = sid;
+    //modalCourseInput.value = course;
   })
 </script>
 
