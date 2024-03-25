@@ -26,6 +26,13 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         }
     }
 
+    //empty fields
+    if (empty($_POST["studentNum"]) || empty($_POST["firstName"]) || empty($_POST["lastName"]) || empty($_POST["email"]) || empty($_POST["course"]) || empty($_POST["username"]) || empty($_POST["password"]) || empty($_POST["confPass"])) {
+        echo "Please fill in all fields.";
+        header("refresh:2; url=../register");
+        exit();
+    }
+
     // Validate and sanitize input data
     $studentNum = isset ($_POST["studentNum"]) ? validate($_POST["studentNum"], $db_connect) : "";
     $firstName = isset ($_POST["firstName"]) ? validate($_POST["firstName"], $db_connect) : "";
