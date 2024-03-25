@@ -56,6 +56,14 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         //Check that account state is active
         if ($row['accountState'] == 0) {
             echo "Your account is currently disabled. Please contact your lecturer for further assistance.";
+            header("refresh:2; url=../login");
+            exit();
+        }
+
+        //check that there are no empty fields
+        if (empty($username) || empty($password)) {
+            echo "Please fill in all fields.";
+            header("refresh:2; url=../login");
             exit();
         }
 
