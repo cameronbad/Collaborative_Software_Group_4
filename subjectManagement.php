@@ -67,12 +67,11 @@ https://cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css
       //ADD SUBJECT
 
       if (isset($_POST["addSubject"]) && isset($_POST["addCourse"])) {
-        $addCourse = $_POST["addSubject"];
-        $addSubject = $_POST["addCourse"];
+        $addCourse = $_POST["addCourse"];
+        $addSubject = $_POST["addSubject"];
 
-        $query = "INSERT INTO `subject` (`subjectID`, `courseID`, `subjectName`) VALUES (NULL, '$addSubject','$addCourse');";
-        // echo $query;
-        $run = mysqli_query($db_connect, $query);
+        $query = "INSERT INTO `subject` (`subjectID`, `courseID`, `subjectName`) VALUES (NULL, ?, ?);";
+        $run = $db_connect->execute_query($query, [$addSubject, $addCourse]);
 
       ?>
         <div class="alert alert-success" role="alert">
