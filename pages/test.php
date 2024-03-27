@@ -122,33 +122,56 @@ $_SESSION['testTotal'] = $test['questionTotal'];
                 $('.test-container').append('<div class="question-'+prevQuestions[question]+'"></div>');
             }
 
+            //Array of promises
+            var promiseArr = [];
+
             //Run loop to make all previous questions.
             $.each(prevQuestions, function(index, value) {
-                $.ajax({
-                    url: "./includes/question.php",
-                    method: "GET",
-                    data: {questionID: value},
-                    success: function(data) {
-                        //Increment count
-                        count++;
+                let generatePrevQuestion = new Promise(function(resolve) {
+                    $.ajax({
+                        url: "./includes/question.php",
+                        method: "GET",
+                        data: {questionID: value},
+                        success: function(data) {
+                            //Increment count
+                            count++;
 
-                        //Replace empty containers with intended content.
-                        $('.question-'+value).replaceWith(data);
+                            //Replace empty containers with intended content.
+                            $('.question-'+value).replaceWith(data);
 
-                        //Question marking
-                        if (count != prevQuestions.length) {
-                            checkQuestion(prevChoice[index], prevCorrect[index]);
-                        } //Add function for moving user to active question after its been loaded, make sure it wont trigger if there is no active question.
-                        else {
-                            if (count == <?= $_SESSION['testTotal'] ?>) {
+                            
+                            if (count != prevQuestions.length) {
+                                //Question marking
                                 checkQuestion(prevChoice[index], prevCorrect[index]);
-                                testEnd();
+
+                                //Resolve this question to show it is done.
+                                resolve();
                             }
+                            else {
+                                if (count == <?= $_SESSION['testTotal'] ?>) {
+                                    checkQuestion(prevChoice[index], prevCorrect[index]);
+                                    testEnd().then(function() {
+                                        resolve();
+                                    })
+                                } else {
+                                    resolve();
+                                }
+                            }
+
+
                         }
-                    }
+                    });
                 });
+                promiseArr.push(generatePrevQuestion);
             });
         }
+
+        //Once all questions are generated
+        Promise.all(promiseArr).then(
+            function() {
+                moveToQuestion(".question-active");
+            }
+        );
 
         //AJAX call to submit an answer
         $(document).on("click", '.question-active .answer-btn', function() {

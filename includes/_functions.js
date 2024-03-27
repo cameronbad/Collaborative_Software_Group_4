@@ -86,15 +86,19 @@ async function makeQuestion(doneQuestions, subjectID, resultID) {
     return ID;
 }
 
-function testEnd() {
-    //End test
-    $.ajax({
-        url: "./includes/testEnd.php",
-        method: "GET",
-        success: function(data) {
-            $('.test-container').append(data);
-        }
+async function testEnd() {
+    let promise = new Promise(function(resolve) {
+        //End test
+        $.ajax({
+            url: "./includes/testEnd.php",
+            method: "GET",
+            success: function(data) {
+                $('.test-container').append(data);
+                resolve();
+            }
+        });
     });
+    await promise;
 }
 
 //Checks for a form being submitted and then posts it's data to a page
@@ -116,4 +120,10 @@ function currentQuestion(textID) {
     $.get("./functionality/getCurrent.php", function(data) {
         $(textID).text(data);
     })
+}
+
+function moveToQuestion(question) {
+    //Move to question
+    const activeQuestion = document.querySelector(question);
+    activeQuestion.scrollIntoView({ behavior: "smooth"});
 }
