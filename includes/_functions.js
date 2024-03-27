@@ -88,31 +88,17 @@ async function makeQuestion(doneQuestions, subjectID, resultID) {
 
 //Checks for a form being submitted and then posts it's data to a page
 function ajaxFormSubmit(formID, pageURL, practice) {
-    if (practice) {
-        $(formID).submit(function (e) {
-            e.preventDefault();
-            $.ajax({
-                url: pageURL,
-                method: "POST",
-                data: $(formID).serialize() + "&practice=" + practice,
-                success: function(data) {
-                    alert(data); //Could use .html to make an in website alert with proper styling
-                }
-            })
-        });
-    } else {
-        $(formID).submit(function (e) {
-            e.preventDefault();
-            $.ajax({
-                url: pageURL,
-                method: "POST",
-                data: $(formID).serialize(),
-                success: function(data) {
-                    alert(data); //Could use .html to make an in website alert with proper styling
-                }
-            })
-        });
-    }
+    $(formID).submit(function (e) {
+        e.preventDefault();
+        $.ajax({
+            url: pageURL,
+            method: "POST",
+            data: $(formID).serialize() + "&practice=" + practice,
+            success: function(data) {
+                alert(data); //Could use .html to make an in website alert with proper styling
+            }
+        })
+    });
 }
 
 function currentQuestion(textID) {
