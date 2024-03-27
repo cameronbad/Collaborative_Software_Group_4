@@ -4,10 +4,10 @@ function checkQuestion(choice, correct) {
     $('.question-active button').addClass('disabled'); //Disable buttons
 
     if(choice == correct) {
-        $('[value=' + choice + ']').addClass('answer-correct');
+        $('.question-active [value=' + choice + ']').addClass('answer-correct');
     } else {
-        $('[value=' + choice + ']').addClass('answer-wrong');
-        $('[value=' + correct + ']').addClass('answer-correct');
+        $('.question-active [value=' + choice + ']').addClass('answer-wrong');
+        $('.question-active [value=' + correct + ']').addClass('answer-correct');
     }
 
     $('.question-done').removeClass('question-active'); //Remove active from done questions to prevent loops
