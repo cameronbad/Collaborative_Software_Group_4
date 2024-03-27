@@ -1,3 +1,6 @@
+<?php include_once("functionality/loginCheck.php") ?> <!-- Checks if the user has logged in -->
+<?php include_once("functionality/authCheck.php") ?> <!-- Checks if the user is of the correct access level -->
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
