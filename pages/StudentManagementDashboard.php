@@ -57,6 +57,7 @@
 <script> new DataTable('#studentTableMain',{ //Datatable styling
     info: false,
     pageLength: 50,
+    responsive: true,
 }); </script>
 <script>
      $('#studentFilterBox').submit(function (e) {
