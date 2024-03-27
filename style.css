@@ -594,6 +594,14 @@ th:last-child {
 
 /* Table-card  END*/
 
+/*CSS for subject management*/
+
+.arTitle {
+  color:black;
+}
+
+/*End of CSS for subject management*/
+
 /* parallax */
 
 .parallax {
