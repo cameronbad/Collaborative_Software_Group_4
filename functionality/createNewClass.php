@@ -2,6 +2,11 @@
 
 include_once("../includes/_connect.php");
 
+//Checks if the fields have been filled out
+if(!isset($_POST['classNameInput']) || !isset($_POST['classCourseName'])){
+    die("Please fill out the fields.");
+}
+
 $className = $db_connect->real_escape_string($_POST["classNameInput"]); //Grabs data from modal form
 $courseID = $db_connect->real_escape_string($_POST["classCourseName"]);
 
