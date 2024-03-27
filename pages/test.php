@@ -117,6 +117,11 @@ $_SESSION['testTotal'] = $test['questionTotal'];
                 }                
             )
         } else {
+            //Make empty containers
+            for (question in prevQuestions) {
+                $('.test-container').append('<div class="question-'+prevQuestions[question]+'"></div>');
+            }
+
             //Run loop to make all previous questions.
             $.each(prevQuestions, function(index, value) {
                 $.ajax({
@@ -124,9 +129,13 @@ $_SESSION['testTotal'] = $test['questionTotal'];
                     method: "GET",
                     data: {questionID: value},
                     success: function(data) {
+                        //Increment count
                         count++;
-                        $('.test-container').append(data);
 
+                        //Replace empty containers with intended content.
+                        $('.question-'+value).replaceWith(data);
+
+                        //Question marking
                         if (count != prevQuestions.length) {
                             checkQuestion(prevChoice[index], prevCorrect[index]);
                         } //Add function for moving user to active question after its been loaded, make sure it wont trigger if there is no active question.
