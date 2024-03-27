@@ -19,19 +19,19 @@
 <div class="container">
     <div class="containter">
         <form class="row" method="POST" id="studentFilterBox">
-            <div class="col-10">
+            <div class="col-sm-10">
                 <select class="form-select col" id="studentFilters" name="studentFilters">
                     <?php include_once("includes/filtersDisplay.php") ?> <!-- Displays subjects for filters -->
                 </select>
             </div>
-            <div class="col-2">
+            <div class="col-sm-2">
                 <button type="submit" class="btn"  id="filterbtn">Filter</button>
             </div>
         </form>
     </div>
 
     <div class="container-fluid mt-5">
-        <table class="table table-hover" id="studentTableMain" name="studentTableMain">
+        <table class="table table-hover table-responsive" id="studentTableMain" name="studentTableMain">
             <thead>
                 <tr>
                     <th class="col-1" scope="col">Number</th>
