@@ -130,6 +130,12 @@ $_SESSION['testTotal'] = $test['questionTotal'];
                         if (count != prevQuestions.length) {
                             checkQuestion(prevChoice[index], prevCorrect[index]);
                         } //Add function for moving user to active question after its been loaded, make sure it wont trigger if there is no active question.
+                        else {
+                            if (count == <?= $_SESSION['testTotal'] ?>) {
+                                checkQuestion(prevChoice[index], prevCorrect[index]);
+                                testEnd();
+                            }
+                        }
                     }
                 });
             });
@@ -149,16 +155,8 @@ $_SESSION['testTotal'] = $test['questionTotal'];
                     checkQuestion(choice, data);
 
                     //Checks if questions are done
-                    if (prevQuestions.length >= <?= $test['questionTotal'] ?>) {
-                        //End test
-                        $.ajax({
-                            url: "./includes/testEnd.php",
-                            method: "GET",
-                            data: {questionID: questionID},
-                            success: function(data) {
-                                $('.test-container').append(data);
-                            }
-                        });
+                    if (prevQuestions.length >= <?= $_SESSION['testTotal'] ?>) {
+                        testEnd();
                     } else {
                         //Generates a new question
                         makeQuestion(prevQuestions, <?= $test['subjectID'] ?>, <?= $resultID ?>).then(

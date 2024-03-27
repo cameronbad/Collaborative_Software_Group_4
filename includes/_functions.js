@@ -86,6 +86,17 @@ async function makeQuestion(doneQuestions, subjectID, resultID) {
     return ID;
 }
 
+function testEnd() {
+    //End test
+    $.ajax({
+        url: "./includes/testEnd.php",
+        method: "GET",
+        success: function(data) {
+            $('.test-container').append(data);
+        }
+    });
+}
+
 //Checks for a form being submitted and then posts it's data to a page
 function ajaxFormSubmit(formID, pageURL, practice) {
     $(formID).submit(function (e) {

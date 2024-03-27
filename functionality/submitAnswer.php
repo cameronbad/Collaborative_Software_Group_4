@@ -6,6 +6,7 @@ require_once("../includes/_connect.php");
 
 //Check fields exist / check current question does not exist test total
 if (!isset($_SESSION['testCurrent']) || !isset($_SESSION['testTotal']) || $_SESSION['testCurrent'] > $_SESSION['testTotal']) {
+    error_log("Critical session values were not set, or current question is greater than total number of questions in test.");
     die(false);
 }
 
@@ -21,10 +22,10 @@ resultCheck($db_connect, $resultID, $_SESSION['userID']);
 $query = "CALL getPosition(?)";
 $run = $db_connect->execute_query($query, [$resultID])->fetch_assoc();
 
-if($run['position'] >= $_SESSION['testTotal']) {
+if($run['position'] > $_SESSION['testTotal']) {
     error_log("Question position is invalid for this test.");
     die(false);
-} else if ($run['position'] + 1 == $_SESSION['testTotal']) {
+} else if ($run['position']  == $_SESSION['testTotal']) {
     $query = "CALL endTest(?)";
     $db_connect->execute_query($query, [$resultID]);
 }
