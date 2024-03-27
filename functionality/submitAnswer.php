@@ -15,7 +15,7 @@ $resultID = $db_connect->real_escape_string($_POST['resultID']);
 $choice = $db_connect->real_escape_string($_POST['choice']);
 
 //Check authentication
-resultCheck($db_connect, $resultID, $_SEESION['userID']);
+resultCheck($db_connect, $resultID, $_SESSION['userID']);
 
 //Validation check
 $query = "CALL getPosition(?)";
@@ -24,7 +24,7 @@ $run = $db_connect->execute_query($query, [$resultID])->fetch_assoc();
 if($run['position'] >= $_SESSION['testTotal']) {
     error_log("Question position is invalid for this test.");
     die(false);
-} else if ($run['position'] + 1 = $_SESSION['testTotal']) {
+} else if ($run['position'] + 1 == $_SESSION['testTotal']) {
     $query = "CALL endTest(?)";
     $db_connect->execute_query($query, [$resultID]);
 }
