@@ -10,26 +10,39 @@
     <link rel="shortcut icon" href="Images/EduTestLogo.png" type="image/x-icon">
 </head>
 <body id="leaderboardBody" class="m-0 p-0">
-    
-    <?php include('includes/navbar.php');?> <!-- Grabs the navbar code and displays it on the leaderboard page -->
-
+<?php include('includes/navbar.php');?> <!-- Grabs the navbar code and displays it on the leaderboard page -->
+<div class="container">
     <div class="lBoardBanner">
         <h1> Lets look at our top scorers! </h1>
+    </div>
+
+    <div class="containter">
+        <form class="row" method="POST" id="filterBox">
+            <div class="col-10">
+                <select class="form-select col" id="classFilters" name="classFilters">
+                    <?php include_once("includes/filtersDisplay.php") ?> <!-- Displays subjects for filters -->
+                </select>
+            </div>
+            <div class="col-2">
+                <button type="submit" class="btn"  id="filterbtn">Filter</button>
+            </div>
+        </form>
     </div>
 
     <div class="container-fluid"><!-- Leaderboard container -->
         <table id="leaderboard" class="table table-primary table-hover">
             <thead><!-- Table headers -->
                 <tr>
-                    <th scope="col">Placement</th>
-                    <th scope="col">Name</th>
-                    <th scope="col">Score</th>
+                    <th class="col-1" scope="col">Placement</th>
+                    <th class="col-3" scope="col">Name</th>
+                    <th class="col-12" scope="col">Score</th>
                 </tr>
             </thead>
-            <tbody><!-- Table Contents -->
-                <?php include('includes/topScorers.php') ?>
+            <tbody id="leaderboardDisplay"><!-- Table Contents -->
+                    <?php  include_once("includes/topScorers.php"); ?> <!-- Grabs a default table based on the users course -->
             </tbody>
         </table>
+    </div>
 </div>
 </body>
 </html>
@@ -42,4 +55,18 @@
     info: false,
     searching: false,
     stateSave: true,
-}); </script>
+}); 
+</script>
+<script>
+     $('#filterBox').submit(function (e) {
+            e.preventDefault();
+            $.ajax({
+                url: "includes/topScorers.php",
+                method: "POST",
+                data: $('#filterBox').serialize(),
+                success: function(data) {
+                    $('#leaderboardDisplay').html(data);
+                }
+            })
+        });
+</script>
