@@ -13,7 +13,7 @@ if (!isset($_SESSION['testCurrent']) || !isset($_SESSION['testTotal']) || $_SESS
 $resultID = $db_connect->real_escape_string($_GET['resultID']);
 
 //Check authentication
-resultCheck($db_connect, $resultID, $_SEESION['userID']);
+resultCheck($db_connect, $resultID, $_SESSION['userID']);
 
 //Set variables
 $questionID = $_GET['questionID'];

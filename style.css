@@ -720,6 +720,12 @@ th:last-child {
   background-color: red;
   border-color: red;
 }
+
+.btn-test {
+  position: fixed;
+  bottom: 70px;
+  right: 10px;
+}
 /* Test page END */
 
 /* CLASS MANAGEMENT PAGE START */

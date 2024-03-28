@@ -53,13 +53,14 @@ function resultCheck($db_connect, $ID, $userID) {
     if ($_SESSION['accessLevel'] == 1) {
         //Check if the user is the same as the user assigned to this result.
         $query = "CALL checkUser(?)";
-        $checkUser = $db_connect->execute_query($query, [$resultID])->fetch_assoc();
+        $checkUser = $db_connect->execute_query($query, [$ID])->fetch_assoc();
 
         if ($checkUser['userID'] == $userID) {
             //Auth passed
+            return;
         } else {
             //Not the correct user/attempted data manipulation
-            header("Location: ./testDashboard");
+            header("Location: ../testDashboard");
             die();
         }
     } else if ($_SESSION['accessLevel'] == 2) {

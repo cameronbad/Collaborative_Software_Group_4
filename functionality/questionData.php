@@ -38,7 +38,7 @@ if ($_SESSION['accessLevel'] == 1) {
 //Array of all questionID's
 $questions = [];
 
-$query = "getQuestionList(?)";
+$query = "CALL getQuestionList(?)";
 $run = $db_connect->execute_query($query, [$subjectID]);
 
 //Error check

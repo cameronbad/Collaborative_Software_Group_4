@@ -77,7 +77,7 @@ $_SESSION['testTotal'] = $test['questionTotal'];
             <!-- Question / Answers / Submit || Add each question to this container / Existing answers get added on load (initial one created  on first load?)
             Later answers get added by ajax query using page template? -->
         </div>  
-
+        <a href="#active" class='btn btn-primary btn-test'>Go to current question</a>
         <!-- Bottom Bar -->
         <div class="navbar fixed-bottom test-bottom">
             <div class="navbar-nav flex-row">
@@ -117,22 +117,60 @@ $_SESSION['testTotal'] = $test['questionTotal'];
                 }                
             )
         } else {
+            //Make empty containers
+            for (question in prevQuestions) {
+                $('.test-container').append('<div class="question-'+prevQuestions[question]+'"></div>');
+            }
+
+            //Array of promises
+            var promiseArr = [];
+
             //Run loop to make all previous questions.
             $.each(prevQuestions, function(index, value) {
-                $.ajax({
-                    url: "./includes/question.php",
-                    method: "GET",
-                    data: {questionID: value},
-                    success: function(data) {
-                        count++;
-                        $('.test-container').append(data);
+                let generatePrevQuestion = new Promise(function(resolve) {
+                    $.ajax({
+                        url: "./includes/question.php",
+                        method: "GET",
+                        data: {questionID: value},
+                        success: function(data) {
+                            //Increment count
+                            count++;
 
-                        if (count != prevQuestions.length) {
-                            checkQuestion(prevChoice[index], prevCorrect[index]);
-                        } //Add function for moving user to active question after its been loaded, make sure it wont trigger if there is no active question.
-                    }
+                            //Replace empty containers with intended content.
+                            $('.question-'+value).replaceWith(data);
+
+                            
+                            if (count != prevQuestions.length) {
+                                //Question marking
+                                checkQuestion(prevChoice[index], prevCorrect[index]);
+
+                                //Resolve this question to show it is done.
+                                resolve();
+                            }
+                            else {
+                                if (count == <?= $_SESSION['testTotal'] ?>) {
+                                    checkQuestion(prevChoice[index], prevCorrect[index]);
+                                    testEnd().then(function() {
+                                        resolve();
+                                    })
+                                } else {
+                                    resolve();
+                                }
+                            }
+
+
+                        }
+                    });
                 });
+                promiseArr.push(generatePrevQuestion);
             });
+
+            //Once all questions are generated
+            Promise.all(promiseArr).then(
+                function() {
+                    moveToQuestion(".question-active");
+                }
+            );
         }
 
         //AJAX call to submit an answer
@@ -149,16 +187,8 @@ $_SESSION['testTotal'] = $test['questionTotal'];
                     checkQuestion(choice, data);
 
                     //Checks if questions are done
-                    if (prevQuestions.length >= <?= $test['questionTotal'] ?>) {
-                        //End test
-                        $.ajax({
-                            url: "./includes/testEnd.php",
-                            method: "GET",
-                            data: {questionID: questionID},
-                            success: function(data) {
-                                $('.test-container').append(data);
-                            }
-                        });
+                    if (prevQuestions.length >= <?= $_SESSION['testTotal'] ?>) {
+                        testEnd();
                     } else {
                         //Generates a new question
                         makeQuestion(prevQuestions, <?= $test['subjectID'] ?>, <?= $resultID ?>).then(
