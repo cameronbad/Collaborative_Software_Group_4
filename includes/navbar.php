@@ -33,10 +33,10 @@ if ( basename(__FILE__) == basename($_SERVER["SCRIPT_FILENAME"]) ) {
         }
         if($_SESSION['accessLevel'] == '3') {
             echo '<li class="nav-item">
-                <a class="nav-link" href="#">Lecturers</a>
+                <a class="nav-link" href="./lecturerManagement">Lecturers</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="#">Subjects</a>
+                <a class="nav-link" href="./subjectManagement">Subjects</a>
             </li>';
         }   
         ?>

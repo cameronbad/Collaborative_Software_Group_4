@@ -63,7 +63,7 @@
                                 } else if (data.trim() === 'success2') {
                                     window.location.href = './studentDisplay';
                                 } else if (data.trim() === 'success3') {
-                                    window.location.href = './adminDashboard';
+                                    window.location.href = './lecturerManagement';
                                 } else {
                                     $('#errorMessage').html(data);
                                     $('#errorMessage').show();
