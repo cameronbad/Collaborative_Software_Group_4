@@ -13,7 +13,7 @@ $courseID = mysqli_real_escape_string($db_connect, $_POST["addCourse"]);
 
 if (isset($userName) && isset($firstName) && isset($lastName) && isset($email) && isset($password) && isset($courseID)) {
     
-        // Hash the password for security
+        // Password Hasher
         $hashedPassword = password_hash($password, PASSWORD_DEFAULT);
     
         $accessLevel = 2;
@@ -23,12 +23,13 @@ if (isset($userName) && isset($firstName) && isset($lastName) && isset($email) &
         $run = mysqli_query($db_connect, $query);
         
         echo $query;
-    
+
         if ($run) {
             echo '<div class="alert alert-success" role="alert">New user has been added.</div>';
         } else {
             echo '<div class="alert alert-danger" role="alert">Failed to add new user.</div>';
         }
+        //Insert Query
     }
 
     header("Location:lecturerManagement.php");

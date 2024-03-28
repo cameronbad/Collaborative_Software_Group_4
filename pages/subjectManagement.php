@@ -31,7 +31,7 @@ https://cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css
 
       <h1>Subject management page</h1>
       <p>Use the page below to manage subjects</p>
-      <!-- ADD NEW Subject   -->
+      <!-- Add New Subject Button  -->
 
       <!-- Button to trigger modal -->
       <button type="button" class="btn btn-primary " data-bs-toggle="modal" data-bs-target="#createModal">
@@ -40,14 +40,11 @@ https://cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css
       <br>
 
 
-      <!-- /ADD NEW Subject   -->
-
-
 
 
       <?php
       include_once("includes/_connect.php");
-      //DELETE SUBJECT ---- OBSELETE BUT DELETING THIS BREAKS IT SO IT'S STAYING IN FOR NOW
+      //DELETE SUBJECT ---- OBSELETE BUT DELETING THIS BREAKS IT SO IT'S STAYING IN
       if (isset($_POST["DcourseID"])) {
       ?>
         <div class="alert alert-warning" role="alert">
@@ -70,13 +67,12 @@ https://cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css
         $addCourse = $_POST["addCourse"];
         $addSubject = $_POST["addSubject"];
 
-        //$query = "INSERT INTO `subject` (`subjectID`, `courseID`, `subjectName`) VALUES (NULL, ?, ?);";
-        $query = "CALL createSubject";
+        $query = "INSERT INTO `subject` (`subjectID`, `subjectName`, `courseID`) VALUES (NULL, ?, ?);";
         $run = $db_connect->execute_query($query, [$addSubject, $addCourse]);
 
       ?>
         <div class="alert alert-success" role="alert">
-          New course <?php echo $addCourse ?> has been added.
+          New subject <?php echo $addSubject ?> has been added.
         </div>
         <?php
 
@@ -192,7 +188,7 @@ https://cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css
       <!-- EDIT MODAL  -->
 
 
-      <div class="modal fade" id="editModal<?php echo $result["subjectID"] ?>" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <div class="modal fade" id="editModal<?php ?>" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog">
           <div class="modal-content">
             <div class="modal-header">
@@ -219,6 +215,7 @@ https://cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css
                     while ($course = $run->fetch_assoc()) {
                       echo "<option value='" . $course["courseID"] . "'>" . $course["courseName"] . "</option>";
                     }
+                    //Dropdown Menu for course select
                     ?>
                   </select>
                 </div>

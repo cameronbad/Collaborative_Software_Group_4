@@ -30,7 +30,7 @@ https://cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css
 
       <h1>Lecturer management dashboard</h1>
       <p>Use the page below to manage users</p>
-      <!-- ALL OF THIS IS OBSELETE BUT DELETING IT BREAKS IT FOR SOME REASON SO I'M LEAVING IT IN -->
+
 
       <!-- Button to trigger modal -->
       <button type="button" class="btn btn-primary " data-bs-toggle="modal" data-bs-target="#createModal">
@@ -40,16 +40,15 @@ https://cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css
 
 
 
-
+      <!-- ALL OF THIS IS OBSELETE BUT DELETING IT BREAKS IT FOR SOME REASON SO I'M LEAVING IT IN -->
       <?php
       include_once("includes/_connect.php");
-      //DELETE SUBJECT
+      //DELETE 
       if (isset($_POST["DcourseID"])) {
       ?>
-        <div class="alert alert-warning" role="alert">
-
+        <div class="" role="alert">
           <?php
-          echo "You have deleted Subject ID " . $_POST['DcourseID'];
+          echo "" . $_POST['DcourseID'];
           ?>
         </div>
       <?php
@@ -60,38 +59,7 @@ https://cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css
         $run = mysqli_query($db_connect, $query);
       }
 
-      //if (isset($_POST["userID"]) && isset($_POST["username"]) && isset($_POST["firstName"]) && isset($_POST["lastName"]) && isset($_POST["email"]) && isset($_POST["password"]) && isset($_POST["courseID"]) && isset($_POST["accessLevel"]) && isset($_POST["studentNumber"])) {
-        //$userName = $_POST["username"];
-        //$userID = $_POST["userID"];
-        //$firstName = $_POST["firstName"];
-        //$lastName = $_POST["lastName"];
-        //$email = $_POST["email"];
-        //$password = $_POST["password"];
-        //$courseID = $_POST["courseID"];
-    
-        // Hash the password for security
-        //$hashedPassword = password_hash($password, PASSWORD_DEFAULT);
-    
-        //$accessLevel = 2;
-        //$studentNumber = NULL;
 
-        //$query = "INSERT INTO `user` (`userID`, `username`, `firstName`, `lastName`, `email`, `password`, `courseID`, `accessLevel`, `studentNumber`) VALUES ('$userID', '$userName', '$firstName', '$lastName', '$email', '$hashedPassword', '$courseID', '$accessLevel', '$studentNumber');";
-        //$run = mysqli_query($db_connect, $query);
-    
-        //if ($run) {
-            //echo '<div class="alert alert-success" role="alert">New user has been added.</div>';
-        //} else {
-            //echo '<div class="alert alert-danger" role="alert">Failed to add new user.</div>';
-        //}
-    //}
-    
-      ?>
-        <!--<div class="alert alert-success" role="alert">
-          New user <?php //echo $username ?> has been added.
-        </div>-->
-        <?php
-
-            
       
 
       /////////////////////////////////RELEVANT CODE/////////////////////////////////
@@ -105,7 +73,6 @@ https://cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css
         $courseID = $_POST["courseID"];
 
         $query = "UPDATE `user` SET `username` = '$userName',`firstName` = '$firstName',`lastName` = '$lastName',`email` = '$email' WHERE `userID` = '$userID';";
-        // echo $query;
         $run = mysqli_query($db_connect, $query);
 
 
@@ -123,19 +90,12 @@ https://cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css
       <?php
         }
       }
-
-
-
-
-
-       //SELECT
+       //Selecting Database Entries
        $query = "SELECT `userID`, `username`, `firstName`, `lastName`, `accountState`, `email` FROM `user` WHERE `accessLevel` = 2"; 
       $run = mysqli_query($db_connect, $query);
-
-
       ?>
 
-
+      <!--Table-->
       <table id="dataTable" class=" table table-bordered table-striped pt-3">
         <thead>
           <tr>
@@ -162,6 +122,7 @@ https://cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css
       </table>
 
 <!--Modals-->
+<!--Create Modal-->
       <div class="modal fade" id="createModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
@@ -219,13 +180,9 @@ https://cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css
     </div>
 </div>
 
-      <!-- EDIT MODAL  -->
+<!-- Edit Modal  -->
 
-
-
-
-
-      <div class="modal fade" id="editModal<?php //echo $result["userID"] ?>" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal fade" id="editModal<?php ?>" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">

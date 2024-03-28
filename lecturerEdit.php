@@ -15,7 +15,7 @@ if (isset($_POST["userID"]) && isset($_POST["username"]) && isset($_POST["firstN
         $query = "UPDATE `user` SET `username` = '$userName',`firstName` = '$firstName',`lastName` = '$lastName',`email` = '$email' WHERE `userID` = '$userID';";
         echo $query;
         $run = mysqli_query($db_connect, $query);
-     
+        //Update Query
     }
 else {
 
