@@ -2,6 +2,11 @@
 
 include_once("../includes/_connect.php");
 
+//Checks if the data is grabbed properly
+if(!isset($_POST['classID'])){
+    die("Error please try again.");
+}
+
 $classID = $db_connect->real_escape_string($_POST["classID"]); //Gets id from button value
 
 $stmt = $db_connect->prepare("CALL deleteClass(?)");

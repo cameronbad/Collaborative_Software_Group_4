@@ -1,3 +1,5 @@
+<?php include_once("functionality/loginCheck.php") ?> <!-- Checks if the user has logged in -->
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -18,19 +20,19 @@
 
     <div class="containter">
         <form class="row" method="POST" id="filterBox">
-            <div class="col-10">
+            <div class="col-sm-10">
                 <select class="form-select col" id="classFilters" name="classFilters">
                     <?php include_once("includes/filtersDisplay.php") ?> <!-- Displays subjects for filters -->
                 </select>
             </div>
-            <div class="col-2">
+            <div class="col-sm-2">
                 <button type="submit" class="btn"  id="filterbtn">Filter</button>
             </div>
         </form>
     </div>
 
     <div class="container-fluid"><!-- Leaderboard container -->
-        <table id="leaderboard" class="table table-primary table-hover">
+        <table id="leaderboard" class="table table-primary table-hover table-responsive">
             <thead><!-- Table headers -->
                 <tr>
                     <th class="col-1" scope="col">Placement</th>

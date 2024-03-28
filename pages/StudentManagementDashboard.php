@@ -1,3 +1,6 @@
+<?php include_once("functionality/loginCheck.php") ?> <!-- Checks if the user has logged in -->
+<?php include_once("functionality/authCheck.php") ?> <!-- Checks if the user is of the correct access level -->
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -16,19 +19,19 @@
 <div class="container">
     <div class="containter">
         <form class="row" method="POST" id="studentFilterBox">
-            <div class="col-10">
+            <div class="col-sm-10">
                 <select class="form-select col" id="studentFilters" name="studentFilters">
                     <?php include_once("includes/filtersDisplay.php") ?> <!-- Displays subjects for filters -->
                 </select>
             </div>
-            <div class="col-2">
+            <div class="col-sm-2">
                 <button type="submit" class="btn"  id="filterbtn">Filter</button>
             </div>
         </form>
     </div>
 
     <div class="container-fluid mt-5">
-        <table class="table table-hover" id="studentTableMain" name="studentTableMain">
+        <table class="table table-hover table-responsive" id="studentTableMain" name="studentTableMain">
             <thead>
                 <tr>
                     <th class="col-1" scope="col">Number</th>
@@ -54,6 +57,7 @@
 <script> new DataTable('#studentTableMain',{ //Datatable styling
     info: false,
     pageLength: 50,
+    responsive: true,
 }); </script>
 <script>
      $('#studentFilterBox').submit(function (e) {
