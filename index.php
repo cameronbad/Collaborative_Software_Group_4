@@ -31,6 +31,10 @@ $route->Route(['get'], '/test_{resultID}', "pages/test.php");
 
 $route->Route(['get'], '/classManagement', "pages/classManagementTable.php");
 
+$route->Route(['get'], '/lecturerManagement', "lecturerManagement.php");
+
+$route->Route(['get'], '/subjectManagement', "subjectManagement.php");
+
 //Includes
 $route->Route(['get'], '/disableAccount/{id}', "functionality/disableAccount.php");
 
