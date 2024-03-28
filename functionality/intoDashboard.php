@@ -124,7 +124,7 @@ function handleInvalidLogin()
     if ($_SESSION['login_attempts'] >= $maxAttempts) {
         // Set lockout time
         global $lockoutTime;
-        $_SESSION['lockout'] = time() + ($lockoutTime / 2); // Convert lockout time to seconds
+        $_SESSION['lockout'] = time() + ($lockoutTime / 2); // Reduce lockout time by half
 
         echo "You have exceeded the maximum number of login attempts. Please try again later.";
         exit();
