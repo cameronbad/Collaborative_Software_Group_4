@@ -5,8 +5,7 @@ require_once("../includes/_connect.php");
 //Check fields have been entered
 if (!isset($_POST['tSubjectSelect']) ||
     !isset($_POST['tName']) ||
-    !isset($_POST['tAmount']) ||
-    !isset($_POST['tSchedule'])
+    !isset($_POST['tAmount'])
 ) {
     error_log("Some fields needed for this page were not posted!");
     die("Please fill out all fields");
@@ -18,9 +17,7 @@ if (!isset($_POST['tSubjectSelect']) ||
 $subject = $db_connect->real_escape_string($_POST['tSubjectSelect']);
 $name = $db_connect->real_escape_string($_POST['tName']);
 $amount = $db_connect->real_escape_string($_POST['tAmount']);
-$schedule = $db_connect->real_escape_string($_POST['tSchedule']);
 $userID = $_SESSION['userID'];
-
 
 //Prepare SQL query
 if ($_POST['practice'] == true && $_SESSION['accessLevel'] == 1) {
@@ -32,6 +29,13 @@ if ($_POST['practice'] == true && $_SESSION['accessLevel'] == 1) {
         echo "Error: " . $db_connect->error();
 } else if ($_POST['practice'] == false && ($_SESSION['accessLevel'] == 2 || $_SESSION['accessLevel'] == 3)) {
     $query = "CALL createTest(?, ?, ?, ?)";
+
+    if (!isset($_POST['tSchedule'])) {
+        error_log("Some fields needed for this page were not posted!");
+        die("Please fill out all fields");
+    }
+
+    $schedule = $db_connect->real_escape_string($_POST['tSchedule']);
 
     if ($db_connect->execute_query($query, [$subject, $name, $amount, $schedule]))
         echo "Test created succesfully";
