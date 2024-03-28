@@ -24,7 +24,8 @@ https://cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css
 
 <body>
   <?php include_once("includes/navbar.php"); ?>
-
+  <?php include_once("functionality/loginCheck.php") ?> <!-- Checks if the user has logged in -->
+  <?php include_once("functionality/authCheck.php") ?> <!-- Checks if the user is of the correct access level -->
   <main>
     <section class="container">
 
