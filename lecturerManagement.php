@@ -79,11 +79,11 @@ https://cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css
 
       /////////////////////////////////RELEVANT CODE/////////////////////////////////
 
-      if (isset($_POST["user-id"]) && isset($_POST["user-name"]) && isset($_POST["first-name"]) && isset($_POST["last-name"])) {
-        $userName = $_POST["user-name"];
-        $userID = $_POST["user-id"];
-        $firstName = $_POST["first-name"];
-        $lastName = $_POST["last-name"];
+      if (isset($_POST["userID"]) && isset($_POST["username"]) && isset($_POST["firstName"]) && isset($_POST["lastName"])) {
+        $userName = $_POST["username"];
+        $userID = $_POST["userID"];
+        $firstName = $_POST["firstName"];
+        $lastName = $_POST["lastName"];
 
         $query = "UPDATE `user` SET `username` = '$userName',`firstName` = '$firstName',`lastName` = '$lastName' WHERE `userID` = '$userID';";
         // echo $query;
@@ -135,7 +135,7 @@ https://cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css
               <td><?php echo $result["firstName"] ?></td>
               <td><?php echo $result["lastName"] ?></td>
               <td><?php echo $result["email"] ?></td>
-              <td><a href="" data-bs-toggle="modal" data-bs-target="#editModal" data-bs-username="<?php echo $result["userName"] ?>" data-bs-id="<?php echo $result["userID"] ?>" data-bs-firstname="<?php echo $result["firstName"] ?>" data-bs-lastname="<?php echo $result["lastName"] ?>"> <i class="fa fa-pencil" aria-hidden="true"></i></a></td>
+              <td><a href="" data-bs-toggle="modal" data-bs-target="#editModal" data-bs-username="<?php echo $result["username"] ?>" data-bs-id="<?php echo $result["userID"] ?>" data-bs-firstname="<?php echo $result["firstName"] ?>" data-bs-lastname="<?php echo $result["lastName"] ?>"> <i class="fa fa-pencil" aria-hidden="true"></i></a></td>
             </tr>
 
           <?php } ?>
@@ -188,7 +188,7 @@ https://cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css
       <!-- EDIT MODAL  -->
 
 
-      <div class="modal fade" id="editModal<?php echo $result["userID"] ?>" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <div class="modal fade" id="editModal<?php //echo $result["userID"] ?>" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
@@ -206,12 +206,12 @@ https://cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css
 
                 <div class="mb-3">   
                   <label for="first-name" class="col-form-label">Lecturer First Name:</label>
-                  <input type="text" name="first-name" class="form-control first-name" id="-name">
+                  <input type="text" name="first-name" class="form-control first-name" id="first-name">
                   </div>
 
                   <div class="mb-3">   
                   <label for="last-name" class="col-form-label">Lecturer Surname:</label>
-                  <input type="text" name="last-name" class="form-control last-name" id="-name">
+                  <input type="text" name="last-name" class="form-control last-name" id="last-name">
                   </div>
 
                 </div>
@@ -239,7 +239,7 @@ https://cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css
     // Extract info from data-bs-* attributes
     const username = button.getAttribute('data-bs-username')
     const firstname = button.getAttribute('data-bs-firstname')
-    const lastname = button.getAttribute('data-bs-lastname')
+    const lastname = button.getAttribute('data-bs-lastName')
     const id = button.getAttribute('data-bs-id')
 
     const modalTitle = editModal.querySelector('.modal-title')
@@ -249,7 +249,7 @@ https://cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css
     //const modalCourseInput = editModal.querySelector('.modal-body2 input')
 
     modalTitle.textContent = `Editng User: ${username}`
-    modalUserInput.value = userName
+    modalUserInput.value = username
     modalUIDInput.value = id
     //modalCourseInput.value = course
   })
