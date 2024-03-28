@@ -28,9 +28,9 @@ https://cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css
   <main>
     <section class="container">
 
-      <h1>Subject management page</h1>
-      <p>Use the page below to manage subjects</p>
-      <!-- ADD NEW Subject  ######################################################################################## -->
+      <h1>Lecturer management dashboard</h1>
+      <p>Use the page below to manage users</p>
+
 
       <!-- Button to trigger modal -->
       <button type="button" class="btn btn-primary " data-bs-toggle="modal" data-bs-target="#createModal">
@@ -39,20 +39,16 @@ https://cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css
       <br>
 
 
-      <!-- /ADD NEW Subject  ######################################################################################## -->
 
-
-
-
+      <!-- ALL OF THIS IS OBSELETE BUT DELETING IT BREAKS IT FOR SOME REASON SO I'M LEAVING IT IN -->
       <?php
       include_once("includes/_connect.php");
-      //DELETE SUBJECT
+      //DELETE 
       if (isset($_POST["DcourseID"])) {
       ?>
-        <div class="alert alert-warning" role="alert">
-
+        <div class="" role="alert">
           <?php
-          echo "You have deleted Subject ID " . $_POST['DcourseID'];
+          echo "" . $_POST['DcourseID'];
           ?>
         </div>
       <?php
@@ -63,83 +59,61 @@ https://cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css
         $run = mysqli_query($db_connect, $query);
       }
 
-      //ADD SUBJECT
 
-      if (isset($_POST["addSubject"]) && isset($_POST["addCourse"])) {
-        $addCourse = $_POST["addSubject"];
-        $addSubject = $_POST["addCourse"];
+      
 
-        $query = "INSERT INTO `subject` (`subjectID`, `courseID`, `subjectName`) VALUES (NULL, '$addSubject','$addCourse');";
-        // echo $query;
+      /////////////////////////////////RELEVANT CODE/////////////////////////////////
+
+      if (isset($_POST["userID"]) && isset($_POST["username"]) && isset($_POST["firstName"]) && isset($_POST["lastName"]) && isset($_POST["email"]) && isset($_POST["courseID"])) {
+        $userName = $_POST["username"];
+        $userID = $_POST["userID"];
+        $firstName = $_POST["firstName"];
+        $lastName = $_POST["lastName"];
+        $email = $_POST["email"];
+        $courseID = $_POST["courseID"];
+
+        $query = "UPDATE `user` SET `username` = '$userName',`firstName` = '$firstName',`lastName` = '$lastName',`email` = '$email' WHERE `userID` = '$userID';";
         $run = mysqli_query($db_connect, $query);
 
-      ?>
-        <div class="alert alert-success" role="alert">
-          New course <?php echo $addCourse ?> has been added.
-        </div>
-        <?php
-
-               /////////////////////////////////EDIT/////////////////////////////////
-      }
-
-      /////////////////////////////////EDIT/////////////////////////////////
-
-      if (isset($_POST["subject-id"]) && isset($_POST["subject-name"]) && isset($_POST["courseSubject"])) {
-        $subjectName = $_POST["subject-name"];
-        $subjectID = $_POST["subject-id"];
-        $select = $_POST["courseSubject"];
-
-        $query = "UPDATE `subject` SET `subjectName` = '$subjectName',`courseID` = '$select' WHERE `subjectID` = '$subjectID';";
-        // echo $query;
-        $run = mysqli_query($db_connect, $query);
 
         if ($run) {
         ?>
           <div class="alert alert-success" role="alert">
-            Subject <?php echo $subjectName ?> has been updated.
+            User <?php echo $userName ?> has been updated.
           </div>
         <?php
         } else {
         ?>
           <div class="alert alert-danger" role="alert">
-            Failed to update <?php echo $subjectName ?>.
+            Failed to update <?php echo $userName ?>.
           </div>
       <?php
         }
       }
-
-
-      ////////////////////////////////END OF EDIT///////////////////////////
-
-
-      //SELECT SUBECT
-      $query = "SELECT `subject`.*, `course`.`courseName`
-      FROM `subject` 
-      WHERE 
-        LEFT JOIN `course` ON `subject`.`courseID` = `course`.`courseID`;";
+       //Selecting Database Entries
+       $query = "SELECT `userID`, `username`, `firstName`, `lastName`, `accountState`, `email` FROM `user` WHERE `accessLevel` = 2"; 
       $run = mysqli_query($db_connect, $query);
-
-
       ?>
 
-
+      <!--Table-->
       <table id="dataTable" class=" table table-bordered table-striped pt-3">
         <thead>
           <tr>
-            <th>ID</th>
-            <th>Subject Name</th>
-            <th>Course Name</th>
+            <th>Username</th>
+            <th>First Name</th>
+            <th>Surname</th>
+            <th>Email</th>
             <th>Edit</th>
-            <!--  <th>Delete</th>  -->
           </tr>
         </thead>
         <tbody>
           <?php while ($result = mysqli_fetch_assoc($run)) { ?>
             <tr>
-              <td><?php echo $result["subjectID"] ?></td>
-              <td><?php echo $result["subjectName"] ?></td>
-              <td><?php echo $result["courseName"] ?></td>
-              <td><a href="" data-bs-toggle="modal" data-bs-target="#editModal" data-bs-subject="<?php echo $result["subjectName"] ?>" data-bs-sid="<?php echo $result["subjectID"] ?>" data-bs-subject="<?php echo $result["courseName"] ?>"><i class="fa fa-pencil" aria-hidden="true"></i></a></td>
+              <td><?php echo $result["username"] ?></td>
+              <td><?php echo $result["firstName"] ?></td>
+              <td><?php echo $result["lastName"] ?></td>
+              <td><?php echo $result["email"] ?></td>
+              <td><a href="" data-bs-toggle="modal" data-bs-target="#editModal" data-bs-username="<?php echo $result["username"] ?>" data-bs-id="<?php echo $result["userID"] ?>" data-bs-firstname="<?php echo $result["firstName"] ?>" data-bs-lastname="<?php echo $result["lastName"] ?>" data-bs-email="<?php echo $result["email"] ?>"> <i class="fa fa-pencil" aria-hidden="true"></i></a></td>
             </tr>
 
           <?php } ?>
@@ -147,27 +121,43 @@ https://cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css
         </tbody>
       </table>
 
-      <!-- ///////////////////MODALS//////////////////////// -->
-
-
-      <!--ADD SUBJECT  Modal -->
+<!--Modals-->
+<!--Create Modal-->
       <div class="modal fade" id="createModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog">
-          <div class="modal-content">
+    <div class="modal-dialog">
+        <div class="modal-content">
             <div class="modal-header">
-              <h1 class="modal-title fs-5" id="exampleModalLabel">Create Subject</h1>
-              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                <h1 class="modal-title fs-5" id="exampleModalLabel">Create User</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
-            <form method="POST" action="#">
-              <div class="modal-body">
-                <p>Create a new Subject</p>
-                <div class="mb-3">
-                  <label for="exampleFormControlInput1" class="form-label">Subject Name</label>
-                  <input name="addSubject" type="text" class="form-control" id="exampleFormControlInput1" placeholder="Subject Name" required>
-                </div>
+            <form method="POST" action="lecturerCreate.php">
+                <div class="modal-body">
+                    <p>Create a new User</p>
+                    <div class="mb-3">
+                        <label for="username" class="form-label">Username</label>
+                        <input name="username" type="text" class="form-control" id="username" placeholder="Username" required>
+                        <input type="hidden" name="userID" class="form-control userID" id="userID">
+                    </div>
 
-                <div class="mb-3">
-                  <label for="select" class="form-label">Subject Name</label>
+                    <div class="mb-3">
+                        <label for="firstName" class="form-label">First Name</label>
+                        <input name="firstName" type="text" class="form-control" id="firstName" placeholder="First Name" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="lastName" class="form-label">Last Name</label>
+                        <input name="lastName" type="text" class="form-control" id="lastName" placeholder="Last Name" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="email" class="form-label">Email</label>
+                        <input name="email" type="email" class="form-control" id="email" placeholder="Email" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="password" class="form-label">Password</label>
+                        <input name="password" type="password" class="form-control" id="password" placeholder="Password" required>
+                    </div>
+
+                    <div class="mb-3">
+                  <label for="select" class="form-label">Course</label>
                   <select name="addCourse" class="form-select" id="select" required aria-label="Default select example">
                     <option selected>Please select a course</option>
                     <?php
@@ -179,89 +169,91 @@ https://cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css
                     ?>
                   </select>
                 </div>
-              </div>
-              <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                <button type="submit" class="btn btn-primary">Create</button>
-              </div>
+
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button type="submit" class="btn btn-primary">Create</button>
+                </div>
             </form>
-          </div>
         </div>
-      </div>
-      <!--ADD SUBJECT  Modal -->
+    </div>
+</div>
 
+<!-- Edit Modal  -->
 
-      <!-- EDIT MODAL  -->
-
-
-      <div class="modal fade" id="editModal<?php echo $result["subjectID"] ?>" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog">
-          <div class="modal-content">
+  <div class="modal fade" id="editModal<?php ?>" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
             <div class="modal-header">
-              <h1 class="modal-title fs-5" id="exampleModalLabel">Edit Modal</h1>
-              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                <h1 class="modal-title fs-5" id="exampleModalLabel">Edit User</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
-            <form method="POST" action="#">
-            <div class="modal-body">
-            
-                <div class="mb-3">
-                  <label for="subject-name" class="col-form-label">Subject Name:</label>
-                  <input type="text" name="subject-name" class="form-control subject-name" id="subject-name">
-                  <input type="hidden" name="subject-id" class="form-control subject-id" id="subject-id">
+            <form method="POST" action="lecturerEdit.php">
+                <div class="modal-body">
+
+                <div class="mb-3">   
+                  <label for="username" class="col-form-label">Lecturer Username:</label>
+                  <input type="text" name="username" class="form-control username" id="username">
+                  <input type="hidden" name="userID" class="form-control userID" id="userID">
+                  </div>
+
+                <div class="mb-3">   
+                  <label for="firstName" class="col-form-label">Lecturer First Name:</label>
+                  <input type="text" name="firstName" class="form-control firstName" id="firstName">
+                  </div>
+
+                  <div class="mb-3">   
+                  <label for="lastName" class="col-form-label">Lecturer Surname:</label>
+                  <input type="text" name="lastName" class="form-control lastName" id="lastName">
+                  </div>
+
+                  <div class="mb-3">   
+                  <label for="email" class="col-form-label">Email Address:</label>
+                  <input type="email" name="email" class="form-control email" id="email">
+                  </div>
 
                 </div>
-
-                <div class="mb-3">
-                  <label for="message-text" class="col-form-label">Course Name:</label>
-                  <select name="courseSubject" class="form-select" id="select"  aria-label="Default select example" required>
-                    <option value="" selected>Please select a course...</option>
-                    <?php
-                    $query = "SELECT* from `course`";
-                    $run = mysqli_query($db_connect, $query);
-                    while ($course = mysqli_fetch_assoc($run)) {
-                      echo "<option value='" . $course["courseID"] . "'>" . $course["courseName"] . "</option>";
-                    }
-                    ?>
-                  </select>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button type="submit" class="btn btn-primary">Save changes</button>
                 </div>
-            </div>
-            <div class="modal-footer">
-              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-              <button type="submit" class="btn btn-primary">Save changes</button>
-            </div>
             </form>
-
-          </div>
         </div>
-      </div>
+    </div>
+</div>
       <!-- /Edit Modal-->
     </section>
   </main>
 
 </body>
 <script>
-  let table = new DataTable('#dataTable');
-  //edit modal
-  const editModal = document.getElementById('editModal')
-  editModal.addEventListener('show.bs.modal', event => {
-    // Button that triggered the modal
-    const button = event.relatedTarget
-    // Extract info from data-bs-* attributes
-    const subject = button.getAttribute('data-bs-subject')
-    const course = button.getAttribute('data-bs-course')
-    const sid = button.getAttribute('data-bs-sid')
+    let table = new DataTable('#dataTable');
 
-    const modalTitle = editModal.querySelector('.modal-title')
-    const modalSubjectInput = editModal.querySelector('.modal-body .subject-name')
-    const modalSIDInput = editModal.querySelector('.modal-body .subject-id')
-    //const modalSubjectInput = editModal.querySelector('.modal-body input')
-    //const modalCourseInput = editModal.querySelector('.modal-body2 input')
+    // Edit modal
+    const editModal = document.getElementById('editModal');
+    editModal.addEventListener('show.bs.modal', event => {
+        // Button that triggered the modal
+        const button = event.relatedTarget;
+        // Extract info from data-bs-* attributes
+        const username = button.getAttribute('data-bs-username');
+        const firstname = button.getAttribute('data-bs-firstName');
+        const lastname = button.getAttribute('data-bs-lastName');
+        const email = button.getAttribute('data-bs-email');
+        const id = button.getAttribute('data-bs-id');
+        const courseID = button.getAttribute('data-bs-courseID'); 
 
-    modalTitle.textContent = `Editng Subject: ${subject}`
-    modalSubjectInput.value = subject
-    modalSIDInput.value = sid
-    //modalCourseInput.value = course
-  })
+        const modalTitle = editModal.querySelector('.modal-title');
+        const modalUserInput = editModal.querySelector('.modal-body .username');
+        const modalUIDInput = editModal.querySelector('.modal-body .userID');
+        const modalCourseIDInput = editModal.querySelector('.modal-body .courseID'); 
+
+        modalTitle.textContent = `Editing User: ${username}`;
+        modalUserInput.value = username;
+        modalUIDInput.value = id;
+        modalCourseIDInput.value = courseID; 
+    });
 </script>
+
 
 </html>
