@@ -54,9 +54,12 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $stmt->close();
 
         //check that there are no empty fields
-        if (empty($username) || empty($password)) {
-            echo "Please fill in all fields.";
-            header("refresh:2; url=../login");
+        if (empty($username)) {
+            echo "Please enter your username.";
+            exit();
+        }
+        if (empty($password)) {
+            echo "Please enter your password.";
             exit();
         }
 
@@ -121,12 +124,12 @@ function handleInvalidLogin()
     if ($_SESSION['login_attempts'] >= $maxAttempts) {
         // Set lockout time
         global $lockoutTime;
-        $_SESSION['lockout'] = time() + ($lockoutTime * 60); // Convert lockout time to seconds
+        $_SESSION['lockout'] = time() + ($lockoutTime / 2); // Convert lockout time to seconds
 
         echo "You have exceeded the maximum number of login attempts. Please try again later.";
         exit();
     } else {
-        echo "Invalid username or password. Please try again.";
+        echo "Invalid username or password. Please try again. You have " . $maxAttempts - $_SESSION['login_attempts'] . " attempts remaining.";
         exit();
     }
 }

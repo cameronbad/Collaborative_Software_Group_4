@@ -269,7 +269,7 @@ a.landingButton i {
 .loginInput {
   position: relative;
   margin: 40px 0;
-  max-width: 310px;
+  max-width: 100%;
   border-bottom: 2px solid #acd6de;
 }
 
