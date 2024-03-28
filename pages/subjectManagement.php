@@ -46,7 +46,7 @@ https://cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css
 
 
       <?php
-      include_once("includes/_connect.php");
+      include_once("./includes/_connect.php");
       //DELETE SUBJECT ---- OBSELETE BUT DELETING THIS BREAKS IT SO IT'S STAYING IN FOR NOW
       if (isset($_POST["DcourseID"])) {
       ?>
