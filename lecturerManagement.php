@@ -125,7 +125,6 @@ https://cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css
             <th>Surname</th>
             <th>Email</th>
             <th>Edit</th>
-            <!--  <th>Delete</th>  -->
           </tr>
         </thead>
         <tbody>
@@ -199,19 +198,19 @@ https://cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css
                 <div class="modal-body">
 
                 <div class="mb-3">   
-                  <label for="user-name" class="col-form-label">Lecturer Username:</label>
-                  <input type="text" name="user-name" class="form-control user-name" id="user-name">
-                  <input type="hidden" name="user-id" class="form-control user-id" id="user-id">
+                  <label for="username" class="col-form-label">Lecturer Username:</label>
+                  <input type="text" name="username" class="form-control username" id="username">
+                  <input type="hidden" name="userID" class="form-control userID" id="userID">
                   </div>
 
                 <div class="mb-3">   
-                  <label for="first-name" class="col-form-label">Lecturer First Name:</label>
-                  <input type="text" name="first-name" class="form-control first-name" id="first-name">
+                  <label for="firstName" class="col-form-label">Lecturer First Name:</label>
+                  <input type="text" name="firstName" class="form-control firstName" id="firstName">
                   </div>
 
                   <div class="mb-3">   
-                  <label for="last-name" class="col-form-label">Lecturer Surname:</label>
-                  <input type="text" name="last-name" class="form-control last-name" id="last-name">
+                  <label for="lastName" class="col-form-label">Lecturer Surname:</label>
+                  <input type="text" name="lastName" class="form-control lastName" id="lastName">
                   </div>
 
                 </div>
@@ -238,13 +237,13 @@ https://cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css
     const button = event.relatedTarget
     // Extract info from data-bs-* attributes
     const username = button.getAttribute('data-bs-username')
-    const firstname = button.getAttribute('data-bs-firstname')
+    const firstname = button.getAttribute('data-bs-firstName')
     const lastname = button.getAttribute('data-bs-lastName')
     const id = button.getAttribute('data-bs-id')
 
     const modalTitle = editModal.querySelector('.modal-title')
-    const modalUserInput = editModal.querySelector('.modal-body .user-name')
-    const modalUIDInput = editModal.querySelector('.modal-body .user-id')
+    const modalUserInput = editModal.querySelector('.modal-body .username')
+    const modalUIDInput = editModal.querySelector('.modal-body .userID')
     //const modalSubjectInput = editModal.querySelector('.modal-body input')
     //const modalCourseInput = editModal.querySelector('.modal-body2 input')
 
