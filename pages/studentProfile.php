@@ -18,7 +18,7 @@
 
 <div class="container p-5">
     <div class="studentProfileBack">
-        <a type="submit" class="btn btn-danger" href="/Collaborative_Software_Group_4/studentDisplay" id="profileBackBtn">Back</a> <!-- Returns the user to the student managment table-->
+        <a type="submit" class="btn btn-danger" href="g4-csd.remote.ac/studentDisplay" id="profileBackBtn">Back</a> <!-- Returns the user to the student managment table-->
     </div>
     <div class="container row" id="studentProfileMain">
         <div class="col">
