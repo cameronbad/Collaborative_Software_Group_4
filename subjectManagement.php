@@ -47,7 +47,7 @@ https://cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css
 
       <?php
       include_once("includes/_connect.php");
-      //DELETE SUBJECT ---- OBSELETE BUT DELETING THIS BREAKS IT
+      //DELETE SUBJECT ---- OBSELETE BUT DELETING THIS BREAKS IT SO IT'S STAYING IN FOR NOW
       if (isset($_POST["DcourseID"])) {
       ?>
         <div class="alert alert-warning" role="alert">
@@ -70,7 +70,8 @@ https://cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css
         $addCourse = $_POST["addCourse"];
         $addSubject = $_POST["addSubject"];
 
-        $query = "CALL createSubject";
+        $query = "INSERT INTO `subject` (`subjectID`, `courseID`, `subjectName`) VALUES (NULL, ?, ?);";
+        //$query = "CALL createSubject(?, ?)";
         $run = $db_connect->execute_query($query, [$addSubject, $addCourse]);
 
       ?>

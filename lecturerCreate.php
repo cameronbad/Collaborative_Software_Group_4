@@ -8,7 +8,7 @@ $lastName = mysqli_real_escape_string($db_connect, $_POST["lastName"]);
 $email = mysqli_real_escape_string($db_connect, $_POST["email"]);
 $password = mysqli_real_escape_string($db_connect, $_POST["password"]);
 $courseID = mysqli_real_escape_string($db_connect, $_POST["addCourse"]);
-
+//Data Sanitisation to protect from SQL attacks
 
 
 if (isset($userName) && isset($firstName) && isset($lastName) && isset($email) && isset($password) && isset($courseID)) {
