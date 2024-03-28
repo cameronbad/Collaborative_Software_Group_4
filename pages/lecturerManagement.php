@@ -24,7 +24,8 @@ https://cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css
 
 <body>
   <?php include_once("includes/navbar.php"); ?>
-
+  <?php include_once("functionality/loginCheck.php") ?> <!-- Checks if the user has logged in -->
+  <?php include_once("functionality/authCheck.php") ?> <!-- Checks if the user is of the correct access level -->
   <main>
     <section class="container">
 
@@ -42,7 +43,7 @@ https://cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css
 
       <!-- ALL OF THIS IS OBSELETE BUT DELETING IT BREAKS IT FOR SOME REASON SO I'M LEAVING IT IN -->
       <?php
-      include_once("includes/_connect.php");
+      include_once("./includes/_connect.php");
       //DELETE 
       if (isset($_POST["DcourseID"])) {
       ?>
@@ -130,7 +131,7 @@ https://cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css
                 <h1 class="modal-title fs-5" id="exampleModalLabel">Create User</h1>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
-            <form method="POST" action="lecturerCreate.php">
+            <form method="POST" action="./includes/lecturerCreate.php">
                 <div class="modal-body">
                     <p>Create a new User</p>
                     <div class="mb-3">
@@ -189,7 +190,7 @@ https://cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css
                 <h1 class="modal-title fs-5" id="exampleModalLabel">Edit User</h1>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
-            <form method="POST" action="lecturerEdit.php">
+            <form method="POST" action="./includes/lecturerEdit.php">
                 <div class="modal-body">
 
                 <div class="mb-3">   
