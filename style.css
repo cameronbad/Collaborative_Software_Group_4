@@ -1,0 +1,766 @@
+@import url("https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,200..1000;1,200..1000&display=swap");
+
+* {
+  margin: 0;
+  padding: 0;
+  font-family: "Nunito", sans-serif;
+}
+
+/* TYPOGRAPHY END */
+
+/* Routing Start */
+
+.routingBody{
+  background-color: #eeeeee;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  font-family: "Segoe UI", "Helvetica Neue", "Helvetica", "Arial", sans-serif;
+}
+
+.error-box {
+  background-color: white;
+  padding: 20px;
+  border-radius: 5px;
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+  text-align: center;
+  max-width: 90%;
+}
+
+.error-box > h1 {
+  margin-top: 0;
+  color: #b35a46;
+}
+
+@media (prefers-color-scheme: dark) {
+  #routingBody{
+      background-color: #222222;
+  }
+
+  .error-box {
+      background-color: #333333;
+      color: white;
+  }
+
+  .error-box > h1 {
+      color: #ff8a80;
+  }
+}
+
+/* Routing End */
+
+/*LANDING PAGE START*/
+:root {
+    --primary-color: #acd6de;
+    --black-color: #050505;
+    --gray-color: #d8dede;
+    --white-color: #FFF;
+
+    --animate-duration: 20s;
+    --animate-delay: 5s;
+}
+
+
+/* Animate */
+.animate__animated.animate__bounceInUp {
+    --animation-duration: 20s;
+}
+
+
+/* The image half */
+.content,
+.image {
+    min-height: 100vh;
+}
+
+.bg-image {
+    background-image: url('./Images/landingPage.jpg');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+
+/* The content half */
+.landingContainer {
+  background-color: #d8dede;
+}
+
+.landingLogo {
+  max-width: 300px;
+  height: 300px;
+  border-radius: 100%;
+  border: 2px solid #fff;
+  transform: translateY(-30%);
+}
+
+.label p {
+    font-size: 20px;
+    color: var(--gray-color);
+    font-family: 'Nunito';
+}
+
+.label .bx {
+    vertical-align: middle;
+    color: var(--gray-color);
+    font-size: 24px;
+}
+
+.flex {
+    display: -webkit-flex;
+    display: flex;
+    -webkit-flex-direction: row;
+    flex-direction: row;
+    -webkit-justify-content: flex-start;
+    justify-content: flex-start;
+}
+
+.text {
+    font-family: 'Nunito';
+}
+
+.text h5 {
+    font-size: 36px;
+    font-weight: 400;
+    color: var(--black-color);
+    padding: 0 0 46px 0;
+}
+
+.text p {
+    font-size: 24px;
+    color: var(--black-color);
+    font-weight: 700;
+}
+
+.landingButton {
+    background-color: var(--primary-color);
+    box-shadow: 0px 17px 30px #d8dede;
+}
+
+.landingButton:hover {
+  background-color: var(--white-color);
+  box-shadow: 0px 17px 30px #d8dede;
+  color: #acd6de;
+}
+
+a.landingButton {
+    margin-top: 51px;
+    padding: 30px;
+    font-size: 20px;
+    font-weight: 500;
+    line-height: 24px;
+    border-radius: 16px;
+}
+
+a.landingButton i {
+    font-size: 34px;
+    vertical-align: middle;
+    padding-left: 106px;
+}
+
+/* Responsive for mobile */
+@media(max-width: 576px) {
+    .landingLogo {
+        max-width: 100px;
+        height: 100px;
+        border-radius: 10%;
+        border: 4px solid #fff;
+        margin-top: 20px;
+    }
+
+    a.landingButton {
+        display: block;
+    }
+
+    a.landingButton i {
+        padding-left: 0;
+    }
+
+    .label p {
+        font-size: 16px;
+    }
+
+    .text h5 {
+        font-size: 32px;
+        font-weight: 300;
+        line-height: 142.02%;
+    }
+
+    .text p {
+        font-size: 40px;
+    }
+}
+
+
+/* Responsive for tablet */
+
+@media(max-width: 768px) {
+    a.landingButton {
+        display: block;
+    }
+
+    a.landingButton i {
+        padding-left: 0;
+    }
+
+    .label p {
+        font-size: 16px;
+    }
+
+    .text h5 {
+        font-size: 32px;
+        font-weight: 300;
+        line-height: 142.02%;
+    }
+
+    .text p {
+        font-size: 40px;
+    }
+}
+/*LANDING PAGE END*/
+
+/* LOGIN FORM START */
+
+.loginBody {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  background-image: url(./Images/loginBackgroundV3.jpg);
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+}
+
+.loginSection {
+  position: relative;
+  max-width: 400px;
+  background-color: transparent;
+  border: 4px solid #acd6de;
+  border-radius: 20px;
+  backdrop-filter: blur(55px);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 2rem 3rem;
+}
+
+.loginForm > h1{
+    font-size: 30px;
+    color: #acdbde;
+    text-align: center;
+}
+
+.loginLogo {
+  position: absolute;
+  top: -180px;
+  left: 33%;
+  transform: translateX(-50%);
+  max-width: 125px;
+  height: 125px;
+  border-radius: 50%;
+  border: 4px solid #fff;
+  margin-left: 18%;
+}
+
+.loginInput {
+  position: relative;
+  margin: 40px 0;
+  max-width: 100%;
+  border-bottom: 2px solid #acd6de;
+}
+
+#passInput {
+  margin-top: 10px;
+}
+
+#userInput {
+  margin-top: 10px;
+}
+
+.loginInput label {
+  position: absolute;
+  top: -40%;
+  left: 33%;
+  transform: translateY(-50%);
+  color: #acd6de;
+  font-size: 1rem;
+  pointer-events: none;
+  transition: all 0.5s ease-in-out;
+  margin-top: 10px;
+  font-size: 18px;
+}
+
+.loginInput input::placeholder {
+  color: white;
+}
+
+.loginInput input {
+  width: 100%;
+  height: 30px;
+  background: transparent;
+  border: none;
+  outline: none;
+  font-size: 16px;
+  padding: 0 35px 0 5px;
+  color: white;
+}
+
+.loginButton {
+  width: 100%;
+  height: 40px;
+  border-radius: 40px;
+  background-color: #acd6de;
+  border: none;
+  outline: none;
+  cursor: pointer;
+  font-size: 1rem;
+  font-weight: 600;
+  transition: all 0.5s ease;
+  transform: translateY(-10%);
+}
+
+.loginButton:hover {
+  background-color: rgb(255, 255, 255, 0.5);
+}
+
+.error {
+  background: #f2dede;
+  color: #a94442;
+  padding: 10px;
+  width: 95%;
+  border-radius: 5px;
+  margin: 20px auto;
+  text-align: center;
+  font-size: 16px;
+}
+
+.registerStudent {
+  font-size: 1rem;
+  color: #acd6de;
+  text-align: center;
+  margin: 25px 0 5px;
+}
+
+.registerStudent p a {
+  color: #fff;
+  text-decoration: none;
+  font-weight: 600;
+}
+
+.registerStudent p a:hover {
+  text-decoration: underline;
+}
+
+/* LOGIN FORM END */
+
+/* REGISTER FORM START */
+
+.registerBody {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  background-image: url(./Images/loginBackgroundV2.jpg);
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+}
+
+.registerSection {
+  position: relative;
+  max-width: 800px;
+  background-color: transparent;
+  border: 4px solid #acd6de;
+  border-radius: 20px;
+  backdrop-filter: blur(55px);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 2rem 3rem;
+}
+
+.registerForm > h1 {
+  font-size: 30px;
+  color: #acdbde;
+  text-align: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transform: translateY(-35%);
+}
+
+.registerLogo {
+  position: absolute;
+  top: -160px;
+  left: 32%;
+  transform: translateX(-50%);
+  max-width: 125px;
+  height: 125px;
+  border-radius: 50%;
+  border: 4px solid #fff;
+  margin-left: 18%;
+}
+
+.registerCol > input, .registerCol > select{
+  font-family: "Nunito", sans-serif;
+  font-size: 16px;
+  background-color: #acd6de;
+}
+
+.registerCol > input::placeholder{
+  color: black;
+}
+
+.registerCol > input:focus, .registerCol > select:focus{
+  background-color: #acd6de;
+}
+
+.registerCol > input:focus, .registerCol > select:focus{
+  box-shadow: 0 0 5px white;
+}
+
+.registerButton {
+  width: 100%;
+  height: 40px;
+  border-radius: 40px;
+  background-color: #acd6de;
+  border: none;
+  outline: none;
+  cursor: pointer;
+  font-size: 1rem;
+  font-weight: 600;
+  transition: all 0.5s ease;
+  transform: translateY(20%);
+}
+
+.registerButton:hover {
+  background-color: rgb(255, 255, 255, 0.5);
+}
+
+.loginStudent {
+  font-size: 1rem;
+  color: #acd6de;
+  text-align: center;
+  margin-top: 25px;
+  transform: translateY(50%);
+}
+
+.loginStudent p a {
+  color: #fff;
+  text-decoration: none;
+  font-weight: 600;
+}
+
+.loginStudent p a:hover {
+  text-decoration: underline;
+}
+
+/* REGISTER FORM END */
+
+/* LEADERBOARD STYLING START */
+
+.lBoardBanner,
+h1 {
+  color: #000;
+  padding-top: 5%;
+}
+
+#leaderboard{
+  margin: auto;
+  margin-top: 5%;
+  border-collapse: separate;
+  border-spacing: 0 20px;
+  font-weight: bolder;
+}
+
+#leaderboardBody {
+  width: 100%;
+  height: 100vh;
+  background-color: #d8dede;
+}
+
+.lBoardBanner{
+  margin-top: 5%;
+  margin-bottom: 5%;
+  text-align: center;
+}
+
+.lBoardBanner > h1{
+  color: #000;
+  font-size: 42px;
+}
+
+#filterbtn{
+  width: 100%;
+  background-color: #acd6de;
+  border-color: azure;
+  font-weight: bold;
+}
+
+#filterbtn:hover{
+  background-color: #A3C1D4;
+}
+
+.progress{
+  font-size: 16px;
+  font-weight: bold;
+  height: 20%;
+}
+
+/* LEADERBOARD STYLING END */
+
+/* STUDENT MANAGMENT STYLING START */
+
+#studentBody{
+  height:100vh;
+  background-color: #d8dede;
+}
+
+#studentFilterBox{
+  margin-top: 5%;
+}
+
+#studentTableMain{
+    margin-top: 5%;
+    font-weight: 500;
+}
+
+#studentProfileBody{
+  background-color: #d8dede;
+}
+
+.studentProfileBack{
+  text-align: end;
+}
+
+#studentProfileMain{
+  width: 100%;
+  height: 100vh;
+  margin-top: 10%;
+}
+
+.profilePicture{
+  border: solid 3px #000;
+  border-radius: 5px;
+}
+
+.profileBtn{
+  width: 100%;
+  background-color: #acd6de;
+  border-color: azure;
+  font-weight: bold;
+}
+
+.profileBtn:hover{
+  background-color: #A3C1D4;
+}
+
+/* STUDENT MANAGMENT STYLING END */
+
+/* Table-card */
+
+.table-card {
+  border-collapse: separate;
+  border-spacing: 0 15px;
+  border: none;
+}
+
+.table-card th {
+  background-color: #acd6de;
+  border-style: none;
+}
+
+.table-card td {
+  background-color: #acd6de;
+  border-style: none;
+}
+
+/* First cell of table row/head*/
+td:first-child,
+th:first-child {
+  background-color: #a3c1d4;
+  border-radius: 10px 0 0 10px;
+}
+
+/* Last cell of table row/head*/
+td:last-child,
+th:last-child {
+  border-radius: 0 10px 10px 0;
+}
+
+/* Table-card  END*/
+
+/*CSS for subject management*/
+
+.arTitle {
+  color:black;
+}
+
+/*End of CSS for subject management*/
+
+/* parallax */
+
+.parallax {
+  background-color: #d8dede;
+  
+
+  /*background-attachment: fixed;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;*/ /* Only works with images */
+}
+
+/* parallax END */
+
+/* stats-left*/
+
+.stats-left {
+  background-color: #acd6de;
+}
+
+.stats-left span {
+  background-color: #ABBADE;
+
+}
+
+.stats-left h2:last-child {
+  margin-bottom: 0;
+}
+/* stats-left  END*/
+
+/* Test-card */
+
+@keyframes fadeIn {
+  from {
+      opacity: 0;
+      top: 50px;
+  }
+  to {
+      opacity: 1;
+      top: 0px;
+  }
+}
+
+.test-card {
+    transition: all 0.4s;
+    animation-name: fadeIn;
+    animation-duration: 2s;
+    width: 300px;
+}
+
+.test-card:hover {
+    margin-top: -4px;
+    margin-left: -4px;
+    box-shadow: 8px 8px #acd6de;
+}
+
+.test-card > a {
+    display: block;
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    text-decoration: none;
+}
+
+/* Test-card  END*/
+
+/* Test page */
+
+.test-body {
+  overflow: hidden;
+}
+
+.test-container {
+  /* Creates a full screen scrolling effect*/
+  height: 100vh;
+  scroll-snap-type: y mandatory;
+  overflow-y: scroll;
+
+  /* Hides the scrollbar while still allowing functionality */
+  -ms-overflow-style: none;  /* Hide scrollbar for IE and Edge */
+  scrollbar-width: none;  /* Hide scrollbar for Firefox */
+}
+.test-container::-webkit-scrollbar {
+  display: none; /* Hide scrollbar for Chrome, Safari and Opera */
+}
+
+.test-box {
+  scroll-snap-align: start;
+  height: 100vh;
+  width: 100vw;
+}
+
+.test-bottom {
+  background-color: #acd6de;
+  padding: 0;
+}
+
+.test-bottom div:first-child div:first-child {
+  background-color: #ABBADE;
+}
+.test-bottom div:last-child div:last-child {
+  background-color: #ABBADE;
+}
+
+.test-bottom-svg {
+  width: 30px;
+  height: 56px;
+  fill: #ABBADE;
+}
+
+.question-done .answer-correct {
+  background-color: green;
+  border-color: green;
+}
+.question-done .answer-wrong {
+  background-color: red;
+  border-color: red;
+}
+
+.btn-test {
+  position: fixed;
+  bottom: 70px;
+  right: 10px;
+}
+/* Test page END */
+
+/* CLASS MANAGEMENT PAGE START */
+
+.classBack{
+  background-color: #d8dede;
+  width: 100%;
+  height: 100%;
+  padding: 0%;
+  margin: 0%;
+}
+
+.classMain{
+  padding: 0%;
+  margin: 0%;
+  width: 100%;
+  height: 100vh;
+}
+
+.newClassContainer{
+  margin-top: 5%;
+  margin-bottom: 5%;
+  text-align: center;
+  width: 100%;
+}
+
+.newClassBtn{
+  width: 25%;
+  background-color: #acd6de;
+  border-color: azure;
+  font-weight: bold;
+}
+
+.newClassBtn:hover{
+  background-color: #A3C1D4;
+}
+
+/* CLASS MANAGEMENT PAGE END */
