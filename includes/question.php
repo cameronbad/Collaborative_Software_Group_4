@@ -21,7 +21,7 @@ shuffle($keys);
 
 ?>
 <div class="container test-box"> 
-    <div class="top-50 start-50 translate-middle card question-active"> <!-- card is temp for styling-->
+    <div id="active" class="top-50 start-50 translate-middle card question-active"> <!-- card is temp for styling-->
         <div class="row">
             <h3 class="text-center"><?= $question['questionText'] ?></h3>      
         </div>

@@ -77,7 +77,7 @@ $_SESSION['testTotal'] = $test['questionTotal'];
             <!-- Question / Answers / Submit || Add each question to this container / Existing answers get added on load (initial one created  on first load?)
             Later answers get added by ajax query using page template? -->
         </div>  
-
+        <a href="#active" class='btn btn-primary btn-test'>Go to current question</a>
         <!-- Bottom Bar -->
         <div class="navbar fixed-bottom test-bottom">
             <div class="navbar-nav flex-row">
@@ -164,14 +164,14 @@ $_SESSION['testTotal'] = $test['questionTotal'];
                 });
                 promiseArr.push(generatePrevQuestion);
             });
-        }
 
-        //Once all questions are generated
-        Promise.all(promiseArr).then(
-            function() {
-                moveToQuestion(".question-active");
-            }
-        );
+            //Once all questions are generated
+            Promise.all(promiseArr).then(
+                function() {
+                    moveToQuestion(".question-active");
+                }
+            );
+        }
 
         //AJAX call to submit an answer
         $(document).on("click", '.question-active .answer-btn', function() {

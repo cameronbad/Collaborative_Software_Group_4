@@ -29,10 +29,14 @@ if ( basename(__FILE__) == basename($_SERVER["SCRIPT_FILENAME"]) ) {
                                 <input type="number" id="tAmount" name="tAmount" class="form-control" placeholder="Question Amount" required>
                                 <label for="tAmount" class="from-label">Question Amount</label>
                             </div>
-                            <div class="form-floating">
-                                <input type="datetime-local" id="tSchedule" name="tSchedule" class="form-control" placeholder="Scheduled Time" required>
-                                <label for="tSchedule" class="from-label">Scheduled Time</label>
-                            </div>
+                            <?php 
+                            if($_SESSION['accessLevel'] != '1') {
+                                echo '<div class="form-floating">
+                                    <input type="datetime-local" id="tSchedule" name="tSchedule" class="form-control" placeholder="Scheduled Time" required>
+                                    <label for="tSchedule" class="from-label">Scheduled Time</label>
+                                </div>';
+                            }
+                            ?>
                         </div>                   
                         <input type="hidden" id="tTestID" name="tTestID" class="form-control" readonly>
                         <div class="modal-footer">

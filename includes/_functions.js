@@ -11,6 +11,7 @@ function checkQuestion(choice, correct) {
     }
 
     $('.question-done').removeClass('question-active'); //Remove active from done questions to prevent loops
+    $('.question-done').removeAttr('id'); //Remove active from done questions to prevent loops
 }
 
 //Appends a new question to page
@@ -125,5 +126,5 @@ function currentQuestion(textID) {
 function moveToQuestion(question) {
     //Move to question
     const activeQuestion = document.querySelector(question);
-    activeQuestion.scrollIntoView({ behavior: "smooth"});
+    activeQuestion.scrollIntoView(false, { behavior: "smooth"});
 }
